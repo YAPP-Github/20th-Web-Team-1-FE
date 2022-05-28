@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-router-dom", "npm:5.3.3"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["axios", "npm:0.27.2"],\
+            ["emotion-reset", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1"],\
             ["eslint", "npm:8.15.0"],\
             ["identity-obj-proxy", "npm:3.0.0"],\
             ["jest", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:28.1.0"],\
@@ -4932,6 +4933,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["emotion-reset", [\
+        ["npm:3.0.1", {\
+          "packageLocation": "./.yarn/cache/emotion-reset-npm-3.0.1-061e1e27b7-788cfbf6f3.zip/node_modules/emotion-reset/",\
+          "packageDependencies": [\
+            ["emotion-reset", "npm:3.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/emotion-reset-virtual-d4676e948d/0/cache/emotion-reset-npm-3.0.1-061e1e27b7-788cfbf6f3.zip/node_modules/emotion-reset/",\
+          "packageDependencies": [\
+            ["emotion-reset", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1"],\
+            ["@emotion/react", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:11.9.0"],\
+            ["@types/emotion__react", null]\
+          ],\
+          "packagePeers": [\
+            "@emotion/react",\
+            "@types/emotion__react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["encoding", [\
         ["npm:0.1.13", {\
           "packageLocation": "./.yarn/cache/encoding-npm-0.1.13-82a1837d30-bb98632f8f.zip/node_modules/encoding/",\
@@ -9232,6 +9255,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-router-dom", "npm:5.3.3"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["axios", "npm:0.27.2"],\
+            ["emotion-reset", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1"],\
             ["eslint", "npm:8.15.0"],\
             ["identity-obj-proxy", "npm:3.0.0"],\
             ["jest", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:28.1.0"],\
