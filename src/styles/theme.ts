@@ -7,6 +7,7 @@ const theme: Theme = {
 		bt_lightGray: '#eeeeee',
 		bt_gray: '#cccccc',
 		bt_green: '#00c4b8',
+		bt_lightGreen: '#c7f2ef',
 		bt_yellow: '#ffd541',
 		bt_white: '#ffffff',
 		bt_lightBlue: '#f5fcff',
@@ -23,6 +24,7 @@ const theme: Theme = {
 	fontWeight: {
 		light: 300,
 		normal: 400,
+		medium: 500,
 		semiBold: 600,
 		bold: 700,
 	},

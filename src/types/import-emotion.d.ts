@@ -8,6 +8,7 @@ declare module '@emotion/react' {
 			bt_lightGray: string;
 			bt_gray: string;
 			bt_green: string;
+			bt_lightGreen: string;
 			bt_yellow: string;
 			bt_white: string;
 			bt_lightBlue: string;
@@ -24,6 +25,7 @@ declare module '@emotion/react' {
 		fontWeight: {
 			light: number;
 			normal: number;
+			medium: number;
 			semiBold: number;
 			bold: number;
 		};
