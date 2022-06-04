@@ -10,6 +10,7 @@ declare module '@emotion/react' {
 			bt_green: string;
 			bt_yellow: string;
 			bt_white: string;
+			bt_lightBlue: string;
 		};
 		fontSize: {
 			f10: string;
