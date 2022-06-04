@@ -1,3 +1,3 @@
-export type MessageChipType = {
+export interface MessageChipType {
 	message: string;
-};
+}
