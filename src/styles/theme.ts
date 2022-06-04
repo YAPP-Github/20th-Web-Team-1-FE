@@ -9,6 +9,7 @@ const theme: Theme = {
 		bt_green: '#00c4b8',
 		bt_yellow: '#ffd541',
 		bt_white: '#ffffff',
+		bt_lightBlue: '#f5fcff',
 	},
 	fontSize: {
 		f10: '10px',
