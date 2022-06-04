@@ -13,7 +13,7 @@ const GlobalStyle = () => {
 				}
 
 				body {
-					font-family: 'noto sans';
+					font-family: 'Pretendard', 'noto sans';
 					max-width: 390px;
 					margin: auto;
 				}

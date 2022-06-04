@@ -1,7 +1,8 @@
 import React from 'react';
+import TreesView from './TreesView';
 
 const Trees = () => {
-	return <h1>Trees</h1>;
+	return <TreesView />;
 };
 
 export default Trees;
