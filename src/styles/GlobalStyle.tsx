@@ -14,7 +14,8 @@ const GlobalStyle = () => {
 
 				body {
 					font-family: 'noto sans';
-					max-width: 390px;
+					max-width: 480px;
+					position: relative;
 					margin: auto;
 				}
 
