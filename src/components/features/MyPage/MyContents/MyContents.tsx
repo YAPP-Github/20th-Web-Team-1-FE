@@ -7,7 +7,7 @@ import * as S from './MyContents.styled';
 const MyContents = () => {
 	return (
 		<S.MyContentsContainer>
-			<h2 hidden>내 컨텐츠</h2>
+			<h2 className="a11y-hidden">내 컨텐츠</h2>
 
 			<S.MyBadgeContainer>
 				<h3>나의 배지</h3>

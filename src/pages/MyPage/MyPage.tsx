@@ -5,7 +5,7 @@ import MyContents from '@/components/features/MyPage/MyContents/MyContents';
 const MyPage = () => {
 	return (
 		<main>
-			<h1 hidden>마이페이지</h1>
+			<h1 className="a11y-hidden">마이페이지</h1>
 			<MyInfo />
 			<MyContents />
 		</main>

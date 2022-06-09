@@ -31,7 +31,7 @@ const GlobalStyle = () => {
 					cursor: pointer;
 				}
 
-				[hidden] {
+				.a11y-hidden {
 					position: absolute;
 					clip: rect(0, 0, 0, 0);
 					width: 1px;

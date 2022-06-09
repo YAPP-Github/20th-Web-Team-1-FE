@@ -7,10 +7,10 @@ import * as S from './MyInfo.styled';
 const MyInfo = () => {
 	return (
 		<S.MyInfoContainer>
-			<h2 hidden>내 정보</h2>
+			<h2 className="a11y-hidden">내 정보</h2>
 
 			<S.MyProfile>
-				<h3 hidden>내 프로필</h3>
+				<h3 className="a11y-hidden">내 프로필</h3>
 
 				<S.MyProfileImageWrapper>
 					<img src={ProfileBeeImg} alt="내 프로필 이미지" />
