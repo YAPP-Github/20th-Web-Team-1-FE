@@ -13,8 +13,8 @@ const MyContents = () => {
 				<h3>나의 배지</h3>
 
 				<S.MyBadgeList>
-					{badgeList.map(({ name, image }, idx) => (
-						<Badge key={idx} name={name} image={image} />
+					{badgeList.map(({ name, image }) => (
+						<Badge key={name} name={name} image={image} />
 					))}
 				</S.MyBadgeList>
 			</S.MyBadgeContainer>
