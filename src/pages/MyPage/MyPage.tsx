@@ -1,6 +1,5 @@
 import React from 'react';
-import MyInfo from '@/components/features/MyPage/MyInfo/MyInfo';
-import MyContents from '@/components/features/MyPage/MyContents/MyContents';
+import { MyInfo, MyContents } from '@/components/features/MyPage';
 
 const MyPage = () => {
 	return (

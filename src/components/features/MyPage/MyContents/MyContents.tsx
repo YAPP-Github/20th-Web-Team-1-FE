@@ -1,7 +1,6 @@
 import React from 'react';
+import { Badge, MySetting } from '@/components/features/MyPage';
 import { badgeList } from '@/constants/badge';
-import Badge from '../Badge/Badge';
-import MySetting from '../MySetting/MySetting';
 import * as S from './MyContents.styled';
 
 const MyContents = () => {
