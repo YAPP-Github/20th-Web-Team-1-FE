@@ -14,7 +14,8 @@ const GlobalStyle = () => {
 				}
 
 				body {
-					max-width: 390px;
+					max-width: 480px;
+					position: relative;
 					margin: auto;
 				}
 
@@ -30,7 +31,7 @@ const GlobalStyle = () => {
 					cursor: pointer;
 				}
 
-				[hidden] {
+				.a11y-hidden {
 					position: absolute;
 					clip: rect(0, 0, 0, 0);
 					width: 1px;
