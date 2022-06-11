@@ -2,15 +2,33 @@ import { Theme } from '@emotion/react';
 
 const theme: Theme = {
 	colors: {
-		bt_black: '#212121',
-		bt_deepGray: '#414141',
-		bt_lightGray: '#eeeeee',
-		bt_gray: '#cccccc',
-		bt_green: '#00c4b8',
-		bt_lightGreen: '#c7f2ef',
-		bt_yellow: '#ffd541',
+		bt_primary: {
+			'20': '#eefbfa',
+			'25': '#e8faf8',
+			'50': '#c7f2ef',
+			'100': '#99e7e3',
+			'200': '#00c4b8',
+			'300': '#577a78',
+		},
+		bt_blue: {
+			20: '#f5fcff',
+			200: '#00aeef',
+		},
+		bt_yellow: {
+			50: '#e8faf8',
+		},
+		bt_grey: {
+			20: '#eeeeee',
+			30: '#cccccc',
+			40: '#8c8c8c',
+			50: '#787878',
+			55: '#6d6d6d',
+			85: '#4b4b4b',
+			90: '#414141',
+			100: '#212121',
+			120: '#121212',
+		},
 		bt_white: '#ffffff',
-		bt_lightBlue: '#f5fcff',
 	},
 	fontSize: {
 		f10: '10px',

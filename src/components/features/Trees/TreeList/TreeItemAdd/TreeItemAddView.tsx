@@ -1,10 +1,11 @@
 import React from 'react';
 import * as S from './TreeItemAdd.styled';
+import { TreeItemAddType } from './type';
 
-const TreeItemAddView = () => {
+const TreeItemAddView = ({ size, onOpenForm }: TreeItemAddType) => {
 	return (
-		<S.ItemAddWrapper>
-			<S.AddCircle>+</S.AddCircle>
+		<S.ItemAddWrapper size={size || 'small'} onClick={onOpenForm}>
+			<span>+</span>
 		</S.ItemAddWrapper>
 	);
 };

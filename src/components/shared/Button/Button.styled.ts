@@ -11,10 +11,11 @@ export const Button = styled.button<ButtonStyledType>`
 	border-radius: 10px;
 	outline: 0;
 	background-color: ${(props) =>
-		props.bgColor === 'primary' ? props.theme.colors.bt_green : props.theme.colors.bt_lightGray};
-	color: ${(props) => (props.bgColor === 'primary' ? props.theme.colors.bt_white : props.theme.colors.bt_deepGray)};
+		props.bgColor === 'primary' ? props.theme.colors.bt_primary[200] : props.theme.colors.bt_grey[20]};
+	color: ${(props) => (props.bgColor === 'primary' ? props.theme.colors.bt_white : props.theme.colors.bt_grey[50])};
 	font-size: ${(props) => props.theme.fontSize.f16};
-	font-weight: ${(props) => props.theme.fontWeight.bold};
+	font-weight: ${(props) =>
+		props.bgColor === 'primary' ? props.theme.fontWeight.bold : props.theme.fontWeight.medium};
 	line-height: ${(props) => props.theme.lineHeight.lh16};
 	letter-spacing: -0.02em;
 `;

@@ -2,11 +2,11 @@ import React from 'react';
 import * as S from './TreeItem.styled';
 import { TreeItemType } from './type';
 
-const TreeItemView = ({ name }: TreeItemType) => {
+const TreeItemView = ({ name, size }: TreeItemType) => {
 	return (
-		<S.ItemWrapper>
-			<S.TreeItemPreview></S.TreeItemPreview>
-			<S.TreeItemName>{name}</S.TreeItemName>
+		<S.ItemWrapper size={size || 'small'}>
+			<div></div>
+			<span className="item-name">{name}</span>
 		</S.ItemWrapper>
 	);
 };
