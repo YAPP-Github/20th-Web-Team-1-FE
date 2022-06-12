@@ -3,12 +3,30 @@ import '@emotion/react';
 declare module '@emotion/react' {
 	export interface Theme {
 		colors: {
-			bt_black: string;
-			bt_deepGray: string;
-			bt_lightGray: string;
-			bt_gray: string;
-			bt_green: string;
-			bt_yellow: string;
+			bt_grey: {
+				20: string;
+				30: string;
+				40: string;
+				50: string;
+				55: string;
+				85: string;
+				90: string;
+				100: string;
+				120: string;
+			};
+			bt_primary: {
+				20: string;
+				25: string;
+				50: string;
+				100: string;
+				200: string;
+				300: string;
+			};
+			bt_blue: {
+				20: string;
+				200: string;
+			};
+			bt_yellow: { 50: string };
 			bt_white: string;
 		};
 		fontSize: {
@@ -23,6 +41,7 @@ declare module '@emotion/react' {
 		fontWeight: {
 			light: number;
 			normal: number;
+			medium: number;
 			semiBold: number;
 			bold: number;
 		};

@@ -1,20 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import NoticeTree from '@/pages/NoticeTree/NoticeTree';
+import Trees from '@/pages/Trees';
+import MyPage from '@/pages/MyPage/MyPage';
 
 const Routers = () => {
 	return (
-		<>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<NoticeTree />} />
-					{/* <Route path="/tree" element={} />
-					<Route path="/friends" element={} />
-					<Route path="/message" element={} />
+		<Routes>
+			<Route path="/" element={<NoticeTree />} />
+			<Route path="/trees" element={<Trees />} />
+			<Route path="/mypage" element={<MyPage />} />
+
+			{/* <Route path="/friends" element={} />
+					<Route path="/messages" element={} />
 					<Route path="/*" element={} /> */}
-				</Routes>
-			</BrowserRouter>
-		</>
+		</Routes>
 	);
 };
 export default Routers;
