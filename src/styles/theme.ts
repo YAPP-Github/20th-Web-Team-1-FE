@@ -3,12 +3,12 @@ import { Theme } from '@emotion/react';
 const theme: Theme = {
 	colors: {
 		bt_primary: {
-			'20': '#eefbfa',
-			'25': '#e8faf8',
-			'50': '#c7f2ef',
-			'100': '#99e7e3',
-			'200': '#00c4b8',
-			'300': '#577a78',
+			20: '#eefbfa',
+			25: '#e8faf8',
+			50: '#c7f2ef',
+			100: '#99e7e3',
+			200: '#00c4b8',
+			300: '#577a78',
 		},
 		bt_blue: {
 			20: '#f5fcff',
