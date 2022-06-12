@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { ChipStyledType } from './type';
 
-export const ChipContainer = styled.div<ChipStyledType>`
+export const FruitInputContainer = styled.div<ChipStyledType>`
 	input[name='fruit-radio'] {
 		display: none;
 	}

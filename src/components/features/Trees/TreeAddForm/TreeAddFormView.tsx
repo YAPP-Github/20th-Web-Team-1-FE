@@ -1,21 +1,44 @@
 import React from 'react';
-import ButtonView from '@/components/shared/Button/ButtonView';
-import ClickableFruitChip from './../../../shared/Chip/ClickableFruitChip';
 import * as S from './TreeAddForm.styled';
+import TreeNameInput from './Input/TreeNameInput';
+import TreeFruitInput from './Input/TreeFruitInput';
+import ButtonView from '@/components/shared/Button/ButtonView';
 import { TreeAddFormViewType } from './type';
 import { fruits } from '@/constants/tree';
 
-const TreeAddFormView = ({ selectedFruit, onChangeSelectedFruit, onCloseForm }: TreeAddFormViewType) => {
+const TreeAddFormView = ({
+	treeName,
+	selectedFruit,
+	onChangeTreeName,
+	onChangeSelectedFruit,
+	onSubmitEditedTreeInfo,
+	onCloseForm,
+}: TreeAddFormViewType) => {
 	return (
-		<form action="">
+		<form onSubmit={onSubmitEditedTreeInfo}>
+			<S.HelperMessageBox>{/* 알림나무 - 꿀벌 영역 재사용할 예정 */}</S.HelperMessageBox>
+
 			<S.TreeInputContainer>
 				<div>
-					<div></div>
+					<div className="tree-name-input-conainter">
+						<TreeNameInput
+							placeholder="새 폴더 이름을 입력하세요."
+							treeName={treeName}
+							onChangeTreeName={onChangeTreeName}
+							autoFocus
+						/>
+					</div>
+
+					<S.TreeShapeContainer>
+						<div className="tree-shape-top" />
+						<div className="tree-shape-bottom" />
+					</S.TreeShapeContainer>
 				</div>
+
 				<div className="fruit-select-box">
 					<ul className="fruit-list">
 						{fruits.map((fruit) => (
-							<ClickableFruitChip
+							<TreeFruitInput
 								key={fruit.id}
 								imgSrc={fruit.imgSrc}
 								fruitName={fruit.name}

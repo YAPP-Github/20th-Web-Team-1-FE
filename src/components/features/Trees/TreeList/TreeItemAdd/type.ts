@@ -1,7 +1,3 @@
-export interface TreeItemAddStyledType {
-	size?: 'small' | 'large';
-}
-
-export interface TreeItemAddType extends TreeItemAddStyledType {
+export interface TreeItemAddType {
 	onOpenForm: () => void;
 }

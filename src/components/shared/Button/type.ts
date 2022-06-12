@@ -4,7 +4,7 @@ export interface ButtonStyledType {
 }
 
 export interface ButtonType extends ButtonStyledType {
-	type: 'button' | 'submit' | 'reset';
+	type: 'button' | 'submit';
 	onClick?: () => void;
 	children?: React.ReactNode;
 }

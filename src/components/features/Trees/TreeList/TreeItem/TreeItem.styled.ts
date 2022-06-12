@@ -1,20 +1,19 @@
 import styled from '@emotion/styled';
-import { TreeItemStyledType } from './type';
 
-export const ItemWrapper = styled.li<TreeItemStyledType>`
+export const ItemWrapper = styled.li`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: ${(props) => (props.size === 'small' ? '154px' : '')};
-	height: ${(props) => (props.size === 'small' ? '221px' : '')};
+	width: 154px;
+	height: 221px;
 	background-color: ${(props) => props.theme.colors.bt_white};
 	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 	border-radius: 20px;
 
 	& > div {
-		width: ${(props) => (props.size === 'small' ? '154px' : '')};
-		height: ${(props) => (props.size === 'small' ? ' 181px' : '')};
+		width: 154px;
+		height: 181px;
 	}
 
 	& > .item-name {
