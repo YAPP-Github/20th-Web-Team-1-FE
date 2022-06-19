@@ -88,6 +88,7 @@ export const WarnningDescBox = styled.div`
 		text-align: center;
 		font-size: ${(props) => props.theme.fontSize.f13};
 		font-weight: ${(props) => props.theme.fontWeight.light};
+		font-family: 'Pretendard', 'noto sans';
 		line-height: 21px;
 		letter-spacing: -0.02em;
 	}

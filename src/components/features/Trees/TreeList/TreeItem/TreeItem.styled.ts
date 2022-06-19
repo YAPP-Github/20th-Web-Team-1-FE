@@ -7,9 +7,12 @@ export const ItemWrapper = styled.li`
 	align-items: center;
 	width: 154px;
 	height: 221px;
-	background-color: ${(props) => props.theme.colors.bt_white};
-	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
-	border-radius: 20px;
+
+	& > a {
+		background-color: ${(props) => props.theme.colors.bt_white};
+		border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
+		border-radius: 20px;
+	}
 
 	& > a > div {
 		width: 154px;
