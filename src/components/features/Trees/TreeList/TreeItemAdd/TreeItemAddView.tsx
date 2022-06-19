@@ -4,7 +4,7 @@ import { TreeItemAddType } from './type';
 
 const TreeItemAddView = ({ onOpenForm }: TreeItemAddType) => {
 	return (
-		<S.ItemAddWrapper onClick={onOpenForm}>
+		<S.ItemAddWrapper type="button" onClick={onOpenForm}>
 			<div className="plus-shape-container">
 				<span className="plus-shape-bar row" />
 				<span className="plus-shape-bar column" />
