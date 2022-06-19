@@ -11,12 +11,12 @@ export const ItemWrapper = styled.li`
 	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 	border-radius: 20px;
 
-	& > div {
+	& > a > div {
 		width: 154px;
 		height: 181px;
 	}
 
-	& > .item-name {
+	& > a > .item-name {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -25,5 +25,6 @@ export const ItemWrapper = styled.li`
 		border-top: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 		font-size: ${(props) => props.theme.fontSize.f12};
 		line-height: ${(props) => props.theme.lineHeight.lh12};
+		color: ${(props) => props.theme.colors.bt_grey[120]};
 	}
 `;
