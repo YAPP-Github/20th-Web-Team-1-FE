@@ -32,6 +32,7 @@ export const FruitInputContainer = styled.div<ChipStyledType>`
 		line-height: 100%;
 		font-size: ${(props) => props.theme.fontSize.f12};
 		font-weight: ${(props) => props.theme.fontWeight.light};
+		font-family: 'Pretendard', 'noto sans';
 		letter-spacing: -0.02em;
 	}
 `;

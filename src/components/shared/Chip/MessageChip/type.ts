@@ -1,3 +1,3 @@
-export interface MessageChipType {
+export interface MessageChipViewType {
 	message: string;
 }

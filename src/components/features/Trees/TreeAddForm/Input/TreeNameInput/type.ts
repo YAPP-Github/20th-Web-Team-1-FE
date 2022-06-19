@@ -10,5 +10,5 @@ export interface TreeNameInputModelType extends InputType {
 
 export interface TreeNameInputViewType extends InputType {
 	treeName: string;
-	onChange: (event: React.FormEvent) => void;
+	onChange: (event: React.FormEvent<HTMLFormElement>) => void;
 }

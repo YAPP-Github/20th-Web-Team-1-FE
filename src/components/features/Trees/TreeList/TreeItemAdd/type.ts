@@ -1,3 +1,3 @@
-export interface TreeItemAddType {
-	onOpenForm: () => void;
+export interface TreeItemAddViewType {
+	onClick: () => void;
 }

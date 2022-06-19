@@ -1,8 +1,14 @@
 import styled from '@emotion/styled';
-import { ItemWrapper } from '@/components/features/Trees/TreeList/TreeItem/TreeItem.styled';
 
-export const ItemAddWrapper = styled(ItemWrapper)`
-	cursor: pointer;
+export const ItemAddWrapper = styled.button`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 154px;
+	height: 221px;
+	background-color: ${(props) => props.theme.colors.bt_white};
+	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
+	border-radius: 20px;
 
 	& > .plus-shape-container {
 		position: relative;

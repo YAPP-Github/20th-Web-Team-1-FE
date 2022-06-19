@@ -3,8 +3,8 @@ import TreeNameInputView from './TreeNameInputView';
 import { TreeNameInputModelType } from './type';
 
 const TreeNameInput = ({ treeName, placeholder, autoFocus, onChangeTreeName }: TreeNameInputModelType) => {
-	const onChange = (event: React.FormEvent) => {
-		const treeName = (event.target as HTMLInputElement).value;
+	const onChange = (event: React.FormEvent<HTMLFormElement>) => {
+		const treeName = event.currentTarget.value;
 		onChangeTreeName(treeName);
 	};
 

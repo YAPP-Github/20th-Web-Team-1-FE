@@ -12,7 +12,7 @@ const TreeAddFormView = ({
 	onChangeTreeName,
 	onChangeSelectedFruit,
 	onSubmitEditedTreeInfo,
-	onCloseForm,
+	onGoBackClick,
 }: TreeAddFormViewType) => {
 	return (
 		<form onSubmit={onSubmitEditedTreeInfo}>
@@ -56,7 +56,7 @@ const TreeAddFormView = ({
 			</S.WarnningDescBox>
 
 			<S.ButtonBox>
-				<ButtonView type="button" width="156px" bgColor="normal" onClick={onCloseForm}>
+				<ButtonView type="button" width="156px" bgColor="normal" onClick={onGoBackClick}>
 					뒤로가기
 				</ButtonView>
 				<ButtonView type="submit" width="156px" bgColor="primary">

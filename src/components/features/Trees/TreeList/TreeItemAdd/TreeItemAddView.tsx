@@ -1,10 +1,10 @@
 import React from 'react';
 import * as S from './TreeItemAdd.styled';
-import { TreeItemAddType } from './type';
+import { TreeItemAddViewType } from './type';
 
-const TreeItemAddView = ({ onOpenForm }: TreeItemAddType) => {
+const TreeItemAddView = ({ onClick }: TreeItemAddViewType) => {
 	return (
-		<S.ItemAddWrapper onClick={onOpenForm}>
+		<S.ItemAddWrapper type="button" onClick={onClick}>
 			<div className="plus-shape-container">
 				<span className="plus-shape-bar row" />
 				<span className="plus-shape-bar column" />

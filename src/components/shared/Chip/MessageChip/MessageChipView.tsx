@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './MessageChip.styled';
-import { MessageChipType } from './type';
+import { MessageChipViewType } from './type';
 
-const MessageChipView = ({ message }: MessageChipType) => {
+const MessageChipView = ({ message }: MessageChipViewType) => {
 	return (
 		<S.MessageChipWrapper>
 			<span>{message}</span>

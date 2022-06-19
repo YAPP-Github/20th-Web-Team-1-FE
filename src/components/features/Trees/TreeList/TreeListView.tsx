@@ -2,15 +2,15 @@ import React from 'react';
 import TreeItemAddView from './TreeItemAdd/TreeItemAddView';
 import TreeItemView from './TreeItem/TreeItemView';
 import * as S from './TreeList.styled';
-import { TreeListType } from './type';
+import { TreeListViewType } from './type';
 
-const TreeListView = ({ onOpenForm }: TreeListType) => {
+const TreeListView = ({ handleTreeEditItemClick }: TreeListViewType) => {
 	return (
 		<S.TreeItemList>
 			<TreeItemView name={'Yapp Web 1팀'} />
 			<TreeItemView name={'Yapp Web 1팀'} />
 			<TreeItemView name={'Yapp Web 1팀'} />
-			<TreeItemAddView onOpenForm={onOpenForm} />
+			<TreeItemAddView onClick={handleTreeEditItemClick} />
 		</S.TreeItemList>
 	);
 };
