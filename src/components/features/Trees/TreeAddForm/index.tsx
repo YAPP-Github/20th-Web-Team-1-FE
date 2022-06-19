@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TreeAddFormView from './TreeAddFormView';
-import { TreeAddFormType } from './type';
 
-const TreeAddForm = ({ onCloseForm }: TreeAddFormType) => {
+const TreeAddForm = () => {
+	const navigate = useNavigate();
 	const [selectedFruit, setSelectedFruit] = useState('');
 	const [treeName, setTreeName] = useState('');
 
@@ -20,6 +21,10 @@ const TreeAddForm = ({ onCloseForm }: TreeAddFormType) => {
 		console.log(treeName, selectedFruit);
 	};
 
+	const handleGoBackClick = () => {
+		navigate(-1);
+	};
+
 	return (
 		<TreeAddFormView
 			treeName={treeName}
@@ -27,7 +32,7 @@ const TreeAddForm = ({ onCloseForm }: TreeAddFormType) => {
 			onChangeTreeName={handleChangeTreeName}
 			onChangeSelectedFruit={handleChangeSelectedFruit}
 			onSubmitEditedTreeInfo={handleSubmitEditedTreeInfo}
-			onCloseForm={onCloseForm}
+			onGoBackClick={handleGoBackClick}
 		/>
 	);
 };

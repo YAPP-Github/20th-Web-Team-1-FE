@@ -23,6 +23,5 @@ export const Button = styled.button<ButtonStyledType>`
 
 	&:focus:not(:focus-visible) {
 		outline: none;
-		box-shadow: 1px 1px 5px rgba(1, 1, 0, 0.7);
 	}
 `;
