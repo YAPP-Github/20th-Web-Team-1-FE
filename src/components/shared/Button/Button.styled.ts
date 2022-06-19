@@ -9,13 +9,20 @@ export const Button = styled.button<ButtonStyledType>`
 	height: 50px;
 	border: 0;
 	border-radius: 10px;
-	outline: 0;
-	background-color: ${(props) =>
-		props.bgColor === 'primary' ? props.theme.colors.bt_primary[200] : props.theme.colors.bt_grey[20]};
-	color: ${(props) => (props.bgColor === 'primary' ? props.theme.colors.bt_white : props.theme.colors.bt_grey[50])};
-	font-size: ${(props) => props.theme.fontSize.f16};
-	font-weight: ${(props) =>
-		props.bgColor === 'primary' ? props.theme.fontWeight.bold : props.theme.fontWeight.medium};
+	background-color: ${({ bgColor, theme }) =>
+		bgColor === 'primary' ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20]};
+	color: ${({ bgColor, theme }) => (bgColor === 'primary' ? theme.colors.bt_white : theme.colors.bt_grey[50])};
+	font-size: ${({ theme }) => theme.fontSize.f16};
+	font-weight: ${({ bgColor, theme }) => (bgColor === 'primary' ? theme.fontWeight.bold : theme.fontWeight.medium)};
 	line-height: ${(props) => props.theme.lineHeight.lh16};
 	letter-spacing: -0.02em;
+
+	&:focus-visible {
+		outline: 2px solid #000000;
+	}
+
+	&:focus:not(:focus-visible) {
+		outline: none;
+		box-shadow: 1px 1px 5px rgba(1, 1, 0, 0.7);
+	}
 `;
