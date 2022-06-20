@@ -40,6 +40,7 @@ const theme: Theme = {
 		f20: '20px',
 	},
 	fontWeight: {
+		thin: 200,
 		light: 300,
 		normal: 400,
 		medium: 500,

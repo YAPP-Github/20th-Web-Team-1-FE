@@ -40,7 +40,7 @@ export const SettingDetails = styled.div`
 		border-radius: 2px;
 		color: #4b4b4b;
 		font-size: 12px;
-		font-weight: 200;
+		font-weight: ${({ theme }) => theme.fontWeight.thin};
 	}
 `;
 
@@ -65,7 +65,7 @@ export const SettingButton = styled.button<StyledProps>`
 	background-color: ${({ selected, theme }) => (selected ? theme.colors.bt_yellow[50] : theme.colors.bt_grey[30])};
 	border-radius: 3.16832px;
 	font-size: 10px;
-	font-weight: 500;
+	font-weight: ${({ theme }) => theme.fontWeight.medium};
 	line-height: 10px;
 	text-align: center;
 
