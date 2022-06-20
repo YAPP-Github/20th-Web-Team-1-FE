@@ -15,7 +15,7 @@ const theme: Theme = {
 			200: '#00aeef',
 		},
 		bt_yellow: {
-			50: '#e8faf8',
+			50: '#ffd541',
 		},
 		bt_grey: {
 			20: '#eeeeee',

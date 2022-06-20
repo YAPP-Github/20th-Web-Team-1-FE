@@ -41,7 +41,7 @@ export const HeaderLink = styled(Link)<StyledProps>`
 	& > span {
 		margin-top: 6px;
 		font-size: 10px;
-		color: ${({ selected, theme }) => (selected ? theme.colors.bt_green : theme.colors.bt_lightGray)};
+		color: ${({ selected, theme }) => (selected ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20])};
 		line-height: 8px;
 	}
 `;

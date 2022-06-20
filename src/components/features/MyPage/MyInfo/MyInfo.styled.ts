@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const MyInfoContainer = styled.section`
 	width: 100%;
 	padding: 52px 32px 40px 32px;
-	background-color: ${({ theme }) => theme.colors.bt_lightBlue};
+	background-color: ${({ theme }) => theme.colors.bt_primary[20]};
 	margin-top: -20px;
 `;
 

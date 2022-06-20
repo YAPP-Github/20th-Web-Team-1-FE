@@ -12,7 +12,8 @@ const Header = () => {
 
 	const isLinkSelected = (to: string) => to === pathname;
 
-	const decideLinkColor = (to: string) => (isLinkSelected(to) ? theme.colors.bt_green : theme.colors.bt_lightGray);
+	const decideLinkColor = (to: string) =>
+		isLinkSelected(to) ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20];
 
 	return (
 		<S.HeaderWrapper>
