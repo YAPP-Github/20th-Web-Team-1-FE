@@ -10,10 +10,10 @@ const GlobalStyle = () => {
 
 				*, *::before, *::after {
 					box-sizing: border-box;
+					font-family: 'Pretendard', 'noto sans';
 				}
 
 				body {
-					font-family: 'noto sans';
 					max-width: 480px;
 					position: relative;
 					margin: auto;
