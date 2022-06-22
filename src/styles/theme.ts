@@ -6,7 +6,9 @@ const theme: Theme = {
 			20: '#eefbfa',
 			25: '#e8faf8',
 			50: '#c7f2ef',
+			60: '#c3eaff',
 			100: '#99e7e3',
+			150: '#47d5cc',
 			200: '#00c4b8',
 			300: '#577a78',
 		},
@@ -23,6 +25,7 @@ const theme: Theme = {
 			40: '#8c8c8c',
 			50: '#787878',
 			55: '#6d6d6d',
+			68: '#686868',
 			85: '#4b4b4b',
 			90: '#414141',
 			100: '#212121',
@@ -32,6 +35,7 @@ const theme: Theme = {
 	},
 	fontSize: {
 		f10: '10px',
+		f11: '11px',
 		f12: '12px',
 		f13: '13px',
 		f14: '14px',
@@ -46,6 +50,7 @@ const theme: Theme = {
 		medium: 500,
 		semiBold: 600,
 		bold: 700,
+		strongBold: 800,
 	},
 	lineHeight: {
 		lh10: '10px',
@@ -55,6 +60,7 @@ const theme: Theme = {
 		lh15: '15px',
 		lh16: '16px',
 		lh20: '20px',
+		lh22: '22px',
 	},
 };
 
