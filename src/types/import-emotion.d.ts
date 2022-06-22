@@ -39,6 +39,7 @@ declare module '@emotion/react' {
 			f20: string;
 		};
 		fontWeight: {
+			thin: number;
 			light: number;
 			normal: number;
 			medium: number;

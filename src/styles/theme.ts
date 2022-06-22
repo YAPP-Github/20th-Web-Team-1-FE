@@ -15,7 +15,7 @@ const theme: Theme = {
 			200: '#00aeef',
 		},
 		bt_yellow: {
-			50: '#e8faf8',
+			50: '#ffd541',
 		},
 		bt_grey: {
 			20: '#eeeeee',
@@ -40,6 +40,7 @@ const theme: Theme = {
 		f20: '20px',
 	},
 	fontWeight: {
+		thin: 200,
 		light: 300,
 		normal: 400,
 		medium: 500,

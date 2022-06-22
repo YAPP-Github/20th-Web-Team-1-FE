@@ -2,9 +2,8 @@ import styled from '@emotion/styled';
 
 export const MyInfoContainer = styled.section`
 	width: 100%;
-	padding: 52px 32px 40px 32px;
-	background-color: ${({ theme }) => theme.colors.bt_lightBlue};
-	margin-top: -20px;
+	padding: 72px 32px 40px 32px;
+	background-color: ${({ theme }) => theme.colors.bt_primary[20]};
 `;
 
 export const MyProfile = styled.div`

@@ -36,7 +36,7 @@ export const MySettingContainer = styled.div`
 export const LogoutButton = styled.button`
 	width: 100%;
 	color: ${({ theme }) => theme.colors.bt_white};
-	background-color: ${({ theme }) => theme.colors.bt_green};
+	background-color: ${({ theme }) => theme.colors.bt_primary[200]};
 	border: none;
 	padding: 17px 0;
 	text-align: center;

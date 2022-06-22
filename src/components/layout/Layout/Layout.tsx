@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Header } from '@/components/layout';
+import { Header, BottomNav } from '@/components/layout';
 
 type Props = {
 	children: ReactNode;
@@ -10,6 +10,7 @@ const Layout = ({ children }: Props) => {
 		<>
 			<Header />
 			{children}
+			<BottomNav />
 		</>
 	);
 };
