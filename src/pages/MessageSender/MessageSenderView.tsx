@@ -1,14 +1,15 @@
 import React from 'react';
-import { RecipientName, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
+import { RecipientName, FolderSelect, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
+import ButtonView from '@/components/shared/Button/ButtonView';
 import * as S from './MessageSender.styled';
 import { MessageSenderPropsType } from './type';
-import ButtonView from '@/components/shared/Button/ButtonView';
 
-const MessageSenderView = ({ name }: MessageSenderPropsType) => {
+const MessageSenderView = ({ name, checked, handleToggleChecked, handleGoBackClick }: MessageSenderPropsType) => {
 	return (
 		<main>
 			<S.TopContainer>
 				<RecipientName name={name} />
+				<FolderSelect />
 			</S.TopContainer>
 
 			<S.MessageInputContainer>
@@ -16,14 +17,14 @@ const MessageSenderView = ({ name }: MessageSenderPropsType) => {
 			</S.MessageInputContainer>
 
 			<S.AnonymousCheckBoxContainer>
-				<AnonymousCheckBox />
+				<AnonymousCheckBox checked={checked} handleToggleChecked={handleToggleChecked} />
 			</S.AnonymousCheckBoxContainer>
 
 			<S.ButtonContainer>
-				<ButtonView type="button" bgColor="normal">
+				<ButtonView type="button" bgColor="normal" onClick={handleGoBackClick}>
 					뒤로가기
 				</ButtonView>
-				<ButtonView type="submit" bgColor="primary">
+				<ButtonView type="submit" bgColor="primary" onClick={() => console.log('물 주기 API POST Go !')}>
 					물 주기
 				</ButtonView>
 			</S.ButtonContainer>
