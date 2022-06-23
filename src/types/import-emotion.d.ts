@@ -9,6 +9,7 @@ declare module '@emotion/react' {
 				40: string;
 				50: string;
 				55: string;
+				68: string;
 				85: string;
 				90: string;
 				100: string;
@@ -18,7 +19,9 @@ declare module '@emotion/react' {
 				20: string;
 				25: string;
 				50: string;
+				60: string;
 				100: string;
+				150: string;
 				200: string;
 				300: string;
 			};
@@ -31,6 +34,7 @@ declare module '@emotion/react' {
 		};
 		fontSize: {
 			f10: string;
+			f11: string;
 			f12: string;
 			f13: string;
 			f14: string;
@@ -45,6 +49,7 @@ declare module '@emotion/react' {
 			medium: number;
 			semiBold: number;
 			bold: number;
+			strongBold: number;
 		};
 		lineHeight: {
 			lh10: string;
@@ -54,6 +59,7 @@ declare module '@emotion/react' {
 			lh15: string;
 			lh16: string;
 			lh20: string;
+			lh22: string;
 		};
 	}
 }

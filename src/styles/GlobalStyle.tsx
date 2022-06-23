@@ -14,9 +14,10 @@ const GlobalStyle = () => {
 				}
 
 				body {
-					max-width: 480px;
-					position: relative;
+					font-family: 'Pretendard';
+					max-width: 475px;
 					margin: auto;
+					position: relative;
 				}
 
 				li {
