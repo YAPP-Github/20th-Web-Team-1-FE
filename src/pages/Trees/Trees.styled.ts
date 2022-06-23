@@ -12,5 +12,5 @@ export const TreeListBox = styled.div`
 export const ButtonBox = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: 61px;
+	margin-top: 42px;
 `;
