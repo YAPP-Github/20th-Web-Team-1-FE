@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+export const MessageSenderContainer = styled.main`
+	padding: 96px 0 30px 0;
+`;
+
 export const TopContainer = styled.div`
 	display: flex;
 	justify-content: space-between;

@@ -5,6 +5,6 @@ export const TreeItemList = styled.ul`
 	grid-gap: 18px;
 	grid-template-rows: repeat(2, 1fr);
 	grid-template-columns: repeat(2, 1fr);
-	width: 326px;
-	margin: auto;
+	width: 100%;
+	margin: 0 auto;
 `;

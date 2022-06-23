@@ -6,7 +6,7 @@ import { MessageSenderPropsType } from './type';
 
 const MessageSenderView = ({ name, checked, handleToggleChecked, handleGoBackClick }: MessageSenderPropsType) => {
 	return (
-		<main>
+		<S.MessageSenderContainer>
 			<S.TopContainer>
 				<RecipientName name={name} />
 				<FolderSelect />
@@ -28,7 +28,7 @@ const MessageSenderView = ({ name, checked, handleToggleChecked, handleGoBackCli
 					물 주기
 				</ButtonView>
 			</S.ButtonContainer>
-		</main>
+		</S.MessageSenderContainer>
 	);
 };
 

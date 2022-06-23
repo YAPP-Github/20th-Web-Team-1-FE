@@ -4,7 +4,7 @@ export const MessageChipWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 326px;
+	width: 100%;
 	height: 50px;
 	margin: auto;
 	border-radius: 20px;

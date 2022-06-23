@@ -15,7 +15,7 @@ const TreeAddFormView = ({
 	onGoBackClick,
 }: TreeAddFormViewType) => {
 	return (
-		<form onSubmit={onSubmitEditedTreeInfo}>
+		<S.TreeAddForm onSubmit={onSubmitEditedTreeInfo}>
 			<S.HelperMessageBox>{/* 알림나무 - 꿀벌 영역 재사용할 예정 */}</S.HelperMessageBox>
 
 			<S.TreeInputContainer>
@@ -63,7 +63,7 @@ const TreeAddFormView = ({
 					저장하기
 				</ButtonView>
 			</S.ButtonBox>
-		</form>
+		</S.TreeAddForm>
 	);
 };
 

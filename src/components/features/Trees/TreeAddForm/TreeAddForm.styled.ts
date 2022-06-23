@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 
+export const TreeAddForm = styled.form`
+	padding: 96px 0 30px 0;
+	margin: 0 32px;
+`;
+
 export const HelperMessageBox = styled.div`
-	width: 326px;
+	width: 100%;
 	height: 66px;
-	margin: auto;
-	margin-top: 32px;
 	border: 1px solid ${(props) => props.theme.colors.bt_primary[200]};
 `;
 
@@ -13,7 +16,7 @@ export const TreeInputContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 326px;
+	width: 100%;
 	height: 415px;
 	margin: auto;
 	margin-top: 27px;
@@ -26,7 +29,7 @@ export const TreeInputContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		width: 326px;
+		width: 100%;
 		height: 287px;
 
 		& > .tree-name-input-conainter {
@@ -40,7 +43,7 @@ export const TreeInputContainer = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 326px;
+		width: 100%;
 		height: 128px;
 		background-color: ${(props) => props.theme.colors.bt_primary[20]};
 
