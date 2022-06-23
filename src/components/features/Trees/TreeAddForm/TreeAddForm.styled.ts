@@ -5,10 +5,54 @@ export const TreeAddForm = styled.form`
 	margin: 0 32px;
 `;
 
-export const HelperMessageBox = styled.div`
+export const HelperMessageContainer = styled.div`
+	display: flex;
+	align-items: center;
 	width: 100%;
 	height: 66px;
-	border: 1px solid ${(props) => props.theme.colors.bt_primary[200]};
+`;
+
+export const HelperBeeContainer = styled.div`
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 66px;
+	height: 66px;
+	padding: 7px 8px 8px 7px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 5px rgba(0, 196, 184, 0.1); ;
+`;
+
+export const HelperBeeMessage = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 7px;
+	width: 100%;
+	height: 66px;
+	border-radius: 20px 20px 20px 0px;
+	background: ${({ theme }) => theme.colors.bt_primary[25]};
+	box-shadow: 0px 0px 5px rgba(0, 196, 184, 0.1);
+	padding: 15px 20px;
+	margin-left: 14px;
+
+	& > .title {
+		font-size: ${({ theme }) => theme.fontSize.f15};
+		font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+		line-height: ${({ theme }) => theme.lineHeight.lh15};
+		letter-spacing: -0.02em;
+		color: ${({ theme }) => theme.colors.bt_grey[120]};
+	}
+
+	& > .sub-title {
+		font-size: ${({ theme }) => theme.fontSize.f12};
+		font-weight: ${({ theme }) => theme.fontWeight.medium};
+		line-height: ${({ theme }) => theme.lineHeight.lh12};
+		letter-spacing: -0.02em;
+		color: ${({ theme }) => theme.colors.bt_grey[85]};
+	}
 `;
 
 export const TreeInputContainer = styled.div`

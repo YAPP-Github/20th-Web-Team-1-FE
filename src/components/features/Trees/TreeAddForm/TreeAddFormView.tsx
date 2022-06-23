@@ -3,8 +3,10 @@ import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import ButtonView from '@/components/shared/Button/ButtonView';
-import { TreeAddFormViewType } from './type';
 import { fruits } from '@/constants/tree';
+import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
+
+import { TreeAddFormViewType } from './type';
 
 const TreeAddFormView = ({
 	treeName,
@@ -16,7 +18,15 @@ const TreeAddFormView = ({
 }: TreeAddFormViewType) => {
 	return (
 		<S.TreeAddForm onSubmit={onSubmitEditedTreeInfo}>
-			<S.HelperMessageBox>{/* 알림나무 - 꿀벌 영역 재사용할 예정 */}</S.HelperMessageBox>
+			<S.HelperMessageContainer>
+				<S.HelperBeeContainer>
+					<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
+				</S.HelperBeeContainer>
+				<S.HelperBeeMessage>
+					<p className="title">열매 나무를 편집하시나요?</p>
+					<p className="sub-title">나무의 이름도 바꿔보세요.</p>
+				</S.HelperBeeMessage>
+			</S.HelperMessageContainer>
 
 			<S.TreeInputContainer>
 				<div>
