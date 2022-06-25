@@ -6,10 +6,8 @@ import * as S from './Trees.styled';
 
 const TreesView = () => {
 	return (
-		<main>
-			<S.MessageChipBox>
-				<MessageChipView message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
-			</S.MessageChipBox>
+		<S.TreesContainer>
+			<MessageChipView message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
 
 			<S.TreeListBox>
 				<TreeList />
@@ -26,7 +24,7 @@ const TreesView = () => {
 					나무에 물 주기
 				</ButtonView>
 			</S.ButtonBox>
-		</main>
+		</S.TreesContainer>
 	);
 };
 

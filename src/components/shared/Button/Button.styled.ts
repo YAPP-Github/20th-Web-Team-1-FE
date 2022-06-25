@@ -5,7 +5,7 @@ export const Button = styled.button<ButtonStyledType>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: ${(props) => props.width || '326px'};
+	width: 100%;
 	height: 50px;
 	border: 0;
 	border-radius: 10px;

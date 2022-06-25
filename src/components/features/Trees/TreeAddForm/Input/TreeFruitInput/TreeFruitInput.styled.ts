@@ -11,7 +11,7 @@ export const FruitInputContainer = styled.div<ChipStyledType>`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 86px;
+		width: 100%;
 		height: 32px;
 		padding: 5px 11px;
 		border-radius: 18px;
