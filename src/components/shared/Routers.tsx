@@ -8,6 +8,7 @@ import MessageDetail from '@/pages/MessageDetail/MessageDetail';
 import MessageSender from '@/pages/MessageSender';
 import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 import Login from '@/pages/Login';
+import Message from '@/pages/Message';
 
 const Routers = () => {
 	return (
@@ -19,11 +20,10 @@ const Routers = () => {
 			<Route path="/mypage" element={<MyPage />} />
 			<Route path="/mypage/edit" element={<ProfileEdit />} />
 			<Route path="/send-message" element={<MessageSender />} />
+			<Route path="/messages" element={<Message />} />
 			<Route path="/messages/:messageId" element={<MessageDetail />} />
-
 			{/* <Route path="/friends" element={} />
-					<Route path="/messages" element={} />
-					<Route path="/*" element={} /> */}
+			<Route path="/*" element={} /> */}
 		</Routes>
 	);
 };
