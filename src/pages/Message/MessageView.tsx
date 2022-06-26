@@ -1,5 +1,5 @@
-import SideDrawer from '@/components/shared/Modal/SideDrawer';
 import React from 'react';
+import SideDrawer from '@/components/shared/Modal/SideDrawer';
 import * as S from './Message.styled';
 
 import { MessageViewPropsType } from './type';
