@@ -5,17 +5,17 @@ export const ItemWrapper = styled.li`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 154px;
+	width: 100%;
 	height: 221px;
 
 	& > a {
+		width: 100%;
 		background-color: ${(props) => props.theme.colors.bt_white};
 		border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 		border-radius: 20px;
 	}
 
 	& > a > div {
-		width: 154px;
 		height: 181px;
 	}
 
@@ -23,7 +23,6 @@ export const ItemWrapper = styled.li`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 154px;
 		height: 40px;
 		border-top: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 		font-size: ${(props) => props.theme.fontSize.f12};

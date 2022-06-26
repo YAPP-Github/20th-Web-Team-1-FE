@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NoticeTree from '@/pages/NoticeTree/NoticeTree';
+import NoticeTree from '@/pages/NoticeTree';
 import Trees from '@/pages/Trees';
 import TreeAddForm from '../features/Trees/TreeAddForm';
 import MyPage from '@/pages/MyPage/MyPage';
 import MessageDetail from '@/pages/MessageDetail/MessageDetail';
+import MessageSender from '@/pages/MessageSender';
 
 const Routers = () => {
 	return (
@@ -13,7 +14,7 @@ const Routers = () => {
 			<Route path="/trees" element={<Trees />} />
 			<Route path="/trees/edit" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
-
+			<Route path="/send-message" element={<MessageSender />} />
 			<Route path="/messages/:messageId" element={<MessageDetail />} />
 
 			{/* <Route path="/friends" element={} />

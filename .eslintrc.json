@@ -12,5 +12,8 @@
 		"plugin:@typescript-eslint/recommended",
 		"plugin:prettier/recommended",
 		"plugin:react-hooks/recommended"
-	]
+	],
+	"rules": {
+		"prettier/prettier": ["error", { "endOfLine": "auto" }]
+	}
 }

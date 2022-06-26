@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 
-export const MessageChipBox = styled.div`
-	margin-top: 41px;
+export const TreesContainer = styled.main`
+	padding: 96px 0 30px 0;
+	margin: 0 32px;
 `;
 
 export const TreeListBox = styled.div`
@@ -11,5 +12,5 @@ export const TreeListBox = styled.div`
 export const ButtonBox = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: 61px;
+	margin-top: 42px;
 `;

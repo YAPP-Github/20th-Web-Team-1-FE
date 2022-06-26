@@ -4,7 +4,7 @@ export const ItemAddWrapper = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 154px;
+	width: 100%;
 	height: 221px;
 	background-color: ${(props) => props.theme.colors.bt_white};
 	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
