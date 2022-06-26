@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const MyContentsContainer = styled.section`
 	background: ${({ theme }) => theme.colors.bt_white};
-	padding: 27px 32px 60px 32px;
+	padding: 27px 32px 0px 32px;
 	border-radius: 20px 20px 0px 0px;
 	margin-top: -20px;
 `;
