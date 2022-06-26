@@ -1,12 +1,24 @@
 import React from 'react';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
+
 import { SideDrawerViewPropsType } from './type';
 
 const SideDrawerView = ({ profileImgSrc, username, email, onModal, setOnModal }: SideDrawerViewPropsType) => {
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
 			<S.SideDrawerContainer show={onModal}>
+				<S.CloseBtnWrapper>
+					<button type="button" onClick={() => setOnModal(false)}>
+						<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M2.57031 14.5938L7.55078 9.61328L12.5312 14.5938L14.4941 12.6309L9.51367 7.62109L14.4941 2.66992L12.5312 0.707031L7.55078 5.6582L2.57031 0.707031L0.607422 2.66992L5.58789 7.62109L0.607422 12.6309L2.57031 14.5938Z"
+								fill="#00C4B8"
+							/>
+						</svg>
+					</button>
+				</S.CloseBtnWrapper>
+
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
 						<div className="thumbnail-img">

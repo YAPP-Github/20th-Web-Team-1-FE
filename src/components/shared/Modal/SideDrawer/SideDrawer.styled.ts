@@ -18,6 +18,17 @@ export const SideDrawerContainer = styled.div<SideDrawerStyledPropType>`
 	transform: ${({ show }) => (show ? 'translateX(0px)' : 'translateX(-100%)')};
 `;
 
+export const CloseBtnWrapper = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	margin: 30px 32px 0 32px;
+
+	& > button {
+		background-color: transparent;
+		border: 0;
+	}
+`;
+
 export const Divider = styled.span`
 	width: 100%;
 	height: 0.5px;
@@ -25,7 +36,9 @@ export const Divider = styled.span`
 	background-color: ${({ theme }) => theme.colors.bt_grey[30]};
 `;
 
-export const ThumbnailWrapper = styled.section``;
+export const ThumbnailWrapper = styled.section`
+	margin-top: 30px;
+`;
 
 export const ThumbnailBox = styled.div`
 	display: flex;
