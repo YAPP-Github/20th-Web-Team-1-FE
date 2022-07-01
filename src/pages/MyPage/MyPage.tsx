@@ -1,13 +1,13 @@
 import React from 'react';
 import { MyInfo, MyContents } from '@/components/features/MyPage';
+import * as S from './MyPage.styled';
 
 const MyPage = () => {
 	return (
-		<main>
-			<h1 className="a11y-hidden">마이페이지</h1>
+		<S.MyPageContainer>
 			<MyInfo />
 			<MyContents />
-		</main>
+		</S.MyPageContainer>
 	);
 };
 
