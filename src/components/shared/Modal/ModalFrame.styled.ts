@@ -6,6 +6,8 @@ export const ModalBackDrop = styled.div<ModalBackDropStyledPropsType>`
 	display: ${({ show }) => (show ? 'flex' : 'none')};
 	align-items: center;
 	justify-content: center;
+	width: inherit;
+	margin: inherit;
 	background-color: rgba(0, 0, 0, 0.66);
 	inset: 0px;
 	z-index: 100;

@@ -12,5 +12,7 @@ export type SideDrawerViewPropsType = {
 	username: string;
 	email: string;
 	onModal: boolean;
+	onMenuMoreModal: boolean;
 	setOnModal: (state: boolean) => void;
+	setOnMenuMoreModal: (state: boolean) => void;
 };

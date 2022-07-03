@@ -8,14 +8,16 @@ export const SideDrawerContainer = styled.div<SideDrawerStyledPropType>`
 	flex-direction: column;
 	flex: 1 0 auto;
 	top: 0;
-	left: 0;
+	left: auto;
 	width: calc(100% - 72px);
-	height: 100%;
+	max-width: 475px;
+	height: 100vh;
+	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.bt_white};
-	overflow-y: auto;
-	z-index: 200;
-	transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+	z-index: 500;
+	transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms, opacity 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 	transform: ${({ show }) => (show ? 'translateX(0px)' : 'translateX(-100%)')};
+	opacity: ${({ show }) => (show ? 1 : 0)};
 `;
 
 export const CloseBtnWrapper = styled.div`
@@ -111,17 +113,6 @@ export const TreeFolderListTopMenu = styled.div`
 		letter-spacing: -0.02em;
 		color: ${({ theme }) => theme.colors.bt_grey[120]};
 	}
-
-	& > button {
-		border: 0.5px solid ${({ theme }) => theme.colors.bt_grey[50]};
-		border-radius: 5px;
-		background-color: ${({ theme }) => theme.colors.bt_white};
-		font-size: ${({ theme }) => theme.fontSize.f12};
-		font-weight: ${({ theme }) => theme.fontWeight.normal};
-		line-height: ${({ theme }) => theme.lineHeight.lh12};
-		letter-spacing: -0.02em;
-		color: ${({ theme }) => theme.colors.bt_grey[50]};
-	}
 `;
 
 export const TreeFolderList = styled.ul`
@@ -129,52 +120,6 @@ export const TreeFolderList = styled.ul`
 	flex-direction: column;
 	gap: 10px;
 	margin-top: 16px;
-`;
-
-export const TreeFolderItem = styled.li`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	padding: 0 11px;
-	border-radius: 5px;
-	background-color: ${({ theme }) => theme.colors.bt_primary[20]};
-	font-size: ${({ theme }) => theme.fontSize.f14};
-	font-weight: ${({ theme }) => theme.fontWeight.light};
-	line-height: ${({ theme }) => theme.lineHeight.lh14};
-	letter-spacing: -0.02em;
-	color: ${({ theme }) => theme.colors.bt_grey[120]};
-
-	& > .folder-info {
-		display: flex;
-		align-items: center;
-		height: 30px;
-
-		& > .folder-badge {
-			position: relative;
-			width: 18px;
-			height: 18px;
-			margin-right: 7px;
-			border-radius: 50%;
-			background-color: ${({ theme }) => theme.colors.bt_white};
-
-			& > .badge-overlap {
-				position: absolute;
-				top: -5px;
-				right: 0px;
-			}
-		}
-	}
-
-	& > .folder-edit-buttons {
-		& > button {
-			display: flex;
-			align-items: center;
-			border: 0;
-			background-color: transparent;
-			line-height: 100%;
-		}
-	}
 `;
 
 export const TreeFolderItemAdd = styled(Link)`

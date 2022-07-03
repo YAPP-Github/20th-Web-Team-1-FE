@@ -6,7 +6,6 @@ const Message = () => {
 
 	const onToggleOpenDrawer = () => {
 		setOpenedDrawer(() => !openedDrawer);
-		console.log(openedDrawer);
 	};
 	return <MessageView openedDrawer={openedDrawer} handleToggleOpenDrawer={onToggleOpenDrawer} />;
 };
