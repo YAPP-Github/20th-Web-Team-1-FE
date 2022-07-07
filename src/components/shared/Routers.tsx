@@ -6,6 +6,7 @@ import TreeAddForm from '../features/Trees/TreeAddForm';
 import MyPage from '@/pages/MyPage/MyPage';
 import MessageDetail from '@/pages/MessageDetail/MessageDetail';
 import MessageSender from '@/pages/MessageSender';
+import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 
 const Routers = () => {
 	return (
@@ -14,6 +15,7 @@ const Routers = () => {
 			<Route path="/trees" element={<Trees />} />
 			<Route path="/trees/edit" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
+			<Route path="/mypage/edit" element={<ProfileEdit />} />
 			<Route path="/send-message" element={<MessageSender />} />
 			<Route path="/messages/:messageId" element={<MessageDetail />} />
 
