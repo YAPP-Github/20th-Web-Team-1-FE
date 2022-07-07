@@ -1,11 +1,11 @@
 import React from 'react';
 import { MessageTopMenu } from '@/components/shared';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
-import ButtonView from '@/components/shared/Button/ButtonView';
 import * as S from './MessageDetail.styled';
 import ProfileBeeImg from '@/assets/images/mypage/profile_bee_img@2x.png';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
+import { Link } from 'react-router-dom';
 
 const MessageDetail = () => {
 	return (
@@ -23,15 +23,15 @@ const MessageDetail = () => {
 			<S.MessageContentWrapper>메시지 본문</S.MessageContentWrapper>
 
 			<S.MessageNavButtonWrapper>
-				<ButtonView type="button" bgColor="primary" fontWeight="medium" width="50%">
+				<Link to="/">
 					<S.ArrowIcon src={ArrowUpIcon} alt="" />
 					이전 메시지
-				</ButtonView>
+				</Link>
 
-				<ButtonView type="button" bgColor="primary" fontWeight="medium" width="50%">
+				<Link to="/">
 					<S.ArrowIcon src={ArrowDownIcon} alt="" />
 					다음 메시지
-				</ButtonView>
+				</Link>
 			</S.MessageNavButtonWrapper>
 		</S.MessageDetailContainer>
 	);
