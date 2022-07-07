@@ -4,7 +4,7 @@ import * as S from './MyContents.styled';
 const MyContents = () => {
 	return (
 		<S.MyContentsContainer>
-			<S.MyMenuLink to="/">프로필 수정하기</S.MyMenuLink>
+			<S.MyMenuLink to="/mypage/edit">프로필 수정하기</S.MyMenuLink>
 			<S.MyMenuButton type="button" color="primary">
 				Url 주소 복사하기
 			</S.MyMenuButton>

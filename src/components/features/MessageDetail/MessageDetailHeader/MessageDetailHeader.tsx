@@ -2,6 +2,7 @@ import React from 'react';
 import BookmarkIcon from '@/assets/images/shared/star.svg';
 import * as S from './MessageDetailHeader.styled';
 import CloseIcon from '@/assets/images/shared/close.svg';
+import { Link } from 'react-router-dom';
 
 type Props = {
 	profileImg: string;
@@ -19,9 +20,9 @@ const MessageDetailHeader = ({ profileImg, senderName, isBookmarked }: Props) =>
 
 			<S.MessageAdditionalMenu>
 				{isBookmarked && <img src={BookmarkIcon} alt="" />}
-				<button type="button">
+				<Link to="/messages">
 					<img src={CloseIcon} alt="닫기" />
-				</button>
+				</Link>
 			</S.MessageAdditionalMenu>
 		</S.MessageDetailHeaderWrapper>
 	);
