@@ -7,11 +7,13 @@ import MyPage from '@/pages/MyPage/MyPage';
 import MessageDetail from '@/pages/MessageDetail/MessageDetail';
 import MessageSender from '@/pages/MessageSender';
 import ProfileEdit from '@/pages/MyPage/ProfileEdit';
+import Login from '@/pages/Login';
 
 const Routers = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<NoticeTree />} />
+			<Route path="/login" element={<Login />} />
 			<Route path="/trees" element={<Trees />} />
 			<Route path="/trees/edit" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
