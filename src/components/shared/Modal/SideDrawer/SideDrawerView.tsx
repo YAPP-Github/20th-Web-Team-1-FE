@@ -4,6 +4,7 @@ import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
 import { SideDrawerViewPropsType } from './type';
 import MenuMoreModal from './MenuMoreModal/index';
+import { Link } from 'react-router-dom';
 
 const SideDrawerView = ({
 	profileImgSrc,
@@ -27,7 +28,6 @@ const SideDrawerView = ({
 						</svg>
 					</button>
 				</S.CloseBtnWrapper>
-
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
 						<div className="thumbnail-img">
@@ -40,12 +40,15 @@ const SideDrawerView = ({
 					</S.ThumbnailBox>
 				</S.ThumbnailWrapper>
 
-				<S.MessageFilterListWrapper>
-					<S.MessageFilterList>
-						<li>나에게 온 메시지</li>
-						<li>즐겨 찾기</li>
-					</S.MessageFilterList>
-				</S.MessageFilterListWrapper>
+				<S.MessageFilterList>
+					<h3>메시지 필터 리스트</h3>
+					<S.MessageFilterItem>
+						<Link to={''}>나에게 온 메시지</Link>
+					</S.MessageFilterItem>
+					<S.MessageFilterItem>
+						<Link to={''}>즐겨 찾기</Link>
+					</S.MessageFilterItem>
+				</S.MessageFilterList>
 
 				<S.Divider />
 
@@ -54,9 +57,9 @@ const SideDrawerView = ({
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem path={'/messages/1'} />
-						<TreeFolderItem path={'/messages/2'} />
-						<S.TreeFolderItemAdd to={'/trees/edit'}>
+						<TreeFolderItem path={''} />
+						<TreeFolderItem path={''} />
+						<S.TreeFolderItemAdd to={''}>
 							<span className="shape row" />
 							<span className="shape column" />
 						</S.TreeFolderItemAdd>

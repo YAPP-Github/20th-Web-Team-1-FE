@@ -38,7 +38,7 @@ export const Divider = styled.span`
 	background-color: ${({ theme }) => theme.colors.bt_grey[30]};
 `;
 
-export const ThumbnailWrapper = styled.section`
+export const ThumbnailWrapper = styled.div`
 	margin-top: 30px;
 `;
 
@@ -78,17 +78,25 @@ export const ThumbnailBox = styled.div`
 	}
 `;
 
-export const MessageFilterListWrapper = styled.section`
-	margin-top: 50px;
-`;
-
 export const MessageFilterList = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: 23px;
 	padding-left: 32px;
+	margin-top: 50px;
 
-	& > li {
+	& > h3 {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: polygon(0 0, 0 0, 0 0);
+	}
+`;
+
+export const MessageFilterItem = styled.li`
+	& > a {
 		font-size: ${({ theme }) => theme.fontSize.f15};
 		font-weight: ${({ theme }) => theme.fontWeight.normal};
 		line-height: ${({ theme }) => theme.lineHeight.lh15};
@@ -97,7 +105,7 @@ export const MessageFilterList = styled.ul`
 	}
 `;
 
-export const TreeFolderListWrapper = styled.section`
+export const TreeFolderListWrapper = styled.div`
 	margin: 0 32px;
 `;
 
