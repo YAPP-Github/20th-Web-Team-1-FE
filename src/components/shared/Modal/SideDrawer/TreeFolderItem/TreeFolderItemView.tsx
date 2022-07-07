@@ -1,9 +1,9 @@
 import React from 'react';
 import * as S from './TreeFolderItem.styled';
 
-const TreeFolderItemView = () => {
+const TreeFolderItemView = ({ path }: { path: string }) => {
 	return (
-		<S.TreeFolderItem>
+		<S.TreeFolderItem to={path}>
 			<div className="folder-info">
 				<div className="folder-badge">
 					<div className="badge-background" />

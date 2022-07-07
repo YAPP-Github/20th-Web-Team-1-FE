@@ -54,8 +54,8 @@ const SideDrawerView = ({
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem />
-						<TreeFolderItem />
+						<TreeFolderItem path={'/messages/1'} />
+						<TreeFolderItem path={'/messages/2'} />
 						<S.TreeFolderItemAdd to={'/trees/edit'}>
 							<span className="shape row" />
 							<span className="shape column" />

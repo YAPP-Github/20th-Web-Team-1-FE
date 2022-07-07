@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
-export const TreeFolderItem = styled.li`
+export const TreeFolderItem = styled(Link)`
 	position: relative;
 	display: flex;
 	align-items: center;
