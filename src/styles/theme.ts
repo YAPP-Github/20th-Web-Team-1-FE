@@ -8,7 +8,7 @@ const theme: Theme = {
 			50: '#c7f2ef',
 			60: '#c3eaff',
 			100: '#99e7e3',
-			150: '#47d5cc',
+			150: '#B4EDEA',
 			200: '#00c4b8',
 			300: '#577a78',
 		},
@@ -41,6 +41,7 @@ const theme: Theme = {
 		f14: '14px',
 		f15: '15px',
 		f16: '16px',
+		f17: '17px',
 		f20: '20px',
 	},
 	fontWeight: {

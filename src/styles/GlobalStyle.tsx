@@ -14,10 +14,17 @@ const GlobalStyle = () => {
 				}
 
 				body {
-					font-family: 'Pretendard';
-					max-width: 475px;
-					margin: auto;
 					position: relative;
+					max-width: 475px;
+					margin: 0 auto;
+					font-family: 'Pretendard';
+				}
+
+				#modal-root {
+					position: relative;
+					width: 475px;
+					margin: 0 auto;
+					overflow: hidden;
 				}
 
 				li {

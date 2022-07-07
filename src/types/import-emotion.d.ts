@@ -40,6 +40,7 @@ declare module '@emotion/react' {
 			f14: string;
 			f15: string;
 			f16: string;
+			f17: string;
 			f20: string;
 		};
 		fontWeight: {
