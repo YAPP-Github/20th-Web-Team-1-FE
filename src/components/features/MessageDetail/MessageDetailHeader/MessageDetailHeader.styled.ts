@@ -25,24 +25,20 @@ export const MessageSenderInfo = styled.div`
 export const MessageAdditionalMenu = styled.div`
 	display: flex;
 	align-items: center;
+	line-height: 20px;
 
 	& > img {
 		margin-right: 10px;
-		width: 20px;
-		height: 20px;
 	}
 
-	& > button {
+	& > a {
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: center;
-		background-color: transparent;
-		border: none;
 		font-weight: ${({ theme }) => theme.fontWeight.medium};
 		font-size: 30px;
 		color: ${({ theme }) => theme.colors.bt_primary[200]};
-		width: 20px;
-		height: 20px;
-		padding: 0;
+		width: 17px;
+		height: 17px;
 	}
 `;
