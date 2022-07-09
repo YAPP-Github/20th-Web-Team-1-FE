@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CheckBoxPropsType } from './type';
+import { StyledProps } from './AnonymousCheckBox.type';
 
 export const CheckBoxContainer = styled.div`
 	display: flex;
@@ -29,7 +29,7 @@ export const HiddenCheckBoxInput = styled.input`
 	white-space: nowrap;
 `;
 
-export const CheckBoxInput = styled.div<CheckBoxPropsType>`
+export const CheckBoxInput = styled.div<StyledProps>`
 	width: 16px;
 	height: 16px;
 	margin-right: 6px;

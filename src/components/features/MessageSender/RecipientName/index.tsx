@@ -1,9 +1,9 @@
 import React from 'react';
-import RecipientNameView from './RecipientNameView';
-import { RecipientNamePropsType } from './type';
+import * as S from './RecipientName.styled';
+import { Props } from './RecipientName.type';
 
-const RecipientName = ({ name }: RecipientNamePropsType) => {
-	return <RecipientNameView name={name} />;
+const RecipientName = ({ name }: Props) => {
+	return <S.RecipientNameContainer>To. {name}</S.RecipientNameContainer>;
 };
 
 export default RecipientName;
