@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
-import ButtonView from '@/components/shared/Button/ButtonView';
+import ButtonView from '@/components/shared/Button/Button';
 import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
 import { fruits } from '@/constants/tree';
 

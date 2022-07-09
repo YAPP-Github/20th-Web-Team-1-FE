@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './MessageSender.styled';
 import { RecipientName, FolderSelect, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
-import ButtonView from '@/components/shared/Button/ButtonView';
+import Button from '@/components/shared/Button/Button';
 
 const MessageSender = () => {
 	const navigate = useNavigate();
@@ -33,12 +33,12 @@ const MessageSender = () => {
 			</S.AnonymousCheckBoxContainer>
 
 			<S.ButtonContainer>
-				<ButtonView type="button" bgColor="normal" onClick={onGoBackClick}>
+				<Button type="button" bgColor="normal" onClick={onGoBackClick}>
 					뒤로가기
-				</ButtonView>
-				<ButtonView type="submit" bgColor="primary" onClick={() => console.log('물 주기 API POST Go !')}>
+				</Button>
+				<Button type="submit" bgColor="primary" onClick={() => console.log('물 주기 API POST Go !')}>
 					물 주기
-				</ButtonView>
+				</Button>
 			</S.ButtonContainer>
 		</S.MessageSenderContainer>
 	);

@@ -1,20 +1,20 @@
 import React from 'react';
 import * as S from './Trees.styled';
-import MessageChipView from '@/components/shared/Chip/MessageChip/MessageChipView';
-import ButtonView from '@/components/shared/Button/ButtonView';
+import MessageChip from '@/components/shared/Chip/MessageChip';
+import Button from '@/components/shared/Button/Button';
 import TreeList from '@/components/features/Trees/TreeList';
 
 const Trees = () => {
 	return (
 		<S.TreesContainer>
-			<MessageChipView message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
+			<MessageChip message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
 
 			<S.TreeListBox>
 				<TreeList />
 			</S.TreeListBox>
 
 			<S.ButtonBox>
-				<ButtonView
+				<Button
 					type="button"
 					bgColor="primary"
 					onClick={() => {
@@ -22,7 +22,7 @@ const Trees = () => {
 					}}
 				>
 					나무에 물 주기
-				</ButtonView>
+				</Button>
 			</S.ButtonBox>
 		</S.TreesContainer>
 	);
