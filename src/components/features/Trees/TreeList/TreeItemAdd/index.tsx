@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './TreeItemAdd.styled';
-import { TreeItemAddViewType } from './type';
+import { Props } from './TreeItemAdd.type';
 
-const TreeItemAddView = ({ onClick }: TreeItemAddViewType) => {
+const TreeItemAdd = ({ onClick }: Props) => {
 	return (
 		<S.ItemAddWrapper type="button" onClick={onClick}>
 			<div className="plus-shape-container">
@@ -13,4 +13,4 @@ const TreeItemAddView = ({ onClick }: TreeItemAddViewType) => {
 	);
 };
 
-export default TreeItemAddView;
+export default TreeItemAdd;

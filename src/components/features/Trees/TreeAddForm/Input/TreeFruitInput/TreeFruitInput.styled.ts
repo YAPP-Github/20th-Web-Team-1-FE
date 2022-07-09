@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { ChipStyledType } from './type';
+import { StyledProps } from './TreeFruitInput.type';
 
-export const FruitInputContainer = styled.div<ChipStyledType>`
+export const FruitInputContainer = styled.div<StyledProps>`
 	input[name='fruit-radio'] {
 		display: none;
 	}

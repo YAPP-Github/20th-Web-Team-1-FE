@@ -1,14 +1,16 @@
 import React from 'react';
-import TreeNameInputView from './TreeNameInputView';
-import { TreeNameInputModelType } from './type';
+import * as S from './TreeNameInput.styled';
+import { Props } from './TreeNameInput.type';
 
-const TreeNameInput = ({ treeName, placeholder, autoFocus, onChangeTreeName }: TreeNameInputModelType) => {
-	const onChange = (event: React.FormEvent<HTMLFormElement>) => {
+const TreeNameInput = ({ treeName, placeholder, autoFocus, onChangeTreeName }: Props) => {
+	const onChange = (event: React.FormEvent<HTMLInputElement>) => {
 		const treeName = event.currentTarget.value;
 		onChangeTreeName(treeName);
 	};
 
-	return <TreeNameInputView treeName={treeName} placeholder={placeholder} autoFocus={autoFocus} onChange={onChange} />;
+	return (
+		<S.TreeNameInput type="text" value={treeName} placeholder={placeholder} autoFocus={autoFocus} onChange={onChange} />
+	);
 };
 
 export default TreeNameInput;
