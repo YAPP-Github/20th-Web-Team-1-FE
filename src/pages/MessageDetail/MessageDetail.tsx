@@ -2,12 +2,24 @@ import React from 'react';
 import { MessageTopMenu } from '@/components/shared';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
 import * as S from './MessageDetail.styled';
-import ProfileBeeImg from '@/assets/images/mypage/profile_bee_img@2x.png';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { messageDetailFetcher } from '@/apis/messages';
+import { MessageDetailData } from '@/types/message';
 
 const MessageDetail = () => {
+	const { messageId } = useParams();
+
+	const { data: messageDetailData } = useQuery<MessageDetailData>(
+		['messageDetail', messageId],
+		() => messageDetailFetcher(messageId),
+		{
+			refetchOnWindowFocus: false,
+		},
+	);
+
 	return (
 		<S.MessageDetailContainer>
 			<MessageTopMenu
@@ -18,17 +30,23 @@ const MessageDetail = () => {
 				onClickRightBtn={() => {}}
 			/>
 
-			<MessageDetailHeader profileImg={ProfileBeeImg} senderName="친구1" isBookmarked={true} />
+			<MessageDetailHeader
+				profileImg={messageDetailData?.responseDto.senderProfileImage}
+				senderName={
+					messageDetailData?.responseDto.anonymous === false ? messageDetailData?.responseDto.senderNickname : '익명'
+				}
+				isBookmarked={messageDetailData?.responseDto.favorite}
+			/>
 
-			<S.MessageContentWrapper>메시지 본문</S.MessageContentWrapper>
+			<S.MessageContentWrapper>{messageDetailData?.responseDto.content}</S.MessageContentWrapper>
 
 			<S.MessageNavButtonWrapper>
-				<Link to="/">
+				<Link to={`/messages/${messageDetailData?.prevId}`}>
 					<S.ArrowIcon src={ArrowUpIcon} alt="" />
 					이전 메시지
 				</Link>
 
-				<Link to="/">
+				<Link to={`/messages/${messageDetailData?.nextId}`}>
 					<S.ArrowIcon src={ArrowDownIcon} alt="" />
 					다음 메시지
 				</Link>

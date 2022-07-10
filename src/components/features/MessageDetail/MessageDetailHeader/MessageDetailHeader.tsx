@@ -5,9 +5,9 @@ import CloseIcon from '@/assets/images/shared/close.svg';
 import { Link } from 'react-router-dom';
 
 type Props = {
-	profileImg: string;
-	senderName: string;
-	isBookmarked: boolean;
+	profileImg: string | undefined;
+	senderName: string | undefined;
+	isBookmarked: boolean | undefined;
 };
 
 const MessageDetailHeader = ({ profileImg, senderName, isBookmarked }: Props) => {
