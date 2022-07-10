@@ -5,13 +5,13 @@ import { Props } from './TreeFolderItem.type';
 const TreeFolderItem = ({ path }: Props) => {
 	return (
 		<S.TreeFolderItem to={path}>
-			<div className="folder-info">
-				<div className="folder-badge">
-					<div className="badge-background" />
+			<S.TreeFolderItemThumbnailWrapper>
+				<div>
+					<img src={''} alt={''} />
 				</div>
 				프로젝트 A
-			</div>
-			<div className="folder-edit-buttons">
+			</S.TreeFolderItemThumbnailWrapper>
+			<S.TreeFolderItemMoreMenuWrapper>
 				<button type="button">
 					<svg width="9" height="3" viewBox="0 0 9 3" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -20,7 +20,7 @@ const TreeFolderItem = ({ path }: Props) => {
 						/>
 					</svg>
 				</button>
-			</div>
+			</S.TreeFolderItemMoreMenuWrapper>
 		</S.TreeFolderItem>
 	);
 };

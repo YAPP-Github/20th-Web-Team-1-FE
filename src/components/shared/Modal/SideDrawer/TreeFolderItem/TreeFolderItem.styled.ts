@@ -15,35 +15,29 @@ export const TreeFolderItem = styled(Link)`
 	line-height: ${({ theme }) => theme.lineHeight.lh14};
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
+`;
 
-	& > .folder-info {
+export const TreeFolderItemThumbnailWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	height: 30px;
+
+	& > div {
+		position: relative;
+		width: 18px;
+		height: 18px;
+		margin-right: 7px;
+		border-radius: 50%;
+		background-color: ${({ theme }) => theme.colors.bt_white};
+	}
+`;
+
+export const TreeFolderItemMoreMenuWrapper = styled.div`
+	& > button {
 		display: flex;
 		align-items: center;
-		height: 30px;
-
-		& > .folder-badge {
-			position: relative;
-			width: 18px;
-			height: 18px;
-			margin-right: 7px;
-			border-radius: 50%;
-			background-color: ${({ theme }) => theme.colors.bt_white};
-
-			& > .badge-overlap {
-				position: absolute;
-				top: -5px;
-				right: 0px;
-			}
-		}
-	}
-
-	& > .folder-edit-buttons {
-		& > button {
-			display: flex;
-			align-items: center;
-			border: 0;
-			background-color: transparent;
-			line-height: 100%;
-		}
+		border: 0;
+		background-color: transparent;
+		line-height: 100%;
 	}
 `;

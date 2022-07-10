@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 export const ItemAddContainer = styled.li``;
+
 export const ItemAddBtn = styled(Link)`
 	display: flex;
 	justify-content: center;

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { StyledProps } from './SideDrawer.type';
 
 export const SideDrawerContainer = styled.div<StyledProps>`
@@ -47,7 +47,7 @@ export const ThumbnailBox = styled.div`
 	align-items: center;
 	padding-left: 32px;
 
-	& > .thumbnail-img {
+	& > div:nth-of-type(1) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -58,7 +58,7 @@ export const ThumbnailBox = styled.div`
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
 	}
 
-	& > .thumbnail-info {
+	& > div:nth-of-type(2) {
 		margin-left: 12px;
 		& > h2 {
 			font-size: ${({ theme }) => theme.fontSize.f17};
@@ -130,13 +130,17 @@ export const TreeFolderList = styled.ul`
 	margin-top: 16px;
 `;
 
-export const TreeFolderItemAdd = styled(Link)`
+export const TreeFolderItemAddContainer = styled.li``;
+
+export const TreeFolderItemAddBtn = styled(Link)`
 	position: relative;
-	height: 30px;
+	display: flex;
+	min-width: 100%;
+	min-height: 30px;
 	border: 0.5px solid ${({ theme }) => theme.colors.bt_primary[200]};
 	border-radius: 5px;
 
-	& > .shape {
+	& > span {
 		position: absolute;
 		top: calc(50% - 0.5px);
 		left: calc(50% - 6px);
@@ -145,7 +149,7 @@ export const TreeFolderItemAdd = styled(Link)`
 		background-color: ${({ theme }) => theme.colors.bt_primary[200]};
 	}
 
-	& > .shape.column {
+	& > span:nth-of-type(2) {
 		transform: rotate(90deg);
 	}
 `;
