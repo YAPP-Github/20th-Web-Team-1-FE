@@ -9,8 +9,8 @@ const TreeItem = ({ name }: Props) => {
 		<S.ItemWrapper>
 			<Link to={name}>
 				<TreeShapeContainer size="small">
-					<div className="tree-shape-top" />
-					<div className="tree-shape-bottom" />
+					<div />
+					<div />
 				</TreeShapeContainer>
 				<span>{name}</span>
 			</Link>

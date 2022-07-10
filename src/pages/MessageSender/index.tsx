@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './MessageSender.styled';
 import { RecipientName, FolderSelect, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
-import Button from '@/components/shared/Button/Button';
+import Button from '@/components/shared/Button';
 
 const MessageSender = () => {
 	const navigate = useNavigate();

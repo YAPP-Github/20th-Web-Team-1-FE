@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './Trees.styled';
 import MessageChip from '@/components/shared/Chip/MessageChip';
-import Button from '@/components/shared/Button/Button';
+import Button from '@/components/shared/Button';
 import TreeList from '@/components/features/Trees/TreeList';
 
 const Trees = () => {
