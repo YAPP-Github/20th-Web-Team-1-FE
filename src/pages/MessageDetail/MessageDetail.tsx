@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MessageTopMenu } from '@/components/shared';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
 import * as S from './MessageDetail.styled';
@@ -6,7 +6,7 @@ import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { messageDetailFetcher } from '@/apis/messages';
+import { messageDetailFetcher, readMessage } from '@/apis/messages';
 import { MessageDetailData } from '@/types/message';
 
 const MessageDetail = () => {
@@ -19,6 +19,12 @@ const MessageDetail = () => {
 			refetchOnWindowFocus: false,
 		},
 	);
+
+	useEffect(() => {
+		if (messageDetailData?.responseDto.alreadyRead === false) {
+			readMessage(messageId);
+		}
+	}, [messageId, messageDetailData]);
 
 	return (
 		<S.MessageDetailContainer>
