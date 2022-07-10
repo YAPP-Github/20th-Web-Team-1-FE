@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { SideDrawerStyledPropType } from './type';
+import { StyledProps } from './SideDrawer.type';
 
-export const SideDrawerContainer = styled.div<SideDrawerStyledPropType>`
+export const SideDrawerContainer = styled.div<StyledProps>`
 	position: fixed;
 	display: flex;
 	flex-direction: column;

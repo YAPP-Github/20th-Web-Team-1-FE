@@ -19,7 +19,7 @@ export const ItemWrapper = styled.li`
 		height: 181px;
 	}
 
-	& > a > .item-name {
+	& > a > span {
 		display: flex;
 		justify-content: center;
 		align-items: center;

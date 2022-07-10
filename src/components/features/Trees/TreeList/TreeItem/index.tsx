@@ -12,7 +12,7 @@ const TreeItem = ({ name }: Props) => {
 					<div className="tree-shape-top" />
 					<div className="tree-shape-bottom" />
 				</TreeShapeContainer>
-				<span className="item-name">{name}</span>
+				<span>{name}</span>
 			</Link>
 		</S.ItemWrapper>
 	);
