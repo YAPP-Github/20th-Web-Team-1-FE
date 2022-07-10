@@ -1,7 +1,6 @@
 import API_URL, { DELETE, GET, PUT } from '@/constants/api';
 import { MessageDetailData } from '@/types/message';
-import { getStorageItem, storageAccessKey } from '@/utils/local-storage';
-import { axiosInstance, requester } from './requester';
+import { requester } from './requester';
 
 export const deleteMessage = async (messageId: string) => {
 	const {
