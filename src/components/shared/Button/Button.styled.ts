@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { ButtonStyledType } from './type';
+import { StyledProps } from './Button.type';
 
-export const Button = styled.button<ButtonStyledType>`
+export const Button = styled.button<StyledProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -13,7 +13,7 @@ export const Button = styled.button<ButtonStyledType>`
 		bgColor === 'primary' ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20]};
 	color: ${({ bgColor, theme }) => (bgColor === 'primary' ? theme.colors.bt_white : theme.colors.bt_grey[50])};
 	font-size: ${({ theme }) => theme.fontSize.f16};
-	font-weight: ${({ fontWeight, theme }) => theme.fontWeight[fontWeight]};
+	font-weight: ${({ fontWeight, theme }) => (fontWeight ? theme.fontWeight[fontWeight] : theme.fontWeight.normal)};
 	line-height: ${(props) => props.theme.lineHeight.lh16};
 	letter-spacing: -0.02em;
 

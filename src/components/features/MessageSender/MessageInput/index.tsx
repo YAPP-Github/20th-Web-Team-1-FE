@@ -1,8 +1,9 @@
 import React from 'react';
-import MessageInputView from './MessageInputView';
+import * as S from './MessageInput.styled';
+import { MIN_LENGTH, PLACE_HOLDER } from '@/constants/messageSender';
 
 const MessageInput = () => {
-	return <MessageInputView />;
+	return <S.MessageInput name="message" minLength={MIN_LENGTH} placeholder={PLACE_HOLDER} autoFocus />;
 };
 
 export default MessageInput;

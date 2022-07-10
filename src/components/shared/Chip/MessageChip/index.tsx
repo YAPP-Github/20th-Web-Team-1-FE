@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './MessageChip.styled';
-import { MessageChipViewType } from './type';
+import { Props } from './MessageChip.type';
 
-const MessageChipView = ({ message }: MessageChipViewType) => {
+const MessageChip = ({ message }: Props) => {
 	return (
 		<S.MessageChipWrapper>
 			<span>{message}</span>
@@ -10,4 +10,4 @@ const MessageChipView = ({ message }: MessageChipViewType) => {
 	);
 };
 
-export default MessageChipView;
+export default MessageChip;

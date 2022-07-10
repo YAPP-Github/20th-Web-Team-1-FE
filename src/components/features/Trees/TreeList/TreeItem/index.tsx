@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as S from './TreeItem.styled';
+import { Link } from 'react-router-dom';
 import { TreeShapeContainer } from '@/components/features/Trees/TreeAddForm/TreeAddForm.styled';
-import { TreeItemViewType } from './type';
+import { Props } from './TreeItem.type';
 
-const TreeItemView = ({ name }: TreeItemViewType) => {
+const TreeItem = ({ name }: Props) => {
 	return (
 		<S.ItemWrapper>
 			<Link to={name}>
@@ -12,10 +12,10 @@ const TreeItemView = ({ name }: TreeItemViewType) => {
 					<div className="tree-shape-top" />
 					<div className="tree-shape-bottom" />
 				</TreeShapeContainer>
-				<span className="item-name">{name}</span>
+				<span>{name}</span>
 			</Link>
 		</S.ItemWrapper>
 	);
 };
 
-export default TreeItemView;
+export default TreeItem;

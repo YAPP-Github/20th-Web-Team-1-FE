@@ -1,8 +1,8 @@
-export type CheckBoxPropsType = {
+export type StyledProps = {
 	checked: boolean;
 };
 
-export type AnonymousCheckBoxPropsType = {
+export type Props = {
 	checked: boolean;
 	handleToggleChecked: () => void;
 };

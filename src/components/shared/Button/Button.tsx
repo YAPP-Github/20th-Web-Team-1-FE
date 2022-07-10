@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './Button.styled';
-import { ButtonType } from './type';
+import { Props } from './Button.type';
 
-const ButtonView = ({ type, width, bgColor, onClick, fontWeight, children }: ButtonType) => {
+const Button = ({ type, width, bgColor, onClick, fontWeight, children }: Props) => {
 	return (
 		<S.Button type={type} width={width} bgColor={bgColor} fontWeight={fontWeight} onClick={onClick}>
 			{children}
@@ -10,4 +10,4 @@ const ButtonView = ({ type, width, bgColor, onClick, fontWeight, children }: But
 	);
 };
 
-export default ButtonView;
+export default Button;
