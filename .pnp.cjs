@@ -65,7 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:18.1.0"],\
-            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.0"],\
+            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.1"],\
             ["react-router-dom", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:6.3.0"],\
             ["recoil", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:0.7.3-alpha.2"],\
             ["ts-jest", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:28.0.2"],\
@@ -8679,17 +8679,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["react-query", [\
-        ["npm:3.39.0", {\
-          "packageLocation": "./.yarn/cache/react-query-npm-3.39.0-ae97fa80af-18fd745ef8.zip/node_modules/react-query/",\
+        ["npm:3.39.1", {\
+          "packageLocation": "./.yarn/cache/react-query-npm-3.39.1-7899b170b9-9273b7c2ad.zip/node_modules/react-query/",\
           "packageDependencies": [\
-            ["react-query", "npm:3.39.0"]\
+            ["react-query", "npm:3.39.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-query-virtual-0e8275586a/0/cache/react-query-npm-3.39.0-ae97fa80af-18fd745ef8.zip/node_modules/react-query/",\
+        ["virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-query-virtual-dcb55dba2a/0/cache/react-query-npm-3.39.1-7899b170b9-9273b7c2ad.zip/node_modules/react-query/",\
           "packageDependencies": [\
-            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.0"],\
+            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.1"],\
             ["@babel/runtime", "npm:7.17.9"],\
             ["@types/react", "npm:18.0.9"],\
             ["@types/react-dom", "npm:18.0.4"],\
@@ -10259,7 +10259,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:18.1.0"],\
-            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.0"],\
+            ["react-query", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.39.1"],\
             ["react-router-dom", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:6.3.0"],\
             ["recoil", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:0.7.3-alpha.2"],\
             ["ts-jest", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:28.0.2"],\
