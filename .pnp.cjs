@@ -53,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:5.27.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["axios", "npm:0.27.2"],\
+            ["dayjs", "npm:1.11.3"],\
             ["emotion-reset", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1"],\
             ["eslint", "npm:8.15.0"],\
             ["eslint-config-prettier", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:8.5.0"],\
@@ -5012,6 +5013,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["abab", "npm:2.0.6"],\
             ["whatwg-mimetype", "npm:3.0.0"],\
             ["whatwg-url", "npm:11.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dayjs", [\
+        ["npm:1.11.3", {\
+          "packageLocation": "./.yarn/cache/dayjs-npm-1.11.3-88985d494e-c87e06b562.zip/node_modules/dayjs/",\
+          "packageDependencies": [\
+            ["dayjs", "npm:1.11.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10247,6 +10257,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:5.27.0"],\
             ["@vitejs/plugin-react", "npm:1.3.2"],\
             ["axios", "npm:0.27.2"],\
+            ["dayjs", "npm:1.11.3"],\
             ["emotion-reset", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:3.0.1"],\
             ["eslint", "npm:8.15.0"],\
             ["eslint-config-prettier", "virtual:b0ce37162af63223b589b51643e8ead374bdc09d10ea72336f1ab5f3b604036a963a6a9866eb73c5cddaffdde8e449ce4295bea7ffe85ab17ec9084c954c5008#npm:8.5.0"],\
