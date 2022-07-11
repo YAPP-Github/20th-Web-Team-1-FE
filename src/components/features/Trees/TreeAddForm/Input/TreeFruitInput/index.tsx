@@ -2,7 +2,9 @@ import React from 'react';
 import * as S from './TreeFruitInput.styled';
 import { Props } from './TreeFruitInput.type';
 
-const TreeFruitInput = ({ fruitName, imgSrc, selected, onChangeSelectedFruit }: Props) => {
+const TreeFruitInput = ({ fruit, selected, onChangeSelectedFruit }: Props) => {
+	const { name, value, imgSrc } = fruit;
+
 	const onClick = (event: React.MouseEvent) => {
 		const targetFruit = (event.target as HTMLInputElement).value;
 
@@ -13,12 +15,12 @@ const TreeFruitInput = ({ fruitName, imgSrc, selected, onChangeSelectedFruit }: 
 
 	return (
 		<S.FruitInputContainer>
-			<input type="radio" id={fruitName} name="fruit-radio" value={fruitName} onClick={onClick} />
-			<S.FruitInputLabel htmlFor={fruitName} selected={selected}>
+			<input type="radio" id={name} name="fruit-radio" value={value} onClick={onClick} />
+			<S.FruitInputLabel htmlFor={name} selected={selected}>
 				<span>
-					<img src={imgSrc} alt={`${fruitName} 아이콘`} />
+					<img src={imgSrc} alt={`${name} 아이콘`} />
 				</span>
-				<span>{fruitName}</span>
+				<span>{name}</span>
 			</S.FruitInputLabel>
 		</S.FruitInputContainer>
 	);

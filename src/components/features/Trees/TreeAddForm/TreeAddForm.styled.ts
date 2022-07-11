@@ -111,6 +111,39 @@ export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
 	}
 `;
 
+export const TreeCircle = styled.div<{ size?: 'small' | 'medium' }>`
+	position: relative;
+	width: ${(props) => (props.size === 'small' ? '68px' : '102px')};
+	height: ${(props) => (props.size === 'small' ? '68px' : '102px')};
+	top: ${(props) => (props.size === 'small' ? '40px' : '10px')};
+	left: ${(props) => (props.size === 'small' ? 'calc(50% - 34px)' : 'calc(50% - 51px)')};
+	border-radius: 50%;
+	background: linear-gradient(to bottom right, #a6ffb2 0%, #40e1bf 100%);
+	z-index: 2;
+`;
+
+export const TreePole = styled.div<{ size?: 'small' | 'medium' }>`
+	position: absolute;
+	width: ${(props) => (props.size === 'small' ? '10px' : '16px')};
+	height: ${(props) => (props.size === 'small' ? '92px' : '138px')};
+	bottom: 0;
+	left: ${(props) => (props.size === 'small' ? 'calc(50% - 5px)' : 'calc(50% - 8px)')};
+	background: linear-gradient(to bottom, #ffd3a8 0%, #e9906c 100%);
+`;
+
+type FruitPosition = {
+	position: {
+		top: number;
+		left: number;
+	};
+};
+
+export const Fruit = styled.img<FruitPosition>`
+	position: absolute;
+	top: ${({ position }) => position.top + '%'};
+	left: ${({ position }) => position.left + '%'};
+`;
+
 export const TreeFruitListWrapper = styled.div`
 	display: flex;
 	align-items: center;
