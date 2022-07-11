@@ -5,7 +5,7 @@ import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import Button from '@/components/shared/Button';
 import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
-import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/tree';
+import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
 
 const TreeAddForm = () => {
 	const navigate = useNavigate();
@@ -59,8 +59,8 @@ const TreeAddForm = () => {
 
 					<S.TreeShapeContainer>
 						<S.TreeCircle>
-							{FRUIT_RENDER_POSITION.TREE_EDIT.map((position, idx) => {
-								return <S.Fruit key={idx} src={getSelectedFruitImage()} alt={''} position={position} />;
+							{FRUIT_RENDER_POSITION.map((info) => {
+								return <S.Fruit key={info.id} src={getSelectedFruitImage()} alt={''} position={info.position} />;
 							})}
 						</S.TreeCircle>
 						<S.TreePole />

@@ -44,23 +44,35 @@ export const FRUITS = [
 	},
 ];
 
-export const FRUIT_RENDER_POSITION = {
-	TREE_EDIT: [
-		{ top: 10, left: 33 },
-		{ top: 19, left: 63 },
-		{ top: 38, left: 13 },
-		{ top: 42, left: 43 },
-		{ top: 47, left: 73 },
-		{ top: 68, left: 23 },
-		{ top: 72, left: 53 },
-	],
-	TREE_FOREST: [
-		{ top: 10, left: 33 },
-		{ top: 19, left: 63 },
-		{ top: 38, left: 13 },
-		{ top: 42, left: 43 },
-		{ top: 47, left: 73 },
-		{ top: 68, left: 23 },
-		{ top: 72, left: 53 },
-	],
-};
+export const FRUIT_RENDER_POSITION = [
+	{
+		id: 1,
+		position: { top: 9, left: 32 },
+	},
+	{
+		id: 2,
+		position: { top: 18, left: 62 },
+	},
+	{
+		id: 3,
+		position: { top: 37, left: 12 },
+	},
+	{
+		id: 4,
+		position: { top: 41, left: 42 },
+	},
+	{
+		id: 5,
+		position: { top: 46, left: 72 },
+	},
+	{
+		id: 6,
+		position: { top: 64, left: 22 },
+	},
+	{
+		id: 7,
+		position: { top: 71, left: 52 },
+	},
+];
+
+export const MAX_TREE_SIZE = 4;

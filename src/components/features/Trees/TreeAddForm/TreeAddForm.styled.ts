@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { StyledProps } from './TreeAddForm.type';
 
 export const TreeAddForm = styled.form`
 	padding: 96px 0 30px 0;
@@ -89,26 +90,6 @@ export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
 	bottom: 0;
 	width: 100%;
 	height: 205.73px;
-
-	& > div:nth-of-type(1) {
-		position: relative;
-		width: ${(props) => (props.size === 'small' ? '68px' : '102px')};
-		height: ${(props) => (props.size === 'small' ? '68px' : '102px')};
-		top: ${(props) => (props.size === 'small' ? '40px' : '10px')};
-		left: ${(props) => (props.size === 'small' ? 'calc(50% - 34px)' : 'calc(50% - 51px)')};
-		border-radius: 50%;
-		background: linear-gradient(to bottom right, #a6ffb2 0%, #40e1bf 100%);
-		z-index: 2;
-	}
-
-	& > div:nth-of-type(2) {
-		position: absolute;
-		width: ${(props) => (props.size === 'small' ? '10px' : '16px')};
-		height: ${(props) => (props.size === 'small' ? '92px' : '138px')};
-		bottom: 0;
-		left: ${(props) => (props.size === 'small' ? 'calc(50% - 5px)' : 'calc(50% - 8px)')};
-		background: linear-gradient(to bottom, #ffd3a8 0%, #e9906c 100%);
-	}
 `;
 
 export const TreeCircle = styled.div<{ size?: 'small' | 'medium' }>`
@@ -131,17 +112,12 @@ export const TreePole = styled.div<{ size?: 'small' | 'medium' }>`
 	background: linear-gradient(to bottom, #ffd3a8 0%, #e9906c 100%);
 `;
 
-type FruitPosition = {
-	position: {
-		top: number;
-		left: number;
-	};
-};
-
-export const Fruit = styled.img<FruitPosition>`
+export const Fruit = styled.img<StyledProps>`
 	position: absolute;
 	top: ${({ position }) => position.top + '%'};
 	left: ${({ position }) => position.left + '%'};
+	width: ${({ width }) => width + 'px' || 'auto'};
+	height: auto;
 `;
 
 export const TreeFruitListWrapper = styled.div`
@@ -173,6 +149,7 @@ export const WarnningDescBox = styled.div`
 		letter-spacing: -0.02em;
 	}
 `;
+
 export const ButtonBox = styled.div`
 	display: flex;
 	justify-content: center;
