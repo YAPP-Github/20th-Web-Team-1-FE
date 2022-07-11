@@ -52,6 +52,7 @@ export async function requester<Payload>(option: AxiosRequestConfig) {
 
 	return {
 		status: response.status,
+		headers: response.headers,
 		payload: response.data,
 	};
 }

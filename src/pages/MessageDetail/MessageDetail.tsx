@@ -17,6 +17,7 @@ const MessageDetail = () => {
 		() => messageDetailFetcher(messageId),
 		{
 			refetchOnWindowFocus: false,
+			retry: 1,
 		},
 	);
 
