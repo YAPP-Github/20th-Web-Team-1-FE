@@ -38,7 +38,7 @@ export const HelperBeeMessage = styled.div`
 	padding: 15px 20px;
 	margin-left: 14px;
 
-	& > .title {
+	& > p:nth-of-type(1) {
 		font-size: ${({ theme }) => theme.fontSize.f15};
 		font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 		line-height: ${({ theme }) => theme.lineHeight.lh15};
@@ -46,7 +46,7 @@ export const HelperBeeMessage = styled.div`
 		color: ${({ theme }) => theme.colors.bt_grey[120]};
 	}
 
-	& > .sub-title {
+	& > p:nth-of-type(2) {
 		font-size: ${({ theme }) => theme.fontSize.f12};
 		font-weight: ${({ theme }) => theme.fontWeight.medium};
 		line-height: ${({ theme }) => theme.lineHeight.lh12};
@@ -69,35 +69,19 @@ export const TreeInputContainer = styled.div`
 	background-color: ${(props) => props.theme.colors.bt_white};
 	overflow: hidden;
 
-	& > div {
+	& > div:nth-of-type(1) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		width: 100%;
 		height: 287px;
-
-		& > .tree-name-input-conainter {
-			display: flex;
-			justify-content: center;
-			margin-top: 25px;
-		}
 	}
+`;
 
-	& > .fruit-select-box {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 128px;
-		background-color: ${(props) => props.theme.colors.bt_primary[20]};
-
-		& > .fruit-list {
-			display: grid;
-			grid-template-rows: repeat(2, 1fr);
-			grid-template-columns: repeat(3, 1fr);
-			grid-gap: 14px 17px;
-		}
-	}
+export const TreeNameInputWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
 `;
 
 export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
@@ -106,8 +90,8 @@ export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
 	width: 100%;
 	height: 205.73px;
 
-	& > .tree-shape-top {
-		position: absolute;
+	& > div:nth-of-type(1) {
+		position: relative;
 		width: ${(props) => (props.size === 'small' ? '68px' : '102px')};
 		height: ${(props) => (props.size === 'small' ? '68px' : '102px')};
 		top: ${(props) => (props.size === 'small' ? '40px' : '10px')};
@@ -117,7 +101,7 @@ export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
 		z-index: 2;
 	}
 
-	& > .tree-shape-bottom {
+	& > div:nth-of-type(2) {
 		position: absolute;
 		width: ${(props) => (props.size === 'small' ? '10px' : '16px')};
 		height: ${(props) => (props.size === 'small' ? '92px' : '138px')};
@@ -125,6 +109,22 @@ export const TreeShapeContainer = styled.div<{ size?: 'small' | 'medium' }>`
 		left: ${(props) => (props.size === 'small' ? 'calc(50% - 5px)' : 'calc(50% - 8px)')};
 		background: linear-gradient(to bottom, #ffd3a8 0%, #e9906c 100%);
 	}
+`;
+
+export const TreeFruitListWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 128px;
+	background-color: ${(props) => props.theme.colors.bt_primary[20]};
+`;
+
+export const TreeFruitList = styled.ul`
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 14px 17px;
 `;
 
 export const WarnningDescBox = styled.div`

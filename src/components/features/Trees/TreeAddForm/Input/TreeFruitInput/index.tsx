@@ -12,14 +12,14 @@ const TreeFruitInput = ({ fruitName, imgSrc, selected, onChangeSelectedFruit }: 
 	};
 
 	return (
-		<S.FruitInputContainer selected={selected}>
+		<S.FruitInputContainer>
 			<input type="radio" id={fruitName} name="fruit-radio" value={fruitName} onClick={onClick} />
-			<label htmlFor={fruitName}>
-				<span className="fruit-icon">
+			<S.FruitInputLabel htmlFor={fruitName} selected={selected}>
+				<span>
 					<img src={imgSrc} alt={`${fruitName} 아이콘`} />
 				</span>
-				<span className="fruit-name">{fruitName}</span>
-			</label>
+				<span>{fruitName}</span>
+			</S.FruitInputLabel>
 		</S.FruitInputContainer>
 	);
 };

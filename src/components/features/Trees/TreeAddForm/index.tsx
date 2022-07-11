@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
-import ButtonView from '@/components/shared/Button/Button';
+import Button from '@/components/shared/Button';
 import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
 import { fruits } from '@/constants/tree';
 
@@ -35,30 +35,30 @@ const TreeAddForm = () => {
 					<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
 				</S.HelperBeeContainer>
 				<S.HelperBeeMessage>
-					<p className="title">열매 나무를 편집하시나요?</p>
-					<p className="sub-title">나무의 이름도 바꿔보세요.</p>
+					<p>열매 나무를 편집하시나요?</p>
+					<p>나무의 이름도 바꿔보세요.</p>
 				</S.HelperBeeMessage>
 			</S.HelperMessageContainer>
 
 			<S.TreeInputContainer>
 				<div>
-					<div className="tree-name-input-conainter">
+					<S.TreeNameInputWrapper>
 						<TreeNameInput
 							placeholder="새 폴더 이름을 입력하세요."
 							treeName={treeName}
 							onChangeTreeName={handleChangeTreeName}
 							autoFocus
 						/>
-					</div>
+					</S.TreeNameInputWrapper>
 
 					<S.TreeShapeContainer>
-						<div className="tree-shape-top" />
-						<div className="tree-shape-bottom" />
+						<div />
+						<div />
 					</S.TreeShapeContainer>
 				</div>
 
-				<div className="fruit-select-box">
-					<ul className="fruit-list">
+				<S.TreeFruitListWrapper>
+					<S.TreeFruitList>
 						{fruits.map((fruit) => (
 							<TreeFruitInput
 								key={fruit.id}
@@ -68,8 +68,8 @@ const TreeAddForm = () => {
 								onChangeSelectedFruit={handleChangeSelectedFruit}
 							/>
 						))}
-					</ul>
-				</div>
+					</S.TreeFruitList>
+				</S.TreeFruitListWrapper>
 			</S.TreeInputContainer>
 
 			<S.WarnningDescBox>
@@ -78,12 +78,12 @@ const TreeAddForm = () => {
 			</S.WarnningDescBox>
 
 			<S.ButtonBox>
-				<ButtonView type="button" width="156px" bgColor="normal" onClick={handleGoBackClick}>
+				<Button type="button" width="156px" bgColor="normal" onClick={handleGoBackClick}>
 					뒤로가기
-				</ButtonView>
-				<ButtonView type="submit" width="156px" bgColor="primary">
+				</Button>
+				<Button type="submit" width="156px" bgColor="primary">
 					저장하기
-				</ButtonView>
+				</Button>
 			</S.ButtonBox>
 		</S.TreeAddForm>
 	);

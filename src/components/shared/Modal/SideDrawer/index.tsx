@@ -23,12 +23,13 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 						</svg>
 					</button>
 				</S.CloseBtnWrapper>
+
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
-						<div className="thumbnail-img">
+						<div>
 							<img src={profileImg || Default_Profile_Img} alt="프로필" />
 						</div>
-						<div className="thumbnail-info">
+						<div>
 							<h2>{username || '닉네임'}의 메시지함</h2>
 							<span>{email || 'abcde@email.com'}</span>
 						</div>
@@ -54,10 +55,12 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 					<S.TreeFolderList>
 						<TreeFolderItem path={''} />
 						<TreeFolderItem path={''} />
-						<S.TreeFolderItemAdd to={''}>
-							<span className="shape row" />
-							<span className="shape column" />
-						</S.TreeFolderItemAdd>
+						<S.TreeFolderItemAddContainer>
+							<S.TreeFolderItemAddBtn to={'/trees/edit'}>
+								<span />
+								<span />
+							</S.TreeFolderItemAddBtn>
+						</S.TreeFolderItemAddContainer>
 						{onMenuMoreModal && <MenuMoreModal setOnMenuMoreModal={setOnMenuMoreModal} />}
 					</S.TreeFolderList>
 				</S.TreeFolderListWrapper>

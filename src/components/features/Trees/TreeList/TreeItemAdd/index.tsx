@@ -1,15 +1,16 @@
 import React from 'react';
 import * as S from './TreeItemAdd.styled';
-import { Props } from './TreeItemAdd.type';
 
-const TreeItemAdd = ({ onClick }: Props) => {
+const TreeItemAdd = () => {
 	return (
-		<S.ItemAddWrapper type="button" onClick={onClick}>
-			<div className="plus-shape-container">
-				<span className="plus-shape-bar row" />
-				<span className="plus-shape-bar column" />
-			</div>
-		</S.ItemAddWrapper>
+		<S.ItemAddContainer>
+			<S.ItemAddBtn to={'/trees/edit'}>
+				<div>
+					<span />
+					<span />
+				</div>
+			</S.ItemAddBtn>
+		</S.ItemAddContainer>
 	);
 };
 
