@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { login } from '@/apis/auth';
 import { RESPONSE_SUCCESS_CREATED } from '@/constants/api';
+import { useSetRecoilState } from 'recoil';
+import { myInfoState } from '@/stores/user';
+import { checkMyInfo } from '@/apis/users';
 
 const useLogin = () => {
 	const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${
@@ -42,6 +45,8 @@ const useLogin = () => {
 
 	const navigate = useNavigate();
 
+	const setUserInfo = useSetRecoilState(myInfoState);
+
 	const handlelogin = useCallback(async () => {
 		const kakaoCode = location.search.split('=')[1];
 
@@ -53,8 +58,11 @@ const useLogin = () => {
 
 		if (status === RESPONSE_SUCCESS_CREATED) {
 			navigate('/');
+
+			const result = await checkMyInfo();
+			setUserInfo(result);
 		}
-	}, [location, navigate]);
+	}, [location, navigate, setUserInfo]);
 
 	useEffect(() => {
 		handlelogin();
