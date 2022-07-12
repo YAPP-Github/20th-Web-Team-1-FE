@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IconBoxProps, MessageBoxProps, OpenAlertProps } from './index.type';
+import { IconBoxProps, MessageBoxProps, OpenAlertProps } from './AlertPopUp.type';
 
 const POPUP_IMAGE_SIZE = '66px';
 export const PopUpWrapper = styled.div<IconBoxProps>`

@@ -58,9 +58,11 @@ export const MessageWriterWrapper = styled.div`
 	height: 10%;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 `;
 
 export const MessageWriterImage = styled.img`
 	width: 17px;
 	height: 17px;
+	margin-right: 6px;
 `;

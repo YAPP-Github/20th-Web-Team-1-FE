@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const WATERING_IMAGE_SIZE = '66px';
 export const Wrapper = styled.div`
 	position: absolute;
-	bottom: 149px;
+	bottom: 65px;
 	right: 54px;
 	text-align: center;
 	span {
