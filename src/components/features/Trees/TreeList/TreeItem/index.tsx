@@ -11,7 +11,7 @@ import { FRUIT_RENDER_POSITION, FRUITS } from '@/constants/forest';
 import { Props } from './TreeItem.type';
 
 const TreeItem = ({ tree }: Props) => {
-	const { fruit, name } = tree;
+	const { id, fruit, name } = tree;
 
 	const getSelectedFruitImage = (fruitValue: string) => {
 		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === fruitValue)[0];
@@ -20,7 +20,7 @@ const TreeItem = ({ tree }: Props) => {
 
 	return (
 		<S.ItemWrapper>
-			<Link to={name}>
+			<Link to={`/message/edit/${id}`}>
 				<TreeShapeContainer>
 					<TreeCircle size="small">
 						{FRUIT_RENDER_POSITION.map((info) => {
