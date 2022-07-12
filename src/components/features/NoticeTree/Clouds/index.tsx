@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from './index.styled';
+import * as S from './Clouds.styled';
 const Clouds = () => {
 	const clouds = [
 		{ id: 'top_right_cloud', cloudImg: 'small_right_cloud', top: '28.2%', left: '67.18%' },

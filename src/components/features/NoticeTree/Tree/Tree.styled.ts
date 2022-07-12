@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { FruitProps } from './index.type';
+import { FruitProps } from './Tree.type';
+
 export const TreeWrapper = styled.div`
 	width: 100%;
 	height: auto;

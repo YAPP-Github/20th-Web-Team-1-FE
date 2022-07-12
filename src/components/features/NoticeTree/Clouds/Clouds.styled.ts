@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { CloudImageProps } from './index.type';
+import { CloudImageProps } from './Clouds.type';
 
 const playCloud = keyframes`
     0 {

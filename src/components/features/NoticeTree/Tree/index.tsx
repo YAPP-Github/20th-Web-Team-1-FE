@@ -1,7 +1,7 @@
 import React from 'react';
-import * as S from './index.styled';
+import * as S from './Tree.styled';
 import Apple from '@/assets/images/noticeTree/apple.svg';
-import { TreeProps } from './index.type';
+import { TreeProps } from './Tree.type';
 
 const Tree = ({ readNoticeMessage, messages }: TreeProps) => {
 	return (
