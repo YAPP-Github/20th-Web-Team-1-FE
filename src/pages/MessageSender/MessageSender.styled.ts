@@ -1,24 +1,24 @@
 import styled from '@emotion/styled';
 
-export const MessageSenderContainer = styled.main`
+export const MessageSenderContainer = styled.form`
 	padding: 96px 0 30px 0;
 `;
 
-export const TopContainer = styled.div`
+export const TopWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	margin: 0 32px 0 32px;
 `;
 
-export const MessageInputContainer = styled.div`
+export const MessageInputWrapper = styled.div`
 	margin: 46px 32px 0 32px;
 `;
 
-export const AnonymousCheckBoxContainer = styled.div`
+export const AnonymousCheckBoxWrapper = styled.div`
 	margin-top: 33px;
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonWrapper = styled.div`
 	display: flex;
 	gap: 14px;
 	margin: 36px 32px 0 32px;
