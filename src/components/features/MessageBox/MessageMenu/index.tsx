@@ -5,7 +5,7 @@ import { MessageMenuProps } from './MessageMenu.type';
 
 const MessageMenu = ({
 	isEdit,
-	setIsEdit,
+	editMakingToggleHandler,
 	onToggleOpenDrawer,
 	deleteMessages,
 	onToggleMovingFolderModal,
@@ -27,8 +27,8 @@ const MessageMenu = ({
 					</>
 				) : (
 					<>
-						<S.MenuButton onClick={() => setIsEdit(true)}>편집하기</S.MenuButton>
-						<S.MenuButton>열매맺기</S.MenuButton>
+						<S.MenuButton onClick={() => editMakingToggleHandler('edit')}>편집하기</S.MenuButton>
+						<S.MenuButton onClick={() => editMakingToggleHandler('making')}>열매맺기</S.MenuButton>
 					</>
 				)}
 			</S.InnerWrapper>

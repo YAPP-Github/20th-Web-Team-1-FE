@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
 export const MenuContainer = styled.div`
-	padding: 94px 32px 42px;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+
+	padding: 94px 32px 42px;
 `;
 
 export const InnerWrapper = styled.div`
@@ -12,38 +13,34 @@ export const InnerWrapper = styled.div`
 `;
 
 export const Title = styled.span`
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 18px;
+	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+	font-size: ${({ theme }) => theme.fontSize.f18};
+	line-height: ${({ theme }) => theme.lineHeight.lh18};
 `;
 
 export const Button = styled.button`
 	border: none;
 	background: none;
 `;
+
 export const HamburgerButton = styled(Button)`
 	margin-right: 12px;
 `;
 
-export const MenuTitle = styled.span`
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 18px;
-`;
-
 export const MenuButton = styled(Button)`
-	border: 0.5px solid #4b4b4b;
-	border-radius: 5px;
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 12px;
+	font-weight: ${({ theme }) => theme.fontWeight.normal};
+	font-size: ${({ theme }) => theme.fontSize.f12};
+	line-height: ${({ theme }) => theme.lineHeight.lh12};
 	text-align: center;
 	letter-spacing: -0.02em;
-	color: #4b4b4b;
+	color: ${({ theme }) => theme.colors.bt_grey[85]};
+
 	padding: 4px 9px;
 
-	&:first-child {
+	border: 0.5px solid ${({ theme }) => theme.colors.bt_grey[85]};
+	border-radius: 5px;
+
+	&:first-of-type {
 		margin-right: 8px;
 	}
 `;
