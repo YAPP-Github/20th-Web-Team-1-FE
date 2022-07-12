@@ -19,6 +19,9 @@ const API_URL = {
 	users: {
 		info: '/users/info',
 	},
+	noticeTree: {
+		read: '/notices',
+	},
 };
 
 export default API_URL;

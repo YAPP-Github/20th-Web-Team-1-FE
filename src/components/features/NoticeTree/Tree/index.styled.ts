@@ -24,7 +24,6 @@ export const TreeCircle = styled.div`
 	z-index: 1;
 `;
 export const TreePole = styled.div`
-	margin-bottom: 67px;
 	margin-top: -10px;
 	width: 38px;
 	height: 285px;

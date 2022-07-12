@@ -9,11 +9,18 @@ const MessageBox = ({ selectedMessage, showMessageHandler }: MessageBoxProps) =>
 			{selectedMessage && (
 				<S.MessageBoxWrapper>
 					<S.MessageBoxInner>
-						<S.MessageText> {selectedMessage.message} </S.MessageText>
+						<S.MessageText> {selectedMessage.content} </S.MessageText>
 						<S.CancleIcon onClick={() => showMessageHandler(false)}>X</S.CancleIcon>
 						<S.MessageWriterWrapper>
-							<S.MessageWriterImage src={AlertBee} alt="messageWriterImage" />
-							<S.MessageWriter> {selectedMessage.writer ? selectedMessage.writer : '익명의 꿀벌'}</S.MessageWriter>
+							<S.MessageWriterImage
+								src={
+									selectedMessage.senderProfileImage.includes('http') ? selectedMessage.senderProfileImage : AlertBee
+								}
+								alt="messageWriterImage"
+							/>
+							<S.MessageWriter>
+								{selectedMessage.senderNickname ? selectedMessage.senderNickname : '익명의 꿀벌'}
+							</S.MessageWriter>
 						</S.MessageWriterWrapper>
 					</S.MessageBoxInner>
 				</S.MessageBoxWrapper>
