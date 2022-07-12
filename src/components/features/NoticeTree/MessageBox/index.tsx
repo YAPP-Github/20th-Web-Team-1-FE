@@ -18,9 +18,7 @@ const MessageBox = ({ selectedMessage, showMessageHandler }: MessageBoxProps) =>
 								}
 								alt="messageWriterImage"
 							/>
-							<S.MessageWriter>
-								{selectedMessage.senderNickname ? selectedMessage.senderNickname : '익명의 꿀벌'}
-							</S.MessageWriter>
+							<S.MessageWriter>{selectedMessage.senderNickname || '익명의 꿀벌'}</S.MessageWriter>
 						</S.MessageWriterWrapper>
 					</S.MessageBoxInner>
 				</S.MessageBoxWrapper>
