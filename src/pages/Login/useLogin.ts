@@ -45,7 +45,7 @@ const useLogin = () => {
 
 	const navigate = useNavigate();
 
-	const setUserInfo = useSetRecoilState(myInfoState);
+	const setMyInfo = useSetRecoilState(myInfoState);
 
 	const handlelogin = useCallback(async () => {
 		const kakaoCode = location.search.split('=')[1];
@@ -60,9 +60,9 @@ const useLogin = () => {
 			navigate('/');
 
 			const result = await checkMyInfo();
-			setUserInfo(result);
+			setMyInfo(result);
 		}
-	}, [location, navigate, setUserInfo]);
+	}, [location, navigate, setMyInfo]);
 
 	useEffect(() => {
 		handlelogin();

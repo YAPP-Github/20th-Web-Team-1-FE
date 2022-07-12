@@ -6,13 +6,13 @@ import { useSetRecoilState } from 'recoil';
 import { myInfoState } from '@/stores/user';
 
 const App = () => {
-	const setUserInfo = useSetRecoilState(myInfoState);
+	const setMyInfo = useSetRecoilState(myInfoState);
 
 	const handleCheckIsLoggedIn = useCallback(async () => {
 		const result = await checkMyInfo();
 
-		setUserInfo(result);
-	}, [setUserInfo]);
+		setMyInfo(result);
+	}, [setMyInfo]);
 
 	useEffect(() => {
 		handleCheckIsLoggedIn();
