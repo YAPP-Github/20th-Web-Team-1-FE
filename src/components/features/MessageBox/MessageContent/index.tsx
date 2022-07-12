@@ -7,12 +7,12 @@ import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import MessageCheckBox from '../MessageCheckBox';
 
-const MessageContent = ({ message, isEdit, checkMessages, onToggleCheckMessage }: MessageContentProps) => {
+const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage }: MessageContentProps) => {
 	dayjs.locale('ko');
 
 	return (
 		<S.MessageWrapper checked={checkMessages.includes(message.id)}>
-			{isEdit && (
+			{checkMode && (
 				<MessageCheckBox
 					checked={checkMessages.includes(message.id)}
 					handleToggleChecked={onToggleCheckMessage}
@@ -29,11 +29,7 @@ const MessageContent = ({ message, isEdit, checkMessages, onToggleCheckMessage }
 				</S.InnerBox>
 				<S.InnerBox>
 					<S.MessageText>{message.content}</S.MessageText>
-					{message.favorite && (
-						<S.LikeButton>
-							<img src={LikeIcon} alt="profileImage" />
-						</S.LikeButton>
-					)}
+					{message.favorite && <img src={LikeIcon} alt="profileImage" />}
 				</S.InnerBox>
 			</S.ContentContainer>
 		</S.MessageWrapper>
