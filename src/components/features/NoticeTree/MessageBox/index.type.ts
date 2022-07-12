@@ -1,5 +1,5 @@
-import { MessageType } from '@/pages/NoticeTree/index.type';
+import { MessageWithLocationType } from '@/pages/NoticeTree/NoticeTree.type';
 export interface MessageBoxProps {
-	selectedMessage: MessageType | null;
+	selectedMessage: MessageWithLocationType | null;
 	showMessageHandler: (show: boolean) => void;
 }

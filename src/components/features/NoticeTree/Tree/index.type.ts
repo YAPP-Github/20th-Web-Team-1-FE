@@ -1,13 +1,8 @@
-type Message = {
-	id: string;
-	width: number;
-	height: number;
-};
-type MessagesType = Message[];
+import { MessageWithLocationType } from '@/pages/NoticeTree/NoticeTree.type';
 
 export interface TreeProps {
-	removeFruit: (idx: number) => void;
-	messages: MessagesType | null;
+	readNoticeMessage: (messageId: number, selectedIdx: number) => void;
+	messages: MessageWithLocationType[] | null;
 }
 
 export interface FruitProps {

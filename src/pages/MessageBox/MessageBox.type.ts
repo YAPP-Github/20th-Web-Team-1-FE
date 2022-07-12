@@ -1,7 +1,7 @@
 export interface MessageType {
 	alreadyRead: boolean;
 	anonymous: boolean;
-	content: string;
+	content?: string;
 	createdDate: string;
 	favorite: boolean;
 	id: number;
