@@ -10,6 +10,7 @@ const API_URL = {
 	auth: {
 		signin: '/signin',
 		refresh: '/refresh-token',
+		logout: '/logout',
 	},
 	messages: {
 		index: '/messages',
