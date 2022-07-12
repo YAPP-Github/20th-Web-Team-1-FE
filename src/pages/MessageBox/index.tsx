@@ -3,7 +3,7 @@ import * as S from './MessageBox.styled';
 import SideDrawer from '@/components/shared/Modal/SideDrawer';
 import { MessagesType } from './MessageBox.type';
 
-import { MessageMenu, MessageContent } from '@/components/features/MessageBox';
+import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
 
 const MessageBox = () => {
@@ -16,7 +16,7 @@ const MessageBox = () => {
 				anonymous: false,
 				content: 'content',
 				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
+				favorite: true,
 				id: 1,
 				opening: true,
 				senderNickname: 'sender1',
@@ -124,8 +124,11 @@ const MessageBox = () => {
 		],
 	});
 	const [isEdit, setIsEdit] = useState(false);
-	const [checkMessages, setCheckMessages] = useState<number[]>([]);
+	const [checkMode, setCheckMode] = useState(false);
+	const [isMakingFruit, setIsMakingFruit] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
+	const [checkMessages, setCheckMessages] = useState<number[]>([]);
+	const [isShownCheckedMessages, setIsShownCheckedMessages] = useState(Boolean);
 	const [moveItems, setMoveItems] = useState<number[]>([]);
 
 	const onToggleCheckMessage = (id: number) => {
@@ -151,19 +154,49 @@ const MessageBox = () => {
 		console.log('move');
 	};
 
+	const editMakingToggleHandler = (path: string) => {
+		if (path === 'edit') {
+			setIsEdit(true);
+			setIsMakingFruit(false);
+			return;
+		}
+		if (path === 'making') {
+			setIsEdit(false);
+			setIsMakingFruit(true);
+			return;
+		}
+		if (path === 'back') {
+			setIsEdit(false);
+			setIsMakingFruit(false);
+		}
+	};
+
 	useEffect(() => {
 		setCheckMessages([]);
-	}, [isEdit]);
+	}, [checkMode]);
+
+	useEffect(() => {
+		setCheckMode(isEdit || isMakingFruit);
+	}, [isEdit, isMakingFruit, setCheckMode]);
 
 	return (
 		<S.Wrapper>
-			<MessageMenu
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				onToggleMovingFolderModal={onToggleMovingFolderModal}
-				onToggleOpenDrawer={onToggleOpenDrawer}
-				deleteMessages={deleteMessages}
-			/>
+			{isMakingFruit ? (
+				<MakingFruitMenu
+					isShownCheckedMessages={isShownCheckedMessages}
+					setIsShownCheckedMessages={setIsShownCheckedMessages}
+					numberOfMessages={Messages ? Messages.responseDto.length : 0}
+					numberOfCheckedMessages={checkMessages.length}
+				/>
+			) : (
+				<MessageMenu
+					isEdit={isEdit}
+					editMakingToggleHandler={editMakingToggleHandler}
+					onToggleMovingFolderModal={onToggleMovingFolderModal}
+					onToggleOpenDrawer={onToggleOpenDrawer}
+					deleteMessages={deleteMessages}
+				/>
+			)}
 
 			<SideDrawer
 				username="username"
@@ -174,19 +207,33 @@ const MessageBox = () => {
 			/>
 			{isMoving && <MovingFolderModal isMoving={isMoving} onToggleMovingFolderModal={onToggleMovingFolderModal} />}
 			<S.MessageListContainer isEdit={isEdit}>
-				{Messages?.responseDto.map((res, idx) => (
-					<MessageContent
-						key={`message-box-messga${idx}`}
-						message={res}
+				{isShownCheckedMessages
+					? Messages?.responseDto
+							.filter((message) => !checkMessages.includes(message.id))
+							.map((res, idx) => (
+								<MessageContent
+									key={`message-box-messga${idx}`}
+									message={res}
+									checkMode={checkMode}
+									onToggleCheckMessage={onToggleCheckMessage}
+									checkMessages={checkMessages}
+								/>
+							))
+					: Messages?.responseDto.map((res, idx) => (
+							<MessageContent
+								key={`message-box-messga${idx}`}
+								message={res}
+								checkMode={checkMode}
+								onToggleCheckMessage={onToggleCheckMessage}
+								checkMessages={checkMessages}
+							/>
+					  ))}
+				{checkMode && (
+					<BottomButtons
 						isEdit={isEdit}
-						onToggleCheckMessage={onToggleCheckMessage}
-						checkMessages={checkMessages}
+						isMakingFruit={isMakingFruit}
+						editMakingToggleHandler={editMakingToggleHandler}
 					/>
-				))}
-				{isEdit && (
-					<S.BackButtonContainer>
-						<S.BackButton onClick={() => setIsEdit(false)}>뒤로가기</S.BackButton>
-					</S.BackButtonContainer>
 				)}
 			</S.MessageListContainer>
 		</S.Wrapper>
