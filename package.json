@@ -12,6 +12,7 @@
 		"@emotion/react": "^11.9.0",
 		"@emotion/styled": "^11.8.1",
 		"axios": "^0.27.2",
+		"dayjs": "^1.11.3",
 		"emotion-reset": "^3.0.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",

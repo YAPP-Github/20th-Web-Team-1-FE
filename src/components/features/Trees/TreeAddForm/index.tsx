@@ -5,23 +5,29 @@ import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import Button from '@/components/shared/Button';
 import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
-import { fruits } from '@/constants/tree';
+import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
 
 const TreeAddForm = () => {
 	const navigate = useNavigate();
-	const [selectedFruit, setSelectedFruit] = useState('');
 	const [treeName, setTreeName] = useState('');
-
-	const handleChangeSelectedFruit = (fruit: string) => {
-		setSelectedFruit(fruit);
-	};
+	const [selectedFruit, setSelectedFruit] = useState('');
 
 	const handleChangeTreeName = (treeName: string) => {
 		setTreeName(treeName);
 	};
 
+	const handleChangeSelectedFruit = (fruit: string) => {
+		setSelectedFruit(fruit);
+	};
+
+	const getSelectedFruitImage = () => {
+		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === selectedFruit)[0];
+		return selectedFruitObj?.imgSrc;
+	};
+
 	const handleSubmitEditedTreeInfo = (event: React.FormEvent) => {
 		event.preventDefault();
+		console.log(treeName, selectedFruit);
 	};
 
 	const handleGoBackClick = () => {
@@ -52,19 +58,22 @@ const TreeAddForm = () => {
 					</S.TreeNameInputWrapper>
 
 					<S.TreeShapeContainer>
-						<div />
-						<div />
+						<S.TreeCircle>
+							{FRUIT_RENDER_POSITION.map((info) => {
+								return <S.Fruit key={info.id} src={getSelectedFruitImage()} alt={''} position={info.position} />;
+							})}
+						</S.TreeCircle>
+						<S.TreePole />
 					</S.TreeShapeContainer>
 				</div>
 
 				<S.TreeFruitListWrapper>
 					<S.TreeFruitList>
-						{fruits.map((fruit) => (
+						{FRUITS.map((fruit) => (
 							<TreeFruitInput
 								key={fruit.id}
-								imgSrc={fruit.imgSrc}
-								fruitName={fruit.name}
-								selected={fruit.name === selectedFruit}
+								fruit={fruit}
+								selected={fruit.value === selectedFruit}
 								onChangeSelectedFruit={handleChangeSelectedFruit}
 							/>
 						))}
@@ -78,10 +87,10 @@ const TreeAddForm = () => {
 			</S.WarnningDescBox>
 
 			<S.ButtonBox>
-				<Button type="button" width="156px" bgColor="normal" onClick={handleGoBackClick}>
+				<Button type="button" width="156px" bgColor="normal" fontWeight="medium" onClick={handleGoBackClick}>
 					뒤로가기
 				</Button>
-				<Button type="submit" width="156px" bgColor="primary">
+				<Button type="submit" width="156px" bgColor="primary" fontWeight="bold">
 					저장하기
 				</Button>
 			</S.ButtonBox>
