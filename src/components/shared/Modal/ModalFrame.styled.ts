@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { ModalBackDropStyledPropsType } from './type';
+import { StyledProps } from './type';
 
-export const ModalBackDrop = styled.div<ModalBackDropStyledPropsType>`
+export const ModalBackDrop = styled.div<StyledProps>`
 	position: fixed;
 	display: ${({ show }) => (show ? 'flex' : 'none')};
 	align-items: center;
