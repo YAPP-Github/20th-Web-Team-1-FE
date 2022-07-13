@@ -15,6 +15,8 @@ export const MessageWrapper = styled.div<CheckedProps>`
 	background: ${({ theme, checked }) => (checked ? ' #EEFBFA' : theme.colors.bt_white)};
 
 	border-bottom: 0.4px solid #cecece;
+
+	cursor: pointer;
 `;
 
 export const ProfileImage = styled.div`

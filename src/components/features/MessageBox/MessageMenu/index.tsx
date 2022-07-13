@@ -20,12 +20,13 @@ const MessageMenu = ({
 			</S.InnerWrapper>
 
 			<S.InnerWrapper>
-				{isEdit ? (
+				{isEdit && (
 					<>
 						<S.MenuButton onClick={deleteMessages}>삭제하기</S.MenuButton>
 						<S.MenuButton onClick={onToggleMovingFolderModal}>이동하기</S.MenuButton>
 					</>
-				) : (
+				)}
+				{!isEdit && editMakingToggleHandler && (
 					<>
 						<S.MenuButton onClick={() => editMakingToggleHandler('edit')}>편집하기</S.MenuButton>
 						<S.MenuButton onClick={() => editMakingToggleHandler('making')}>열매맺기</S.MenuButton>

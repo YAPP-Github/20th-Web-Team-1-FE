@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { MessageTopMenu } from '@/components/shared';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
 import * as S from './MessageDetail.styled';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
@@ -8,10 +7,17 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { messageDetailFetcher, readMessage } from '@/apis/messages';
 import { MessageDetailData } from '@/types/message';
+import { MessageMenu } from '@/components/features/MessageBox';
+import { SideDrawer } from '@/components/shared';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
 
 const MessageDetail = () => {
-	const { messageId } = useParams();
+	const myInfo = useRecoilValue(myInfoState);
 
+	const { messageId } = useParams();
+	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const { data: messageDetailData } = useQuery<MessageDetailData>(
 		['messageDetail', messageId],
 		() => messageDetailFetcher(messageId),
@@ -21,6 +27,10 @@ const MessageDetail = () => {
 		},
 	);
 
+	const onToggleOpenDrawer = () => {
+		setOpenedDrawer(() => !openedDrawer);
+	};
+
 	useEffect(() => {
 		if (messageDetailData?.responseDto.alreadyRead === false) {
 			readMessage(messageId);
@@ -28,37 +38,48 @@ const MessageDetail = () => {
 	}, [messageId, messageDetailData]);
 
 	return (
-		<S.MessageDetailContainer>
-			<MessageTopMenu
-				category="Yapp 20기 Web1"
-				leftBtnName="삭제하기"
-				rightBtnName="이동하기"
-				onClickLeftBtn={() => {}}
-				onClickRightBtn={() => {}}
+		<S.Wrapper>
+			<MessageMenu
+				isEdit={true}
+				onToggleMovingFolderModal={() => {
+					console.log('movingmodal');
+				}}
+				onToggleOpenDrawer={onToggleOpenDrawer}
+				deleteMessages={() => {
+					console.log('deleteMessage');
+				}}
 			/>
+			<S.MessageDetailContainer>
+				<MessageDetailHeader
+					profileImg={messageDetailData?.responseDto.senderProfileImage}
+					senderName={
+						messageDetailData?.responseDto.anonymous === false ? messageDetailData?.responseDto.senderNickname : '익명'
+					}
+					isBookmarked={messageDetailData?.responseDto.favorite}
+				/>
 
-			<MessageDetailHeader
-				profileImg={messageDetailData?.responseDto.senderProfileImage}
-				senderName={
-					messageDetailData?.responseDto.anonymous === false ? messageDetailData?.responseDto.senderNickname : '익명'
-				}
-				isBookmarked={messageDetailData?.responseDto.favorite}
+				<S.MessageContentWrapper>{messageDetailData?.responseDto.content}</S.MessageContentWrapper>
+
+				<S.MessageNavButtonWrapper>
+					<Link to={`/messages/${messageDetailData?.prevId}`}>
+						<S.ArrowIcon src={ArrowUpIcon} alt="" />
+						이전 메시지
+					</Link>
+
+					<Link to={`/messages/${messageDetailData?.nextId}`}>
+						다음 메시지
+						<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
+					</Link>
+				</S.MessageNavButtonWrapper>
+			</S.MessageDetailContainer>
+			<SideDrawer
+				username={myInfo?.nickname}
+				email={myInfo?.email}
+				profileImg={myInfo?.userImage}
+				onModal={openedDrawer}
+				setOnModal={onToggleOpenDrawer}
 			/>
-
-			<S.MessageContentWrapper>{messageDetailData?.responseDto.content}</S.MessageContentWrapper>
-
-			<S.MessageNavButtonWrapper>
-				<Link to={`/messages/${messageDetailData?.prevId}`}>
-					<S.ArrowIcon src={ArrowUpIcon} alt="" />
-					이전 메시지
-				</Link>
-
-				<Link to={`/messages/${messageDetailData?.nextId}`}>
-					<S.ArrowIcon src={ArrowDownIcon} alt="" />
-					다음 메시지
-				</Link>
-			</S.MessageNavButtonWrapper>
-		</S.MessageDetailContainer>
+		</S.Wrapper>
 	);
 };
 
