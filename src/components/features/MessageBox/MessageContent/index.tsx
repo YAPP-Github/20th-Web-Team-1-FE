@@ -6,12 +6,21 @@ import { MessageContentProps } from './MessageContent.type';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import MessageCheckBox from '../MessageCheckBox';
+import { useNavigate } from 'react-router-dom';
 
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage }: MessageContentProps) => {
 	dayjs.locale('ko');
+	const navigate = useNavigate();
+	const moveToMessageDetail = (messageId: number) => {
+		if (checkMode) {
+			return;
+		} else {
+			navigate(`/messages/${messageId}`);
+		}
+	};
 
 	return (
-		<S.MessageWrapper checked={checkMessages.includes(message.id)}>
+		<S.MessageWrapper checked={checkMessages.includes(message.id)} onClick={() => moveToMessageDetail(message.id)}>
 			{checkMode && (
 				<MessageCheckBox
 					checked={checkMessages.includes(message.id)}
