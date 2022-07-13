@@ -1,4 +1,11 @@
+export type StyledProps = {
+	opened: boolean;
+};
+
 export type Props = {
-	folderNames: string[];
-	selectedFolderName: string;
+	folders: string[];
+	isOpenedFolderBox: boolean;
+	onToggleSelectedFolderBox: () => void;
+	selectedFolder: string;
+	handleSelectedFolderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };

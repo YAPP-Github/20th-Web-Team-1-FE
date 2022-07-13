@@ -1,4 +1,4 @@
-import React, { FormEvent, FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './MessageSender.styled';
 import { RecipientName, FolderSelect, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
@@ -12,11 +12,24 @@ const MessageSender = () => {
 	const [checkAnonymous, setCheckAnonymous] = useState(false);
 	const [isSucceedSendMessage, setIsSucceedSendMessage] = useState(false);
 
+	const [isOpenedSelectFolderBox, setIsOpenedSelectedFolderBox] = useState(false);
+	const [selectedFolder, setSelectedFolder] = useState('');
+
+	const handleSelectedFolderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const selected = event.target.value;
+		setSelectedFolder(selected);
+		onToggleSelectedFolderBox();
+	};
+
+	const onToggleSelectedFolderBox = () => {
+		setIsOpenedSelectedFolderBox(() => !isOpenedSelectFolderBox);
+	};
+
 	const onToggleCheckAnonymous = () => {
 		setCheckAnonymous(() => !checkAnonymous);
 	};
 
-	const handleSubmitMessage = async (event: FormEvent<HTMLFormElement>) => {
+	const handleSubmitMessage = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
@@ -37,7 +50,13 @@ const MessageSender = () => {
 		<S.MessageSenderContainer onSubmit={handleSubmitMessage}>
 			<S.TopWrapper>
 				<RecipientName name={recipientName} />
-				<FolderSelect />
+				<FolderSelect
+					folders={[]}
+					isOpenedFolderBox={isOpenedSelectFolderBox}
+					onToggleSelectedFolderBox={onToggleSelectedFolderBox}
+					selectedFolder={selectedFolder}
+					handleSelectedFolderChange={handleSelectedFolderChange}
+				/>
 			</S.TopWrapper>
 
 			<S.MessageInputWrapper>

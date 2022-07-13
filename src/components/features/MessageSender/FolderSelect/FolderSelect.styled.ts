@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { StyledProps } from './FolderSelect.type';
 import ArrowIcon from '@/assets/images/messageSender/arrow.svg';
 
 export const FolderSelectContainer = styled.div`
@@ -11,7 +12,7 @@ export const SelectedFolderWrapper = styled.div`
 	width: 100%;
 	border-radius: 12px;
 	background-color: ${({ theme }) => theme.colors.bt_white};
-	z-index: 300;
+	z-index: 2;
 
 	& > input[type='checkbox'] {
 		display: none;
@@ -33,10 +34,17 @@ export const SelectedFolderWrapper = styled.div`
 		cursor: pointer;
 	}
 
+	& > label > p {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
 	& > label > span {
 		width: 14px;
 		height: 14px;
 		background: url(${ArrowIcon});
+		transform: rotate(180deg);
 		transition: transform 0.1s;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -44,14 +52,15 @@ export const SelectedFolderWrapper = styled.div`
 
 	& > input[type='checkbox']:checked {
 		& + label > span {
-			transform: rotate(180deg);
+			transform: rotate(0deg);
 		}
 	}
 `;
 
-export const FolderList = styled.ul`
+export const FolderList = styled.ul<StyledProps>`
 	position: absolute;
 	top: 12px;
+	display: ${({ opened }) => (opened ? 'block' : 'none')};
 	width: 100%;
 	background-color: ${({ theme }) => theme.colors.bt_primary[100]};
 	border-radius: 0 0 12px 12px;
@@ -73,6 +82,9 @@ export const FolderItem = styled.li`
 		line-height: ${({ theme }) => theme.lineHeight.lh10};
 		color: ${({ theme }) => theme.colors.bt_primary[300]};
 		letter-spacing: -0.01em;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 		cursor: pointer;
 	}
 
