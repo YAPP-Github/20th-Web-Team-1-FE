@@ -7,6 +7,7 @@ import { SuccessModal } from '@/components/shared';
 
 const MessageSender = () => {
 	const navigate = useNavigate();
+
 	const [recipientName, setRecipientName] = useState('나에게');
 	const [checkAnonymous, setCheckAnonymous] = useState(false);
 	const [isSucceedSendMessage, setIsSucceedSendMessage] = useState(false);
