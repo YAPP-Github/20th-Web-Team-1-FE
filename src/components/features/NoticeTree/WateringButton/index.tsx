@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as S from './index.styled';
+import * as S from './WateringButton.styled';
 import WateringIcon from '@/assets/images/noticeTree/watering_icon.svg';
 
 const WateringButton = () => {
 	return (
-		<Link to="/">
+		<Link to="/send-message">
 			<S.Wrapper>
 				<S.ImageWrapper>
 					<img src={WateringIcon} alt="watering_icon" />

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { FruitProps } from './index.type';
+import { FruitProps } from './Tree.type';
+
 export const TreeWrapper = styled.div`
 	width: 100%;
 	height: auto;
@@ -24,7 +25,6 @@ export const TreeCircle = styled.div`
 	z-index: 1;
 `;
 export const TreePole = styled.div`
-	margin-bottom: 67px;
 	margin-top: -10px;
 	width: 38px;
 	height: 285px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './index.styled';
-import { MessageBoxProps } from './index.type';
+import * as S from './MessageBox.styled';
+import { MessageBoxProps } from './MessageBox.type';
 import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
 
 const MessageBox = ({ selectedMessage, showMessageHandler }: MessageBoxProps) => {
@@ -9,11 +9,16 @@ const MessageBox = ({ selectedMessage, showMessageHandler }: MessageBoxProps) =>
 			{selectedMessage && (
 				<S.MessageBoxWrapper>
 					<S.MessageBoxInner>
-						<S.MessageText> {selectedMessage.message} </S.MessageText>
+						<S.MessageText> {selectedMessage.content} </S.MessageText>
 						<S.CancleIcon onClick={() => showMessageHandler(false)}>X</S.CancleIcon>
 						<S.MessageWriterWrapper>
-							<S.MessageWriterImage src={AlertBee} alt="messageWriterImage" />
-							<S.MessageWriter> {selectedMessage.writer ? selectedMessage.writer : '익명의 꿀벌'}</S.MessageWriter>
+							<S.MessageWriterImage
+								src={
+									selectedMessage.senderProfileImage.includes('http') ? selectedMessage.senderProfileImage : AlertBee
+								}
+								alt="messageWriterImage"
+							/>
+							<S.MessageWriter>{selectedMessage.senderNickname || '익명의 꿀벌'}</S.MessageWriter>
 						</S.MessageWriterWrapper>
 					</S.MessageBoxInner>
 				</S.MessageBoxWrapper>

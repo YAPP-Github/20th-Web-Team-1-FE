@@ -1,8 +1,8 @@
-export type ModalBackDropStyledPropsType = {
+export type StyledProps = {
 	show: boolean;
 };
 
-export type ModalFramePropsType = {
+export type Props = {
 	children: React.ReactNode;
 	onModal: boolean;
 	setOnModal: (state: boolean) => void;

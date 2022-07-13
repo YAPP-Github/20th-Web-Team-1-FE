@@ -1,12 +1,12 @@
 import React from 'react';
 import * as S from './ModalFrame.styled';
 import ModalPortal from './ModalPortal';
-import { ModalFramePropsType } from './type';
+import { Props } from './type';
 
-const ModalFrame = ({ children, onModal, setOnModal }: ModalFramePropsType) => {
+const ModalFrame = ({ children, onModal, setOnModal }: Props) => {
 	return (
 		<ModalPortal>
-			<S.ModalBackDrop show={onModal} onClick={() => setOnModal(false)}></S.ModalBackDrop>
+			<S.ModalBackDrop show={onModal} onClick={() => setOnModal(false)} />
 			{children}
 		</ModalPortal>
 	);

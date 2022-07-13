@@ -1,16 +1,17 @@
 export interface MessageType {
-	alreadyRead: boolean;
 	anonymous: boolean;
 	content?: string;
-	createdDate: string;
-	favorite: boolean;
 	id: number;
-	opening: boolean;
 	senderNickname: string;
 	senderProfileImage: string;
 }
 
+export interface MessageWithLocationType extends MessageType {
+	width: number;
+	height: number;
+}
+
 export interface MessagesType {
-	hasNext: boolean;
-	responseDto: MessageType[];
+	messages: MessageWithLocationType[];
+	totalUnreadMessageCount: number;
 }

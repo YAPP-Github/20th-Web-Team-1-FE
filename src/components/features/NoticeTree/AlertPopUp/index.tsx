@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import * as S from './index.styled';
+import * as S from './AlertPopUp.styled';
 import { Link } from 'react-router-dom';
 import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
 import Forest from '@/assets/images/noticeTree/forest_btn.svg';
-import { AlertPopUpProps } from './index.type';
+import { AlertPopUpProps } from './AlertPopUp.type';
 
 const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProps) => {
 	const [openedAlertButton, setOpenedAlertButton] = useState(false);
