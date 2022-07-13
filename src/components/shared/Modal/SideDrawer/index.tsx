@@ -56,7 +56,7 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 						<TreeFolderItem path={''} />
 						<TreeFolderItem path={''} />
 						<S.TreeFolderItemAddContainer>
-							<S.TreeFolderItemAddBtn to={'/trees/edit'}>
+							<S.TreeFolderItemAddBtn to={'/forest/edit'}>
 								<span />
 								<span />
 							</S.TreeFolderItemAddBtn>
