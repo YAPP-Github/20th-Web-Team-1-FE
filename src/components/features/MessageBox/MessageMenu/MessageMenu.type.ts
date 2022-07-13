@@ -1,6 +1,6 @@
 export interface MessageMenuProps {
 	isEdit: boolean;
-	setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+	editMakingToggleHandler: (path: string) => void;
 	onToggleOpenDrawer: () => void;
 	deleteMessages: () => void;
 	onToggleMovingFolderModal: () => void;

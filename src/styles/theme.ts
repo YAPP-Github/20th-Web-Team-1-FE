@@ -42,6 +42,7 @@ const theme: Theme = {
 		f15: '15px',
 		f16: '16px',
 		f17: '17px',
+		f18: '18px',
 		f20: '20px',
 	},
 	fontWeight: {
@@ -60,6 +61,7 @@ const theme: Theme = {
 		lh14: '14px',
 		lh15: '15px',
 		lh16: '16px',
+		lh18: '18px',
 		lh20: '20px',
 		lh22: '22px',
 	},
