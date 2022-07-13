@@ -1,16 +1,14 @@
 import API_URL, { DELETE, GET, PUT } from '@/constants/api';
-import { MessageDetailData } from '@/types/message';
+import { MessageDetailData, MessageIdType, MessagesType } from '@/types/message';
 import { requester } from './requester';
 
-export const deleteMessage = async (messageId: string) => {
+export const deleteMessage = async (messageIds: MessageIdType[]) => {
 	const {
 		messages: { index },
 	} = API_URL;
 
 	try {
-		const data = {
-			messageIds: [messageId],
-		};
+		const data = messageIds;
 
 		const { status } = await requester({
 			method: DELETE,
@@ -24,7 +22,7 @@ export const deleteMessage = async (messageId: string) => {
 	}
 };
 
-export const readMessage = async (messageId: number) => {
+export const readMessage = async (messageId: MessageIdType) => {
 	const {
 		messages: { read },
 	} = API_URL;
@@ -41,10 +39,19 @@ export const readMessage = async (messageId: number) => {
 	}
 };
 
-export const messageDetailFetcher = async (messageId: string | undefined) => {
+export const messageDetailFetcher = async (messageId: MessageIdType) => {
 	const response = await requester<MessageDetailData>({
 		method: GET,
 		url: `/messages/${messageId}`,
+	});
+
+	return response.payload;
+};
+
+export const getMessages = async () => {
+	const response = await requester<MessagesType>({
+		method: GET,
+		url: '/messages',
 	});
 
 	return response.payload;
