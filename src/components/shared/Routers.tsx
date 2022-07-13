@@ -10,12 +10,12 @@ const Routers = () => {
 		<Routes>
 			<Route path="/" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
-			<Route path="/trees" element={<Trees />} />
-			<Route path="/trees/edit" element={<TreeAddForm />} />
+			<Route path="/forest" element={<Trees />} />
+			<Route path="/forest/edit" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
 			<Route path="/mypage/edit" element={<ProfileEdit />} />
-			<Route path="/message/edit/:folderId" element={<MessageSender />} />
 			<Route path="/message/edit" element={<MessageSender />} />
+			<Route path="/message/edit/:folderId" element={<MessageSender />} />
 			<Route path="/messages" element={<MessageBox />} />
 			<Route path="/messages/:messageId" element={<MessageDetail />} />
 			{/* <Route path="/friends" element={} />

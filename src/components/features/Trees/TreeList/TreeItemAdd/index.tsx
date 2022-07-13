@@ -4,7 +4,7 @@ import * as S from './TreeItemAdd.styled';
 const TreeItemAdd = () => {
 	return (
 		<S.ItemAddContainer>
-			<S.ItemAddBtn to={'/trees/edit'}>
+			<S.ItemAddBtn to={'/forest/edit'}>
 				<div>
 					<span />
 					<span />
