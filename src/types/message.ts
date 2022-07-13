@@ -15,3 +15,10 @@ export type MessageDetailData = {
 	prevId: number;
 	responseDto: Message;
 };
+
+export type MessageIdType = number | string | undefined;
+
+export interface MessagesType {
+	hasNext: boolean;
+	responseDto: Message[];
+}
