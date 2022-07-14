@@ -232,9 +232,6 @@ const MessageBox = () => {
 			)}
 
 			<SideDrawer
-				username="username"
-				email="string"
-				profileImg="string"
 				onModal={openedDrawer}
 				setOnModal={onToggleOpenDrawer}
 				onEditMoreModal={onEditMoreModal}

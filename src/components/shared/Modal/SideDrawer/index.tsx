@@ -6,11 +6,10 @@ import TreeFolderItem from './TreeFolderItem';
 import EditFolderMoreModal from './EditFolderMoreModal';
 import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
 
 const SideDrawer = ({
-	username,
-	email,
-	profileImg,
 	onModal,
 	setOnModal,
 	onEditMoreModal,
@@ -19,6 +18,8 @@ const SideDrawer = ({
 	handleEditMoreModalClose,
 	handleFolderDeleteAlertModalToggle,
 }: Props) => {
+	const myInfo = useRecoilValue(myInfoState);
+
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
 			<S.SideDrawerContainer show={onModal}>
@@ -36,11 +37,11 @@ const SideDrawer = ({
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
 						<div>
-							<img src={profileImg || Default_Profile_Img} alt="프로필" />
+							<img src={myInfo?.userImage || Default_Profile_Img} alt="프로필" />
 						</div>
 						<div>
-							<h2>{username || '닉네임'}의 메시지함</h2>
-							<span>{email || 'abcde@email.com'}</span>
+							<h2>{myInfo?.nickname || '게스트'}의 메시지함</h2>
+							<span>{myInfo?.email || 'guest@email.com'}</span>
 						</div>
 					</S.ThumbnailBox>
 				</S.ThumbnailWrapper>
