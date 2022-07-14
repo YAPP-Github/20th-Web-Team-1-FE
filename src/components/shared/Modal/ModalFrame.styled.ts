@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { StyledProps } from './ModaFrame.type';
+import { StyledProps } from './ModalFrame.type';
 
 export const ModalBackDrop = styled.div<StyledProps>`
 	position: fixed;
