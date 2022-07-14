@@ -3,6 +3,7 @@ import ModalFrame from '../ModalFrame';
 import * as S from './AlertModal.styled';
 import Button from '../../Button';
 import { AlertModalProps } from './AlertModal.type';
+import DeleteIcon from '@/assets/images/messages/delete_icon.svg';
 
 const AlertModal = ({
 	isOpen,
@@ -18,7 +19,7 @@ const AlertModal = ({
 			<S.ModalContainer>
 				<S.ModalWrapper>
 					<S.WateringImgWrapper>
-						<S.WateringImg src={modalMainImage} alt="" />
+						<S.WateringImg src={modalMainImage === 'deleteMessageModal' ? DeleteIcon : ''} alt="" />
 					</S.WateringImgWrapper>
 
 					<S.MessageTitle>{modalTitle}</S.MessageTitle>
