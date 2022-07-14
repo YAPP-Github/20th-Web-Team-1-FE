@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalFrame from '../ModalFrame';
+import AlertModalFrame from '../AlertModalFrame';
 import * as S from './SuccessModal.styled';
 import WateringIcon from '@/assets/images/noticeTree/watering_icon.svg';
 import Button from '../../Button';
@@ -7,7 +7,7 @@ import { Props } from './SuccessModal.type';
 
 const SuccessModal = ({ isSucceedSendMessage, handleCloseBtnClick }: Props) => {
 	return (
-		<ModalFrame onModal={isSucceedSendMessage} setOnModal={handleCloseBtnClick}>
+		<AlertModalFrame onAlertModal={isSucceedSendMessage}>
 			<S.SuccessModalContainer>
 				<S.SuccessModalWrapper>
 					<S.WateringImgWrapper>
@@ -28,7 +28,7 @@ const SuccessModal = ({ isSucceedSendMessage, handleCloseBtnClick }: Props) => {
 					</S.ConfirmBtnWrapper>
 				</S.SuccessModalWrapper>
 			</S.SuccessModalContainer>
-		</ModalFrame>
+		</AlertModalFrame>
 	);
 };
 
