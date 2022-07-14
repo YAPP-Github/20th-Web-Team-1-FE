@@ -10,5 +10,6 @@ export type StyledProps = {
 export type Props = {
 	modalPosition: ModalPosition;
 	onEditMoreModal: boolean;
-	setOnEditMoreModal: () => void;
+	handleEditMoreModalClose: () => void;
+	handleFolderDeleteAlertModalToggle: (state: 'open' | 'close') => void;
 };
