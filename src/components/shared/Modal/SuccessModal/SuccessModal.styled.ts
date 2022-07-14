@@ -1,19 +1,9 @@
 import styled from '@emotion/styled';
+import { ModalContainer, ModalWrapper } from '../ModalFrame.styled';
 
-export const ModalContainer = styled.div`
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1000;
-`;
+export const SuccessModalContainer = ModalContainer;
 
-export const ModalWrapper = styled.div`
-	min-width: 350px;
-	min-height: 496px;
-	border-radius: 20px;
-	background-color: ${({ theme }) => theme.colors.bt_white};
-`;
+export const SuccessModalWrapper = ModalWrapper;
 
 export const WateringImgWrapper = styled.div`
 	text-align: center;
