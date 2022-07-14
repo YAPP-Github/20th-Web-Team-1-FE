@@ -32,7 +32,7 @@ export const readMessage = async (messageId: MessageIdType) => {
 			method: PUT,
 			url: `${read}?messageId=${messageId}`,
 		});
-		console.log(status);
+
 		return status;
 	} catch (error) {
 		// 에러 핸들링
@@ -55,4 +55,49 @@ export const getMessages = async () => {
 	});
 
 	return response.payload;
+};
+
+export const openMessages = async (messageIds: MessageIdType[]) => {
+	const {
+		messages: { opening },
+	} = API_URL;
+
+	try {
+		const data = messageIds;
+
+		const { status } = await requester({
+			method: PUT,
+			url: opening,
+			data,
+		});
+		if (status === 204) {
+			window.alert('열매맺기에 성공했습니다.');
+		}
+		return status;
+	} catch (error) {
+		// 에러 핸들링
+	}
+};
+
+export const moveMessages = async ({ messageIds, treeId }: { messageIds: number[]; treeId: number }) => {
+	const {
+		messages: { folder },
+	} = API_URL;
+
+	try {
+		const data = messageIds;
+
+		const { status } = await requester({
+			method: PUT,
+			url: `${folder}?treeId=${treeId}`,
+			data,
+		});
+
+		if (status === 204) {
+			window.alert('이동에 성공했습니다.');
+		}
+		return status;
+	} catch (error) {
+		// 에러 핸들링
+	}
 };
