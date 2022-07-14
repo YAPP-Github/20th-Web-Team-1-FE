@@ -3,12 +3,22 @@ import { Link } from 'react-router-dom';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
-import MenuMoreModal from './MenuMoreModal';
+import EditFolderMoreModal from './EditFolderMoreModal';
 import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
 
-const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props) => {
-	const [onMenuMoreModal, setOnMenuMoreModal] = useState(false);
+const SideDrawer = ({
+	onModal,
+	setOnModal,
+	onEditMoreModal,
+	modalPosition,
+	handleEditMoreModalOpen,
+	handleEditMoreModalClose,
+	handleFolderDeleteAlertModalToggle,
+}: Props) => {
+	const myInfo = useRecoilValue(myInfoState);
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
@@ -27,11 +37,11 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
 						<div>
-							<img src={profileImg || Default_Profile_Img} alt="프로필" />
+							<img src={myInfo?.userImage || Default_Profile_Img} alt="프로필" />
 						</div>
 						<div>
-							<h2>{username || '닉네임'}의 메시지함</h2>
-							<span>{email || 'abcde@email.com'}</span>
+							<h2>{myInfo?.nickname || '게스트'}의 메시지함</h2>
+							<span>{myInfo?.email || 'guest@email.com'}</span>
 						</div>
 					</S.ThumbnailBox>
 				</S.ThumbnailWrapper>
@@ -53,15 +63,22 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem path={''} />
-						<TreeFolderItem path={''} />
+						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
+						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
 						<S.TreeFolderItemAddContainer>
 							<S.TreeFolderItemAddBtn to={'/forest/edit'}>
 								<span />
 								<span />
 							</S.TreeFolderItemAddBtn>
 						</S.TreeFolderItemAddContainer>
-						{onMenuMoreModal && <MenuMoreModal setOnMenuMoreModal={setOnMenuMoreModal} />}
+						{onEditMoreModal && (
+							<EditFolderMoreModal
+								modalPosition={modalPosition}
+								onEditMoreModal={onEditMoreModal}
+								handleEditMoreModalClose={handleEditMoreModalClose}
+								handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
+							/>
+						)}
 					</S.TreeFolderList>
 				</S.TreeFolderListWrapper>
 			</S.SideDrawerContainer>

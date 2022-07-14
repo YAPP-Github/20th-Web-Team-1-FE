@@ -11,7 +11,6 @@ import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/ind
 
 const MessageBox = () => {
 	const [checkMessages, setCheckMessages] = useState<number[]>([]);
-	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
 	const [checkMode, setCheckMode] = useState(false);
 	const [isMakingFruit, setIsMakingFruit] = useState(false);
@@ -21,10 +20,34 @@ const MessageBox = () => {
 	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages));
 
-	const [moveItems, setMoveItems] = useState<number[]>([]);
-
+	const [openedDrawer, setOpenedDrawer] = useState(false);
+	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
 	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
 	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
+
+	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
+		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
+		const rect = closest.getBoundingClientRect();
+		const newPosition = { top: rect.top, left: rect.left + rect.width };
+
+		setModalPosition(newPosition);
+		setOnEditMoreModal(true);
+	};
+
+	const handleEditMoreModalClose = () => {
+		setOnEditMoreModal(false);
+	};
+
+	const handleFolderDelete = () => {
+		console.log('폴더 삭제 로직 실행');
+		handleFolderDeleteAlertModalToggle('close');
+	};
+
+	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
+		setIsOpenedFolderDeleteAlertModal(state === 'open');
+		handleEditMoreModalClose();
+	};
 
 	const onToggleCheckMessage = (id: number) => {
 		checkMessages.includes(id)
@@ -70,15 +93,6 @@ const MessageBox = () => {
 		setIsOpenedMessageDeleteAlertModal(state === 'open');
 	};
 
-	const handleFolderDelete = () => {
-		console.log('폴더 삭제 로직 실행');
-		handleFolderDeleteAlertModalToggle('close');
-	};
-
-	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
-		setIsOpenedFolderDeleteAlertModal(state === 'open');
-	};
-
 	useEffect(() => {
 		setCheckMessages([]);
 	}, [checkMode]);
@@ -107,12 +121,15 @@ const MessageBox = () => {
 			)}
 
 			<SideDrawer
-				username="username"
-				email="string"
-				profileImg="string"
 				onModal={openedDrawer}
 				setOnModal={onToggleOpenDrawer}
+				onEditMoreModal={onEditMoreModal}
+				modalPosition={modalPosition}
+				handleEditMoreModalOpen={handleEditMoreModalOpen}
+				handleEditMoreModalClose={handleEditMoreModalClose}
+				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
 			/>
+
 			{isMoving && <MovingFolderModal isMoving={isMoving} onToggleMovingFolderModal={onToggleMovingFolderModal} />}
 			<S.MessageListContainer isEdit={isEdit}></S.MessageListContainer>
 			{isOpenDeleteModal && (
@@ -139,7 +156,7 @@ const MessageBox = () => {
 							.filter((message) => !checkMessages.includes(message.id))
 							.map((res, idx) => (
 								<MessageContent
-									key={`message-box-messga${idx}`}
+									key={`message-box-message${idx}`}
 									message={res}
 									checkMode={checkMode}
 									onToggleCheckMessage={onToggleCheckMessage}
@@ -148,7 +165,7 @@ const MessageBox = () => {
 							))
 					: messages?.responseDto.map((res, idx) => (
 							<MessageContent
-								key={`message-box-messga${idx}`}
+								key={`message-box-message${idx}`}
 								message={res}
 								checkMode={checkMode}
 								onToggleCheckMessage={onToggleCheckMessage}
@@ -173,6 +190,7 @@ const MessageBox = () => {
 					handleTargetDelete={() => console.log('메시지 삭제 로직 실행')}
 				/>
 			)}
+
 			{isOpenedFolderDeleteAlertModal && (
 				<DeleteAlertModal
 					deleteTargetType="folder"
