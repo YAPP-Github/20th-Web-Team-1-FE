@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './MessageBox.styled';
 import SideDrawer from '@/components/shared/Modal/SideDrawer';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
 import { getMessages, deleteMessage } from '@/apis/messages';
@@ -10,15 +10,21 @@ import AlertModal from '@/components/shared/Modal/AlertModal';
 import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/index';
 
 const MessageBox = () => {
+	const queryClient = useQueryClient();
+	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
+	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('getMessages');
+		},
+	});
+
 	const [checkMessages, setCheckMessages] = useState<number[]>([]);
 	const [isEdit, setIsEdit] = useState(false);
 	const [checkMode, setCheckMode] = useState(false);
 	const [isMakingFruit, setIsMakingFruit] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
-	const [isShownCheckedMessages, setIsShownCheckedMessages] = useState(false);
+	const [showCheckedMessages, setShowCheckedMessages] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
-	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages));
 
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -63,13 +69,26 @@ const MessageBox = () => {
 		setIsMoving(!isMoving);
 	};
 
-	const moveToFolder = () => {
-		console.log('move');
+	const onClickDeleteButton = () => {
+		if (checkMessages.length > 0) {
+			setIsOpenDeleteModal(true);
+		} else {
+			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
+		}
+	};
+
+	const onClickMovingFolderButton = () => {
+		if (checkMessages.length > 0) {
+			onToggleMovingFolderModal();
+		} else {
+			alert('1개 이상의 이동할 메세지를 선택해주세요! ');
+		}
 	};
 
 	const deleteMessageHandler = () => {
 		setIsOpenDeleteModal(false);
 		deleteMutate();
+		setCheckMessages([]);
 	};
 
 	const editMakingToggleHandler = (path: string) => {
@@ -105,8 +124,8 @@ const MessageBox = () => {
 		<S.Wrapper>
 			{isMakingFruit ? (
 				<MakingFruitMenu
-					isShownCheckedMessages={isShownCheckedMessages}
-					setIsShownCheckedMessages={setIsShownCheckedMessages}
+					showCheckedMessages={showCheckedMessages}
+					setShowCheckedMessages={setShowCheckedMessages}
 					numberOfMessages={messages ? messages.responseDto.length : 0}
 					numberOfCheckedMessages={checkMessages.length}
 				/>
@@ -114,46 +133,16 @@ const MessageBox = () => {
 				<MessageMenu
 					isEdit={isEdit}
 					editMakingToggleHandler={editMakingToggleHandler}
-					onToggleMovingFolderModal={onToggleMovingFolderModal}
 					onToggleOpenDrawer={onToggleOpenDrawer}
-					deleteMessages={() => setIsOpenDeleteModal(true)}
+					onToggleMovingFolderModal={onClickMovingFolderButton}
+					deleteMessages={onClickDeleteButton}
 				/>
 			)}
 
-			<SideDrawer
-				onModal={openedDrawer}
-				setOnModal={onToggleOpenDrawer}
-				onEditMoreModal={onEditMoreModal}
-				modalPosition={modalPosition}
-				handleEditMoreModalOpen={handleEditMoreModalOpen}
-				handleEditMoreModalClose={handleEditMoreModalClose}
-				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
-			/>
-
-			{isMoving && <MovingFolderModal isMoving={isMoving} onToggleMovingFolderModal={onToggleMovingFolderModal} />}
-			<S.MessageListContainer isEdit={isEdit}></S.MessageListContainer>
-			{isOpenDeleteModal && (
-				<AlertModal
-					isOpen={isOpenDeleteModal}
-					modalTitle="메세지"
-					modalMainImage="messageAlertModal"
-					modalDescMessages={[
-						'메시지 삭제 시',
-						'메세지함에 있던 메시지가 삭제되며',
-						'삭제 후에는 복구할 수 없어요',
-						'정말 삭제하시겠습니까?',
-					]}
-					buttonTitle="삭제하기"
-					handleCloseBtnClick={() => {
-						setIsOpenDeleteModal(false);
-					}}
-					handleMainBtnClick={deleteMessageHandler}
-				/>
-			)}
 			<S.MessageListContainer isEdit={isEdit}>
-				{isShownCheckedMessages
+				{showCheckedMessages
 					? messages?.responseDto
-							.filter((message) => !checkMessages.includes(message.id))
+							.filter((message) => checkMessages.includes(message.id))
 							.map((res, idx) => (
 								<MessageContent
 									key={`message-box-message${idx}`}
@@ -172,14 +161,54 @@ const MessageBox = () => {
 								checkMessages={checkMessages}
 							/>
 					  ))}
+
 				{checkMode && (
 					<BottomButtons
 						isEdit={isEdit}
 						isMakingFruit={isMakingFruit}
 						editMakingToggleHandler={editMakingToggleHandler}
+						checkMessages={checkMessages}
+						setShowCheckedMessages={setShowCheckedMessages}
 					/>
 				)}
 			</S.MessageListContainer>
+
+			<SideDrawer
+				onModal={openedDrawer}
+				setOnModal={onToggleOpenDrawer}
+				onEditMoreModal={onEditMoreModal}
+				modalPosition={modalPosition}
+				handleEditMoreModalOpen={handleEditMoreModalOpen}
+				handleEditMoreModalClose={handleEditMoreModalClose}
+				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
+			/>
+
+			{isMoving && (
+				<MovingFolderModal
+					isMoving={isMoving}
+					onToggleMovingFolderModal={onToggleMovingFolderModal}
+					checkMessages={checkMessages}
+				/>
+			)}
+
+			{isOpenDeleteModal && (
+				<AlertModal
+					isOpen={isOpenDeleteModal}
+					modalTitle="메세지"
+					modalMainImage="deleteMessageModal"
+					modalDescMessages={[
+						'메시지 삭제 시',
+						'메세지함에 있던 메시지가 삭제되며',
+						'삭제 후에는 복구할 수 없어요',
+						'정말 삭제하시겠습니까?',
+					]}
+					buttonTitle="삭제하기"
+					handleCloseBtnClick={() => {
+						setIsOpenDeleteModal(false);
+					}}
+					handleMainBtnClick={deleteMessageHandler}
+				/>
+			)}
 
 			{isOpenedMessageDeleteAlertModal && (
 				<DeleteAlertModal
