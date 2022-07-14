@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { StyledProps } from './type';
+import { StyledProps } from './ModaFrame.type';
 
 export const ModalBackDrop = styled.div<StyledProps>`
 	position: fixed;
@@ -11,4 +11,19 @@ export const ModalBackDrop = styled.div<StyledProps>`
 	background-color: rgba(0, 0, 0, 0.66);
 	inset: 0px;
 	z-index: 100;
+`;
+
+export const ModalContainer = styled.div`
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+`;
+
+export const ModalWrapper = styled.div`
+	min-width: 350px;
+	min-height: 496px;
+	border-radius: 20px;
+	background-color: ${({ theme }) => theme.colors.bt_white};
 `;

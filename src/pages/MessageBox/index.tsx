@@ -5,6 +5,7 @@ import { MessagesType } from './MessageBox.type';
 
 import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
+import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/index';
 
 const MessageBox = () => {
 	const [openedDrawer, setOpenedDrawer] = useState(false);
@@ -131,6 +132,9 @@ const MessageBox = () => {
 	const [isShownCheckedMessages, setIsShownCheckedMessages] = useState(Boolean);
 	const [moveItems, setMoveItems] = useState<number[]>([]);
 
+	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
+	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
+
 	const onToggleCheckMessage = (id: number) => {
 		checkMessages.includes(id)
 			? setCheckMessages(checkMessages.filter((message) => message !== id))
@@ -169,6 +173,19 @@ const MessageBox = () => {
 			setIsEdit(false);
 			setIsMakingFruit(false);
 		}
+	};
+
+	const handleMessageDeleteAlertModalToggle = (state: 'open' | 'close') => {
+		setIsOpenedMessageDeleteAlertModal(state === 'open');
+	};
+
+	const handleFolderDelete = () => {
+		console.log('폴더 삭제 로직 실행');
+		handleFolderDeleteAlertModalToggle('close');
+	};
+
+	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
+		setIsOpenedFolderDeleteAlertModal(state === 'open');
 	};
 
 	useEffect(() => {
@@ -236,6 +253,25 @@ const MessageBox = () => {
 					/>
 				)}
 			</S.MessageListContainer>
+
+			{isOpenedMessageDeleteAlertModal && (
+				<DeleteAlertModal
+					deleteTargetType="message"
+					deleteTarget="메시지"
+					onAlertModal={isOpenedMessageDeleteAlertModal}
+					handleAlertModalToggle={() => handleMessageDeleteAlertModalToggle('close')}
+					handleTargetDelete={() => console.log('메시지 삭제 로직 실행')}
+				/>
+			)}
+			{isOpenedFolderDeleteAlertModal && (
+				<DeleteAlertModal
+					deleteTargetType="folder"
+					deleteTarget="프로젝트A"
+					onAlertModal={isOpenedFolderDeleteAlertModal}
+					handleAlertModalToggle={() => handleFolderDeleteAlertModalToggle('close')}
+					handleTargetDelete={handleFolderDelete}
+				/>
+			)}
 		</S.Wrapper>
 	);
 };

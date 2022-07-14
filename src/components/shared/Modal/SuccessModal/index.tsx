@@ -8,8 +8,8 @@ import { Props } from './SuccessModal.type';
 const SuccessModal = ({ isSucceedSendMessage, handleCloseBtnClick }: Props) => {
 	return (
 		<ModalFrame onModal={isSucceedSendMessage} setOnModal={handleCloseBtnClick}>
-			<S.ModalContainer>
-				<S.ModalWrapper>
+			<S.SuccessModalContainer>
+				<S.SuccessModalWrapper>
 					<S.WateringImgWrapper>
 						<S.WateringImg src={WateringIcon} alt="" />
 					</S.WateringImgWrapper>
@@ -26,8 +26,8 @@ const SuccessModal = ({ isSucceedSendMessage, handleCloseBtnClick }: Props) => {
 							닫기
 						</Button>
 					</S.ConfirmBtnWrapper>
-				</S.ModalWrapper>
-			</S.ModalContainer>
+				</S.SuccessModalWrapper>
+			</S.SuccessModalContainer>
 		</ModalFrame>
 	);
 };

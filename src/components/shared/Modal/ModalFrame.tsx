@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './ModalFrame.styled';
 import ModalPortal from './ModalPortal';
-import { Props } from './type';
+import { Props } from './ModaFrame.type';
 
 const ModalFrame = ({ children, onModal, setOnModal }: Props) => {
 	return (
