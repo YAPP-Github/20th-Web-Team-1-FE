@@ -33,9 +33,10 @@ export const TreeFolderItemThumbnailWrapper = styled.div`
 `;
 
 export const TreeFolderItemMoreMenuWrapper = styled.div`
+	display: flex;
+	height: 30px;
+	transform: translate3d(0, -3px, 0);
 	& > button {
-		display: flex;
-		align-items: center;
 		border: 0;
 		background-color: transparent;
 		line-height: 100%;

@@ -4,20 +4,20 @@ import { StyledProps } from './SideDrawer.type';
 
 export const SideDrawerContainer = styled.div<StyledProps>`
 	position: fixed;
+	top: 0;
+	left: auto;
 	display: flex;
 	flex-direction: column;
 	flex: 1 0 auto;
-	top: 0;
-	left: auto;
 	width: calc(100% - 72px);
 	max-width: 475px;
 	height: 100vh;
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.bt_white};
-	z-index: 500;
 	transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms, opacity 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 	transform: ${({ show }) => (show ? 'translateX(0px)' : 'translateX(-100%)')};
 	opacity: ${({ show }) => (show ? 1 : 0)};
+	z-index: 10;
 `;
 
 export const CloseBtnWrapper = styled.div`

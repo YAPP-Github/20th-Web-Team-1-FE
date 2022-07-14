@@ -3,12 +3,26 @@ import { Link } from 'react-router-dom';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
-import MenuMoreModal from './MenuMoreModal';
+import EditFolderMoreModal from './EditFolderMoreModal';
 import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
 
 const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props) => {
-	const [onMenuMoreModal, setOnMenuMoreModal] = useState(false);
+	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
+	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+
+	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
+		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
+		const rect = closest.getBoundingClientRect();
+		const newPosition = { top: rect.top, left: rect.left + rect.width };
+
+		setModalPosition(newPosition);
+		setOnEditMoreModal(true);
+	};
+
+	const handleEditMoreModalClose = () => {
+		setOnEditMoreModal(false);
+	};
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
@@ -53,15 +67,21 @@ const SideDrawer = ({ username, email, profileImg, onModal, setOnModal }: Props)
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem path={''} />
-						<TreeFolderItem path={''} />
+						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
+						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
 						<S.TreeFolderItemAddContainer>
 							<S.TreeFolderItemAddBtn to={'/forest/edit'}>
 								<span />
 								<span />
 							</S.TreeFolderItemAddBtn>
 						</S.TreeFolderItemAddContainer>
-						{onMenuMoreModal && <MenuMoreModal setOnMenuMoreModal={setOnMenuMoreModal} />}
+						{onEditMoreModal && (
+							<EditFolderMoreModal
+								modalPosition={modalPosition}
+								onEditMoreModal={onEditMoreModal}
+								setOnEditMoreModal={handleEditMoreModalClose}
+							/>
+						)}
 					</S.TreeFolderList>
 				</S.TreeFolderListWrapper>
 			</S.SideDrawerContainer>
