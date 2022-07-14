@@ -15,7 +15,8 @@ export const MenuMoreModalWrapper = styled.div`
 		background-color: ${({ theme }) => theme.colors.bt_primary[150]};
 	}
 
-	& > ul > li > button {
+	& > ul > li > button,
+	a {
 		display: flex;
 		align-items: center;
 		gap: 6px;
@@ -24,7 +25,11 @@ export const MenuMoreModalWrapper = styled.div`
 		border: 0;
 		border-radius: 5px;
 		background-color: transparent;
-		line-height: ${({ theme }) => theme.lineHeight.lh13};
+		font-size: ${({ theme }) => theme.fontSize.f12};
+		font-weight: ${({ theme }) => theme.fontWeight.normal};
+		line-height: ${({ theme }) => theme.lineHeight.lh12};
+		letter-spacing: -0.02em;
+		color: ${({ theme }) => theme.colors.bt_grey[120]};
 
 		&:hover {
 			background-color: ${({ theme }) => theme.colors.bt_white};
