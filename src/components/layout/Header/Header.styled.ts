@@ -10,4 +10,8 @@ export const HeaderWrapper = styled.header`
 	align-items: center;
 	justify-content: space-between;
 	background-color: transparent;
+
+	& > a:first-of-type {
+		height: 21px;
+	}
 `;
