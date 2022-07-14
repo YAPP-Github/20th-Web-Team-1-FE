@@ -8,6 +8,7 @@ export type StyledProps = {
 };
 
 export type Props = {
+	treeId?: number;
 	modalPosition: ModalPosition;
 	onEditMoreModal: boolean;
 	handleEditMoreModalClose: () => void;

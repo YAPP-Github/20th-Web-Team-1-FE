@@ -1,9 +1,11 @@
 import React from 'react';
 import * as S from './EditFolderMoreModal.styled';
 import EditFolderMoreFrame from '../../EditFolderMoreFrame';
+import { Link } from 'react-router-dom';
 import { Props } from './EditFolderMoreModal.type';
 
 const EditFolderMoreModal = ({
+	treeId,
 	modalPosition,
 	onEditMoreModal,
 	handleEditMoreModalClose,
@@ -15,7 +17,7 @@ const EditFolderMoreModal = ({
 				<S.MenuMoreModalWrapper>
 					<ul>
 						<li>
-							<button type="button">
+							<Link to={`/forest/edit/${treeId}`}>
 								<span>
 									<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
@@ -25,7 +27,7 @@ const EditFolderMoreModal = ({
 									</svg>
 								</span>
 								편집하기
-							</button>
+							</Link>
 						</li>
 						<li>
 							<button type="button" onClick={() => handleFolderDeleteAlertModalToggle('open')}>
