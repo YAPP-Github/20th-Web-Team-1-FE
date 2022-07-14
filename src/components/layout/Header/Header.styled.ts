@@ -11,7 +11,7 @@ export const HeaderWrapper = styled.header`
 	justify-content: space-between;
 	background-color: transparent;
 
-	& > a:first-child {
+	& > a:first-of-type {
 		height: 21px;
 	}
 `;
