@@ -1,4 +1,5 @@
 export type Tree = {
+	id: number;
 	fruit: string;
 	name: string;
 };

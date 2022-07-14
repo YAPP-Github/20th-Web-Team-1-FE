@@ -5,3 +5,5 @@ dist
 .yarn/install-state.gz
 
 .env
+
+.DS_Store
