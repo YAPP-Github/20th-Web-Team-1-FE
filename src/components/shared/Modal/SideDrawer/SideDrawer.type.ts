@@ -5,9 +5,6 @@ export type StyledProps = {
 };
 
 export type Props = {
-	username: string;
-	email: string;
-	profileImg: string;
 	handleFolderDeleteAlertModalToggle: (state: 'open' | 'close') => void;
 	onModal: boolean;
 	setOnModal: (state: boolean) => void;
