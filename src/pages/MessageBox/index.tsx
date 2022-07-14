@@ -139,7 +139,7 @@ const MessageBox = () => {
 				/>
 			)}
 
-			<S.MessageListContainer isEdit={isEdit}>
+			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
 				{showCheckedMessages
 					? messages?.responseDto
 							.filter((message) => checkMessages.includes(message.id))
