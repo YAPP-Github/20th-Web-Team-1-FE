@@ -10,12 +10,14 @@ import { useNavigate } from 'react-router-dom';
 
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage }: MessageContentProps) => {
 	dayjs.locale('ko');
+
 	const navigate = useNavigate();
+
 	const moveToMessageDetail = (messageId: number) => {
 		if (checkMode) {
 			return;
 		} else {
-			navigate(`/messages/${messageId}`);
+			navigate(`/message/${messageId}`);
 		}
 	};
 
@@ -34,7 +36,7 @@ const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessag
 			<S.ContentContainer>
 				<S.InnerBox>
 					<S.Sender>{message.senderNickname}</S.Sender>
-					<S.TimeText>{dayjs(message.createdDate).format('YYYY.MM. A HH:MM')}</S.TimeText>
+					<S.TimeText>{dayjs(message.createdDate).format('YYYY.MM.DD A HH:MM')}</S.TimeText>
 				</S.InnerBox>
 				<S.InnerBox>
 					<S.MessageText>{message.content}</S.MessageText>
