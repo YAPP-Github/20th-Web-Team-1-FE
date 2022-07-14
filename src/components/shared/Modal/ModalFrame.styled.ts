@@ -10,7 +10,7 @@ export const ModalBackDrop = styled.div<StyledProps>`
 	margin: inherit;
 	background-color: rgba(0, 0, 0, 0.66);
 	inset: 0px;
-	z-index: 100;
+	z-index: 10;
 `;
 
 export const ModalContainer = styled.div`
