@@ -17,12 +17,12 @@ interface GetNoticesType {
 
 export const getNotices = async () => {
 	const {
-		noticeTree: { read },
+		noticeTree: { index },
 	} = API_URL;
 	try {
 		const { payload } = await requester<GetNoticesType>({
 			method: GET,
-			url: read,
+			url: index,
 		});
 
 		return payload;
