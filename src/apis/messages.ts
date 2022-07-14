@@ -24,7 +24,7 @@ export const deleteMessage = async (messageId: string) => {
 	}
 };
 
-export const readMessage = async (messageId: number) => {
+export const readMessage = async (messageId: string | number | undefined) => {
 	const {
 		messages: { read },
 	} = API_URL;
@@ -34,7 +34,7 @@ export const readMessage = async (messageId: number) => {
 			method: PUT,
 			url: `${read}?messageId=${messageId}`,
 		});
-		console.log(status);
+
 		return status;
 	} catch (error) {
 		// 에러 핸들링

@@ -6,7 +6,7 @@ type StyledProps = {
 };
 
 export const MyContentsContainer = styled.div`
-	padding: 0px 32px 134px 32px;
+	padding: 0px 32px 20px 32px;
 	display: flex;
 	flex-direction: column;
 `;
