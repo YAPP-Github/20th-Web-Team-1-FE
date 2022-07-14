@@ -5,13 +5,13 @@ import MessageCheckBox from '../MessageCheckBox';
 import { MakingFruitMenuProps } from './MakingFruitMenu.type';
 
 const MakingFruitMenu = ({
-	isShownCheckedMessages,
-	setIsShownCheckedMessages,
+	showCheckedMessages,
+	setShowCheckedMessages,
 	numberOfMessages,
 	numberOfCheckedMessages,
 }: MakingFruitMenuProps) => {
 	const handleToggleChecked = () => {
-		setIsShownCheckedMessages(!isShownCheckedMessages);
+		setShowCheckedMessages(!showCheckedMessages);
 	};
 
 	return (
@@ -19,7 +19,7 @@ const MakingFruitMenu = ({
 			<MakingFruitPopup />
 			<S.InfoContainer>
 				<S.FlexBox>
-					<MessageCheckBox checked={isShownCheckedMessages} handleToggleChecked={handleToggleChecked} id={1} />
+					<MessageCheckBox checked={showCheckedMessages} handleToggleChecked={handleToggleChecked} id={1} />
 					<S.CheckText>선택한 메시지 모아보기</S.CheckText>
 				</S.FlexBox>
 				<S.CheckText>
