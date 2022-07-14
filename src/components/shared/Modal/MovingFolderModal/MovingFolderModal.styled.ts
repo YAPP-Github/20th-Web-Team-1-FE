@@ -9,14 +9,14 @@ export const Wrapper = styled.div`
 `;
 export const ModalInner = styled.div`
 	min-width: 350px;
-	min-height: 496px;
+	height: 496px;
 	border-radius: 20px;
 	background-color: ${({ theme }) => theme.colors.bt_white};
 
 	position: relative;
 `;
 
-export const MoadlHead = styled.div`
+export const ModalHead = styled.div`
 	width: 100%;
 	background: #00c4b8;
 	height: 72px;
@@ -55,8 +55,11 @@ export const Button = styled.button`
 export const FolderContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 50px 30px 41px 30px;
+	padding: 50px 30px 0px 30px;
 	width: 100%;
+	height: calc(100% - 72px);
+
+	overflow: scroll;
 `;
 
 export const Folder = styled(Button)<{ isSelected: boolean }>`
