@@ -17,3 +17,8 @@ export const MessageListContainer = styled.div<MessageListContainerProps>`
 		display: none; /* Chrome, Safari, Opera*/
 	}
 `;
+
+export const NoMessageContainer = styled.div`
+	padding: 0px 32px;
+	line-height: 30px;
+`;
