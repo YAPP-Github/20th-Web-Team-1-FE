@@ -6,7 +6,7 @@ import {
 	TreeCircle,
 	TreePole,
 	Fruit,
-} from '@/components/features/Trees/TreeAddForm/TreeAddForm.styled';
+} from '@/components/features/Forest/TreeAddForm/TreeAddForm.styled';
 import { FRUIT_RENDER_POSITION, FRUITS } from '@/constants/forest';
 import { Props } from './TreeItem.type';
 

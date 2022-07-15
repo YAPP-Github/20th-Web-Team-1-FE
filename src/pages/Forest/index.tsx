@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './Trees.styled';
+import * as S from './Forest.styled';
 import MessageChip from '@/components/shared/Chip/MessageChip';
 import Button from '@/components/shared/Button';
-import TreeList from '@/components/features/Trees/TreeList';
+import TreeList from '@/components/features/Forest/TreeList';
 
 const trees = [
 	{
@@ -38,7 +38,7 @@ const trees = [
 	// },
 ];
 
-const Trees = () => {
+const Forest = () => {
 	const navigate = useNavigate();
 
 	return (
@@ -58,4 +58,4 @@ const Trees = () => {
 	);
 };
 
-export default Trees;
+export default Forest;
