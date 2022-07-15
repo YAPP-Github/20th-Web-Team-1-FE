@@ -3,7 +3,7 @@ import ModalFrame from '../ModalFrame';
 import { MovingFolderModalProps } from './MovingFolderModal.type';
 import * as S from './MovingFolderModal.styled';
 import Button from '../../Button';
-import { FolderType } from '@/types/forest';
+import { Folder } from '@/types/forest';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
@@ -17,11 +17,9 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 
 	const [selectFolder, setSelectFolder] = useState(0);
 
-	const { data: folders } = useQuery<FolderType[] | undefined>(
-		['readUserForest', userId],
-		() => readUserForest(userId),
-		{ enabled: !!userId },
-	);
+	const { data: folders } = useQuery<Folder[] | undefined>(['readUserForest', userId], () => readUserForest(userId), {
+		enabled: !!userId,
+	});
 
 	const { mutate: moveMutate } = useMutation(() => moveMessages({ messageIds: checkMessages, treeId: selectFolder }), {
 		onSuccess: () => {

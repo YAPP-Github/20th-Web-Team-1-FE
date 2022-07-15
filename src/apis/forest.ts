@@ -1,6 +1,6 @@
 import API_URL, { GET } from '@/constants/api';
 import { requester } from './requester';
-import { FolderType } from '@/types/forest';
+import { Folder } from '@/types/forest';
 
 export const readUserForest = async (userId: number | undefined) => {
 	const {
@@ -8,7 +8,7 @@ export const readUserForest = async (userId: number | undefined) => {
 	} = API_URL;
 
 	try {
-		const response = await requester<FolderType[] | undefined>({
+		const response = await requester<Folder[] | undefined>({
 			method: GET,
 			url: `${index}?userId=${userId}`,
 		});
