@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import * as S from './MessageMenu.styled';
-import HamburgerIcon from '@/assets/images/shared/hamburger.svg';
 import { MessageMenuProps } from './MessageMenu.type';
 import { readUserForest } from '@/apis/forest';
 import { myInfoState } from '@/stores/user';
-import { useRecoilValue } from 'recoil';
 import { Folder } from '@/types/forest';
-import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import HamburgerIcon from '@/assets/images/shared/hamburger.svg';
 
 const MessageMenu = ({
 	isEdit,

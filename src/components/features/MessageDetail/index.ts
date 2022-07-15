@@ -1,1 +1,1 @@
-export { default as MessageDetailHeader } from './MessageDetailHeader/MessageDetailHeader';
+export { default as MessageDetailHeader } from './MessageDetailHeader';

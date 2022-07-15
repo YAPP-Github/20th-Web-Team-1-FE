@@ -1,12 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import * as S from './MessageContent.styled';
-
 import { MessageContentProps } from './MessageContent.type';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import MessageCheckBox from '../MessageCheckBox';
+import { MessageCheckBox } from '@/components/features/MessageBox';
 import BeeIcon from '@/assets/images/messages/message_bee.svg';
 import LikeIcon from '@/assets/images/messages/like_star.svg';
 

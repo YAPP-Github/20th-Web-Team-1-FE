@@ -1,8 +1,7 @@
 import React from 'react';
-import MakingFruitPopup from '../MakingFruitPopup';
 import * as S from './MakingFruitMenu.styled';
-import MessageCheckBox from '../MessageCheckBox';
 import { MakingFruitMenuProps } from './MakingFruitMenu.type';
+import { MessageCheckBox, MakingFruitPopup } from '@/components/features/MessageBox';
 
 const MakingFruitMenu = ({
 	showCheckedMessages,
