@@ -10,8 +10,8 @@ import { Props } from './SideDrawer.type';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
-import { readUserForest } from '@/apis/forest';
-import { MAX_TREE_SIZE } from '@/constants/forest';
+import { getForest } from '@/apis/forest';
+import { TREE_SIZE_MAX } from '@/constants/forest';
 
 const SideDrawer = ({
 	onModal,
@@ -24,7 +24,7 @@ const SideDrawer = ({
 }: Props) => {
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['readUserForest'], () => readUserForest(myInfo?.id), {
+	const { data: folders } = useQuery<Folder[] | undefined>('getForest', () => getForest(myInfo?.id), {
 		refetchOnWindowFocus: false,
 		retry: 1,
 	});
@@ -35,7 +35,7 @@ const SideDrawer = ({
 		setCheckedTreeId(treeId);
 	};
 
-	const checkTreeSizeMax = () => folders && folders?.length < MAX_TREE_SIZE;
+	const checkTreeSizeMax = () => folders && folders?.length < TREE_SIZE_MAX;
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
