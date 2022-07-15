@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './BottomButtons.styled';
-import { BottomButtonsProps } from './BottomButtons.type';
-import { openMessages } from '@/apis/messages';
 import { useMutation, useQueryClient } from 'react-query';
+import { openMessages } from '@/apis/messages';
+import { BottomButtonsProps } from './BottomButtons.type';
 
 const BottomButtons = ({
 	isEdit,

@@ -1,16 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import * as S from './MessageContent.styled';
-import BeeIcon from '@/assets/images/messages/message_bee.svg';
-import LikeIcon from '@/assets/images/messages/like_star.svg';
+
 import { MessageContentProps } from './MessageContent.type';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import MessageCheckBox from '../MessageCheckBox';
-import { useNavigate } from 'react-router-dom';
+import BeeIcon from '@/assets/images/messages/message_bee.svg';
+import LikeIcon from '@/assets/images/messages/like_star.svg';
 
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage }: MessageContentProps) => {
 	dayjs.locale('ko');
-
 	const navigate = useNavigate();
 
 	const moveToMessageDetail = (messageId: number) => {
