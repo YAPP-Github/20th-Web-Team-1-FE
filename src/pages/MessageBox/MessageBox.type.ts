@@ -14,3 +14,8 @@ export interface MessagesType {
 	hasNext: boolean;
 	responseDto: MessageType[];
 }
+
+export interface MessageListContainerProps {
+	checkMode: boolean;
+	isMakingFruit: boolean;
+}

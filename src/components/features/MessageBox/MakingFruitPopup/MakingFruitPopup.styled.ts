@@ -5,11 +5,10 @@ const POPUP_IMAGE_SIZE = '66px';
 const BOX_SHADOW_COLOR = 'rgba(79, 181, 255, 0.12)';
 
 export const PopUpWrapper = styled.div`
-	width: 80%;
+	width: 100%;
 	height: ${POPUP_IMAGE_SIZE};
 
 	display: flex;
-	justify-content: space-between;
 `;
 
 export const IconBox = styled.div`
@@ -29,7 +28,7 @@ export const IconBox = styled.div`
 `;
 
 export const MessageBox = styled.div`
-	width: 100%;
+	width: 211px;
 	height: ${POPUP_IMAGE_SIZE};
 
 	padding: 15px 20px;

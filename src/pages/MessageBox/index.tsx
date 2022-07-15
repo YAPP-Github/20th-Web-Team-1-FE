@@ -1,135 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './MessageBox.styled';
 import SideDrawer from '@/components/shared/Modal/SideDrawer';
-import { MessagesType } from './MessageBox.type';
-
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
+import { getMessages, deleteMessage } from '@/apis/messages';
+import { MessagesType } from '@/types/message';
+import AlertModal from '@/components/shared/Modal/AlertModal';
 import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/index';
 
 const MessageBox = () => {
-	const [Messages, setMessages] = useState<MessagesType | null>({
-		hasNext: false,
-		responseDto: [
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: true,
-				id: 1,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 2,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 3,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 4,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 5,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 6,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 7,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 8,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 0,
-				opening: true,
-				senderNickname: 'sender1',
-				senderProfileImage: 'string',
-			},
-			{
-				alreadyRead: false,
-				anonymous: false,
-				content: 'content',
-				createdDate: '2022-07-10T16:01:20.144Z',
-				favorite: false,
-				id: 0,
-				opening: true,
-				senderNickname: 'sender100',
-				senderProfileImage: 'string',
-			},
-		],
+	const queryClient = useQueryClient();
+	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
+	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('getMessages');
+		},
 	});
+
+	const [checkMessages, setCheckMessages] = useState<number[]>([]);
 	const [isEdit, setIsEdit] = useState(false);
 	const [checkMode, setCheckMode] = useState(false);
 	const [isMakingFruit, setIsMakingFruit] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
-	const [checkMessages, setCheckMessages] = useState<number[]>([]);
-	const [isShownCheckedMessages, setIsShownCheckedMessages] = useState(Boolean);
-	const [moveItems, setMoveItems] = useState<number[]>([]);
+	const [showCheckedMessages, setShowCheckedMessages] = useState(false);
+	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -170,17 +65,30 @@ const MessageBox = () => {
 		setOpenedDrawer(() => !openedDrawer);
 	};
 
-	const deleteMessages = () => {
-		const NewMessages = Messages?.responseDto.filter((message) => !checkMessages.includes(message.id));
-		setMessages(Messages ? { hasNext: Messages.hasNext, responseDto: NewMessages ? NewMessages : [] } : null);
-	};
-
 	const onToggleMovingFolderModal = () => {
 		setIsMoving(!isMoving);
 	};
 
-	const moveToFolder = () => {
-		console.log('move');
+	const onClickDeleteButton = () => {
+		if (checkMessages.length > 0) {
+			setIsOpenDeleteModal(true);
+		} else {
+			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
+		}
+	};
+
+	const onClickMovingFolderButton = () => {
+		if (checkMessages.length > 0) {
+			onToggleMovingFolderModal();
+		} else {
+			alert('1개 이상의 이동할 메세지를 선택해주세요! ');
+		}
+	};
+
+	const deleteMessageHandler = () => {
+		setIsOpenDeleteModal(false);
+		deleteMutate();
+		setCheckMessages([]);
 	};
 
 	const editMakingToggleHandler = (path: string) => {
@@ -216,20 +124,54 @@ const MessageBox = () => {
 		<S.Wrapper>
 			{isMakingFruit ? (
 				<MakingFruitMenu
-					isShownCheckedMessages={isShownCheckedMessages}
-					setIsShownCheckedMessages={setIsShownCheckedMessages}
-					numberOfMessages={Messages ? Messages.responseDto.length : 0}
+					showCheckedMessages={showCheckedMessages}
+					setShowCheckedMessages={setShowCheckedMessages}
+					numberOfMessages={messages ? messages.responseDto.length : 0}
 					numberOfCheckedMessages={checkMessages.length}
 				/>
 			) : (
 				<MessageMenu
 					isEdit={isEdit}
 					editMakingToggleHandler={editMakingToggleHandler}
-					onToggleMovingFolderModal={onToggleMovingFolderModal}
 					onToggleOpenDrawer={onToggleOpenDrawer}
-					deleteMessages={deleteMessages}
+					onToggleMovingFolderModal={onClickMovingFolderButton}
+					deleteMessages={onClickDeleteButton}
 				/>
 			)}
+
+			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
+				{showCheckedMessages
+					? messages?.responseDto
+							.filter((message) => checkMessages.includes(message.id))
+							.map((res, idx) => (
+								<MessageContent
+									key={`message-box-message${idx}`}
+									message={res}
+									checkMode={checkMode}
+									onToggleCheckMessage={onToggleCheckMessage}
+									checkMessages={checkMessages}
+								/>
+							))
+					: messages?.responseDto.map((res, idx) => (
+							<MessageContent
+								key={`message-box-message${idx}`}
+								message={res}
+								checkMode={checkMode}
+								onToggleCheckMessage={onToggleCheckMessage}
+								checkMessages={checkMessages}
+							/>
+					  ))}
+
+				{checkMode && (
+					<BottomButtons
+						isEdit={isEdit}
+						isMakingFruit={isMakingFruit}
+						editMakingToggleHandler={editMakingToggleHandler}
+						checkMessages={checkMessages}
+						setShowCheckedMessages={setShowCheckedMessages}
+					/>
+				)}
+			</S.MessageListContainer>
 
 			<SideDrawer
 				onModal={openedDrawer}
@@ -241,37 +183,32 @@ const MessageBox = () => {
 				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
 			/>
 
-			{isMoving && <MovingFolderModal isMoving={isMoving} onToggleMovingFolderModal={onToggleMovingFolderModal} />}
-			<S.MessageListContainer isEdit={isEdit}>
-				{isShownCheckedMessages
-					? Messages?.responseDto
-							.filter((message) => !checkMessages.includes(message.id))
-							.map((res, idx) => (
-								<MessageContent
-									key={`message-box-messga${idx}`}
-									message={res}
-									checkMode={checkMode}
-									onToggleCheckMessage={onToggleCheckMessage}
-									checkMessages={checkMessages}
-								/>
-							))
-					: Messages?.responseDto.map((res, idx) => (
-							<MessageContent
-								key={`message-box-messga${idx}`}
-								message={res}
-								checkMode={checkMode}
-								onToggleCheckMessage={onToggleCheckMessage}
-								checkMessages={checkMessages}
-							/>
-					  ))}
-				{checkMode && (
-					<BottomButtons
-						isEdit={isEdit}
-						isMakingFruit={isMakingFruit}
-						editMakingToggleHandler={editMakingToggleHandler}
-					/>
-				)}
-			</S.MessageListContainer>
+			{isMoving && (
+				<MovingFolderModal
+					isMoving={isMoving}
+					onToggleMovingFolderModal={onToggleMovingFolderModal}
+					checkMessages={checkMessages}
+				/>
+			)}
+
+			{isOpenDeleteModal && (
+				<AlertModal
+					isOpen={isOpenDeleteModal}
+					modalTitle="메세지"
+					modalMainImage="deleteMessageModal"
+					modalDescMessages={[
+						'메시지 삭제 시',
+						'메세지함에 있던 메시지가 삭제되며',
+						'삭제 후에는 복구할 수 없어요',
+						'정말 삭제하시겠습니까?',
+					]}
+					buttonTitle="삭제하기"
+					handleCloseBtnClick={() => {
+						setIsOpenDeleteModal(false);
+					}}
+					handleMainBtnClick={deleteMessageHandler}
+				/>
+			)}
 
 			{isOpenedMessageDeleteAlertModal && (
 				<DeleteAlertModal
@@ -282,6 +219,7 @@ const MessageBox = () => {
 					handleTargetDelete={() => console.log('메시지 삭제 로직 실행')}
 				/>
 			)}
+
 			{isOpenedFolderDeleteAlertModal && (
 				<DeleteAlertModal
 					deleteTargetType="folder"

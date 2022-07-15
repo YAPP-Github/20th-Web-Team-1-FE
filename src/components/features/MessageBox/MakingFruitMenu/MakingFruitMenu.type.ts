@@ -1,6 +1,6 @@
 export interface MakingFruitMenuProps {
 	numberOfMessages: number;
 	numberOfCheckedMessages: number;
-	isShownCheckedMessages: boolean;
-	setIsShownCheckedMessages: React.Dispatch<React.SetStateAction<boolean>>;
+	showCheckedMessages: boolean;
+	setShowCheckedMessages: React.Dispatch<React.SetStateAction<boolean>>;
 }

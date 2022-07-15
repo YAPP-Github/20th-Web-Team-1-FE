@@ -16,12 +16,16 @@ const API_URL = {
 		index: '/messages',
 		folder: '/messages/folder',
 		read: '/messages/alreadyRead',
+		opening: '/messages/opening',
 	},
 	users: {
 		info: '/users/info',
 	},
 	noticeTree: {
-		read: '/notices',
+		index: '/notices',
+	},
+	forest: {
+		index: '/forest',
 	},
 };
 

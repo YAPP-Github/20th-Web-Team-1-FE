@@ -1,13 +1,22 @@
 import styled from '@emotion/styled';
 
-export const MessageDetailContainer = styled.main`
-	padding: 72px 32px;
+export const Wrapper = styled.main`
+	height: calc(100vh - 85px);
+	background: #fff;
+	position: relative;
+	overflow: hidden;
 `;
 
+export const MessageDetailContainer = styled.div`
+	width: 100%;
+	height: 100%;
+	padding: 0px 32px;
+`;
 export const MessageContentWrapper = styled.p`
 	resize: none;
 	width: 100%;
-	height: 435px;
+	max-height: 435px;
+	height: 60%;
 	padding: 30px;
 	background: ${({ theme }) => theme.colors.bt_primary[20]};
 	border: 0.5px solid ${({ theme }) => theme.colors.bt_primary[200]};
@@ -17,13 +26,16 @@ export const MessageContentWrapper = styled.p`
 `;
 
 export const MessageNavButtonWrapper = styled.div`
-	margin-top: 46px;
-	width: 100%;
+	width: calc(100% - 64px);
+
+	position: absolute;
+	bottom: 30px;
+
 	display: flex;
-	gap: 14px;
+	justify-content: space-around;
 
 	& > a {
-		width: 50%;
+		width: calc(50% - 7px);
 		padding: 17px 0;
 		text-align: center;
 		background-color: ${({ theme }) => theme.colors.bt_primary[200]};
@@ -37,4 +49,7 @@ export const MessageNavButtonWrapper = styled.div`
 
 export const ArrowIcon = styled.img`
 	margin-right: 8px;
+`;
+export const ArrowDownIcon = styled.img`
+	margin-left: 8px;
 `;
