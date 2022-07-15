@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import * as S from './MessageBox.styled';
-import SideDrawer from '@/components/shared/Modal/SideDrawer';
+import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
-import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
+import * as S from './MessageBox.styled';
 import { getMessages, deleteMessage } from '@/apis/messages';
 import { MessagesType } from '@/types/message';
-import AlertModal from '@/components/shared/Modal/AlertModal';
-import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/index';
+import { AlertModal, MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
+import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 
 const MessageBox = () => {
+	const { treeId } = useParams();
+
 	const queryClient = useQueryClient();
-	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
+
+	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages(treeId));
+
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
