@@ -25,7 +25,7 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProp
 			<S.IconBox openedAlertButton={openedAlertButton}>
 				<img src={AlertBee} alt="alertBee" onClick={showAlertHandler} />
 				{openedAlertButton && (
-					<Link to="/trees">
+					<Link to="/forest">
 						<S.ForestWrapper>
 							<S.ForestImage openedAlertButton={openedAlertButton} src={Forest} alt="ForestBtn" />
 							<S.ForestText>나무숲 가기</S.ForestText>
