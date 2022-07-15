@@ -1,9 +1,5 @@
-import { Tree } from './TreeItem/TreeItem.type';
-
-export type TreeItem = {
-	id: number;
-} & Tree;
+import { Folder } from '@/types/forest';
 
 export type Props = {
-	trees: TreeItem[];
+	trees: Folder[] | undefined;
 };

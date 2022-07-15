@@ -1,9 +1,5 @@
-export type Tree = {
-	id: number;
-	fruit: string;
-	name: string;
-};
+import { Folder } from '@/types/forest';
 
 export type Props = {
-	tree: Tree;
+	tree: Folder;
 };

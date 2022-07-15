@@ -6,12 +6,14 @@ import { MAX_TREE_SIZE } from '@/constants/forest';
 import { Props } from './TreeList.type';
 
 const TreeList = ({ trees }: Props) => {
+	const checkTreeSizeMax = () => trees && trees?.length < MAX_TREE_SIZE;
+
 	return (
 		<S.TreeItemList>
 			{trees?.map((tree) => {
 				return <TreeItem key={tree.id} tree={tree} />;
 			})}
-			{trees?.length < MAX_TREE_SIZE && <TreeItemAdd />}
+			{checkTreeSizeMax() && <TreeItemAdd />}
 		</S.TreeItemList>
 	);
 };
