@@ -1,17 +1,23 @@
 import React from 'react';
 import * as S from './TreeFolderItem.styled';
 import { Props } from './TreeFolderItem.type';
+import { FRUITS } from '@/constants/forest';
 
-const TreeFolderItem = ({ path, handleEditMoreModalOpen }: Props) => {
+const TreeFolderItem = ({ folder, handleEditMoreModalOpen, onClickTreeFolderMoreMenuButton }: Props) => {
+	const getSelectedFruitImage = (fruitValue: string) => {
+		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === fruitValue)[0];
+		return selectedFruitObj?.imgSrc;
+	};
+
 	return (
-		<S.TreeFolderItem id="test" to={path}>
+		<S.TreeFolderItem id="test" to={`/messages/${folder?.id}`}>
 			<S.TreeFolderItemThumbnailWrapper>
 				<div>
-					<img src={''} alt={''} />
+					<img src={getSelectedFruitImage(folder?.fruit)} alt={''} />
 				</div>
-				프로젝트 A
+				{folder?.name}
 			</S.TreeFolderItemThumbnailWrapper>
-			<S.TreeFolderItemMoreMenuWrapper>
+			<S.TreeFolderItemMoreMenuWrapper onClick={() => onClickTreeFolderMoreMenuButton(folder?.id)}>
 				<button type="button" onClick={handleEditMoreModalOpen}>
 					<svg width="9" height="3" viewBox="0 0 9 3" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path

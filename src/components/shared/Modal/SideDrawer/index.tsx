@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
@@ -8,6 +9,9 @@ import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
+import { Folder } from '@/types/forest';
+import { readUserForest } from '@/apis/forest';
+import { MAX_TREE_SIZE } from '@/constants/forest';
 
 const SideDrawer = ({
 	onModal,
@@ -19,6 +23,19 @@ const SideDrawer = ({
 	handleFolderDeleteAlertModalToggle,
 }: Props) => {
 	const myInfo = useRecoilValue(myInfoState);
+
+	const { data: folders } = useQuery<Folder[] | undefined>(['readUserForest'], () => readUserForest(myInfo?.id), {
+		refetchOnWindowFocus: false,
+		retry: 1,
+	});
+
+	const [checkedTreeId, setCheckedTreeId] = useState<number>();
+
+	const handleClickTreeFolderMoreMenuButton = (treeId: number) => {
+		setCheckedTreeId(treeId);
+	};
+
+	const checkTreeSizeMax = () => folders && folders?.length < MAX_TREE_SIZE;
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
@@ -63,16 +80,26 @@ const SideDrawer = ({
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
-						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
-						<S.TreeFolderItemAddContainer>
-							<S.TreeFolderItemAddBtn to={'/forest/edit'}>
-								<span />
-								<span />
-							</S.TreeFolderItemAddBtn>
-						</S.TreeFolderItemAddContainer>
+						{folders?.map((folder) => (
+							<TreeFolderItem
+								key={folder?.id}
+								folder={folder}
+								handleEditMoreModalOpen={handleEditMoreModalOpen}
+								onClickTreeFolderMoreMenuButton={handleClickTreeFolderMoreMenuButton}
+							/>
+						))}
+						{checkTreeSizeMax() && (
+							<S.TreeFolderItemAddContainer>
+								<S.TreeFolderItemAddBtn to={'/forest/edit'}>
+									<span />
+									<span />
+								</S.TreeFolderItemAddBtn>
+							</S.TreeFolderItemAddContainer>
+						)}
+
 						{onEditMoreModal && (
 							<EditFolderMoreModal
+								treeId={checkedTreeId}
 								modalPosition={modalPosition}
 								onEditMoreModal={onEditMoreModal}
 								handleEditMoreModalClose={handleEditMoreModalClose}
