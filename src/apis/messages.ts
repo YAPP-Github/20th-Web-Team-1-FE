@@ -48,10 +48,10 @@ export const messageDetailFetcher = async (messageId: MessageIdType) => {
 	return response.payload;
 };
 
-export const getMessages = async () => {
+export const getMessages = async (treeId: MessageIdType) => {
 	const response = await requester<MessagesType>({
 		method: GET,
-		url: '/messages',
+		url: treeId ? `/messages?treeId=${treeId}` : '/messages',
 	});
 
 	return response.payload;
