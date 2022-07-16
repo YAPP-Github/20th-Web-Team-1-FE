@@ -1,23 +1,47 @@
 import React from 'react';
 import * as S from './ProfileEdit.styled';
 import ProfileBeeImg from '@/assets/images/mypage/profile_bee_img@2x.png';
-import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import useInput from '@/hooks/useInput';
+import { editProfile } from '@/apis/users';
+import { RESPONSE_SUCCESS_OK } from '@/constants/api';
 
 const ProfileEdit = () => {
-	const myInfo = useRecoilValue(myInfoState);
+	const [myInfo, setMyInfo] = useRecoilState(myInfoState);
 
-	const [newNickName, handleNewNickName] = useInput(myInfo?.nickname || '');
+	const [newNickname, handleNewNickname] = useInput(myInfo?.nickname || '');
+
+	const navigate = useNavigate();
+
+	const handleSubmitEditProfileForm = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		const status = await editProfile(newNickname);
+
+		if (status === RESPONSE_SUCCESS_OK) {
+			navigate('/mypage');
+
+			setMyInfo((prev) => {
+				if (prev) {
+					return {
+						...prev,
+						nickname: newNickname,
+					};
+				}
+				return prev;
+			});
+		}
+	};
 
 	return (
 		<main>
-			<S.ProfileEditForm>
+			<S.ProfileEditForm onSubmit={handleSubmitEditProfileForm}>
 				<S.ProfileEditWrapper>
 					<label htmlFor="edit_nickname_input">바꿀 닉네임을 입력해주세요!</label>
 					<img src={ProfileBeeImg} alt="" />
-					<input id="edit_nickname_input" type="text" value={newNickName} onChange={handleNewNickName} />
+					<input id="edit_nickname_input" type="text" value={newNickname} onChange={handleNewNickname} />
 				</S.ProfileEditWrapper>
 
 				<S.Buttons>
