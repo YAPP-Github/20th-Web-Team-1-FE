@@ -3,20 +3,32 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as S from './MessageBox.styled';
 import { getMessages, deleteMessage } from '@/apis/messages';
+import { getForest, deleteTree } from '@/apis/forest';
 import { MessagesType } from '@/types/message';
 import { AlertModal, MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
 import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
+import { Folder } from '@/types/forest';
+
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
-
+	const myInfo = useRecoilValue(myInfoState);
 	const queryClient = useQueryClient();
-
 	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages(treeId));
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
+		},
+	});
+
+	const { data: trees } = useQuery<Folder[] | undefined>('readUserForest', () => getForest(myInfo?.id));
+	const treeDeleteMutation = useMutation(deleteTree, {
+		onSuccess: () => {
+			queryClient.invalidateQueries('readUserForest');
+			handleFolderDeleteAlertModalToggle('close');
 		},
 	});
 
@@ -33,6 +45,7 @@ const MessageBox = () => {
 	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
 	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
 	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
+	const [checkedTreeId, setCheckedTreeId] = useState<number>();
 
 	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
 		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
@@ -47,9 +60,12 @@ const MessageBox = () => {
 		setOnEditMoreModal(false);
 	};
 
+	const handleClickTreeFolderMoreMenuButton = (treeId: number) => {
+		setCheckedTreeId(treeId);
+	};
+
 	const handleFolderDelete = () => {
-		console.log('폴더 삭제 로직 실행');
-		handleFolderDeleteAlertModalToggle('close');
+		treeDeleteMutation.mutate(checkedTreeId);
 	};
 
 	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
@@ -192,6 +208,7 @@ const MessageBox = () => {
 			</S.MessageListContainer>
 
 			<SideDrawer
+				trees={trees}
 				onModal={openedDrawer}
 				setOnModal={onToggleOpenDrawer}
 				onEditMoreModal={onEditMoreModal}
@@ -199,6 +216,7 @@ const MessageBox = () => {
 				handleEditMoreModalOpen={handleEditMoreModalOpen}
 				handleEditMoreModalClose={handleEditMoreModalClose}
 				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
+				onClickTreeFolderMoreMenuButton={handleClickTreeFolderMoreMenuButton}
 			/>
 
 			{isMoving && (

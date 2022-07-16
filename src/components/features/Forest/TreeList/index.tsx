@@ -2,11 +2,11 @@ import React from 'react';
 import TreeItem from './TreeItem';
 import TreeItemAdd from './TreeItemAdd';
 import * as S from './TreeList.styled';
-import { MAX_TREE_SIZE } from '@/constants/forest';
+import { TREE_SIZE_MAX } from '@/constants/forest';
 import { Props } from './TreeList.type';
 
 const TreeList = ({ trees }: Props) => {
-	const checkTreeSizeMax = () => trees && trees?.length < MAX_TREE_SIZE;
+	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
 
 	return (
 		<S.TreeItemList>

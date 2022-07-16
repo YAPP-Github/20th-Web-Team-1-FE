@@ -2,6 +2,7 @@ import React from 'react';
 import AlertModalFrame from '../AlertModalFrame';
 import * as S from './DeleteAlertModal.styled';
 import Button from '@/components/shared/Button';
+import TrashIcon from '@/assets/images/messages/delete_icon.svg';
 import { Props } from './DeleteAlertModal.type';
 
 const DeleteAlertModal = ({
@@ -14,7 +15,7 @@ const DeleteAlertModal = ({
 	return (
 		<AlertModalFrame onAlertModal={onAlertModal}>
 			<S.TopImgWrapper>
-				<S.TopImage src="" alt="" />
+				<S.TopImage src={TrashIcon} alt="" />
 			</S.TopImgWrapper>
 			<S.MessageTitle>{deleteTarget}</S.MessageTitle>
 			<S.MessageDescWrapper>

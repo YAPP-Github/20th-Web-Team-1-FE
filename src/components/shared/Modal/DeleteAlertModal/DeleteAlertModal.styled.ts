@@ -9,9 +9,10 @@ export const TopImgWrapper = styled.div`
 export const TopImage = styled.img`
 	width: 120px;
 	height: 120px;
-	border-radius: 50%; /* 이미지 위치 확인 용 */
-	background-color: lightgray; /* 이미지 위치 확인 용 */
 	margin: 72px 0 17px 0;
+	border-radius: 50%; /* 이미지 위치 확인 용 */
+	background-color: ${({ theme }) => theme.colors.bt_white};
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const MessageTitle = styled.h3`

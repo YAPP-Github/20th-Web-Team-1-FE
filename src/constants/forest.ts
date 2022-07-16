@@ -75,4 +75,7 @@ export const FRUIT_RENDER_POSITION = [
 	},
 ];
 
-export const MAX_TREE_SIZE = 4;
+export const TREE_SIZE_MAX = 4;
+
+export const TREE_NAME_LENGTH_MAX = 10;
+export const TREE_NAME_LENGTH_MIN = 1;
