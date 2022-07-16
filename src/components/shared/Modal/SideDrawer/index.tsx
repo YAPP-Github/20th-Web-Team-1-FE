@@ -11,6 +11,7 @@ import { myInfoState } from '@/stores/user';
 import { TREE_SIZE_MAX } from '@/constants/forest';
 
 const SideDrawer = ({
+	checkedTreeId,
 	trees,
 	onModal,
 	setOnModal,
@@ -87,6 +88,7 @@ const SideDrawer = ({
 
 						{onEditMoreModal && (
 							<EditFolderMoreModal
+								treeId={checkedTreeId}
 								modalPosition={modalPosition}
 								onEditMoreModal={onEditMoreModal}
 								handleEditMoreModalClose={handleEditMoreModalClose}
