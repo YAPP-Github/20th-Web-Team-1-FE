@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+import { DefaultButton } from '@/components/shared/DefaultButton/DefaultButton.styled';
 export const MessageBoxInner = styled.div`
 	width: 100%;
 	height: 100%;
@@ -17,7 +17,7 @@ export const MessageBoxInner = styled.div`
 
 export const MessageBoxWrapper = styled.div`
 	position: absolute;
-	bottom: 129px;
+	bottom: 45px;
 	width: 100%;
 	height: 173px;
 	z-index: 1;
@@ -25,21 +25,31 @@ export const MessageBoxWrapper = styled.div`
 	justify-content: center;
 `;
 
-export const CancleIcon = styled.p`
+export const CancelButton = styled(DefaultButton)`
+	width: 20px;
+	height: 33px;
+
 	position: absolute;
 	top: 12px;
 	right: 20px;
-	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-	font-size: 26.2727px;
-	line-height: 28px;
-	color: ${({ theme }) => theme.colors.bt_primary[200]};
+
 	z-index: 1;
+`;
+
+export const MessageTitle = styled.span`
+	font-weight: ${({ theme }) => theme.fontWeight.medium};
+	font-size: ${({ theme }) => theme.fontSize.f16};
+	line-height: ${({ theme }) => theme.lineHeight.lh18};
+	color: ${({ theme }) => theme.colors.bt_grey[55]};
+	letter-spacing: -0.02em;
+	margin-bottom: 9px;
 `;
 
 export const MessageText = styled.p`
 	font-weight: ${({ theme }) => theme.fontWeight.normal};
 	font-size: ${({ theme }) => theme.fontSize.f14};
 	line-height: ${({ theme }) => theme.lineHeight.lh22};
+	color: ${({ theme }) => theme.colors.bt_grey[40]};
 	height: 80%;
 	overflow-y: scroll;
 	::-webkit-scrollbar {
@@ -51,7 +61,7 @@ export const MessageWriter = styled.p`
 	font-weight: ${({ theme }) => theme.fontWeight.medium};
 	font-size: ${({ theme }) => theme.fontSize.f12};
 	line-height: ${({ theme }) => theme.lineHeight.lh12};
-	color: ${({ theme }) => theme.colors.bt_grey[68]};
+	color: ${({ theme }) => theme.colors.bt_grey[55]};
 `;
 
 export const MessageWriterWrapper = styled.div`
