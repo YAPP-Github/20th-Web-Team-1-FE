@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/react';
 import { CloudImageProps } from './Clouds.type';
 
 const playCloud = keyframes`
-    0 {
+    0% {
         transform: translateX(0);    
     }
     50% {
