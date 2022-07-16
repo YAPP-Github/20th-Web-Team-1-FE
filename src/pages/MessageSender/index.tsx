@@ -18,7 +18,10 @@ const MessageSender = () => {
 
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: trees } = useQuery('getForest', () => getForest(myInfo?.id));
+	const { data: trees } = useQuery(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
+	});
+
 	const postMessageMutation = useMutation(postMessages, {
 		onSuccess: () => {
 			setIsSucceedSendMessage(true);

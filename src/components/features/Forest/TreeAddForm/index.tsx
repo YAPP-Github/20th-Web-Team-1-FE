@@ -16,10 +16,10 @@ const TreeAddForm = () => {
 	const navigate = useNavigate();
 	const { treeId } = useParams();
 
-	const userId = useRecoilValue(myInfoState);
+	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: trees } = useQuery<Folder[] | undefined>('getForest', () => getForest(userId?.id), {
-		refetchOnWindowFocus: false,
+	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
 	});
 
 	const treePostMutation = useMutation(postTree, {

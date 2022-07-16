@@ -14,10 +14,9 @@ const Forest = () => {
 	const navigate = useNavigate();
 
 	const myInfo = useRecoilValue(myInfoState);
-	const userId = myInfo?.id;
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', userId], () => getForest(userId), {
-		refetchOnWindowFocus: false,
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
 	});
 
 	return (

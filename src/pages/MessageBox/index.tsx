@@ -24,7 +24,10 @@ const MessageBox = () => {
 		},
 	});
 
-	const { data: trees } = useQuery<Folder[] | undefined>('readUserForest', () => getForest(myInfo?.id));
+	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
+	});
+
 	const treeDeleteMutation = useMutation(deleteTree, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('readUserForest');
