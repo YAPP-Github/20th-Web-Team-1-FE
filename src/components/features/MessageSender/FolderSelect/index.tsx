@@ -1,6 +1,7 @@
 import React from 'react';
 import * as S from './FolderSelect.styled';
 import { Props } from './FolderSelect.type';
+import { DEFAULT_FOLDER_NAME } from '@/constants/messageSender';
 
 const FolderSelect = ({
 	folders,
@@ -21,72 +22,40 @@ const FolderSelect = ({
 					onChange={onToggleSelectedFolderBox}
 				/>
 				<label htmlFor="selected-folder">
-					<p>{selectedFolder || '기본 폴더'}</p>
+					<p>
+						{folders?.length === 0 || selectedFolder === DEFAULT_FOLDER_NAME ? DEFAULT_FOLDER_NAME : selectedFolder}
+					</p>
 					<span></span>
 				</label>
 			</S.SelectedFolderWrapper>
 
 			<S.FolderList opened={isOpenedFolderBox}>
-				{/* {folderNames?.map((folderName, idx) => {
+				<S.FolderItem>
+					<input
+						id={`default-folder`}
+						type="radio"
+						value={DEFAULT_FOLDER_NAME}
+						name="tree-folder"
+						onChange={handleSelectedFolderChange}
+						checked={DEFAULT_FOLDER_NAME === selectedFolder}
+					/>
+					<label htmlFor={`default-folder`}>{DEFAULT_FOLDER_NAME}</label>
+				</S.FolderItem>
+				{folders?.map((folder) => {
 					return (
-						<S.FolderItem key={idx}>
-							<input id={folderName + idx} type="radio" value={folderName} name="tree-folder" />
-							<label htmlFor={folderName + idx}>{folderName}</label>
+						<S.FolderItem key={folder?.id}>
+							<input
+								id={`${folder?.name}${folder?.id}`}
+								type="radio"
+								value={folder.name}
+								name="tree-folder"
+								onChange={handleSelectedFolderChange}
+								checked={folder.name === selectedFolder}
+							/>
+							<label htmlFor={`${folder?.name}${folder?.id}`}>{folder?.name}</label>
 						</S.FolderItem>
 					);
-				})} */}
-
-				<S.FolderItem>
-					<input
-						id="tree-folder-0"
-						type="radio"
-						value="기본 폴더"
-						name="tree-folder"
-						onChange={handleSelectedFolderChange}
-						defaultChecked
-					/>
-					<label htmlFor="tree-folder-0">기본 폴더</label>
-				</S.FolderItem>
-				<S.FolderItem>
-					<input
-						id="tree-folder-1"
-						type="radio"
-						value="Yapp Web 1팀"
-						name="tree-folder"
-						onChange={handleSelectedFolderChange}
-					/>
-					<label htmlFor="tree-folder-1">Yapp Web 1팀</label>
-				</S.FolderItem>
-				<S.FolderItem>
-					<input
-						id="tree-folder-2"
-						type="radio"
-						value="인터페이스 디자인 1"
-						name="tree-folder"
-						onChange={handleSelectedFolderChange}
-					/>
-					<label htmlFor="tree-folder-2">인터페이스 디자인 1</label>
-				</S.FolderItem>
-				<S.FolderItem>
-					<input
-						id="tree-folder-3"
-						type="radio"
-						value="인터페이스 디자인 2 MoreMoreMoreMoreMore"
-						name="tree-folder"
-						onChange={handleSelectedFolderChange}
-					/>
-					<label htmlFor="tree-folder-3">인터페이스 디자인 2 MoreMoreMoreMoreMore</label>
-				</S.FolderItem>
-				<S.FolderItem>
-					<input
-						id="tree-folder-4"
-						type="radio"
-						value="인터페이스 디자인 3"
-						name="tree-folder"
-						onChange={handleSelectedFolderChange}
-					/>
-					<label htmlFor="tree-folder-4">인터페이스 디자인 3</label>
-				</S.FolderItem>
+				})}
 			</S.FolderList>
 		</S.FolderSelectContainer>
 	);
