@@ -208,6 +208,7 @@ const MessageBox = () => {
 			</S.MessageListContainer>
 
 			<SideDrawer
+				checkedTreeId={checkedTreeId}
 				trees={trees}
 				onModal={openedDrawer}
 				setOnModal={onToggleOpenDrawer}

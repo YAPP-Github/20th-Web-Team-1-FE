@@ -6,6 +6,7 @@ export type StyledProps = {
 };
 
 export type Props = {
+	checkedTreeId?: number;
 	trees: Folder[] | undefined;
 	onModal: boolean;
 	setOnModal: (state: boolean) => void;

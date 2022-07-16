@@ -16,6 +16,7 @@ const TreeAddForm = () => {
 	const navigate = useNavigate();
 	const { treeId } = useParams();
 
+	console.log(treeId);
 	const userId = useRecoilValue(myInfoState);
 
 	const { data: trees } = useQuery<Folder[] | undefined>('getForest', () => getForest(userId?.id), {
