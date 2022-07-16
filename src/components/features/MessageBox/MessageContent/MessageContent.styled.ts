@@ -23,6 +23,7 @@ export const ProfileImage = styled.div`
 	img {
 		width: ${PROFILE_IMAGE_SIZE}px;
 		height: ${PROFILE_IMAGE_SIZE}px;
+	}
 `;
 
 export const Sender = styled.span`
@@ -43,6 +44,12 @@ export const MessageText = styled.div`
 	font-weight: ${({ theme }) => theme.fontWeight.light};
 	font-size: ${({ theme }) => theme.fontSize.f13};
 	line-height: ${({ theme }) => theme.lineHeight.lh13};
+
+	white-space: normal;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 `;
 
 export const Button = styled.button`
