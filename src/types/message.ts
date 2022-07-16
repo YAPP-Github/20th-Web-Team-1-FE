@@ -22,3 +22,10 @@ export interface MessagesType {
 	hasNext: boolean;
 	responseDto: Message[];
 }
+
+export type PostMessageData = {
+	anonymous: boolean;
+	content: string;
+	folderId: number | null;
+	receiverId: number;
+};
