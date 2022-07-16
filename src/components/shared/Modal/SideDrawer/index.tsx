@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
@@ -9,11 +8,10 @@ import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
-import { getForest } from '@/apis/forest';
 import { TREE_SIZE_MAX } from '@/constants/forest';
 
 const SideDrawer = ({
+	trees,
 	onModal,
 	setOnModal,
 	onEditMoreModal,
@@ -21,21 +19,11 @@ const SideDrawer = ({
 	handleEditMoreModalOpen,
 	handleEditMoreModalClose,
 	handleFolderDeleteAlertModalToggle,
+	onClickTreeFolderMoreMenuButton,
 }: Props) => {
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: folders } = useQuery<Folder[] | undefined>('getForest', () => getForest(myInfo?.id), {
-		refetchOnWindowFocus: false,
-		retry: 1,
-	});
-
-	const [checkedTreeId, setCheckedTreeId] = useState<number>();
-
-	const handleClickTreeFolderMoreMenuButton = (treeId: number) => {
-		setCheckedTreeId(treeId);
-	};
-
-	const checkTreeSizeMax = () => folders && folders?.length < TREE_SIZE_MAX;
+	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
@@ -80,12 +68,12 @@ const SideDrawer = ({
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						{folders?.map((folder) => (
+						{trees?.map((tree) => (
 							<TreeFolderItem
-								key={folder?.id}
-								folder={folder}
+								key={tree?.id}
+								folder={tree}
 								handleEditMoreModalOpen={handleEditMoreModalOpen}
-								onClickTreeFolderMoreMenuButton={handleClickTreeFolderMoreMenuButton}
+								onClickTreeFolderMoreMenuButton={onClickTreeFolderMoreMenuButton}
 							/>
 						))}
 						{checkTreeSizeMax() && (
@@ -99,7 +87,6 @@ const SideDrawer = ({
 
 						{onEditMoreModal && (
 							<EditFolderMoreModal
-								treeId={checkedTreeId}
 								modalPosition={modalPosition}
 								onEditMoreModal={onEditMoreModal}
 								handleEditMoreModalClose={handleEditMoreModalClose}
