@@ -51,6 +51,7 @@ const useTreeDetail = () => {
 		}
 	}, [treeDetailInfo]);
 	return {
+		treeId,
 		treeMessages,
 		treeDetailInfo,
 		readTreeMessage,

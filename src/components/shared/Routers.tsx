@@ -17,7 +17,7 @@ const Routers = () => {
 			<Route path="/mypage" element={<MyPage />} />
 			<Route path="/mypage/edit" element={<ProfileEdit />} />
 			<Route path="/message/edit" element={<MessageSender />} />
-			<Route path="/message/edit/:folderId" element={<MessageSender />} />
+			<Route path="/message/edit/:treeId" element={<MessageSender />} />
 			<Route path="/messages" element={<MessageBox />} />
 			<Route path="/messages/:treeId" element={<MessageBox />} />
 			<Route path="/message/:messageId" element={<MessageDetail />} />
