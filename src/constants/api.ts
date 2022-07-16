@@ -19,6 +19,7 @@ const API_URL = {
 	},
 	users: {
 		info: '/users/info',
+		nickname: '/users/nickname',
 	},
 	noticeTree: {
 		read: '/notices',
