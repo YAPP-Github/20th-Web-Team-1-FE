@@ -4,8 +4,16 @@ import * as S from './TreeDetail.styled';
 
 import useTreeDetail from './useTreeDetail';
 const TreeDetail = () => {
-	const { treeMessages, treeDetailInfo, readTreeMessage, moveTree, showMessage, selectedMessage, setShowMessage } =
-		useTreeDetail();
+	const {
+		treeId,
+		treeMessages,
+		treeDetailInfo,
+		readTreeMessage,
+		moveTree,
+		showMessage,
+		selectedMessage,
+		setShowMessage,
+	} = useTreeDetail();
 
 	return (
 		<>
@@ -31,7 +39,7 @@ const TreeDetail = () => {
 					<S.NextButton onClick={() => moveTree(treeDetailInfo?.nextId)}>{'>'}</S.NextButton>
 				)}
 
-				<WateringButton />
+				<WateringButton treeId={treeId} />
 			</S.TemporaryWrapper>
 		</>
 	);
