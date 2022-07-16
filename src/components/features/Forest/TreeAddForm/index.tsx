@@ -53,8 +53,6 @@ const TreeAddForm = () => {
 	const handleSubmitEditedTreeInfo = (event: React.FormEvent) => {
 		event.preventDefault();
 
-		console.log(treeName, selectedFruit);
-
 		if (treeId) {
 			treeUpdateMutation.mutate({ treeId: Number(treeId), name: treeName, fruitType: selectedFruit }); //
 		} else {
