@@ -3,6 +3,7 @@ import BookmarkIcon from '@/assets/images/shared/star.svg';
 import * as S from './MessageDetailHeader.styled';
 import CloseIcon from '@/assets/images/shared/close.svg';
 import { Link } from 'react-router-dom';
+import ProfileBee from '@/assets/images/messages/message_bee.svg';
 
 type Props = {
 	profileImg: string | undefined;
@@ -14,7 +15,7 @@ const MessageDetailHeader = ({ profileImg, senderName, isBookmarked }: Props) =>
 	return (
 		<S.MessageDetailHeaderWrapper>
 			<S.MessageSenderInfo>
-				<img src={profileImg} alt="" />
+				<img src={ProfileBee} alt="" />
 				<h2>{senderName}</h2>
 			</S.MessageSenderInfo>
 

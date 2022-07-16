@@ -9,23 +9,48 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProp
 	const [openedAlertButton, setOpenedAlertButton] = useState(false);
 	const [showAlert, setShowAlert] = useState(true);
 	const showAlertHandler = () => {
-		if (!showAlert) {
+		if (!showAlert && !openedAlertButton) {
 			setShowAlert(true);
-		} else {
-			setShowAlert(false);
+			return;
 		}
-		setOpenedAlertButton(!openedAlertButton);
+
+		if (openedAlertButton) {
+			setOpenedAlertButton(false);
+			return;
+		}
+
+		if (showAlert) {
+			setOpenedAlertButton(!openedAlertButton);
+			return;
+		}
 	};
 
 	useEffect(() => {
-		setTimeout(() => setShowAlert(false), 5000);
-	}, []);
+		const alertTimer = setTimeout(() => {
+			setShowAlert(false);
+		}, 5000);
+
+		return () => {
+			clearTimeout(alertTimer);
+		};
+	}, [showAlert]);
+
+	useEffect(() => {
+		const forestButtonTimer = setTimeout(() => {
+			setOpenedAlertButton(false);
+		}, 3000);
+
+		return () => {
+			clearTimeout(forestButtonTimer);
+		};
+	}, [openedAlertButton]);
+
 	return (
 		<S.PopUpWrapper showAlert={showAlert}>
 			<S.IconBox openedAlertButton={openedAlertButton}>
 				<img src={AlertBee} alt="alertBee" onClick={showAlertHandler} />
 				{openedAlertButton && (
-					<Link to="/trees">
+					<Link to="/forest">
 						<S.ForestWrapper>
 							<S.ForestImage openedAlertButton={openedAlertButton} src={Forest} alt="ForestBtn" />
 							<S.ForestText>나무숲 가기</S.ForestText>

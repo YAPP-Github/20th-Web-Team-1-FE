@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { NoticeTree, Forest, MyPage, MessageSender, MessageDetail, MessageBox } from '@/pages';
+import { NoticeTree, Forest, MyPage, MessageSender, MessageDetail, MessageBox, TreeDetail } from '@/pages';
 import TreeAddForm from '../features/Forest/TreeAddForm';
 import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 import Login from '@/pages/Login';
@@ -11,6 +11,7 @@ const Routers = () => {
 			<Route path="/" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/forest" element={<Forest />} />
+			<Route path="/forest/:treeId" element={<TreeDetail />} />
 			<Route path="/forest/edit" element={<TreeAddForm />} />
 			<Route path="/forest/edit/:treeId" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />

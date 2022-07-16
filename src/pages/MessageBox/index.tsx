@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import * as S from './MessageBox.styled';
-import SideDrawer from '@/components/shared/Modal/SideDrawer';
+import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
-import MovingFolderModal from '@/components/shared/Modal/MovingFolderModal';
+import * as S from './MessageBox.styled';
 import { getMessages, deleteMessage } from '@/apis/messages';
 import { MessagesType } from '@/types/message';
-import AlertModal from '@/components/shared/Modal/AlertModal';
-import DeleteAlertModal from '../../components/shared/Modal/DeleteAlertModal/index';
+import { AlertModal, MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
+import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
 
 const MessageBox = () => {
+	const { treeId } = useParams();
+
 	const queryClient = useQueryClient();
-	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages());
+
+	const { data: messages } = useQuery<MessagesType>('getMessages', () => getMessages(treeId));
+
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
@@ -161,6 +163,22 @@ const MessageBox = () => {
 								checkMessages={checkMessages}
 							/>
 					  ))}
+				{messages?.responseDto.length === 0 && (
+					<S.NoMessageContainer>
+						{treeId ? (
+							<>
+								👀아직 해당 메세지함에 이동한 메세지가 없습니다. <br />
+								기본 폴더에서 메세지를 이동해주세요!😸
+							</>
+						) : (
+							<>
+								아직 도착한 메세지가 없습니다.
+								<br />
+								스스로를 위한 메세지를 써보는것은 어떨까요?😸
+							</>
+						)}
+					</S.NoMessageContainer>
+				)}
 
 				{checkMode && (
 					<BottomButtons

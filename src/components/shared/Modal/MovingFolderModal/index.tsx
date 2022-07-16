@@ -9,10 +9,17 @@ import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import { readUserForest } from '@/apis/forest';
 import { moveMessages } from '@/apis/messages';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages }: MovingFolderModalProps) => {
+	const { messageId } = useParams();
+
+	const navigate = useNavigate();
+
 	const queryClient = useQueryClient();
+
 	const myInfo = useRecoilValue(myInfoState);
+
 	const userId = myInfo?.id;
 
 	const [selectFolder, setSelectFolder] = useState(0);
@@ -30,6 +37,10 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 	const onClickMovingFolderButton = () => {
 		moveMutate();
 		onToggleMovingFolderModal();
+
+		if (messageId) {
+			navigate('/messages');
+		}
 	};
 
 	return (
