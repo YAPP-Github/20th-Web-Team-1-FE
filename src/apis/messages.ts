@@ -1,5 +1,5 @@
-import API_URL, { DELETE, GET, PUT } from '@/constants/api';
-import { MessageDetailData, MessageIdType, MessagesType } from '@/types/message';
+import API_URL, { DELETE, GET, POST, PUT } from '@/constants/api';
+import { MessageDetailData, MessageIdType, MessagesType, PostMessageData } from '@/types/message';
 import { requester } from './requester';
 
 export const deleteMessage = async (messageIds: MessageIdType[]) => {
@@ -99,5 +99,26 @@ export const moveMessages = async ({ messageIds, treeId }: { messageIds: number[
 		return status;
 	} catch (error) {
 		// 에러 핸들링
+	}
+};
+
+export const postMessages = async (postMessageData: PostMessageData) => {
+	const {
+		messages: { index },
+	} = API_URL;
+
+	try {
+		const data = postMessageData;
+
+		const { status } = await requester({
+			method: POST,
+			url: index,
+			data,
+		});
+
+		return status;
+	} catch (error) {
+		// 에러 핸들링
+		throw new Error('메시지 전송을 실패 !');
 	}
 };

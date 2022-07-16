@@ -4,12 +4,13 @@ import * as S from './MessageSender.styled';
 import { RecipientName, FolderSelect, MessageInput, AnonymousCheckBox } from '@/components/features/MessageSender';
 import Button from '@/components/shared/Button';
 import { SuccessModal } from '@/components/shared';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import { getForest } from '@/apis/forest';
 import { DEFAULT_FOLDER_NAME } from '@/constants/messageSender';
 import { Folder } from '@/types/forest';
+import { postMessages } from '@/apis/messages';
 
 const MessageSender = () => {
 	const navigate = useNavigate();
@@ -18,6 +19,11 @@ const MessageSender = () => {
 	const myInfo = useRecoilValue(myInfoState);
 
 	const { data: trees } = useQuery('getForest', () => getForest(myInfo?.id));
+	const postMessageMutation = useMutation(postMessages, {
+		onSuccess: () => {
+			setIsSucceedSendMessage(true);
+		},
+	});
 
 	const messageInputRef = useRef<HTMLTextAreaElement>(null);
 	const [recipientName, setRecipientName] = useState('나에게');
@@ -44,23 +50,15 @@ const MessageSender = () => {
 		event.preventDefault();
 
 		const data = getPostingMessageInfo();
-		console.log(data);
-
-		try {
-			// 메시지 작성 정보 POST 전송
-			// 정보가 잘 보내졌으면, 완료 모달 ON
-			// setIsSucceedSendMessage(true);
-		} catch (error) {
-			// 에러 처리
-		}
+		postMessageMutation.mutate(data);
 	};
 
 	const getPostingMessageInfo = () => {
 		return {
 			anonymous: checkAnonymous,
-			content: messageInputRef.current?.value,
+			content: messageInputRef.current?.value as string,
 			folderId: trees?.filter((tree) => tree.name === selectedFolder)[0].id ?? null,
-			receiverId: myInfo?.id,
+			receiverId: myInfo?.id as number,
 		};
 	};
 
@@ -73,7 +71,7 @@ const MessageSender = () => {
 
 	useEffect(() => {
 		setSelectedFolder(setInitialSelectedFolder(trees, String(treeId)));
-	}, [trees]);
+	}, [trees, treeId]);
 
 	return (
 		<S.MessageSenderContainer onSubmit={handleSubmitMessage}>
