@@ -48,7 +48,8 @@ export const ForestText = styled.span`
 	margin-top: 5px;
 `;
 export const MessageBox = styled.div<MessageBoxProps>`
-	width: 190px;
+	min-width: 190px;
+	width: 80%;
 	height: ${POPUP_IMAGE_SIZE};
 	border-radius: 20px 20px 20px 0px;
 	background: ${({ theme }) => theme.colors.bt_white};
