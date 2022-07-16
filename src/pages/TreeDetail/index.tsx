@@ -8,7 +8,7 @@ const TreeDetail = () => {
 		treeId,
 		treeMessages,
 		treeDetailInfo,
-		readTreeMessage,
+		updateReadMessageHandler,
 		moveTree,
 		showMessage,
 		selectedMessage,
@@ -26,7 +26,7 @@ const TreeDetail = () => {
 					</S.TreeDetailMainText>
 					<span>맺혀 있는 열매 : {treeDetailInfo?.messages.length}개</span>
 				</S.TreeDetailTextWrapper>
-				<Tree readNoticeMessage={readTreeMessage} messages={treeMessages ? treeMessages : null} />
+				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={treeMessages ? treeMessages : null} />
 
 				{showMessage && (
 					<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />

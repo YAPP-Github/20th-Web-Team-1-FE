@@ -4,7 +4,7 @@ import Apple from '@/assets/images/noticeTree/apple.svg';
 import { TreeProps } from './Tree.type';
 import TreeImage from '@/assets/images/shared/tree.svg';
 
-const Tree = ({ readNoticeMessage, messages }: TreeProps) => {
+const Tree = ({ updateReadMessageHandler, messages }: TreeProps) => {
 	const [imageWidth, setImageWidth] = useState(0);
 
 	const onLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
@@ -24,7 +24,7 @@ const Tree = ({ readNoticeMessage, messages }: TreeProps) => {
 									src={Apple}
 									innerWidth={`${message.width}%`}
 									innerHeight={`${message.height}%`}
-									onClick={() => readNoticeMessage(message.id, idx)}
+									onClick={() => updateReadMessageHandler(message.id, idx)}
 								/>
 							);
 						})}

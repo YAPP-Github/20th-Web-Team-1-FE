@@ -5,7 +5,7 @@ import * as S from './NoticeTree.styled';
 import useNoticeMessages from './useNoticeMessages';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
-import { readMessage } from '@/apis/messages';
+import { updateReadMessage } from '@/apis/messages';
 
 const NoticeTree = () => {
 	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount, setTotalUnreadMessageCount } =
@@ -20,11 +20,11 @@ const NoticeTree = () => {
 	const [showAlertMessage, setShowAlertMessage] = useState(true);
 	const [activeHomeAlert, setActiveHomeAlert] = useState(false);
 
-	const readNoticeMessage = (messageId: number, selectedIdx: number) => {
+	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
 		if (noticeMessages) {
 			if (messageId > 0) {
 				setTotalUnreadMessageCount((prev) => prev - 1);
-				readMessage(messageId);
+				updateReadMessage(messageId);
 			}
 
 			showMessageHandler(true);
@@ -67,7 +67,7 @@ const NoticeTree = () => {
 						{username}의 알림나무<span>읽지 않은 열매 {totalUnreadMessageCount} </span>
 					</S.NoticeMainText>
 				</S.NoticeTextWrapper>
-				<Tree readNoticeMessage={readNoticeMessage} messages={noticeMessages ? noticeMessages : null} />
+				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={noticeMessages ? noticeMessages : null} />
 				<AlertPopUp
 					username={username}
 					messageCount={totalUnreadMessageCount}
