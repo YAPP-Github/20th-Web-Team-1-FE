@@ -9,3 +9,8 @@ export interface FruitProps {
 	innerWidth: string;
 	innerHeight: string;
 }
+
+export interface getMessageParam {
+	messageId: number;
+	idx: number;
+}

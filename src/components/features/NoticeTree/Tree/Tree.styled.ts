@@ -1,40 +1,54 @@
 import styled from '@emotion/styled';
 import { FruitProps } from './Tree.type';
 
+const TREE_CIRCLE_SIZE = '261px';
+
 export const TreeWrapper = styled.div`
 	width: 100%;
-	height: auto;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	height: 100%;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	justify-content: center;
+	align-items: flex-end;
 	box-sizing: border-box;
+
+	padding: 30vh 16.5vw 0px 16.5vw;
 `;
 
-const TREE_CIRCLE_SIZE = '261px';
-export const TreeCircle = styled.div`
-	width: ${TREE_CIRCLE_SIZE};
-	height: ${TREE_CIRCLE_SIZE};
-	border-radius: 50%;
-	background: linear-gradient(148.02deg, #a6ffb2 13.79%, #40e1bf 86.24%);
+export const TreeContainer = styled.div`
+	width: 100%;
+	height: 100%;
+
+	position: relative;
+
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+`;
+
+export const TreeImage = styled.img`
+	width: auto;
+	height: 100%;
+
+	object-fit: contain;
+`;
+
+export const TreeCircle = styled.div<{ imageWidth: number }>`
+	width: ${({ imageWidth }) => (imageWidth ? imageWidth : 0)}px;
+	height: ${({ imageWidth }) => (imageWidth ? imageWidth : 0)}px;
+	position: absolute;
+	top: 0;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 1;
-`;
-export const TreePole = styled.div`
-	margin-top: -10px;
-	width: 38px;
-	height: 285px;
-	background: linear-gradient(180deg, #ffd5a9 0%, #e88f6b 100%);
 `;
 
 export const InnerCircle = styled.div`
-	position: relative;
 	width: 70%;
 	height: 70%;
+
+	position: relative;
+
 	z-index: 1;
 `;
 
