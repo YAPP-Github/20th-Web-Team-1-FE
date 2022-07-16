@@ -16,7 +16,6 @@ const TreeAddForm = () => {
 	const navigate = useNavigate();
 	const { treeId } = useParams();
 
-	console.log(treeId);
 	const userId = useRecoilValue(myInfoState);
 
 	const { data: trees } = useQuery<Folder[] | undefined>('getForest', () => getForest(userId?.id), {
@@ -53,8 +52,6 @@ const TreeAddForm = () => {
 
 	const handleSubmitEditedTreeInfo = (event: React.FormEvent) => {
 		event.preventDefault();
-
-		console.log(treeName, selectedFruit);
 
 		if (treeId) {
 			treeUpdateMutation.mutate({ treeId: Number(treeId), name: treeName, fruitType: selectedFruit }); //
