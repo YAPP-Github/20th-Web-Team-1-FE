@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import * as S from './MessageMenu.styled';
 import { MessageMenuProps } from './MessageMenu.type';
-import { readUserForest } from '@/apis/forest';
+import { getForest } from '@/apis/forest';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
 import HamburgerIcon from '@/assets/images/shared/hamburger.svg';
@@ -20,7 +20,7 @@ const MessageMenu = ({
 
 	const { treeId } = useParams();
 
-	const { data: folders } = useQuery<Folder[] | undefined>('readUserForest', () => readUserForest(myInfo?.id), {
+	const { data: folders } = useQuery<Folder[] | undefined>('getForest', () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 

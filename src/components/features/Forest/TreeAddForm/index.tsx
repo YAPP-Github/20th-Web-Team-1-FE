@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import Button from '@/components/shared/Button';
 import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
 import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
+import { useQuery, useMutation } from 'react-query';
+import { Folder } from '@/types/forest';
+import { postTree, getForest, updateTree } from '@/apis/forest';
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
 
 const TreeAddForm = () => {
 	const navigate = useNavigate();
-	const [treeName, setTreeName] = useState('');
-	const [selectedFruit, setSelectedFruit] = useState('');
+	const { treeId } = useParams();
+
+	const userId = useRecoilValue(myInfoState);
+
+	const { data: trees } = useQuery<Folder[] | undefined>('getForest', () => getForest(userId?.id), {
+		refetchOnWindowFocus: false,
+	});
+
+	const treePostMutation = useMutation(postTree, {
+		onSuccess: () => {
+			handleGoBackClick();
+		},
+	});
+
+	const treeUpdateMutation = useMutation(updateTree, {
+		onSuccess: () => {
+			handleGoBackClick();
+		},
+	});
+
+	const [treeName, setTreeName] = useState<string>('');
+	const [selectedFruit, setSelectedFruit] = useState<string | undefined>('');
 
 	const handleChangeTreeName = (treeName: string) => {
 		setTreeName(treeName);
@@ -27,12 +52,27 @@ const TreeAddForm = () => {
 
 	const handleSubmitEditedTreeInfo = (event: React.FormEvent) => {
 		event.preventDefault();
+
 		console.log(treeName, selectedFruit);
+
+		if (treeId) {
+			treeUpdateMutation.mutate({ treeId: Number(treeId), name: treeName, fruitType: selectedFruit }); //
+		} else {
+			treePostMutation.mutate({ name: treeName, fruitType: selectedFruit });
+		}
 	};
 
 	const handleGoBackClick = () => {
 		navigate(-1);
 	};
+
+	useEffect(() => {
+		if (treeId) {
+			const targetTree = trees?.filter((tree) => tree?.id === Number(treeId))[0];
+			setTreeName(targetTree?.name as string); //
+			setSelectedFruit(targetTree?.fruit);
+		}
+	}, [treeId]);
 
 	return (
 		<S.TreeAddForm onSubmit={handleSubmitEditedTreeInfo}>

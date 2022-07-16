@@ -24,11 +24,13 @@ export const TreeFolderItemThumbnailWrapper = styled.div`
 
 	& > div {
 		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 18px;
 		height: 18px;
 		margin-right: 7px;
 		border-radius: 50%;
-		background-color: ${({ theme }) => theme.colors.bt_white};
 	}
 `;
 

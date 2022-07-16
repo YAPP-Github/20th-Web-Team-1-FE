@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 export const TreeNameInput = styled.input`
-	width: 120px;
 	padding: 8px 0px;
 	outline: 0;
 	border: none;

@@ -8,7 +8,7 @@ import TreeList from '@/components/features/Forest/TreeList';
 import { Folder } from '@/types/forest';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '../../stores/user';
-import { readUserForest } from '@/apis/forest';
+import { getForest } from '@/apis/forest';
 
 const trees = [
 	{
@@ -49,7 +49,7 @@ const Forest = () => {
 	const myInfo = useRecoilValue(myInfoState);
 	const userId = myInfo?.id;
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['readUserForest', userId], () => readUserForest(userId), {
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', userId], () => getForest(userId), {
 		refetchOnWindowFocus: false,
 	});
 

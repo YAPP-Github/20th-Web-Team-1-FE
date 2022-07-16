@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
@@ -8,8 +8,10 @@ import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
+import { TREE_SIZE_MAX } from '@/constants/forest';
 
 const SideDrawer = ({
+	trees,
 	onModal,
 	setOnModal,
 	onEditMoreModal,
@@ -17,8 +19,11 @@ const SideDrawer = ({
 	handleEditMoreModalOpen,
 	handleEditMoreModalClose,
 	handleFolderDeleteAlertModalToggle,
+	onClickTreeFolderMoreMenuButton,
 }: Props) => {
 	const myInfo = useRecoilValue(myInfoState);
+
+	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
@@ -63,14 +68,23 @@ const SideDrawer = ({
 						<h3>나무 폴더</h3>
 					</S.TreeFolderListTopMenu>
 					<S.TreeFolderList>
-						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
-						<TreeFolderItem path={'/messages/#'} handleEditMoreModalOpen={handleEditMoreModalOpen} />
-						<S.TreeFolderItemAddContainer>
-							<S.TreeFolderItemAddBtn to={'/forest/edit'}>
-								<span />
-								<span />
-							</S.TreeFolderItemAddBtn>
-						</S.TreeFolderItemAddContainer>
+						{trees?.map((tree) => (
+							<TreeFolderItem
+								key={tree?.id}
+								folder={tree}
+								handleEditMoreModalOpen={handleEditMoreModalOpen}
+								onClickTreeFolderMoreMenuButton={onClickTreeFolderMoreMenuButton}
+							/>
+						))}
+						{checkTreeSizeMax() && (
+							<S.TreeFolderItemAddContainer>
+								<S.TreeFolderItemAddBtn to={'/forest/edit'}>
+									<span />
+									<span />
+								</S.TreeFolderItemAddBtn>
+							</S.TreeFolderItemAddContainer>
+						)}
+
 						{onEditMoreModal && (
 							<EditFolderMoreModal
 								modalPosition={modalPosition}
