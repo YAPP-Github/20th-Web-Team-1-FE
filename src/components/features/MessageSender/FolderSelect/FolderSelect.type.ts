@@ -1,11 +1,13 @@
+import { Folder } from '@/types/forest';
+
 export type StyledProps = {
 	opened: boolean;
 };
 
 export type Props = {
-	folders: string[];
+	folders: Folder[] | undefined;
 	isOpenedFolderBox: boolean;
 	onToggleSelectedFolderBox: () => void;
-	selectedFolder: string;
+	selectedFolder: string | undefined;
 	handleSelectedFolderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };

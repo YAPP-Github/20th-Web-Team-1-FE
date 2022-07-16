@@ -5,7 +5,14 @@ import { Props } from './MessageInput.type';
 
 const MessageInput = ({ messageInputRef }: Props) => {
 	return (
-		<S.MessageInput ref={messageInputRef} name="message" minLength={MIN_LENGTH} placeholder={PLACE_HOLDER} autoFocus />
+		<S.MessageInput
+			ref={messageInputRef}
+			name="message"
+			minLength={MIN_LENGTH}
+			placeholder={PLACE_HOLDER}
+			autoFocus
+			required
+		/>
 	);
 };
 
