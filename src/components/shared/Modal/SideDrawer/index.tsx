@@ -6,23 +6,24 @@ import TreeFolderItem from './TreeFolderItem';
 import EditFolderMoreModal from './EditFolderMoreModal';
 import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
-import { useRecoilValue } from 'recoil';
-import { myInfoState } from '@/stores/user';
 import { TREE_SIZE_MAX } from '@/constants/forest';
+import { DeleteAlertModal } from '@/components/shared';
+import useDrawer from '@/hooks/useDrawer';
 
-const SideDrawer = ({
-	checkedTreeId,
-	trees,
-	onModal,
-	setOnModal,
-	onEditMoreModal,
-	modalPosition,
-	handleEditMoreModalOpen,
-	handleEditMoreModalClose,
-	handleFolderDeleteAlertModalToggle,
-	onClickTreeFolderMoreMenuButton,
-}: Props) => {
-	const myInfo = useRecoilValue(myInfoState);
+const SideDrawer = ({ onModal, setOnModal }: Props) => {
+	const {
+		myInfo,
+		trees,
+		checkedTreeId,
+		setCheckedTreeId,
+		modalPosition,
+		onEditMoreModal,
+		isOpenedFolderDeleteAlertModal,
+		handleFolderDeleteAlertModalToggle,
+		handleFolderDelete,
+		handleEditMoreModalOpen,
+		setOnEditMoreModal,
+	} = useDrawer();
 
 	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
 
@@ -55,10 +56,10 @@ const SideDrawer = ({
 				<S.MessageFilterList>
 					<h3>메시지 필터 리스트</h3>
 					<S.MessageFilterItem>
-						<Link to={''}>나에게 온 메시지</Link>
+						<Link to={'/messages'}>나에게 온 메시지</Link>
 					</S.MessageFilterItem>
 					<S.MessageFilterItem>
-						<Link to={''}>즐겨 찾기</Link>
+						<Link to={'/messages/favorite'}>즐겨 찾기</Link>
 					</S.MessageFilterItem>
 				</S.MessageFilterList>
 
@@ -74,7 +75,7 @@ const SideDrawer = ({
 								key={tree?.id}
 								folder={tree}
 								handleEditMoreModalOpen={handleEditMoreModalOpen}
-								onClickTreeFolderMoreMenuButton={onClickTreeFolderMoreMenuButton}
+								onClickTreeFolderMoreMenuButton={() => setCheckedTreeId(tree?.id)}
 							/>
 						))}
 						{checkTreeSizeMax() && (
@@ -91,8 +92,18 @@ const SideDrawer = ({
 								treeId={checkedTreeId}
 								modalPosition={modalPosition}
 								onEditMoreModal={onEditMoreModal}
-								handleEditMoreModalClose={handleEditMoreModalClose}
+								handleEditMoreModalClose={() => setOnEditMoreModal(false)}
 								handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
+							/>
+						)}
+
+						{isOpenedFolderDeleteAlertModal && (
+							<DeleteAlertModal
+								deleteTargetType="folder"
+								deleteTarget="프로젝트A"
+								onAlertModal={isOpenedFolderDeleteAlertModal}
+								handleAlertModalToggle={() => handleFolderDeleteAlertModalToggle('close')}
+								handleTargetDelete={handleFolderDelete}
 							/>
 						)}
 					</S.TreeFolderList>
