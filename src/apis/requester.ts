@@ -3,7 +3,7 @@ import { getStorageItem, storageAccessKey } from '@/utils/local-storage';
 
 const createAxiosInstance = () => {
 	const base = axios.create({
-		baseURL: import.meta.env.VITE_API_BASE_URL,
+		baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
 		withCredentials: true,
 	});
 
