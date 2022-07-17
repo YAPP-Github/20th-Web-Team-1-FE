@@ -12,6 +12,7 @@ export const MessageInput = styled.textarea`
 	line-height: 24px;
 	color: ${({ theme }) => theme.colors.bt_grey[100]};
 	letter-spacing: -0.02em;
+	resize: none;
 
 	&:focus:not(:focus-visible) {
 		border: 0;

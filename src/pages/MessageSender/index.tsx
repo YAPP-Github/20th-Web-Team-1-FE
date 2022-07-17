@@ -32,7 +32,7 @@ const MessageSender = () => {
 	const [recipientName, setRecipientName] = useState('나에게');
 	const [checkAnonymous, setCheckAnonymous] = useState(false);
 	const [isSucceedSendMessage, setIsSucceedSendMessage] = useState(false);
-	const [selectedFolder, setSelectedFolder] = useState('');
+	const [selectedFolder, setSelectedFolder] = useState(DEFAULT_FOLDER_NAME);
 	const [isOpenedSelectFolderBox, setIsOpenedSelectedFolderBox] = useState(false);
 
 	const handleSelectedFolderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,7 @@ const MessageSender = () => {
 		return {
 			anonymous: checkAnonymous,
 			content: messageInputRef.current?.value as string,
-			folderId: trees?.filter((tree) => tree.name === selectedFolder)[0].id ?? null,
+			folderId: trees?.filter((tree) => tree.name === selectedFolder)[0]?.id ?? null,
 			receiverId: myInfo?.id as number,
 		};
 	};
