@@ -72,6 +72,7 @@ const MessageDetail = () => {
 	return (
 		<S.Wrapper>
 			<MessageMenu
+				detailTreeName={messageDetail?.treeResponseDto.name}
 				isEdit={true}
 				onToggleMovingFolderModal={onToggleMovingFolderModal}
 				onToggleOpenDrawer={onToggleOpenDrawer}
