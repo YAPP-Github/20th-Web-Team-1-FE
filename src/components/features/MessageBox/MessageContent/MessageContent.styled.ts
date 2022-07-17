@@ -1,25 +1,36 @@
 import styled from '@emotion/styled';
-import { CheckedProps } from '../MessageCheckBox/MessageCheckBox.type';
+import { MessageWrapperProps } from '../MessageCheckBox/MessageCheckBox.type';
 
 const PROFILE_IMAGE_SIZE = 47;
 
-export const MessageWrapper = styled.div<CheckedProps>`
+export const MessageWrapper = styled.div<MessageWrapperProps>`
 	height: 97px;
 	width: 100%;
 
 	display: flex;
 	align-items: center;
 
-	padding: 28px 32px;
+	padding: 0px 32px;
+	margin-top: ${({ idx }) => idx === 0 && '10px'};
 
 	background: ${({ theme, checked }) => (checked ? ' #EEFBFA' : theme.colors.bt_white)};
 
+	border-radius: ${({ idx }) => idx === 0 && '20px 20px 0px 0px'};
 	border-bottom: 0.4px solid #cecece;
+
+	box-shadow: ${({ idx }) => idx === 0 && '0px -4px 10px rgba(0, 0, 0, 0.05)'};
 
 	cursor: pointer;
 `;
 
+export const MessageContainer = styled.div`
+	width: 100%;
+
+	display: flex;
+`;
+
 export const ProfileImage = styled.div`
+	margin-right: 10px;
 	img {
 		width: ${PROFILE_IMAGE_SIZE}px;
 		height: ${PROFILE_IMAGE_SIZE}px;
@@ -47,7 +58,7 @@ export const MessageText = styled.div`
 
 	white-space: normal;
 	display: -webkit-box;
-	-webkit-line-clamp: 3; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
+	-webkit-line-clamp: 2; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 `;
@@ -64,4 +75,8 @@ export const InnerBox = styled.div`
 
 export const ContentContainer = styled.div`
 	width: calc(100% - ${PROFILE_IMAGE_SIZE}px);
+`;
+
+export const FavoriteContainer = styled.div`
+	margin-left: 18px;
 `;

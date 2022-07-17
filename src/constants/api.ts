@@ -17,6 +17,7 @@ const API_URL = {
 		folder: '/messages/folder',
 		read: '/messages/alreadyRead',
 		opening: '/messages/opening',
+		favorite: '/messages/favorite',
 	},
 	users: {
 		info: '/users/info',
