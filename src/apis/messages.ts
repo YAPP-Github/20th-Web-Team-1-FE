@@ -18,7 +18,7 @@ export const deleteMessage = async (messageIds: MessageIdType[]) => {
 
 		return status;
 	} catch (error) {
-		// 에러 핸들링
+		throw new Error('Failed to delete message!');
 	}
 };
 
@@ -35,26 +35,36 @@ export const updateReadMessage = async (messageId: MessageIdType) => {
 
 		return status;
 	} catch (error) {
-		// 에러 핸들링
+		throw new Error('Failed to update read message!');
 	}
 };
 
 export const getMessageDetail = async (messageId: MessageIdType) => {
-	const response = await requester<MessageDetailData>({
-		method: GET,
-		url: `/messages/${messageId}`,
-	});
+	try {
+		const response = await requester<MessageDetailData>({
+			method: GET,
+			url: `/messages/${messageId}`,
+		});
 
-	return response.payload;
+		return response.payload;
+	} catch (error) {
+		throw new Error('Failed to get message of detail');
+	}
 };
 
 export const getMessages = async (treeId: MessageIdType) => {
-	const response = await requester<MessagesType>({
-		method: GET,
-		url: treeId ? `/messages?treeId=${treeId}` : '/messages',
-	});
+	const path = treeId === 'favorite' ? '/messages/favorite' : treeId ? `/messages?treeId=${treeId}` : '/messages';
 
-	return response.payload;
+	try {
+		const response = await requester<MessagesType>({
+			method: GET,
+			url: path,
+		});
+
+		return response.payload;
+	} catch (error) {
+		throw new Error(`Failed to get messages of ${treeId ? treeId : 'myMessageFolder'}`);
+	}
 };
 
 export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
@@ -70,12 +80,14 @@ export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
 			url: opening,
 			data,
 		});
+
 		if (status === 204) {
 			window.alert('열매맺기에 성공했습니다.');
 		}
+
 		return status;
 	} catch (error) {
-		// 에러 핸들링
+		throw new Error('Failed to open messages');
 	}
 };
 
@@ -96,9 +108,10 @@ export const updateMovingMessages = async ({ messageIds, treeId }: { messageIds:
 		if (status === 204) {
 			window.alert('이동에 성공했습니다.');
 		}
+
 		return status;
 	} catch (error) {
-		// 에러 핸들링
+		throw new Error('Failed to move messages to another folder');
 	}
 };
 
@@ -119,6 +132,23 @@ export const postMessages = async (postMessageData: PostMessageData) => {
 		return status;
 	} catch (error) {
 		// 에러 핸들링
-		throw new Error('메시지 전송을 실패 !');
+		throw new Error('Failed to send message');
+	}
+};
+
+export const updateFavoriteMessage = async (messageId: MessageIdType) => {
+	const {
+		messages: { favorite },
+	} = API_URL;
+
+	try {
+		const { status } = await requester({
+			method: PUT,
+			url: `${favorite}?messageId=${messageId}`,
+		});
+
+		return status;
+	} catch (error) {
+		throw new Error('Failed to update read message!');
 	}
 };
