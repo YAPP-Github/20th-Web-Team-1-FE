@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as S from './MessageBox.styled';
 import { getMessages, deleteMessage } from '@/apis/messages';
@@ -13,6 +13,7 @@ import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 
 const MessageBox = () => {
+	const navigator = useNavigate();
 	const { treeId } = useParams();
 	const myInfo = useRecoilValue(myInfoState);
 	const queryClient = useQueryClient();
@@ -24,16 +25,16 @@ const MessageBox = () => {
 		},
 	});
 
-
 	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
-
 
 	const treeDeleteMutation = useMutation(deleteTree, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getForest');
 			handleFolderDeleteAlertModalToggle('close');
+			navigator(`/messages`);
+			onToggleOpenDrawer();
 		},
 	});
 
@@ -53,7 +54,7 @@ const MessageBox = () => {
 	const [checkedTreeId, setCheckedTreeId] = useState<number>();
 
 	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
-		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
+		const closest = event.currentTarget.closest('li') as HTMLElement;
 		const rect = closest.getBoundingClientRect();
 		const newPosition = { top: rect.top, left: rect.left + rect.width };
 
