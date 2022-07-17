@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as S from './WateringButton.styled';
 import WateringIcon from '@/assets/images/noticeTree/watering_icon.svg';
 
-const WateringButton = ({ treeId }: { treeId: string | undefined }) => {
+const WateringButton = ({ treeId }: { treeId?: string | undefined }) => {
 	return (
 		<Link to={`/message/edit/${treeId}`}>
 			<S.Wrapper>

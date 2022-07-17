@@ -8,7 +8,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import { getForest } from '@/apis/forest';
-import { moveMessages } from '@/apis/messages';
+import { updateMovingMessages } from '@/apis/messages';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages }: MovingFolderModalProps) => {
@@ -28,14 +28,17 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 		enabled: !!myInfo,
 	});
 
-	const { mutate: moveMutate } = useMutation(() => moveMessages({ messageIds: checkMessages, treeId: selectFolder }), {
-		onSuccess: () => {
-			queryClient.invalidateQueries('getMessages');
+	const { mutate: updateMovingMessagesMutate } = useMutation(
+		() => updateMovingMessages({ messageIds: checkMessages, treeId: selectFolder }),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries('getMessages');
+			},
 		},
-	});
+	);
 
 	const onClickMovingFolderButton = () => {
-		moveMutate();
+		updateMovingMessagesMutate();
 		onToggleMovingFolderModal();
 
 		if (messageId) {

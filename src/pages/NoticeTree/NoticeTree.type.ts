@@ -9,6 +9,7 @@ export interface MessageType {
 export interface MessageWithLocationType extends MessageType {
 	width: number;
 	height: number;
+	messageIndex?: number;
 }
 
 export interface MessagesType {

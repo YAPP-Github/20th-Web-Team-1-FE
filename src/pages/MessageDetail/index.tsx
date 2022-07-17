@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from './MessageDetail.styled';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { messageDetailFetcher, readMessage, deleteMessage } from '@/apis/messages';
+import { getMessageDetail, updateReadMessage, deleteMessage } from '@/apis/messages';
 import { MessageDetailData } from '@/types/message';
 import { MessageMenu } from '@/components/features/MessageBox';
 import { SideDrawer, AlertModal, MovingFolderModal } from '@/components/shared';
@@ -20,8 +20,8 @@ const MessageDetail = () => {
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
 	const { data: messageDetailData } = useQuery<MessageDetailData>(
-		['messageDetail', messageId],
-		() => messageDetailFetcher(messageId),
+		['getMessageDetail', messageId],
+		() => getMessageDetail(messageId),
 		{
 			refetchOnWindowFocus: false,
 			retry: 1,
@@ -54,7 +54,7 @@ const MessageDetail = () => {
 
 	useEffect(() => {
 		if (messageDetailData?.responseDto.alreadyRead === false) {
-			readMessage(messageId);
+			updateReadMessage(messageId);
 		}
 	}, [messageId, messageDetailData]);
 

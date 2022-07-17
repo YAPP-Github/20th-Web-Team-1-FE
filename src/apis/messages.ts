@@ -22,7 +22,7 @@ export const deleteMessage = async (messageIds: MessageIdType[]) => {
 	}
 };
 
-export const readMessage = async (messageId: MessageIdType) => {
+export const updateReadMessage = async (messageId: MessageIdType) => {
 	const {
 		messages: { read },
 	} = API_URL;
@@ -39,7 +39,7 @@ export const readMessage = async (messageId: MessageIdType) => {
 	}
 };
 
-export const messageDetailFetcher = async (messageId: MessageIdType) => {
+export const getMessageDetail = async (messageId: MessageIdType) => {
 	const response = await requester<MessageDetailData>({
 		method: GET,
 		url: `/messages/${messageId}`,
@@ -57,7 +57,7 @@ export const getMessages = async (treeId: MessageIdType) => {
 	return response.payload;
 };
 
-export const openMessages = async (messageIds: MessageIdType[]) => {
+export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
 	const {
 		messages: { opening },
 	} = API_URL;
@@ -79,7 +79,7 @@ export const openMessages = async (messageIds: MessageIdType[]) => {
 	}
 };
 
-export const moveMessages = async ({ messageIds, treeId }: { messageIds: number[]; treeId: number }) => {
+export const updateMovingMessages = async ({ messageIds, treeId }: { messageIds: number[]; treeId: number }) => {
 	const {
 		messages: { folder },
 	} = API_URL;
