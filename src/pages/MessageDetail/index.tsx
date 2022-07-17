@@ -27,8 +27,6 @@ const MessageDetail = () => {
 		enabled: !!messageId,
 	});
 
-	console.log(messageDetail);
-
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage([messageId]), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
@@ -61,6 +59,10 @@ const MessageDetail = () => {
 		}
 	};
 
+	const onClickNavButton = (messageId: number) => {
+		navigate(`/message/${messageId}`);
+	};
+
 	useEffect(() => {
 		if (messageDetail?.responseDto.alreadyRead === false) {
 			updateReadMessage(messageId);
@@ -77,31 +79,29 @@ const MessageDetail = () => {
 			/>
 			{messageDetail && (
 				<S.MessageDetailContainer>
-					<MessageDetailHeader
-						profileImg={messageDetail.responseDto.senderProfileImage}
-						senderName={
-							messageDetail.responseDto.anonymous === false ? messageDetail.responseDto.senderNickname : '익명'
-						}
-						isLike={messageDetail.responseDto.favorite}
-						messageId={messageDetail.responseDto.id}
-						onToggleLike={onToggleLike}
-					/>
+					<S.MessageContentContainer>
+						<MessageDetailHeader
+							profileImg={messageDetail.responseDto.senderProfileImage}
+							senderName={
+								messageDetail.responseDto.anonymous === false ? messageDetail.responseDto.senderNickname : '익명'
+							}
+							isLike={messageDetail.responseDto.favorite}
+							messageId={messageDetail.responseDto.id}
+							onToggleLike={onToggleLike}
+						/>
 
-					<S.MessageContentWrapper>{messageDetail.responseDto.content}</S.MessageContentWrapper>
-
+						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
+					</S.MessageContentContainer>
 					<S.MessageNavButtonWrapper>
-						{messageDetail.prevId > 0 && (
-							<Link to={`/message/${messageDetail.prevId}`}>
-								<S.ArrowIcon src={ArrowUpIcon} alt="" onClick={() => navigate(`/message/${messageDetail.prevId}`)} />
-								이전 메시지
-							</Link>
-						)}
-						{messageDetail.nextId > 0 && (
-							<Link to={`/message/${messageDetail.nextId}`}>
-								다음 메시지
-								<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
-							</Link>
-						)}
+						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
+							<S.ArrowIcon src={ArrowUpIcon} alt="" onClick={() => navigate(`/message/${messageDetail.prevId}`)} />
+							이전 메시지
+						</S.Button>
+
+						<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
+							다음 메시지
+							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />{' '}
+						</S.Button>
 					</S.MessageNavButtonWrapper>
 				</S.MessageDetailContainer>
 			)}
