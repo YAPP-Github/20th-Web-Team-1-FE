@@ -55,10 +55,14 @@ const SideDrawer = ({
 				<S.MessageFilterList>
 					<h3>메시지 필터 리스트</h3>
 					<S.MessageFilterItem>
-						<Link to={''}>나에게 온 메시지</Link>
+						<Link to={'/messages'} onClick={() => setOnModal(false)}>
+							나에게 온 메시지
+						</Link>
 					</S.MessageFilterItem>
 					<S.MessageFilterItem>
-						<Link to={''}>즐겨 찾기</Link>
+						<Link to={'/messages/favorite'} onClick={() => setOnModal(false)}>
+							즐겨 찾기
+						</Link>
 					</S.MessageFilterItem>
 				</S.MessageFilterList>
 
@@ -75,6 +79,7 @@ const SideDrawer = ({
 								folder={tree}
 								handleEditMoreModalOpen={handleEditMoreModalOpen}
 								onClickTreeFolderMoreMenuButton={onClickTreeFolderMoreMenuButton}
+								onCloseSideDrawer={() => setOnModal(false)}
 							/>
 						))}
 						{checkTreeSizeMax() && (
