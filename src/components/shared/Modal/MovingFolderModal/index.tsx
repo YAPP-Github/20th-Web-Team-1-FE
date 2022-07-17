@@ -25,7 +25,7 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 	const [selectFolder, setSelectFolder] = useState(0);
 
 	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', userId], () => getForest(userId), {
-		enabled: !!userId,
+		enabled: !!myInfo,
 	});
 
 	const { mutate: updateMovingMessagesMutate } = useMutation(

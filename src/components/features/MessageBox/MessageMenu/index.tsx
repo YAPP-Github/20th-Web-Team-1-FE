@@ -20,7 +20,7 @@ const MessageMenu = ({
 
 	const { treeId } = useParams();
 
-	const { data: folders } = useQuery<Folder[] | undefined>('getForest', () => getForest(myInfo?.id), {
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 

@@ -10,47 +10,13 @@ import { useRecoilValue } from 'recoil';
 import { myInfoState } from '../../stores/user';
 import { getForest } from '@/apis/forest';
 
-const trees = [
-	{
-		id: 1,
-		fruit: 'APPLE',
-		name: 'TEAM. 위영민',
-	},
-	{
-		id: 2,
-		fruit: 'GRAPE',
-		name: 'TEAM. 최영광',
-	},
-	{
-		id: 3,
-		fruit: 'LEMON',
-		name: 'TEAM. 최수임',
-	},
-	// {
-	// 	id: 4,
-	// 	fruit: 'STRAWBERRY',
-	// 	name: 'TEAM. 황재원',
-	// },
-	// {
-	// 	id: 5,
-	// 	fruit: 'BLUEBERRY',
-	// 	name: 'TEAM. 강지수',
-	// },
-	// {
-	// 	id: 6,
-	// 	fruit: 'ORANGE',
-	// 	name: 'TEAM. 김수빈',
-	// },
-];
-
 const Forest = () => {
 	const navigate = useNavigate();
 
 	const myInfo = useRecoilValue(myInfoState);
-	const userId = myInfo?.id;
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', userId], () => getForest(userId), {
-		refetchOnWindowFocus: false,
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
 	});
 
 	return (
