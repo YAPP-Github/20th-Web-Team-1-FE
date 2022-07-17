@@ -16,6 +16,7 @@ const MessageBox = () => {
 	const { treeId } = useParams();
 	const myInfo = useRecoilValue(myInfoState);
 	const queryClient = useQueryClient();
+
 	const { data: messages } = useQuery<MessagesType>(['getMessages', treeId], () => getMessages(treeId));
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
@@ -24,11 +25,9 @@ const MessageBox = () => {
 		},
 	});
 
-
 	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
-
 
 	const treeDeleteMutation = useMutation(deleteTree, {
 		onSuccess: () => {
@@ -94,7 +93,7 @@ const MessageBox = () => {
 
 	const onClickDeleteButton = () => {
 		if (checkMessages.length > 0) {
-			setIsOpenDeleteModal(true);
+			setIsOpenedMessageDeleteAlertModal(true);
 		} else {
 			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
 		}
@@ -109,7 +108,7 @@ const MessageBox = () => {
 	};
 
 	const deleteMessageHandler = () => {
-		setIsOpenDeleteModal(false);
+		setIsOpenedMessageDeleteAlertModal(false);
 		deleteMutate();
 		setCheckMessages([]);
 	};
@@ -170,6 +169,7 @@ const MessageBox = () => {
 								<MessageContent
 									key={`message-box-message${idx}`}
 									message={res}
+									idx={idx}
 									checkMode={checkMode}
 									onToggleCheckMessage={onToggleCheckMessage}
 									checkMessages={checkMessages}
@@ -179,6 +179,7 @@ const MessageBox = () => {
 							<MessageContent
 								key={`message-box-message${idx}`}
 								message={res}
+								idx={idx}
 								checkMode={checkMode}
 								onToggleCheckMessage={onToggleCheckMessage}
 								checkMessages={checkMessages}
@@ -233,32 +234,13 @@ const MessageBox = () => {
 				/>
 			)}
 
-			{isOpenDeleteModal && (
-				<AlertModal
-					isOpen={isOpenDeleteModal}
-					modalTitle="메세지"
-					modalMainImage="deleteMessageModal"
-					modalDescMessages={[
-						'메시지 삭제 시',
-						'메세지함에 있던 메시지가 삭제되며',
-						'삭제 후에는 복구할 수 없어요',
-						'정말 삭제하시겠습니까?',
-					]}
-					buttonTitle="삭제하기"
-					handleCloseBtnClick={() => {
-						setIsOpenDeleteModal(false);
-					}}
-					handleMainBtnClick={deleteMessageHandler}
-				/>
-			)}
-
 			{isOpenedMessageDeleteAlertModal && (
 				<DeleteAlertModal
 					deleteTargetType="message"
 					deleteTarget="메시지"
 					onAlertModal={isOpenedMessageDeleteAlertModal}
 					handleAlertModalToggle={() => handleMessageDeleteAlertModalToggle('close')}
-					handleTargetDelete={() => console.log('메시지 삭제 로직 실행')}
+					handleTargetDelete={deleteMessageHandler}
 				/>
 			)}
 
