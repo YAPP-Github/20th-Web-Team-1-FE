@@ -1,4 +1,4 @@
-export type Message = {
+export interface Message {
 	alreadyRead: boolean;
 	anonymous: boolean;
 	content: string;
@@ -8,13 +8,21 @@ export type Message = {
 	opening: boolean;
 	senderNickname: string;
 	senderProfileImage: string;
-};
+}
 
-export type MessageDetailData = {
+export interface TreeInfo {
+	fruit: string;
+	id: number;
+	name: string;
+	opening: boolean;
+}
+
+export interface MessageDetailData {
 	nextId: number;
 	prevId: number;
 	responseDto: Message;
-};
+	treeResponseDto: TreeInfo;
+}
 
 export type MessageIdType = number | string | undefined;
 
@@ -23,9 +31,9 @@ export interface MessagesType {
 	responseDto: Message[];
 }
 
-export type PostMessageData = {
+export interface PostMessageData {
 	anonymous: boolean;
 	content: string;
 	folderId: number | null;
 	receiverId: number;
-};
+}
