@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { myInfoState } from '@/stores/user';
 import { useRecoilValue } from 'recoil';
 import { useQuery } from 'react-query';
-import { readTreeDetail } from '@/apis/forest';
+import { getTreeDetail } from '@/apis/forest';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MessageWithLocationType } from '../NoticeTree/NoticeTree.type';
-import { readMessage } from '@/apis/messages';
+import { updateReadMessage } from '@/apis/messages';
 const useTreeDetail = () => {
 	const { treeId } = useParams();
 
@@ -22,13 +22,13 @@ const useTreeDetail = () => {
 
 	const { data: treeDetailInfo } = useQuery(
 		['readTreeDetail', { treeId: treeId, userId: userId }],
-		() => readTreeDetail({ treeId: treeId, userId: String(userId) }),
+		() => getTreeDetail({ treeId: treeId, userId: String(userId) }),
 		{ enabled: !!treeId && !!userId },
 	);
 
-	const readTreeMessage = (messageId: number, selectedIdx: number) => {
+	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
 		if (treeMessages) {
-			readMessage(messageId);
+			updateReadMessage(messageId);
 			setShowMessage(true);
 
 			setSelectedMessage(treeMessages[selectedIdx]);
@@ -54,7 +54,7 @@ const useTreeDetail = () => {
 		treeId,
 		treeMessages,
 		treeDetailInfo,
-		readTreeMessage,
+		updateReadMessageHandler,
 		moveTree,
 		showMessage,
 		selectedMessage,

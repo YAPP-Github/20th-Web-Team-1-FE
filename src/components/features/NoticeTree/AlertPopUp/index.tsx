@@ -5,7 +5,7 @@ import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
 import Forest from '@/assets/images/noticeTree/forest_btn.svg';
 import { AlertPopUpProps } from './AlertPopUp.type';
 
-const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProps) => {
+const AlertPopUp = ({ username, messageCount, showAlertMessage, activeHomeAlert }: AlertPopUpProps) => {
 	const [openedAlertButton, setOpenedAlertButton] = useState(false);
 	const [showAlert, setShowAlert] = useState(true);
 	const showAlertHandler = () => {
@@ -45,6 +45,18 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProp
 		};
 	}, [openedAlertButton]);
 
+	useEffect(() => {
+		if (activeHomeAlert) {
+			setShowAlert(true);
+			const closeAlertTimer = setTimeout(() => {
+				setShowAlert(false);
+			}, 5000);
+			return () => {
+				clearTimeout(closeAlertTimer);
+			};
+		}
+	}, [activeHomeAlert]);
+
 	return (
 		<S.PopUpWrapper showAlert={showAlert}>
 			<S.IconBox openedAlertButton={openedAlertButton}>
@@ -60,10 +72,19 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage }: AlertPopUpProp
 			</S.IconBox>
 
 			<S.MessageBox showAlertMessage={showAlertMessage}>
-				<S.NameText>안녕하세요 {username}님!</S.NameText>
-				<S.AlertMessage>
-					<span>{messageCount}개</span>의 열매가 새로 맺혔어요!
-				</S.AlertMessage>
+				{activeHomeAlert ? (
+					<>
+						<S.NameText> 오늘의 메세지를 모두 확인했어요! </S.NameText>
+						<S.AlertMessage>메세지함에서 나머지 {messageCount}개를 확인하세요!</S.AlertMessage>
+					</>
+				) : (
+					<>
+						<S.NameText>안녕하세요 {username}님!</S.NameText>
+						<S.AlertMessage>
+							<span>{messageCount}개</span>의 열매가 새로 맺혔어요!
+						</S.AlertMessage>
+					</>
+				)}
 			</S.MessageBox>
 		</S.PopUpWrapper>
 	);

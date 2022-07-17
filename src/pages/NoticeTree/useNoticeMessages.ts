@@ -9,10 +9,11 @@ const useNoticeMessages = () => {
 	const getNoticeMessages = useCallback(async () => {
 		const defaultNotices = await getNotices();
 		if (defaultNotices !== undefined) {
-			const newNoticeMessages = defaultNotices.messages.map((message) => ({
+			const newNoticeMessages = defaultNotices.messages.map((message, idx) => ({
 				...message,
 				width: Math.floor(Math.random() * 100),
 				height: Math.floor(Math.random() * 100),
+				messageIndex: idx + 1,
 			}));
 			setNoticeMessages(newNoticeMessages);
 			setTotalUnreadMessageCount(defaultNotices.totalUnreadMessageCount);
@@ -23,7 +24,12 @@ const useNoticeMessages = () => {
 		getNoticeMessages();
 	}, [getNoticeMessages]);
 
-	return { noticeMessages, setNoticeMessages, totalUnreadMessageCount, setTotalUnreadMessageCount };
+	return {
+		noticeMessages,
+		setNoticeMessages,
+		totalUnreadMessageCount,
+		setTotalUnreadMessageCount,
+	};
 };
 
 export default useNoticeMessages;

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './BottomButtons.styled';
 import { useMutation, useQueryClient } from 'react-query';
-import { openMessages } from '@/apis/messages';
+import { updateOpenMessages } from '@/apis/messages';
 import { BottomButtonsProps } from './BottomButtons.type';
 
 const BottomButtons = ({
@@ -12,14 +12,14 @@ const BottomButtons = ({
 	setShowCheckedMessages,
 }: BottomButtonsProps) => {
 	const queryClient = useQueryClient();
-	const { mutate: openMessagesMutate } = useMutation(() => openMessages(checkMessages), {
+	const { mutate: updateOpenMessagesMutate } = useMutation(() => updateOpenMessages(checkMessages), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
 		},
 	});
 
 	const onClickMakeFruitButton = () => {
-		openMessagesMutate();
+		updateOpenMessagesMutate();
 		setShowCheckedMessages(false);
 	};
 

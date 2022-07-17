@@ -77,7 +77,7 @@ export const deleteTree = async (treeId: number | undefined) => {
 	}
 };
 
-export const readTreeDetail = async ({ treeId, userId }: TreeDetailParam) => {
+export const getTreeDetail = async ({ treeId, userId }: TreeDetailParam) => {
 	const {
 		forest: { index },
 	} = API_URL;
