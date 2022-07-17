@@ -53,7 +53,6 @@ const MessageSender = () => {
 		event.preventDefault();
 
 		const data = getPostingMessageInfo();
-		console.log(data);
 		postMessageMutation.mutate(data);
 	};
 
