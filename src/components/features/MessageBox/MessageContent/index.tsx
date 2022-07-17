@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import * as S from './MessageContent.styled';
 import { MessageContentProps } from './MessageContent.type';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from 'react-query';
+import { updateFavoriteMessage } from '@/apis/messages';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { MessageCheckBox } from '@/components/features/MessageBox';
 import BeeIcon from '@/assets/images/messages/message_bee.svg';
 import LikeIcon from '@/assets/images/messages/like_star.svg';
 import StarIcon from '@/assets/images/messages/star.svg';
-import { useMutation, useQueryClient } from 'react-query';
-import { updateFavoriteMessage } from '@/apis/messages';
 
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage, idx }: MessageContentProps) => {
 	dayjs.locale('ko');
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const [isLikeArea, setIsLikeArea] = useState(false);
 
 	const { mutate: updateFavoriteMutate } = useMutation(() => updateFavoriteMessage(message.id), {
 		onSuccess: () => {
@@ -27,9 +26,14 @@ const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessag
 		if (checkMode) {
 			return;
 		}
-		if (!isLikeArea) {
-			navigate(`/message/${messageId}`);
-		}
+
+		navigate(`/message/${messageId}`);
+	};
+
+	const onClickFavoriteButtonHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		e.stopPropagation && e.stopPropagation();
+
+		updateFavoriteMutate();
 	};
 
 	return (
@@ -56,11 +60,7 @@ const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessag
 					</S.InnerBox>
 					<S.InnerBox>
 						<S.MessageText>{message.content}</S.MessageText>
-						<S.FavoriteContainer
-							onClick={() => updateFavoriteMutate()}
-							onMouseEnter={() => setIsLikeArea(true)}
-							onMouseLeave={() => setIsLikeArea(false)}
-						>
+						<S.FavoriteContainer onClick={onClickFavoriteButtonHandler}>
 							{message.favorite ? <img src={LikeIcon} alt="" /> : <img src={StarIcon} alt="" />}
 						</S.FavoriteContainer>
 					</S.InnerBox>
