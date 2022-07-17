@@ -4,9 +4,15 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { myInfoState } from '@/stores/user';
 import { deleteTree, getForest } from '@/apis/forest';
 import { Folder } from '@/types/forest';
+import { useNavigate } from 'react-router-dom';
 
-const useDrawer = () => {
+interface useDrawerProps {
+	onToggleOpenDrawer: () => void;
+}
+
+const useDrawer = ({ onToggleOpenDrawer }: useDrawerProps) => {
 	const myInfo = useRecoilValue(myInfoState);
+	const navigator = useNavigate();
 	const queryClient = useQueryClient();
 	const [checkedTreeId, setCheckedTreeId] = useState<number>();
 	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
@@ -21,6 +27,8 @@ const useDrawer = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getForest');
 			handleFolderDeleteAlertModalToggle('close');
+			navigator(`/messages`);
+			onToggleOpenDrawer();
 		},
 	});
 
@@ -32,6 +40,10 @@ const useDrawer = () => {
 		treeDeleteMutation.mutate(checkedTreeId);
 	};
 
+	/**
+	 *
+	 * event.currentTarget이 null로 들어옵니다.
+	 */
 	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
 		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
 		const rect = closest.getBoundingClientRect();

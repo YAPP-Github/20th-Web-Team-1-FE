@@ -11,6 +11,9 @@ import { DeleteAlertModal } from '@/components/shared';
 import useDrawer from '@/hooks/useDrawer';
 
 const SideDrawer = ({ onModal, setOnModal }: Props) => {
+	const onToggleOpenDrawer = () => {
+		setOnModal(!onModal);
+	};
 	const {
 		myInfo,
 		trees,
@@ -23,7 +26,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 		handleFolderDelete,
 		handleEditMoreModalOpen,
 		setOnEditMoreModal,
-	} = useDrawer();
+	} = useDrawer({ onToggleOpenDrawer });
 
 	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
 
@@ -56,7 +59,9 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 				<S.MessageFilterList>
 					<h3>메시지 필터 리스트</h3>
 					<S.MessageFilterItem>
-						<Link to={'/messages'}>나에게 온 메시지</Link>
+						<Link to={'/messages'} onClick={() => setOnModal(false)}>
+							나에게 온 메시지
+						</Link>
 					</S.MessageFilterItem>
 					<S.MessageFilterItem>
 						<Link to={'/messages/favorite'}>즐겨 찾기</Link>
@@ -76,6 +81,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 								folder={tree}
 								handleEditMoreModalOpen={handleEditMoreModalOpen}
 								onClickTreeFolderMoreMenuButton={() => setCheckedTreeId(tree?.id)}
+								onCloseSideDrawer={() => setOnModal(false)}
 							/>
 						))}
 						{checkTreeSizeMax() && (
