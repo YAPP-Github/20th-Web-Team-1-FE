@@ -14,6 +14,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 	const onToggleOpenDrawer = () => {
 		setOnModal(!onModal);
 	};
+
 	const {
 		myInfo,
 		trees,
