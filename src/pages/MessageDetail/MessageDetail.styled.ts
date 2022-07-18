@@ -1,49 +1,78 @@
+import { DefaultButton } from '@/components/shared/DefaultButton/DefaultButton.styled';
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.main`
 	height: calc(100vh - 85px);
-	background: #fff;
+
 	position: relative;
 	overflow: hidden;
+
+	background: ${({ theme }) => theme.colors.bt_white};
 `;
 
 export const MessageDetailContainer = styled.div`
 	width: 100%;
-	height: 100%;
+	height: calc(100vh - 233px);
+
 	padding: 0px 32px;
+	overflow: auto;
 `;
-export const MessageContentWrapper = styled.p`
-	resize: none;
-	width: 100%;
-	max-height: 435px;
-	height: 60%;
+
+export const MessageContentContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+
+	padding-bottom: 46px;
+`;
+
+export const MessageContent = styled.div`
+	display: flex;
+	flex-direction: column;
+
 	padding: 30px;
+	overflow: auto;
+
+	font-weight: ${({ theme }) => theme.fontWeight.light};
+	font-size: ${({ theme }) => theme.fontSize.f14};
+	line-height: 24px;
+
 	background: ${({ theme }) => theme.colors.bt_primary[20]};
+
 	border: 0.5px solid ${({ theme }) => theme.colors.bt_primary[200]};
 	border-radius: 20px;
-	font-weight: ${({ theme }) => theme.fontWeight.light};
-	font-size: 14px;
 `;
 
 export const MessageNavButtonWrapper = styled.div`
-	width: calc(100% - 64px);
+	height: 82px;
 
-	position: absolute;
-	bottom: 30px;
+	position: relative;
 
 	display: flex;
-	justify-content: space-around;
+`;
 
-	& > a {
-		width: calc(50% - 7px);
-		padding: 17px 0;
-		text-align: center;
-		background-color: ${({ theme }) => theme.colors.bt_primary[200]};
-		color: ${({ theme }) => theme.colors.bt_white};
-		border-radius: 10px;
-		font-size: 16px;
-		font-weight: ${({ theme }) => theme.fontWeight.medium};
-		line-height: 16px;
+export const Button = styled(DefaultButton)<{ disabled: boolean }>`
+	width: calc(50% - 7px);
+
+	position: absolute;
+	right: 0;
+
+	display: ${({ disabled }) => (disabled ? 'none' : 'block')};
+
+	padding: 17px 0;
+
+	text-align: center;
+	color: ${({ theme }) => theme.colors.bt_white};
+	font-size: ${({ theme }) => theme.fontSize.f16};
+	font-weight: ${({ theme }) => theme.fontWeight.medium};
+	line-height: ${({ theme }) => theme.lineHeight.lh16};
+
+	background-color: ${({ theme }) => theme.colors.bt_primary[200]};
+
+	border-radius: 10px;
+
+	:first-of-type {
+		left: 0;
 	}
 `;
 

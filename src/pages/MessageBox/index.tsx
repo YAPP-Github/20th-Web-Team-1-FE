@@ -3,38 +3,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as S from './MessageBox.styled';
 import { getMessages, deleteMessage } from '@/apis/messages';
-import { getForest, deleteTree } from '@/apis/forest';
 import { MessagesType } from '@/types/message';
-import { AlertModal, MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
+import { MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
 import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
-import { Folder } from '@/types/forest';
-
-import { useRecoilValue } from 'recoil';
-import { myInfoState } from '@/stores/user';
 
 const MessageBox = () => {
-	const navigator = useNavigate();
 	const { treeId } = useParams();
-	const myInfo = useRecoilValue(myInfoState);
+
 	const queryClient = useQueryClient();
+
 	const { data: messages } = useQuery<MessagesType>(['getMessages', treeId], () => getMessages(treeId));
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
-		},
-	});
-
-	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
-		enabled: !!myInfo,
-	});
-
-	const treeDeleteMutation = useMutation(deleteTree, {
-		onSuccess: () => {
-			queryClient.invalidateQueries('getForest');
-			handleFolderDeleteAlertModalToggle('close');
-			navigator(`/messages`);
-			onToggleOpenDrawer();
 		},
 	});
 
@@ -44,40 +26,9 @@ const MessageBox = () => {
 	const [isMakingFruit, setIsMakingFruit] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
 	const [showCheckedMessages, setShowCheckedMessages] = useState(false);
-	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
 
 	const [openedDrawer, setOpenedDrawer] = useState(false);
-	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
-	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
-	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
-	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
-	const [checkedTreeId, setCheckedTreeId] = useState<number>();
-
-	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
-		const closest = event.currentTarget.closest('li') as HTMLElement;
-		const rect = closest.getBoundingClientRect();
-		const newPosition = { top: rect.top, left: rect.left + rect.width };
-
-		setModalPosition(newPosition);
-		setOnEditMoreModal(true);
-	};
-
-	const handleEditMoreModalClose = () => {
-		setOnEditMoreModal(false);
-	};
-
-	const handleClickTreeFolderMoreMenuButton = (treeId: number) => {
-		setCheckedTreeId(treeId);
-	};
-
-	const handleFolderDelete = () => {
-		treeDeleteMutation.mutate(checkedTreeId);
-	};
-
-	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
-		setIsOpenedFolderDeleteAlertModal(state === 'open');
-		handleEditMoreModalClose();
-	};
 
 	const onToggleCheckMessage = (id: number) => {
 		checkMessages.includes(id)
@@ -95,7 +46,7 @@ const MessageBox = () => {
 
 	const onClickDeleteButton = () => {
 		if (checkMessages.length > 0) {
-			setIsOpenDeleteModal(true);
+			setIsOpenedMessageDeleteAlertModal(true);
 		} else {
 			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
 		}
@@ -110,7 +61,7 @@ const MessageBox = () => {
 	};
 
 	const deleteMessageHandler = () => {
-		setIsOpenDeleteModal(false);
+		setIsOpenedMessageDeleteAlertModal(false);
 		deleteMutate();
 		setCheckMessages([]);
 	};
@@ -130,10 +81,6 @@ const MessageBox = () => {
 			setIsEdit(false);
 			setIsMakingFruit(false);
 		}
-	};
-
-	const handleMessageDeleteAlertModalToggle = (state: 'open' | 'close') => {
-		setIsOpenedMessageDeleteAlertModal(state === 'open');
 	};
 
 	useEffect(() => {
@@ -171,6 +118,7 @@ const MessageBox = () => {
 								<MessageContent
 									key={`message-box-message${idx}`}
 									message={res}
+									idx={idx}
 									checkMode={checkMode}
 									onToggleCheckMessage={onToggleCheckMessage}
 									checkMessages={checkMessages}
@@ -180,6 +128,7 @@ const MessageBox = () => {
 							<MessageContent
 								key={`message-box-message${idx}`}
 								message={res}
+								idx={idx}
 								checkMode={checkMode}
 								onToggleCheckMessage={onToggleCheckMessage}
 								checkMessages={checkMessages}
@@ -213,19 +162,6 @@ const MessageBox = () => {
 				)}
 			</S.MessageListContainer>
 
-			<SideDrawer
-				checkedTreeId={checkedTreeId}
-				trees={trees}
-				onModal={openedDrawer}
-				setOnModal={onToggleOpenDrawer}
-				onEditMoreModal={onEditMoreModal}
-				modalPosition={modalPosition}
-				handleEditMoreModalOpen={handleEditMoreModalOpen}
-				handleEditMoreModalClose={handleEditMoreModalClose}
-				handleFolderDeleteAlertModalToggle={handleFolderDeleteAlertModalToggle}
-				onClickTreeFolderMoreMenuButton={handleClickTreeFolderMoreMenuButton}
-			/>
-
 			{isMoving && (
 				<MovingFolderModal
 					isMoving={isMoving}
@@ -234,44 +170,17 @@ const MessageBox = () => {
 				/>
 			)}
 
-			{isOpenDeleteModal && (
-				<AlertModal
-					isOpen={isOpenDeleteModal}
-					modalTitle="메세지"
-					modalMainImage="deleteMessageModal"
-					modalDescMessages={[
-						'메시지 삭제 시',
-						'메세지함에 있던 메시지가 삭제되며',
-						'삭제 후에는 복구할 수 없어요',
-						'정말 삭제하시겠습니까?',
-					]}
-					buttonTitle="삭제하기"
-					handleCloseBtnClick={() => {
-						setIsOpenDeleteModal(false);
-					}}
-					handleMainBtnClick={deleteMessageHandler}
-				/>
-			)}
-
 			{isOpenedMessageDeleteAlertModal && (
 				<DeleteAlertModal
 					deleteTargetType="message"
 					deleteTarget="메시지"
 					onAlertModal={isOpenedMessageDeleteAlertModal}
-					handleAlertModalToggle={() => handleMessageDeleteAlertModalToggle('close')}
-					handleTargetDelete={() => console.log('메시지 삭제 로직 실행')}
+					handleAlertModalToggle={() => setIsOpenedMessageDeleteAlertModal(false)}
+					handleTargetDelete={deleteMessageHandler}
 				/>
 			)}
 
-			{isOpenedFolderDeleteAlertModal && (
-				<DeleteAlertModal
-					deleteTargetType="folder"
-					deleteTarget="프로젝트A"
-					onAlertModal={isOpenedFolderDeleteAlertModal}
-					handleAlertModalToggle={() => handleFolderDeleteAlertModalToggle('close')}
-					handleTargetDelete={handleFolderDelete}
-				/>
-			)}
+			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
 		</S.Wrapper>
 	);
 };

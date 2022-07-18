@@ -1,8 +1,9 @@
+import { DefaultButton } from '@/components/shared/DefaultButton/DefaultButton.styled';
 import styled from '@emotion/styled';
 
 export const MessageDetailHeaderWrapper = styled.header`
+	height: 30px;
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 13px;
 `;
@@ -22,14 +23,12 @@ export const MessageSenderInfo = styled.div`
 	}
 `;
 
-export const MessageAdditionalMenu = styled.div`
+export const MessageMenu = styled.div`
+	height: 100%;
+
 	display: flex;
 	align-items: center;
 	line-height: 20px;
-
-	& > img {
-		margin-right: 10px;
-	}
 
 	& > a {
 		display: flex;
@@ -41,4 +40,14 @@ export const MessageAdditionalMenu = styled.div`
 		width: 17px;
 		height: 17px;
 	}
+`;
+
+export const LikeButton = styled(DefaultButton)`
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+
+	margin-right: 10px;
+	padding: 0px;
 `;

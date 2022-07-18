@@ -18,15 +18,14 @@ const MessageDetail = () => {
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+	const [messageDetail, setMessageDetail] = useState<MessageDetailData | undefined>(undefined);
 
-	const { data: messageDetailData } = useQuery<MessageDetailData>(
-		['getMessageDetail', messageId],
-		() => getMessageDetail(messageId),
-		{
-			refetchOnWindowFocus: false,
-			retry: 1,
+	const { data } = useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
+		onSuccess: (data) => {
+			setMessageDetail(data);
 		},
-	);
+		enabled: !!messageId,
+	});
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage([messageId]), {
 		onSuccess: () => {
@@ -52,42 +51,58 @@ const MessageDetail = () => {
 		navigate('/messages');
 	};
 
+	const onToggleLike = () => {
+		if (messageDetail) {
+			const newMessage = { ...messageDetail };
+			newMessage.responseDto.favorite = !newMessage.responseDto.favorite;
+			setMessageDetail(newMessage);
+		}
+	};
+
+	const onClickNavButton = (messageId: number) => {
+		navigate(`/message/${messageId}`);
+	};
+
 	useEffect(() => {
-		if (messageDetailData?.responseDto.alreadyRead === false) {
+		if (messageDetail?.responseDto.alreadyRead === false) {
 			updateReadMessage(messageId);
 		}
-	}, [messageId, messageDetailData]);
+	}, [messageId, messageDetail]);
 
 	return (
 		<S.Wrapper>
 			<MessageMenu
+				detailTreeName={messageDetail?.treeResponseDto.name}
 				isEdit={true}
 				onToggleMovingFolderModal={onToggleMovingFolderModal}
 				onToggleOpenDrawer={onToggleOpenDrawer}
 				deleteMessages={onClickDeleteButton}
 			/>
-			{messageDetailData && (
+			{messageDetail && (
 				<S.MessageDetailContainer>
-					<MessageDetailHeader
-						profileImg={messageDetailData.responseDto.senderProfileImage}
-						senderName={
-							messageDetailData.responseDto.anonymous === false ? messageDetailData.responseDto.senderNickname : '익명'
-						}
-						isBookmarked={messageDetailData.responseDto.favorite}
-					/>
+					<S.MessageContentContainer>
+						<MessageDetailHeader
+							profileImg={messageDetail.responseDto.senderProfileImage}
+							senderName={
+								messageDetail.responseDto.anonymous === false ? messageDetail.responseDto.senderNickname : '익명'
+							}
+							isLike={messageDetail.responseDto.favorite}
+							messageId={messageDetail.responseDto.id}
+							onToggleLike={onToggleLike}
+						/>
 
-					<S.MessageContentWrapper>{messageDetailData.responseDto.content}</S.MessageContentWrapper>
-
+						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
+					</S.MessageContentContainer>
 					<S.MessageNavButtonWrapper>
-						<Link to={messageDetailData.prevId === 0 ? '#' : `/message/${messageDetailData.prevId}`}>
-							<S.ArrowIcon src={ArrowUpIcon} alt="" onClick={() => navigate(`/message/${messageDetailData.prevId}`)} />
+						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
+							<S.ArrowIcon src={ArrowUpIcon} alt="" onClick={() => navigate(`/message/${messageDetail.prevId}`)} />
 							이전 메시지
-						</Link>
+						</S.Button>
 
-						<Link to={messageDetailData.nextId === 0 ? '#' : `/message/${messageDetailData.nextId}`}>
+						<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
 							다음 메시지
-							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
-						</Link>
+							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />{' '}
+						</S.Button>
 					</S.MessageNavButtonWrapper>
 				</S.MessageDetailContainer>
 			)}
