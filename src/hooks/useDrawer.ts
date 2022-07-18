@@ -45,7 +45,7 @@ const useDrawer = ({ onToggleOpenDrawer }: useDrawerProps) => {
 	 * event.currentTarget이 null로 들어옵니다.
 	 */
 	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
-		const closest = event.currentTarget.closest('a') as HTMLAnchorElement;
+		const closest = event.currentTarget.closest('li') as HTMLLIElement;
 		const rect = closest.getBoundingClientRect();
 		const newPosition = { top: rect.top, left: rect.left + rect.width };
 
