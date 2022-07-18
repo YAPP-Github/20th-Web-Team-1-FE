@@ -65,7 +65,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 						</Link>
 					</S.MessageFilterItem>
 					<S.MessageFilterItem>
-						<Link to={'/messages/favorite'}>즐겨 찾기</Link>
+						<Link to={'/messages/favorite'} onClick={() => setOnModal(false)}>즐겨 찾기</Link>
 					</S.MessageFilterItem>
 				</S.MessageFilterList>
 
