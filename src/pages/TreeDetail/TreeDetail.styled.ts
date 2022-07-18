@@ -11,6 +11,7 @@ export const TemporaryWrapper = styled.div`
 		${({ theme }) => theme.colors.bt_white} 100%
 	);
 `;
+
 export const TreeDetailTextWrapper = styled.div`
 	width: 100%;
 	display: flex;
@@ -37,23 +38,21 @@ export const TreeDetailMainText = styled.p`
 		margin-top: 10px;
 	}
 `;
+
 export const Button = styled.button`
-	background: ${({ theme }) => theme.colors.bt_yellow[50]};
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border: none;
-
 	position: absolute;
-	top: 50%;
+	top: 127px;
 
-	font-size: ${({ theme }) => theme.fontSize.f18};
-	font-weight: ${({ theme }) => theme.fontWeight.strongBold};
+	background: none;
+
+	border: none;
 `;
+
 export const PrevButton = styled(Button)`
 	left: 0;
 	margin-left: 10px;
 `;
+
 export const NextButton = styled(Button)`
 	right: 0;
 	margin-right: 10px;
