@@ -37,13 +37,13 @@ const TreeDetail = () => {
 				<WateringButton treeId={treeId} />
 
 				{treeDetailInfo?.prevId !== 0 && (
-					<S.PrevButton>
-						<img src={LeftButton} onClick={() => moveTree(treeDetailInfo?.prevId)} alt="move to prev tree" />
+					<S.PrevButton onClick={() => moveTree(treeDetailInfo?.prevId)}>
+						<img src={LeftButton} alt="이전 메세지 이동" />
 					</S.PrevButton>
 				)}
 				{treeDetailInfo?.nextId !== 0 && (
-					<S.NextButton>
-						<img src={RightButton} onClick={() => moveTree(treeDetailInfo?.nextId)} alt="move to next tree" />
+					<S.NextButton onClick={() => moveTree(treeDetailInfo?.nextId)}>
+						<img src={RightButton} alt="다음 메세지 이동" />
 					</S.NextButton>
 				)}
 			</S.TemporaryWrapper>
