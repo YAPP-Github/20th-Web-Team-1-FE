@@ -40,10 +40,6 @@ const useDrawer = ({ onToggleOpenDrawer }: useDrawerProps) => {
 		treeDeleteMutation.mutate(checkedTreeId);
 	};
 
-	/**
-	 *
-	 * event.currentTarget이 null로 들어옵니다.
-	 */
 	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
 		const closest = event.currentTarget.closest('li') as HTMLLIElement;
 		const rect = closest.getBoundingClientRect();
