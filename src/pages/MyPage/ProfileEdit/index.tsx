@@ -7,6 +7,7 @@ import { myInfoState } from '@/stores/user';
 import useInput from '@/hooks/useInput';
 import { editProfile } from '@/apis/users';
 import { RESPONSE_SUCCESS_OK } from '@/constants/api';
+import withAuth from '@/utils/HOC/withAuth';
 
 const ProfileEdit = () => {
 	const [myInfo, setMyInfo] = useRecoilState(myInfoState);
@@ -53,4 +54,4 @@ const ProfileEdit = () => {
 	);
 };
 
-export default ProfileEdit;
+export default withAuth(ProfileEdit);
