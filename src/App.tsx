@@ -8,15 +8,15 @@ import { myInfoState } from '@/stores/user';
 const App = () => {
 	const setMyInfo = useSetRecoilState(myInfoState);
 
-	const handleCheckIsLoggedIn = useCallback(async () => {
-		const result = await checkMyInfo();
+	const handleCheckMyInfo = useCallback(async () => {
+		const response = await checkMyInfo();
 
-		setMyInfo(result);
+		setMyInfo(response?.payload);
 	}, [setMyInfo]);
 
 	useEffect(() => {
-		handleCheckIsLoggedIn();
-	}, [handleCheckIsLoggedIn]);
+		handleCheckMyInfo();
+	}, [handleCheckMyInfo]);
 
 	return (
 		<Layout>

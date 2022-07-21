@@ -8,12 +8,12 @@ export const checkMyInfo = async () => {
 	} = API_URL;
 
 	try {
-		const { payload } = await requester<UserInfo>({
+		const response = await requester<UserInfo>({
 			method: GET,
 			url: info,
 		});
 
-		return payload;
+		return response;
 	} catch (error) {
 		// 에러 핸들링
 	}

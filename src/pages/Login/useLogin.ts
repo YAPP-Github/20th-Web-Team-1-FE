@@ -59,8 +59,8 @@ const useLogin = () => {
 		if (status === RESPONSE_SUCCESS_CREATED) {
 			navigate('/');
 
-			const result = await checkMyInfo();
-			setMyInfo(result);
+			const response = await checkMyInfo();
+			setMyInfo(response?.payload);
 		}
 	}, [location, navigate, setMyInfo]);
 
