@@ -11,7 +11,13 @@ import { getForest } from '@/apis/forest';
 import { updateMovingMessages } from '@/apis/messages';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages }: MovingFolderModalProps) => {
+const MovingFolderModal = ({
+	isMoving,
+	setIsEdit,
+	onToggleMovingFolderModal,
+	checkMessages,
+	getMessageList,
+}: MovingFolderModalProps) => {
 	const { messageId } = useParams();
 
 	const navigate = useNavigate();
@@ -40,7 +46,8 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 	const onClickMovingFolderButton = () => {
 		updateMovingMessagesMutate();
 		onToggleMovingFolderModal();
-
+		setIsEdit && setIsEdit(false);
+		getMessageList && getMessageList();
 		if (messageId) {
 			navigate('/messages');
 		}

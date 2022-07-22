@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './MessageDetail.styled';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { getMessageDetail, updateReadMessage, deleteMessage } from '@/apis/messages';
 import { MessageDetailData } from '@/types/message';
@@ -9,18 +9,19 @@ import { SideDrawer, AlertModal, MovingFolderModal } from '@/components/shared';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
+import { useLocation } from 'react-router-dom';
 
 const MessageDetail = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { messageId } = useParams();
-
+	const { state } = useLocation();
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 	const [messageDetail, setMessageDetail] = useState<MessageDetailData | undefined>(undefined);
 
-	const { data } = useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
+	useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
 		onSuccess: (data) => {
 			setMessageDetail(data);
 		},
@@ -72,7 +73,7 @@ const MessageDetail = () => {
 	return (
 		<S.Wrapper>
 			<MessageMenu
-				detailTreeName={messageDetail?.treeResponseDto.name}
+				detailTreeName={state === 'favorite' ? '즐겨찾기' : messageDetail?.treeResponseDto.name}
 				isEdit={true}
 				onToggleMovingFolderModal={onToggleMovingFolderModal}
 				onToggleOpenDrawer={onToggleOpenDrawer}
@@ -89,6 +90,7 @@ const MessageDetail = () => {
 							isLike={messageDetail.responseDto.favorite}
 							messageId={messageDetail.responseDto.id}
 							onToggleLike={onToggleLike}
+							treeId={messageDetail.treeResponseDto.id}
 						/>
 
 						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>

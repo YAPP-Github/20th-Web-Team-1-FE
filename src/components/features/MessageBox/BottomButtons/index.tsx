@@ -21,6 +21,7 @@ const BottomButtons = ({
 	const onClickMakeFruitButton = () => {
 		updateOpenMessagesMutate();
 		setShowCheckedMessages(false);
+		editMakingToggleHandler('back');
 	};
 
 	const onClickBackButton = () => {

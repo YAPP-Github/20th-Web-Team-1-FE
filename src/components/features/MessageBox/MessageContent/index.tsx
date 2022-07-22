@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './MessageContent.styled';
 import { MessageContentProps } from './MessageContent.type';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { updateFavoriteMessage } from '@/apis/messages';
 import * as dayjs from 'dayjs';
@@ -14,6 +14,7 @@ import StarIcon from '@/assets/images/messages/star.svg';
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage, idx }: MessageContentProps) => {
 	dayjs.locale('ko');
 	const navigate = useNavigate();
+	const { treeId } = useParams();
 	const queryClient = useQueryClient();
 
 	const { mutate: updateFavoriteMutate } = useMutation(() => updateFavoriteMessage(message.id), {
@@ -27,7 +28,7 @@ const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessag
 			return;
 		}
 
-		navigate(`/message/${messageId}`);
+		navigate(`/message/${messageId}`, { state: treeId });
 	};
 
 	const onClickFavoriteButtonHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

@@ -40,7 +40,7 @@ const MessageMenu = ({
 				<S.HamburgerButton onClick={onToggleOpenDrawer}>
 					<img src={HamburgerIcon} alt="message-box-hamburger-button" />
 				</S.HamburgerButton>
-				{treeId && <S.Title>{currentTree && currentTree.name}</S.Title>}
+				<S.Title>{currentTree && currentTree.name}</S.Title>
 				{detailTreeName && <S.Title>{detailTreeName === 'DEFAULT' ? '나에게 온 편지' : detailTreeName}</S.Title>}
 			</S.InnerWrapper>
 
