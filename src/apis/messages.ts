@@ -1,5 +1,5 @@
 import API_URL, { DELETE, GET, POST, PUT } from '@/constants/api';
-import { MessageDetailData, MessageIdType, MessagesType, PostMessageData } from '@/types/message';
+import { MessageDetailData, MessageIdType, MessagesType, PostMessageData, MessageParams } from '@/types/message';
 import { requester } from './requester';
 
 export const deleteMessage = async (messageIds: MessageIdType[]) => {
@@ -52,8 +52,13 @@ export const getMessageDetail = async (messageId: MessageIdType) => {
 	}
 };
 
-export const getMessages = async (treeId: MessageIdType) => {
-	const path = treeId === 'favorite' ? '/messages/favorite' : treeId ? `/messages?treeId=${treeId}` : '/messages';
+export const getMessages = async ({ treeId, currentPage }: MessageParams) => {
+	const path =
+		treeId === 'favorite'
+			? `/messages/favorite?page=${currentPage}&size=10`
+			: treeId
+			? `/messages?page=${currentPage}&size=10&treeId=${treeId}`
+			: `/messages?page=${currentPage}&size=10`;
 
 	try {
 		const response = await requester<MessagesType>({

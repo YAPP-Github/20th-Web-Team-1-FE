@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './MessageBox.styled';
-import { getMessages, deleteMessage } from '@/apis/messages';
-import { MessagesType } from '@/types/message';
-import { MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
-import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
+import { useMutation } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { deleteMessage, getMessages } from '@/apis/messages';
+import { Message } from '@/types/message';
+import { BottomButtons, MakingFruitMenu, MessageContent, MessageMenu } from '@/components/features/MessageBox';
+import { DeleteAlertModal, MovingFolderModal, SideDrawer } from '@/components/shared';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
 
-	const queryClient = useQueryClient();
-
-	const { data: messages } = useQuery<MessagesType>(['getMessages', treeId], () => getMessages(treeId));
-
-	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
-		onSuccess: () => {
-			queryClient.invalidateQueries('getMessages');
-		},
-	});
+	const lastItemRef = useRef<HTMLDivElement>(null);
 
 	const [checkMessages, setCheckMessages] = useState<number[]>([]);
 	const [isEdit, setIsEdit] = useState(false);
@@ -27,8 +19,41 @@ const MessageBox = () => {
 	const [isMoving, setIsMoving] = useState(false);
 	const [showCheckedMessages, setShowCheckedMessages] = useState(false);
 	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
-
 	const [openedDrawer, setOpenedDrawer] = useState(false);
+	const [currentPage, setCurrantPage] = useState(0);
+	const [messageList, setMessageList] = useState<Message[] | null>(null);
+	const [hasNext, setHasNext] = useState(false);
+
+	const getMessageList = useCallback(async () => {
+		const data = await getMessages({ treeId, currentPage: 0 });
+		setMessageList(data.responseDto);
+
+		if (data.hasNext) {
+			setHasNext(data.hasNext);
+			setCurrantPage(currentPage + 1);
+		}
+	}, [currentPage, treeId]);
+
+	const getMoreMessageList = async () => {
+		const data = await getMessages({ treeId, currentPage });
+
+		if (messageList) {
+			setMessageList([...messageList, ...data.responseDto]);
+		}
+		if (data.hasNext) {
+			setHasNext(data.hasNext);
+			setCurrantPage(currentPage + 1);
+			return;
+		} else {
+			setHasNext(false);
+		}
+	};
+
+	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
+		onSuccess: () => {
+			getMessageList();
+		},
+	});
 
 	const onToggleCheckMessage = (id: number) => {
 		checkMessages.includes(id)
@@ -64,6 +89,7 @@ const MessageBox = () => {
 		setIsOpenedMessageDeleteAlertModal(false);
 		deleteMutate();
 		setCheckMessages([]);
+		setIsEdit(false);
 	};
 
 	const editMakingToggleHandler = (path: string) => {
@@ -83,6 +109,11 @@ const MessageBox = () => {
 		}
 	};
 
+	const filteredList =
+		showCheckedMessages && messageList
+			? messageList.filter((message) => checkMessages.includes(message.id))
+			: messageList;
+
 	useEffect(() => {
 		setCheckMessages([]);
 	}, [checkMode]);
@@ -91,18 +122,40 @@ const MessageBox = () => {
 		setCheckMode(isEdit || isMakingFruit);
 	}, [isEdit, isMakingFruit, setCheckMode]);
 
+	useEffect(() => {
+		getMessageList();
+	}, [treeId]);
+
+	const onIntersect: IntersectionObserverCallback = ([entry]) => {
+		entry.isIntersecting && hasNext && getMoreMessageList();
+	};
+
+	useEffect(() => {
+		let observer: IntersectionObserver;
+		if (lastItemRef && lastItemRef.current && hasNext) {
+			observer = new IntersectionObserver(onIntersect, {
+				threshold: 0.1,
+			});
+
+			observer.observe(lastItemRef.current);
+		}
+
+		return () => observer && observer.disconnect();
+	}, [lastItemRef, lastItemRef.current, onIntersect]);
+
 	return (
 		<S.Wrapper>
 			{isMakingFruit ? (
 				<MakingFruitMenu
 					showCheckedMessages={showCheckedMessages}
 					setShowCheckedMessages={setShowCheckedMessages}
-					numberOfMessages={messages ? messages.responseDto.length : 0}
+					numberOfMessages={messageList ? messageList.length : 0}
 					numberOfCheckedMessages={checkMessages.length}
 				/>
 			) : (
 				<MessageMenu
 					isEdit={isEdit}
+					detailTreeName={treeId === 'favorite' ? '즐겨찾기' : !treeId ? '나에게 온 메시지' : undefined}
 					editMakingToggleHandler={editMakingToggleHandler}
 					onToggleOpenDrawer={onToggleOpenDrawer}
 					onToggleMovingFolderModal={onClickMovingFolderButton}
@@ -111,10 +164,10 @@ const MessageBox = () => {
 			)}
 
 			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
-				{showCheckedMessages
-					? messages?.responseDto
-							.filter((message) => checkMessages.includes(message.id))
-							.map((res, idx) => (
+				{filteredList &&
+					filteredList.map((res, idx) =>
+						idx === filteredList.length - 1 ? (
+							<div key={`message-box-message${idx}`} ref={lastItemRef}>
 								<MessageContent
 									key={`message-box-message${idx}`}
 									message={res}
@@ -123,18 +176,21 @@ const MessageBox = () => {
 									onToggleCheckMessage={onToggleCheckMessage}
 									checkMessages={checkMessages}
 								/>
-							))
-					: messages?.responseDto.map((res, idx) => (
-							<MessageContent
-								key={`message-box-message${idx}`}
-								message={res}
-								idx={idx}
-								checkMode={checkMode}
-								onToggleCheckMessage={onToggleCheckMessage}
-								checkMessages={checkMessages}
-							/>
-					  ))}
-				{messages?.responseDto.length === 0 && (
+							</div>
+						) : (
+							<div key={`message-box-message${idx}`}>
+								<MessageContent
+									key={`message-box-message${idx}`}
+									message={res}
+									idx={idx}
+									checkMode={checkMode}
+									onToggleCheckMessage={onToggleCheckMessage}
+									checkMessages={checkMessages}
+								/>
+							</div>
+						),
+					)}
+				{messageList && messageList.length === 0 && (
 					<S.NoMessageContainer>
 						{treeId ? (
 							<>
@@ -165,8 +221,10 @@ const MessageBox = () => {
 			{isMoving && (
 				<MovingFolderModal
 					isMoving={isMoving}
+					setIsEdit={setIsEdit}
 					onToggleMovingFolderModal={onToggleMovingFolderModal}
 					checkMessages={checkMessages}
+					getMessageList={getMessageList}
 				/>
 			)}
 

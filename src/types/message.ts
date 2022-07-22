@@ -37,3 +37,8 @@ export interface PostMessageData {
 	folderId: number | null;
 	receiverId: number;
 }
+
+export interface MessageParams {
+	treeId: MessageIdType;
+	currentPage: number;
+}
