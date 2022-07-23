@@ -1,16 +1,16 @@
 import { updateReadMessage } from '@/apis/messages';
+import { getNotices } from '@/apis/noticeTree';
+import NoMessageIcon from '@/assets/images/noticeTree/no_message.svg';
 import { AlertPopUp, Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
+import { MediumAlertModal } from '@/components/shared';
 import { myInfoState } from '@/stores/user';
-import React, { useEffect, useState } from 'react';
+import withAuth from '@/utils/HOC/withAuth';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import * as S from './NoticeTree.styled';
 import { MessageWithLocationType } from './NoticeTree.type';
-import useNoticeMessages from './useNoticeMessages';
-import withAuth from '@/utils/HOC/withAuth';
 
 const NoticeTree = () => {
-	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount } = useNoticeMessages();
-
 	const myInfo = useRecoilValue(myInfoState);
 
 	const username = myInfo ? myInfo.nickname : '';
@@ -19,7 +19,30 @@ const NoticeTree = () => {
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [showAlertMessage, setShowAlertMessage] = useState(true);
 	const [activeHomeAlert, setActiveHomeAlert] = useState(false);
+	const [noticeMessages, setNoticeMessages] = useState<MessageWithLocationType[] | null>(null);
+	const [totalUnreadMessageCount, setTotalUnreadMessageCount] = useState<number>(0);
+	const [onAlertModal, setOnAlertModal] = useState(false);
 	const [unreadCount, setUnreadCount] = useState(totalUnreadMessageCount);
+
+	const modalHandler = () => {
+		setOnAlertModal(!onAlertModal);
+	};
+
+	const getNoticeMessages = useCallback(async () => {
+		const defaultNotices = await getNotices();
+		if (defaultNotices !== undefined) {
+			const newNoticeMessages = defaultNotices.messages.map((message, idx) => ({
+				...message,
+				width: Math.floor(Math.random() * 100),
+				height: Math.floor(Math.random() * 100),
+				messageIndex: idx + 1,
+			}));
+			setNoticeMessages(newNoticeMessages);
+			setTotalUnreadMessageCount(defaultNotices.totalUnreadMessageCount);
+		} else {
+			modalHandler();
+		}
+	}, []);
 
 	const updateReadMessageHandler = async (messageId: number, selectedIdx: number) => {
 		if (noticeMessages) {
@@ -41,6 +64,10 @@ const NoticeTree = () => {
 	const showMessageHandler = (show: boolean) => {
 		setShowMessage(show);
 	};
+
+	useEffect(() => {
+		getNoticeMessages();
+	}, [getNoticeMessages]);
 
 	useEffect(() => {
 		setTimeout(() => setShowAlertMessage(false), 3000);
@@ -78,6 +105,14 @@ const NoticeTree = () => {
 				{showMessage && <MessageBox selectedMessage={selectedMessage} showMessageHandler={showMessageHandler} />}
 				<WateringButton />
 			</S.TemporaryWrapper>
+			{onAlertModal && (
+				<MediumAlertModal
+					image={NoMessageIcon}
+					contents={['새롭게 도착한 메시지가 없습니다.']}
+					modalHandler={modalHandler}
+					buttonText="닫기"
+				/>
+			)}
 		</>
 	);
 };
