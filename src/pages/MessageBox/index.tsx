@@ -1,18 +1,21 @@
 import { getForest } from '@/apis/forest';
 import { deleteMessage, getMessages } from '@/apis/messages';
 import { BottomButtons, MakingFruitMenu, MessageContent, MessageMenu } from '@/components/features/MessageBox';
-import { DeleteAlertModal, MovingFolderModal, SideDrawer } from '@/components/shared';
+import { DeleteAlertModal, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
 import { Message } from '@/types/message';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { smallModalState } from '@/stores/modal';
 import * as S from './MessageBox.styled';
+import withAuth from '@/utils/HOC/withAuth';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
+	const [smallModal, setSmallModal] = useRecoilState(smallModalState);
 
 	const myInfo = useRecoilValue(myInfoState);
 
@@ -38,24 +41,31 @@ const MessageBox = () => {
 	const getMessageList = useCallback(async () => {
 		const data = await getMessages({ treeId, currentPage: 0 });
 
-		setMessageList(data.responseDto);
+		if (data) {
+			setMessageList(data.responseDto);
 
-		if (data.hasNext) {
-			setHasNext(data.hasNext);
-			setCurrantPage(currentPage + 1);
+			if (data.hasNext) {
+				setHasNext(data.hasNext);
+				setCurrantPage(currentPage + 1);
+			}
+		} else {
+			setSmallModal('네트워크에러');
 		}
 	}, [currentPage, treeId]);
 
 	const getMoreMessageList = async () => {
 		const data = await getMessages({ treeId, currentPage });
-
-		if (messageList) {
-			setMessageList([...messageList, ...data.responseDto]);
-		}
-		if (data.hasNext) {
-			setHasNext(data.hasNext);
-			setCurrantPage(currentPage + 1);
-			return;
+		if (data) {
+			if (messageList) {
+				setMessageList([...messageList, ...data.responseDto]);
+			}
+			if (data.hasNext) {
+				setHasNext(data.hasNext);
+				setCurrantPage(currentPage + 1);
+				return;
+			} else {
+				setHasNext(false);
+			}
 		} else {
 			setHasNext(false);
 		}
@@ -84,17 +94,13 @@ const MessageBox = () => {
 	const onClickDeleteButton = () => {
 		if (checkMessages.length > 0) {
 			setIsOpenedMessageDeleteAlertModal(true);
-		} else {
-			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
-		}
+		} else setSmallModal('1개 이상의 삭제할 메세지를 선택해주세요!');
 	};
 
 	const onClickMovingFolderButton = () => {
 		if (checkMessages.length > 0) {
 			onToggleMovingFolderModal();
-		} else {
-			alert('1개 이상의 이동할 메세지를 선택해주세요! ');
-		}
+		} else setSmallModal('1개 이상의 이동할 메세지를 선택해주세요!');
 	};
 
 	const deleteMessageHandler = () => {
@@ -248,8 +254,9 @@ const MessageBox = () => {
 			)}
 
 			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
+			{smallModal && <SmallAlertModal />}
 		</S.Wrapper>
 	);
 };
 
-export default MessageBox;
+export default withAuth(MessageBox);

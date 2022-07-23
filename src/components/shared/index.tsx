@@ -10,3 +10,4 @@ export { default as EditFolderMoreFrame } from './Modal/EditFolderMoreFrame';
 export { default as MovingFolderModal } from './Modal/MovingFolderModal';
 export { default as SideDrawer } from './Modal/SideDrawer';
 export { default as SuccessModal } from './Modal/SuccessModal';
+export { default as SmallAlertModal } from './Modal/SmallAlertModal';
