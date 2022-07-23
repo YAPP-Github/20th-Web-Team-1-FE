@@ -8,8 +8,7 @@ import { MessageWithLocationType } from './NoticeTree.type';
 import useNoticeMessages from './useNoticeMessages';
 
 const NoticeTree = () => {
-	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount, setTotalUnreadMessageCount } =
-		useNoticeMessages();
+	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount } = useNoticeMessages();
 
 	const myInfo = useRecoilValue(myInfoState);
 
@@ -19,12 +18,13 @@ const NoticeTree = () => {
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [showAlertMessage, setShowAlertMessage] = useState(true);
 	const [activeHomeAlert, setActiveHomeAlert] = useState(false);
+	const [unreadCount, setUnreadCount] = useState(totalUnreadMessageCount);
 
 	const updateReadMessageHandler = async (messageId: number, selectedIdx: number) => {
 		if (noticeMessages) {
 			if (messageId > 0) {
 				const isRead = await updateReadMessage(messageId);
-				isRead && setTotalUnreadMessageCount((prev) => prev - 1);
+				isRead && setUnreadCount((prev) => prev - 1);
 			}
 
 			showMessageHandler(true);
@@ -64,13 +64,13 @@ const NoticeTree = () => {
 				<Clouds />
 				<S.NoticeTextWrapper>
 					<S.NoticeMainText>
-						{username}의 알림나무<span>읽지 않은 열매 {totalUnreadMessageCount} </span>
+						{username}의 알림나무<span>읽지 않은 열매 {unreadCount} </span>
 					</S.NoticeMainText>
 				</S.NoticeTextWrapper>
 				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={noticeMessages ? noticeMessages : null} />
 				<AlertPopUp
 					username={username}
-					messageCount={totalUnreadMessageCount}
+					messageCount={unreadCount}
 					showAlertMessage={showAlertMessage}
 					activeHomeAlert={activeHomeAlert}
 				/>

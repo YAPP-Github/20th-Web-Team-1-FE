@@ -28,7 +28,6 @@ const useNoticeMessages = () => {
 		noticeMessages,
 		setNoticeMessages,
 		totalUnreadMessageCount,
-		setTotalUnreadMessageCount,
 	};
 };
 
