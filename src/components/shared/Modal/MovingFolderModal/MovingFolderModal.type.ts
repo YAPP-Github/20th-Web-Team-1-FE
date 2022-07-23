@@ -4,4 +4,5 @@ export interface MovingFolderModalProps {
 	setIsEdit?: React.Dispatch<React.SetStateAction<boolean>>;
 	onToggleMovingFolderModal: () => void;
 	getMessageList?: () => Promise<void>;
+	handleAfterAction?: () => void;
 }

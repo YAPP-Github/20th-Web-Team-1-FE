@@ -1,9 +1,9 @@
+import { Forest, MessageBox, MessageDetail, MessageSender, MyPage, NoticeTree, TreeDetail } from '@/pages';
+import Login from '@/pages/Login';
+import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { NoticeTree, Forest, MyPage, MessageSender, MessageDetail, MessageBox, TreeDetail } from '@/pages';
 import TreeAddForm from '../features/Forest/TreeAddForm';
-import ProfileEdit from '@/pages/MyPage/ProfileEdit';
-import Login from '@/pages/Login';
 
 const Routers = () => {
 	return (
@@ -21,6 +21,7 @@ const Routers = () => {
 			<Route path="/messages" element={<MessageBox />} />
 			<Route path="/messages/:treeId" element={<MessageBox />} />
 			<Route path="/message/:messageId" element={<MessageDetail />} />
+			<Route path="/message/:treeId/:messageId" element={<MessageDetail />} />
 
 			{/* <Route path="/friends" element={} />
 			<Route path="/*" element={} /> */}

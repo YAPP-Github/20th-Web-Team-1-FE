@@ -1,16 +1,24 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import * as S from './MessageBox.styled';
-import { useMutation } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { getForest } from '@/apis/forest';
 import { deleteMessage, getMessages } from '@/apis/messages';
-import { Message } from '@/types/message';
 import { BottomButtons, MakingFruitMenu, MessageContent, MessageMenu } from '@/components/features/MessageBox';
 import { DeleteAlertModal, MovingFolderModal, SideDrawer } from '@/components/shared';
+import { myInfoState } from '@/stores/user';
+import { Folder } from '@/types/forest';
+import { Message } from '@/types/message';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import * as S from './MessageBox.styled';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
 
-	const lastItemRef = useRef<HTMLDivElement>(null);
+	const myInfo = useRecoilValue(myInfoState);
+
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
+	});
 
 	const [checkMessages, setCheckMessages] = useState<number[]>([]);
 	const [isEdit, setIsEdit] = useState(false);
@@ -24,8 +32,12 @@ const MessageBox = () => {
 	const [messageList, setMessageList] = useState<Message[] | null>(null);
 	const [hasNext, setHasNext] = useState(false);
 
+	const [currentTree, setCurrentTree] = useState<string | undefined>(undefined);
+
+	const lastItemRef = useRef<HTMLDivElement>(null);
 	const getMessageList = useCallback(async () => {
 		const data = await getMessages({ treeId, currentPage: 0 });
+
 		setMessageList(data.responseDto);
 
 		if (data.hasNext) {
@@ -143,6 +155,16 @@ const MessageBox = () => {
 		return () => observer && observer.disconnect();
 	}, [lastItemRef, lastItemRef.current, onIntersect]);
 
+	useEffect(() => {
+		if (treeId === 'favorite' || !treeId) {
+			return;
+		}
+		if (folders && treeId) {
+			const idx = folders.findIndex((folder) => folder.id === Number(treeId));
+			setCurrentTree(folders[idx].name);
+		}
+	}, [folders, treeId]);
+
 	return (
 		<S.Wrapper>
 			{isMakingFruit ? (
@@ -155,42 +177,29 @@ const MessageBox = () => {
 			) : (
 				<MessageMenu
 					isEdit={isEdit}
-					detailTreeName={treeId === 'favorite' ? '즐겨찾기' : !treeId ? '나에게 온 메시지' : undefined}
 					editMakingToggleHandler={editMakingToggleHandler}
 					onToggleOpenDrawer={onToggleOpenDrawer}
 					onToggleMovingFolderModal={onClickMovingFolderButton}
 					deleteMessages={onClickDeleteButton}
+					treeName={currentTree}
 				/>
 			)}
 
 			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
 				{filteredList &&
-					filteredList.map((res, idx) =>
-						idx === filteredList.length - 1 ? (
-							<div key={`message-box-message${idx}`} ref={lastItemRef}>
-								<MessageContent
-									key={`message-box-message${idx}`}
-									message={res}
-									idx={idx}
-									checkMode={checkMode}
-									onToggleCheckMessage={onToggleCheckMessage}
-									checkMessages={checkMessages}
-								/>
-							</div>
-						) : (
-							<div key={`message-box-message${idx}`}>
-								<MessageContent
-									key={`message-box-message${idx}`}
-									message={res}
-									idx={idx}
-									checkMode={checkMode}
-									onToggleCheckMessage={onToggleCheckMessage}
-									checkMessages={checkMessages}
-								/>
-							</div>
-						),
-					)}
-				{messageList && messageList.length === 0 && (
+					filteredList.map((res, idx) => (
+						<div key={`message-box-message${res.id}`} ref={idx === filteredList.length - 1 ? lastItemRef : null}>
+							<MessageContent
+								key={`message-box-message${res.id}`}
+								message={res}
+								idx={idx}
+								checkMode={checkMode}
+								onToggleCheckMessage={onToggleCheckMessage}
+								checkMessages={checkMessages}
+							/>
+						</div>
+					))}
+				{messageList?.length === 0 && (
 					<S.NoMessageContainer>
 						{treeId ? (
 							<>
