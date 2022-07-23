@@ -12,7 +12,7 @@ const Layout = ({ children }: Props) => {
 
 	return (
 		<>
-			{pathname === '/login' ? (
+			{pathname === '/login' || pathname === '/not-found' ? (
 				<>{children}</>
 			) : (
 				<>
