@@ -1,20 +1,34 @@
-import React from 'react';
-import { Clouds, Tree, MessageBox, WateringButton } from '@/components/features/NoticeTree';
-import * as S from './TreeDetail.styled';
+import { updateReadMessage } from '@/apis/messages';
 import LeftButton from '@/assets/images/trees/tree_left_button.svg';
 import RightButton from '@/assets/images/trees/tree_right_button.svg';
+import { Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MessageWithLocationType } from '../NoticeTree/NoticeTree.type';
+import * as S from './TreeDetail.styled';
 import useTreeDetail from './useTreeDetail';
+
 const TreeDetail = () => {
-	const {
-		treeId,
-		treeMessages,
-		treeDetailInfo,
-		updateReadMessageHandler,
-		moveTree,
-		showMessage,
-		selectedMessage,
-		setShowMessage,
-	} = useTreeDetail();
+	const { treeId, treeMessages, treeDetailInfo } = useTreeDetail();
+
+	const navigate = useNavigate();
+
+	const [showMessage, setShowMessage] = useState(false);
+	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
+
+	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
+		if (treeMessages) {
+			updateReadMessage(messageId);
+			setShowMessage(true);
+
+			setSelectedMessage(treeMessages[selectedIdx]);
+		}
+	};
+
+	const moveTree = (nextTree: number | undefined) => {
+		setShowMessage(false);
+		navigate(`/forest/${nextTree}`);
+	};
 
 	return (
 		<>
