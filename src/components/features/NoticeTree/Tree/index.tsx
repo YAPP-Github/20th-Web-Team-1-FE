@@ -20,7 +20,7 @@ const Tree = ({ updateReadMessageHandler, messages }: TreeProps) => {
 						{messages?.map((message, idx) => {
 							return (
 								<S.Fruit
-									key={`noticeTree_fruit_${idx}`}
+									key={`noticeTree_fruit_${message.id}`}
 									src={Apple}
 									innerWidth={`${message.width}%`}
 									innerHeight={`${message.height}%`}
