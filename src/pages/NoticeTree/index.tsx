@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import * as S from './NoticeTree.styled';
 import { MessageWithLocationType } from './NoticeTree.type';
 import useNoticeMessages from './useNoticeMessages';
+import withAuth from '@/utils/HOC/withAuth';
 
 const NoticeTree = () => {
 	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount } = useNoticeMessages();
@@ -81,4 +82,4 @@ const NoticeTree = () => {
 	);
 };
 
-export default NoticeTree;
+export default withAuth(NoticeTree);

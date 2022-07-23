@@ -9,12 +9,15 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './MessageDetail.styled';
+import withAuth from '@/utils/HOC/withAuth';
 
 const MessageDetail = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
+
 	const { messageId } = useParams();
 	const { treeId } = useParams();
+
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
@@ -45,12 +48,6 @@ const MessageDetail = () => {
 		setIsMoving(!isMoving);
 	};
 
-	const deleteMessageHandler = () => {
-		setIsOpenDeleteModal(false);
-		deleteMutate();
-		onMoveToNextMessage();
-	};
-
 	const onToggleLike = () => {
 		if (messageDetail) {
 			const newMessage = { ...messageDetail };
@@ -74,6 +71,12 @@ const MessageDetail = () => {
 					: `/messages/${treeId}`;
 			navigate(path);
 		}
+	};
+
+	const deleteMessageHandler = () => {
+		setIsOpenDeleteModal(false);
+		deleteMutate();
+		onMoveToNextMessage();
 	};
 
 	useEffect(() => {
@@ -151,4 +154,4 @@ const MessageDetail = () => {
 	);
 };
 
-export default MessageDetail;
+export default withAuth(MessageDetail);
