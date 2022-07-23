@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { AlertPopUp, Clouds, Tree, MessageBox, WateringButton } from '@/components/features/NoticeTree';
-import { MessageWithLocationType } from './NoticeTree.type';
-import * as S from './NoticeTree.styled';
-import useNoticeMessages from './useNoticeMessages';
-import { useRecoilValue } from 'recoil';
-import { myInfoState } from '@/stores/user';
 import { updateReadMessage } from '@/apis/messages';
+import { AlertPopUp, Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
+import { myInfoState } from '@/stores/user';
+import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import * as S from './NoticeTree.styled';
+import { MessageWithLocationType } from './NoticeTree.type';
+import useNoticeMessages from './useNoticeMessages';
 
 const NoticeTree = () => {
 	const { noticeMessages, setNoticeMessages, totalUnreadMessageCount, setTotalUnreadMessageCount } =
@@ -20,11 +20,11 @@ const NoticeTree = () => {
 	const [showAlertMessage, setShowAlertMessage] = useState(true);
 	const [activeHomeAlert, setActiveHomeAlert] = useState(false);
 
-	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
+	const updateReadMessageHandler = async (messageId: number, selectedIdx: number) => {
 		if (noticeMessages) {
 			if (messageId > 0) {
-				setTotalUnreadMessageCount((prev) => prev - 1);
-				updateReadMessage(messageId);
+				const isRead = await updateReadMessage(messageId);
+				isRead && setTotalUnreadMessageCount((prev) => prev - 1);
 			}
 
 			showMessageHandler(true);

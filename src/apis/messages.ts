@@ -28,12 +28,12 @@ export const updateReadMessage = async (messageId: MessageIdType) => {
 	} = API_URL;
 
 	try {
-		const { status } = await requester({
+		const response = await requester<boolean>({
 			method: PUT,
 			url: `${read}?messageId=${messageId}`,
 		});
 
-		return status;
+		return response.payload;
 	} catch (error) {
 		throw new Error('Failed to update read message!');
 	}
