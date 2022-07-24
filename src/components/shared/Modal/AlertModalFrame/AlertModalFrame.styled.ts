@@ -7,3 +7,9 @@ export const AlertModalBackDrop = ModalBackDrop;
 export const AlertModalContainer = ModalContainer;
 
 export const AlertModalWrapper = ModalWrapper;
+
+export const SmallAlertModalWrapper = styled(AlertModalWrapper)`
+	min-height: 273px;
+	width: 100%;
+	max-width: 350px;
+`;

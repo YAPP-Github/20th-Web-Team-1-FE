@@ -1,38 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import HamburgerIcon from '@/assets/images/shared/hamburger.svg';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import * as S from './MessageMenu.styled';
 import { MessageMenuProps } from './MessageMenu.type';
-import { getForest } from '@/apis/forest';
-import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
-import HamburgerIcon from '@/assets/images/shared/hamburger.svg';
 
 const MessageMenu = ({
-	detailTreeName,
 	isEdit,
 	editMakingToggleHandler,
 	onToggleOpenDrawer,
 	deleteMessages,
 	onToggleMovingFolderModal,
+	treeName,
 }: MessageMenuProps) => {
-	const myInfo = useRecoilValue(myInfoState);
-
 	const { treeId } = useParams();
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
-		enabled: !!myInfo,
-	});
-
-	const [currentTree, setCurrentTree] = useState<Folder | undefined>(undefined);
-
-	useEffect(() => {
-		if (folders && treeId) {
-			const idx = folders.findIndex((folder) => folder.id === Number(treeId));
-			setCurrentTree(folders[idx]);
-		}
-	}, [folders, treeId]);
+	const currentTree =
+		!treeId || treeId === 'DEFAULT' ? '나에게 온 메세지함' : treeId === 'favorite' ? '즐겨찾기' : treeName;
 
 	return (
 		<S.MenuContainer>
@@ -40,8 +23,7 @@ const MessageMenu = ({
 				<S.HamburgerButton onClick={onToggleOpenDrawer}>
 					<img src={HamburgerIcon} alt="message-box-hamburger-button" />
 				</S.HamburgerButton>
-				{treeId && <S.Title>{currentTree && currentTree.name}</S.Title>}
-				{detailTreeName && <S.Title>{detailTreeName === 'DEFAULT' ? '나에게 온 편지' : detailTreeName}</S.Title>}
+				<S.Title>{currentTree && currentTree}</S.Title>
 			</S.InnerWrapper>
 
 			<S.InnerWrapper>

@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getForest } from '@/apis/forest';
+import { deleteMessage, getMessages } from '@/apis/messages';
+import { BottomButtons, MakingFruitMenu, MessageContent, MessageMenu } from '@/components/features/MessageBox';
+import { DeleteAlertModal, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
+import { myInfoState } from '@/stores/user';
+import { Folder } from '@/types/forest';
+import { Message } from '@/types/message';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { smallModalState } from '@/stores/modal';
 import * as S from './MessageBox.styled';
-import { getMessages, deleteMessage } from '@/apis/messages';
-import { MessagesType } from '@/types/message';
-import { MovingFolderModal, SideDrawer, DeleteAlertModal } from '@/components/shared';
-import { MessageMenu, MessageContent, MakingFruitMenu, BottomButtons } from '@/components/features/MessageBox';
+import withAuth from '@/utils/HOC/withAuth';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
+	const [smallModal, setSmallModal] = useRecoilState(smallModalState);
 
-	const queryClient = useQueryClient();
+	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: messages } = useQuery<MessagesType>(['getMessages', treeId], () => getMessages(treeId));
-
-	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
-		onSuccess: () => {
-			queryClient.invalidateQueries('getMessages');
-		},
+	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		enabled: !!myInfo,
 	});
 
 	const [checkMessages, setCheckMessages] = useState<number[]>([]);
@@ -27,8 +30,52 @@ const MessageBox = () => {
 	const [isMoving, setIsMoving] = useState(false);
 	const [showCheckedMessages, setShowCheckedMessages] = useState(false);
 	const [isOpenedMessageDeleteAlertModal, setIsOpenedMessageDeleteAlertModal] = useState(false);
-
 	const [openedDrawer, setOpenedDrawer] = useState(false);
+	const [currentPage, setCurrantPage] = useState(0);
+	const [messageList, setMessageList] = useState<Message[] | null>(null);
+	const [hasNext, setHasNext] = useState(false);
+
+	const [currentTree, setCurrentTree] = useState<string | undefined>(undefined);
+
+	const lastItemRef = useRef<HTMLDivElement>(null);
+	const getMessageList = useCallback(async () => {
+		const data = await getMessages({ treeId, currentPage: 0 });
+
+		if (data) {
+			setMessageList(data.responseDto);
+
+			if (data.hasNext) {
+				setHasNext(data.hasNext);
+				setCurrantPage(currentPage + 1);
+			}
+		} else {
+			setSmallModal('네트워크에러');
+		}
+	}, [currentPage, treeId]);
+
+	const getMoreMessageList = async () => {
+		const data = await getMessages({ treeId, currentPage });
+		if (data) {
+			if (messageList) {
+				setMessageList([...messageList, ...data.responseDto]);
+			}
+			if (data.hasNext) {
+				setHasNext(data.hasNext);
+				setCurrantPage(currentPage + 1);
+				return;
+			} else {
+				setHasNext(false);
+			}
+		} else {
+			setHasNext(false);
+		}
+	};
+
+	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
+		onSuccess: () => {
+			getMessageList();
+		},
+	});
 
 	const onToggleCheckMessage = (id: number) => {
 		checkMessages.includes(id)
@@ -47,23 +94,20 @@ const MessageBox = () => {
 	const onClickDeleteButton = () => {
 		if (checkMessages.length > 0) {
 			setIsOpenedMessageDeleteAlertModal(true);
-		} else {
-			alert('1개 이상의 삭제할 메세지를 선택해주세요! ');
-		}
+		} else setSmallModal('1개 이상의 삭제할 메세지를 선택해주세요!');
 	};
 
 	const onClickMovingFolderButton = () => {
 		if (checkMessages.length > 0) {
 			onToggleMovingFolderModal();
-		} else {
-			alert('1개 이상의 이동할 메세지를 선택해주세요! ');
-		}
+		} else setSmallModal('1개 이상의 이동할 메세지를 선택해주세요!');
 	};
 
 	const deleteMessageHandler = () => {
 		setIsOpenedMessageDeleteAlertModal(false);
 		deleteMutate();
 		setCheckMessages([]);
+		setIsEdit(false);
 	};
 
 	const editMakingToggleHandler = (path: string) => {
@@ -83,6 +127,11 @@ const MessageBox = () => {
 		}
 	};
 
+	const filteredList =
+		showCheckedMessages && messageList
+			? messageList.filter((message) => checkMessages.includes(message.id))
+			: messageList;
+
 	useEffect(() => {
 		setCheckMessages([]);
 	}, [checkMode]);
@@ -91,13 +140,44 @@ const MessageBox = () => {
 		setCheckMode(isEdit || isMakingFruit);
 	}, [isEdit, isMakingFruit, setCheckMode]);
 
+	useEffect(() => {
+		getMessageList();
+	}, [treeId]);
+
+	const onIntersect: IntersectionObserverCallback = ([entry]) => {
+		entry.isIntersecting && hasNext && getMoreMessageList();
+	};
+
+	useEffect(() => {
+		let observer: IntersectionObserver;
+		if (lastItemRef && lastItemRef.current && hasNext) {
+			observer = new IntersectionObserver(onIntersect, {
+				threshold: 0.1,
+			});
+
+			observer.observe(lastItemRef.current);
+		}
+
+		return () => observer && observer.disconnect();
+	}, [lastItemRef, lastItemRef.current, onIntersect]);
+
+	useEffect(() => {
+		if (treeId === 'favorite' || !treeId) {
+			return;
+		}
+		if (folders && treeId) {
+			const idx = folders.findIndex((folder) => folder.id === Number(treeId));
+			setCurrentTree(folders[idx].name);
+		}
+	}, [folders, treeId]);
+
 	return (
 		<S.Wrapper>
 			{isMakingFruit ? (
 				<MakingFruitMenu
 					showCheckedMessages={showCheckedMessages}
 					setShowCheckedMessages={setShowCheckedMessages}
-					numberOfMessages={messages ? messages.responseDto.length : 0}
+					numberOfMessages={messageList ? messageList.length : 0}
 					numberOfCheckedMessages={checkMessages.length}
 				/>
 			) : (
@@ -107,34 +187,25 @@ const MessageBox = () => {
 					onToggleOpenDrawer={onToggleOpenDrawer}
 					onToggleMovingFolderModal={onClickMovingFolderButton}
 					deleteMessages={onClickDeleteButton}
+					treeName={currentTree}
 				/>
 			)}
 
 			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
-				{showCheckedMessages
-					? messages?.responseDto
-							.filter((message) => checkMessages.includes(message.id))
-							.map((res, idx) => (
-								<MessageContent
-									key={`message-box-message${idx}`}
-									message={res}
-									idx={idx}
-									checkMode={checkMode}
-									onToggleCheckMessage={onToggleCheckMessage}
-									checkMessages={checkMessages}
-								/>
-							))
-					: messages?.responseDto.map((res, idx) => (
+				{filteredList &&
+					filteredList.map((res, idx) => (
+						<div key={`message-box-message${res.id}`} ref={idx === filteredList.length - 1 ? lastItemRef : null}>
 							<MessageContent
-								key={`message-box-message${idx}`}
+								key={`message-box-message${res.id}`}
 								message={res}
 								idx={idx}
 								checkMode={checkMode}
 								onToggleCheckMessage={onToggleCheckMessage}
 								checkMessages={checkMessages}
 							/>
-					  ))}
-				{messages?.responseDto.length === 0 && (
+						</div>
+					))}
+				{messageList?.length === 0 && (
 					<S.NoMessageContainer>
 						{treeId ? (
 							<>
@@ -165,8 +236,10 @@ const MessageBox = () => {
 			{isMoving && (
 				<MovingFolderModal
 					isMoving={isMoving}
+					setIsEdit={setIsEdit}
 					onToggleMovingFolderModal={onToggleMovingFolderModal}
 					checkMessages={checkMessages}
+					getMessageList={getMessageList}
 				/>
 			)}
 
@@ -181,8 +254,9 @@ const MessageBox = () => {
 			)}
 
 			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
+			{smallModal && <SmallAlertModal />}
 		</S.Wrapper>
 	);
 };
 
-export default MessageBox;
+export default withAuth(MessageBox);

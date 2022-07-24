@@ -1,19 +1,20 @@
-import React from 'react';
-import * as S from './MessageContent.styled';
-import { MessageContentProps } from './MessageContent.type';
-import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
 import { updateFavoriteMessage } from '@/apis/messages';
+import LikeIcon from '@/assets/images/messages/like_star.svg';
+import BeeIcon from '@/assets/images/messages/message_bee.svg';
+import StarIcon from '@/assets/images/messages/star.svg';
+import { MessageCheckBox } from '@/components/features/MessageBox';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { MessageCheckBox } from '@/components/features/MessageBox';
-import BeeIcon from '@/assets/images/messages/message_bee.svg';
-import LikeIcon from '@/assets/images/messages/like_star.svg';
-import StarIcon from '@/assets/images/messages/star.svg';
+import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as S from './MessageContent.styled';
+import { MessageContentProps } from './MessageContent.type';
 
 const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage, idx }: MessageContentProps) => {
 	dayjs.locale('ko');
 	const navigate = useNavigate();
+	const { treeId } = useParams();
 	const queryClient = useQueryClient();
 
 	const { mutate: updateFavoriteMutate } = useMutation(() => updateFavoriteMessage(message.id), {
@@ -27,7 +28,7 @@ const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessag
 			return;
 		}
 
-		navigate(`/message/${messageId}`);
+		navigate(`/message/${treeId}/${messageId}`);
 	};
 
 	const onClickFavoriteButtonHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import ModalFrame from '../ModalFrame';
-import { MovingFolderModalProps } from './MovingFolderModal.type';
-import * as S from './MovingFolderModal.styled';
-import Button from '../../Button';
-import { Folder } from '@/types/forest';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { myInfoState } from '@/stores/user';
 import { getForest } from '@/apis/forest';
 import { updateMovingMessages } from '@/apis/messages';
-import { useNavigate, useParams } from 'react-router-dom';
+import { myInfoState } from '@/stores/user';
+import { Folder } from '@/types/forest';
+import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import Button from '../../Button';
+import ModalFrame from '../ModalFrame';
+import * as S from './MovingFolderModal.styled';
+import { MovingFolderModalProps } from './MovingFolderModal.type';
 
-const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages }: MovingFolderModalProps) => {
-	const { messageId } = useParams();
-
-	const navigate = useNavigate();
-
+const MovingFolderModal = ({
+	isMoving,
+	setIsEdit,
+	onToggleMovingFolderModal,
+	checkMessages,
+	getMessageList,
+	handleAfterAction,
+}: MovingFolderModalProps) => {
 	const queryClient = useQueryClient();
 
 	const myInfo = useRecoilValue(myInfoState);
@@ -40,10 +42,9 @@ const MovingFolderModal = ({ isMoving, onToggleMovingFolderModal, checkMessages 
 	const onClickMovingFolderButton = () => {
 		updateMovingMessagesMutate();
 		onToggleMovingFolderModal();
-
-		if (messageId) {
-			navigate('/messages');
-		}
+		setIsEdit && setIsEdit(false);
+		getMessageList && getMessageList();
+		handleAfterAction && handleAfterAction();
 	};
 
 	return (

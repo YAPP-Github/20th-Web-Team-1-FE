@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import * as S from './MessageDetail.styled';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { getMessageDetail, updateReadMessage, deleteMessage } from '@/apis/messages';
-import { MessageDetailData } from '@/types/message';
-import { MessageMenu } from '@/components/features/MessageBox';
-import { SideDrawer, AlertModal, MovingFolderModal } from '@/components/shared';
-import { MessageDetailHeader } from '@/components/features/MessageDetail';
-import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
+import { deleteMessage, getMessageDetail, updateReadMessage } from '@/apis/messages';
 import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
+import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
+import { MessageMenu } from '@/components/features/MessageBox';
+import { MessageDetailHeader } from '@/components/features/MessageDetail';
+import { AlertModal, MovingFolderModal, SideDrawer } from '@/components/shared';
+import { MessageDetailData } from '@/types/message';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as S from './MessageDetail.styled';
+import withAuth from '@/utils/HOC/withAuth';
 
 const MessageDetail = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
+
 	const { messageId } = useParams();
+	const { treeId } = useParams();
 
 	const [openedDrawer, setOpenedDrawer] = useState(false);
 	const [isMoving, setIsMoving] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 	const [messageDetail, setMessageDetail] = useState<MessageDetailData | undefined>(undefined);
 
-	const { data } = useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
+	useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
 		onSuccess: (data) => {
 			setMessageDetail(data);
 		},
@@ -45,12 +48,6 @@ const MessageDetail = () => {
 		setIsMoving(!isMoving);
 	};
 
-	const deleteMessageHandler = () => {
-		setIsOpenDeleteModal(false);
-		deleteMutate();
-		navigate('/messages');
-	};
-
 	const onToggleLike = () => {
 		if (messageDetail) {
 			const newMessage = { ...messageDetail };
@@ -60,7 +57,26 @@ const MessageDetail = () => {
 	};
 
 	const onClickNavButton = (messageId: number) => {
-		navigate(`/message/${messageId}`);
+		const path = !treeId ? `/message/${messageId}` : `/message/${treeId}/${messageId}`;
+		navigate(path);
+	};
+
+	const onMoveToNextMessage = () => {
+		if (messageDetail) {
+			const path =
+				messageDetail.nextId !== 0
+					? `/message/${treeId}/${messageDetail.nextId}`
+					: messageDetail.prevId !== 0
+					? `/message/${treeId}/${messageDetail.prevId}`
+					: `/messages/${treeId}`;
+			navigate(path);
+		}
+	};
+
+	const deleteMessageHandler = () => {
+		setIsOpenDeleteModal(false);
+		deleteMutate();
+		onMoveToNextMessage();
 	};
 
 	useEffect(() => {
@@ -72,11 +88,11 @@ const MessageDetail = () => {
 	return (
 		<S.Wrapper>
 			<MessageMenu
-				detailTreeName={messageDetail?.treeResponseDto.name}
 				isEdit={true}
 				onToggleMovingFolderModal={onToggleMovingFolderModal}
 				onToggleOpenDrawer={onToggleOpenDrawer}
 				deleteMessages={onClickDeleteButton}
+				treeName={messageDetail?.treeResponseDto.name}
 			/>
 			{messageDetail && (
 				<S.MessageDetailContainer>
@@ -89,19 +105,20 @@ const MessageDetail = () => {
 							isLike={messageDetail.responseDto.favorite}
 							messageId={messageDetail.responseDto.id}
 							onToggleLike={onToggleLike}
+							treeId={messageDetail.treeResponseDto.id}
 						/>
 
 						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
 					</S.MessageContentContainer>
 					<S.MessageNavButtonWrapper>
 						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
-							<S.ArrowIcon src={ArrowUpIcon} alt="" onClick={() => navigate(`/message/${messageDetail.prevId}`)} />
+							<S.ArrowIcon src={ArrowUpIcon} alt="" />
 							이전 메시지
 						</S.Button>
 
 						<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
 							다음 메시지
-							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />{' '}
+							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
 						</S.Button>
 					</S.MessageNavButtonWrapper>
 				</S.MessageDetailContainer>
@@ -130,10 +147,11 @@ const MessageDetail = () => {
 					isMoving={isMoving}
 					onToggleMovingFolderModal={onToggleMovingFolderModal}
 					checkMessages={[Number(messageId)]}
+					handleAfterAction={onMoveToNextMessage}
 				/>
 			)}
 		</S.Wrapper>
 	);
 };
 
-export default MessageDetail;
+export default withAuth(MessageDetail);
