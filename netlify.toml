@@ -1,4 +1,9 @@
+[build]
+  command = "yarn run build"
+  publish = "/dist"
+  base = "/"
+
 [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
