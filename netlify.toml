@@ -1,9 +1,8 @@
 [build]
-  command = "yarn run build"
-  publish = "/dist"
-  base = "/"
+  command = "CI= yarn run build"
+  publish = "dist"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "https://betree-client.netlify.app"
+  to = "/dist/index.html"
   status = 200
