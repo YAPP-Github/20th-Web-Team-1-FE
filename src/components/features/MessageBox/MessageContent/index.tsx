@@ -3,7 +3,7 @@ import LikeIcon from '@/assets/images/messages/like_star.svg';
 import BeeIcon from '@/assets/images/messages/message_bee.svg';
 import StarIcon from '@/assets/images/messages/star.svg';
 import { MessageCheckBox } from '@/components/features/MessageBox';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
