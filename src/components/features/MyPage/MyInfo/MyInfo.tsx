@@ -1,5 +1,4 @@
 import React from 'react';
-import ProfileBeeImg from '@/assets/images/mypage/profile_bee_img@2x.png';
 import * as S from './MyInfo.styled';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
@@ -9,7 +8,7 @@ const MyInfo = () => {
 
 	return (
 		<S.MyInfoContainer>
-			<img src={myInfo?.userImage || ProfileBeeImg} alt="" />
+			<img src={`${import.meta.env.VITE_API_BASE_URL}/${myInfo?.userImage}`} alt="" />
 			<p>{myInfo?.nickname}</p>
 			<p>{myInfo?.email}</p>
 		</S.MyInfoContainer>
