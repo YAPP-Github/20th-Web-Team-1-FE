@@ -10,7 +10,7 @@ import { updateFavoriteMessage } from '@/apis/messages';
 type Props = {
 	profileImg: string | undefined;
 	senderName: string | undefined;
-	treeId: number | undefined;
+	treeId: string | undefined;
 	isLike: boolean | undefined;
 	messageId: number;
 	onToggleLike: () => void;

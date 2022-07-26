@@ -68,7 +68,9 @@ const MessageDetail = () => {
 					? `/message/${treeId}/${messageDetail.nextId}`
 					: messageDetail.prevId !== 0
 					? `/message/${treeId}/${messageDetail.prevId}`
-					: `/messages/${treeId}`;
+					: treeId
+					? `/messages/${treeId}`
+					: '/messages';
 			navigate(path);
 		}
 	};
@@ -105,7 +107,7 @@ const MessageDetail = () => {
 							isLike={messageDetail.responseDto.favorite}
 							messageId={messageDetail.responseDto.id}
 							onToggleLike={onToggleLike}
-							treeId={messageDetail.treeResponseDto.id}
+							treeId={treeId}
 						/>
 
 						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>

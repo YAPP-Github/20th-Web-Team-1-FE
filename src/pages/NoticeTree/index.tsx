@@ -48,7 +48,8 @@ const NoticeTree = () => {
 		if (noticeMessages) {
 			if (messageId > 0) {
 				const isRead = await updateReadMessage(messageId);
-				isRead && setUnreadCount((prev) => prev - 1);
+
+				!isRead && setUnreadCount((prev) => prev - 1);
 			}
 
 			showMessageHandler(true);
