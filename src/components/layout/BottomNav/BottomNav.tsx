@@ -62,27 +62,6 @@ const BottomNav = () => {
 						<span>메시지</span>
 					</S.BottomNavLink>
 				</li>
-
-				<li>
-					<S.BottomNavLink to="/friends" selected={isLinkSelected('/friends')}>
-						<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M8.70782 8.56933C10.8965 8.21405 12.3828 6.15175 12.0275 3.96305C11.6723 1.77434 9.60995 0.28806 7.42125 0.643336C5.23255 0.998613 3.74626 3.06091 4.10154 5.24962C4.45681 7.43832 6.51912 8.9246 8.70782 8.56933Z"
-								fill={decideLinkColor('/friends')}
-							/>
-							<path
-								d="M16.1293 11.1187C17.7663 11.1187 19.0933 9.79169 19.0933 8.1547C19.0933 6.51771 17.7663 5.19067 16.1293 5.19067C14.4923 5.19067 13.1653 6.51771 13.1653 8.1547C13.1653 9.79169 14.4923 11.1187 16.1293 11.1187Z"
-								fill={decideLinkColor('/friends')}
-							/>
-							<path
-								d="M16.1293 12.2422C15.4045 12.2422 14.7117 12.3776 14.0728 12.6221C12.5962 10.9738 10.4516 9.93604 8.06466 9.93604C3.61098 9.93531 0 13.5463 0 18H21.8878C21.8878 14.8198 19.3095 12.2415 16.1293 12.2415V12.2422Z"
-								fill={decideLinkColor('/friends')}
-							/>
-						</svg>
-
-						<span>친구</span>
-					</S.BottomNavLink>
-				</li>
 			</S.BottomNavLinkList>
 		</S.BottomNavWrapper>
 	);
