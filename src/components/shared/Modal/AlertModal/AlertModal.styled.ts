@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { StyledProps } from './AlertModal.type';
 
 export const ModalContainer = styled.div`
 	position: fixed;
@@ -13,7 +14,6 @@ export const ModalWrapper = styled.div`
 	min-height: 496px;
 	border-radius: 20px;
 	background-color: ${({ theme }) => theme.colors.bt_white};
-
 	position: relative;
 `;
 
@@ -29,6 +29,11 @@ export const WateringImg = styled.img`
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
+export const ModalImg = styled.img`
+	margin: 72px 0 31px 0;
+	max-width: 257px;
+`;
+
 export const MessageTitle = styled.h3`
 	margin-bottom: 24px;
 	text-align: center;
@@ -39,12 +44,11 @@ export const MessageTitle = styled.h3`
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
 `;
 
-export const MessageDescWrapper = styled.span`
+export const MessageDescWrapper = styled.span<StyledProps>`
 	margin-bottom: 83px;
 
 	& > p {
 		margin-bottom: 0.5em;
-
 		text-align: center;
 		font-size: ${({ theme }) => theme.fontSize.f16};
 		font-weight: ${({ theme }) => theme.fontWeight.normal};
@@ -55,6 +59,10 @@ export const MessageDescWrapper = styled.span`
 
 	& > p:nth-last-of-type(1) {
 		margin-bottom: 83px;
+	}
+
+	& > p:nth-last-of-type(2) {
+		${({ modalTitle }) => !modalTitle && 'margin-top: 18px'};
 	}
 `;
 
@@ -73,5 +81,5 @@ export const ConfirmBtnWrapper = styled.div`
 `;
 
 export const ConfirmRightBtnWrapper = styled(ConfirmBtnWrapper)`
-	margin-left: 18px;
+	margin-left: 17px;
 `;

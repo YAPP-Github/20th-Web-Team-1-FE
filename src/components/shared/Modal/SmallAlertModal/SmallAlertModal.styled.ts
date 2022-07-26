@@ -15,4 +15,10 @@ export const Content = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	& > p {
+		text-align: center;
+		line-height: 26px;
+		white-space: pre-line;
+	}
 `;

@@ -32,16 +32,10 @@ export const logout = async () => {
 		auth: { logout },
 	} = API_URL;
 
-	try {
-		const { status } = await requester({
-			method: POST,
-			url: logout,
-		});
+	await requester({
+		method: POST,
+		url: logout,
+	});
 
-		removeStorageItem(storageAccessKey);
-
-		return status;
-	} catch (error) {
-		// 에러 핸들링
-	}
+	removeStorageItem(storageAccessKey);
 };
