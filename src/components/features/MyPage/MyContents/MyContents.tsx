@@ -1,22 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '@/apis/auth';
-import { RESPONSE_SUCCESS_OK } from '@/constants/api';
 import * as S from './MyContents.styled';
 import { useRecoilState } from 'recoil';
 import { myInfoState } from '@/stores/user';
+import { useMutation } from 'react-query';
 
 const MyContents = () => {
 	const [myInfo, setMyInfo] = useRecoilState(myInfoState);
 	const navigate = useNavigate();
 
-	const handleClickLogoutButton = async () => {
-		const status = await logout();
-
-		if (status === RESPONSE_SUCCESS_OK) {
+	const { mutate: logoutMutation } = useMutation('logout', logout, {
+		onSuccess: () => {
 			setMyInfo(undefined);
 			navigate('/');
-		}
+		},
+	});
+
+	const handleClickLogoutButton = () => {
+		logoutMutation();
 	};
 
 	const DOMAIN_URL = import.meta.env.DEV ? 'http://localhost:3000' : 'https://www.betree.shop';
