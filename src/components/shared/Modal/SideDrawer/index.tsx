@@ -48,7 +48,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 				<S.ThumbnailWrapper>
 					<S.ThumbnailBox>
 						<div>
-							<img src={myInfo?.userImage || Default_Profile_Img} alt="프로필" />
+							<img src={`${import.meta.env.VITE_API_BASE_URL}/${myInfo?.userImage}`} alt="" />
 						</div>
 						<div>
 							<h2>{myInfo?.nickname || '게스트'}의 메시지함</h2>
@@ -65,7 +65,9 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 						</Link>
 					</S.MessageFilterItem>
 					<S.MessageFilterItem>
-						<Link to={'/messages/favorite'} onClick={() => setOnModal(false)}>즐겨 찾기</Link>
+						<Link to={'/messages/favorite'} onClick={() => setOnModal(false)}>
+							즐겨 찾기
+						</Link>
 					</S.MessageFilterItem>
 				</S.MessageFilterList>
 
