@@ -19,12 +19,16 @@ const AlertModal = ({
 			<S.ModalContainer>
 				<S.ModalWrapper>
 					<S.WateringImgWrapper>
-						<S.WateringImg src={modalMainImage === 'deleteMessageModal' ? DeleteIcon : ''} alt="" />
+						{modalMainImage === 'deleteMessageModal' ? (
+							<S.WateringImg src={DeleteIcon} alt="" />
+						) : (
+							<S.ModalImg src={modalMainImage} alt="" />
+						)}
 					</S.WateringImgWrapper>
 
-					<S.MessageTitle>{modalTitle}</S.MessageTitle>
+					{modalTitle && <S.MessageTitle>{modalTitle}</S.MessageTitle>}
 
-					<S.MessageDescWrapper>
+					<S.MessageDescWrapper modalTitle={modalTitle}>
 						{modalDescMessages.map((message, idx) => (
 							<p key={`modalTitle-modal-desc-message-${idx}`}>{message}</p>
 						))}
