@@ -62,7 +62,7 @@ export const MessageDescWrapper = styled.span<StyledProps>`
 	}
 
 	& > p:nth-last-of-type(2) {
-		${({ modalTitle }) => !modalTitle && 'margin-top: 18px'};
+		${({ modalTitle }) => !modalTitle && 'margin-top: 17px'};
 	}
 `;
 
@@ -81,5 +81,5 @@ export const ConfirmBtnWrapper = styled.div`
 `;
 
 export const ConfirmRightBtnWrapper = styled(ConfirmBtnWrapper)`
-	margin-left: 17px;
+	margin-left: 18px;
 `;
