@@ -11,14 +11,11 @@ export const MessageWrapper = styled.div<MessageWrapperProps>`
 	align-items: center;
 
 	padding: 0px 32px;
-	margin-top: ${({ idx }) => idx === 0 && '10px'};
 
 	background: ${({ theme, checked }) => (checked ? ' #EEFBFA' : theme.colors.bt_white)};
 
 	border-radius: ${({ idx }) => idx === 0 && '20px 20px 0px 0px'};
 	border-bottom: 0.4px solid #cecece;
-
-	box-shadow: ${({ idx }) => idx === 0 && '0px -4px 10px rgba(0, 0, 0, 0.05)'};
 
 	cursor: pointer;
 `;

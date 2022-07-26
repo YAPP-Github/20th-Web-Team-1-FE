@@ -1,6 +1,12 @@
 import { getForest } from '@/apis/forest';
 import { deleteMessage, getMessages } from '@/apis/messages';
-import { BottomButtons, MakingFruitMenu, MessageContent, MessageMenu } from '@/components/features/MessageBox';
+import {
+	BottomButtons,
+	EmptyMessage,
+	MakingFruitMenu,
+	MessageContent,
+	MessageMenu,
+} from '@/components/features/MessageBox';
 import { DeleteAlertModal, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
@@ -205,22 +211,7 @@ const MessageBox = () => {
 							/>
 						</div>
 					))}
-				{messageList?.length === 0 && (
-					<S.NoMessageContainer>
-						{treeId ? (
-							<>
-								👀아직 해당 메세지함에 이동한 메세지가 없습니다. <br />
-								기본 폴더에서 메세지를 이동해주세요!😸
-							</>
-						) : (
-							<>
-								아직 도착한 메세지가 없습니다.
-								<br />
-								스스로를 위한 메세지를 써보는것은 어떨까요?😸
-							</>
-						)}
-					</S.NoMessageContainer>
-				)}
+				{messageList?.length === 0 && <EmptyMessage treeId={treeId} />}
 
 				{checkMode && (
 					<BottomButtons
