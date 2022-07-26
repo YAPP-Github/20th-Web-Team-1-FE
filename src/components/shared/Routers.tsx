@@ -18,8 +18,8 @@ import TreeAddForm from '../features/Forest/TreeAddForm';
 const Routers = () => {
 	return (
 		<Routes>
-			<Route path="/landing" element={<Landing />} />
-			<Route path="/" element={<NoticeTree />} />
+			<Route path="/" element={<Landing />} />
+			<Route path="/main-tree" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/forest" element={<Forest />} />
 			<Route path="/forest/:treeId" element={<TreeDetail />} />

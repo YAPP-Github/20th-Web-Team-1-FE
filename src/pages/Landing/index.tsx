@@ -73,7 +73,7 @@ const Landing = () => {
 				</S.AppStartDescWrapper>
 
 				<S.AppStartButtonWrapper>
-					<S.AppStartButton to="/notice-tree">Betree 시작하기</S.AppStartButton>
+					<S.AppStartButton to="/main-tree">Betree 시작하기</S.AppStartButton>
 				</S.AppStartButtonWrapper>
 			</S.AppStartContainer>
 

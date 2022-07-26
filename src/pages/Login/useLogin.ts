@@ -57,7 +57,7 @@ const useLogin = () => {
 		const status = await login(kakaoAccessToken);
 
 		if (status === RESPONSE_SUCCESS_CREATED) {
-			navigate('/');
+			navigate('/main-tree');
 
 			const response = await checkMyInfo();
 			setMyInfo(response?.payload);
