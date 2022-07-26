@@ -76,6 +76,13 @@ export const ThumbnailBox = styled.div`
 			color: ${({ theme }) => theme.colors.bt_grey[100]};
 		}
 	}
+
+	img {
+		width: 60px;
+		height: 60px;
+
+		border-radius: 50%;
+	}
 `;
 
 export const MessageFilterList = styled.ul`

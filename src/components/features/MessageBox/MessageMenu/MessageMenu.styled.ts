@@ -5,7 +5,7 @@ export const MenuContainer = styled.div`
 	justify-content: space-between;
 	align-items: flex-start;
 
-	padding: 94px 32px 32px;
+	padding: 94px 32px 41px;
 `;
 
 export const InnerWrapper = styled.div`

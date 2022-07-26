@@ -44,8 +44,8 @@ export const TreeCircle = styled.div<{ imageWidth: number }>`
 `;
 
 export const InnerCircle = styled.div`
-	width: 70%;
-	height: 70%;
+	width: 60%;
+	height: 60%;
 
 	position: relative;
 
