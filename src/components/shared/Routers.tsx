@@ -1,4 +1,14 @@
-import { Forest, MessageBox, MessageDetail, MessageSender, MyPage, NoticeTree, TreeDetail, NotFound } from '@/pages';
+import {
+	Forest,
+	MessageBox,
+	MessageDetail,
+	MessageSender,
+	MyPage,
+	NoticeTree,
+	TreeDetail,
+	NotFound,
+	Landing,
+} from '@/pages';
 import Login from '@/pages/Login';
 import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 import React from 'react';
@@ -8,6 +18,7 @@ import TreeAddForm from '../features/Forest/TreeAddForm';
 const Routers = () => {
 	return (
 		<Routes>
+			<Route path="/landing" element={<Landing />} />
 			<Route path="/" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/forest" element={<Forest />} />

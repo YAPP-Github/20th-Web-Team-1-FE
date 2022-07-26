@@ -6,3 +6,4 @@ export { default as MessageDetail } from './MessageDetail';
 export { default as MyPage } from './MyPage/MyPage';
 export { default as TreeDetail } from './TreeDetail';
 export { default as NotFound } from './NotFound';
+export { default as Landing } from './Landing';
