@@ -17,12 +17,11 @@ export const AppDescContainer = styled.div`
 export const LogoWrapper = styled.div`
 	position: absolute;
 	top: 8vh;
-	left: -3vh;
 `;
 
 export const Logo = styled.img`
-	width: 297px;
-	height: 78px;
+	width: 15.5vw;
+	object-fit: cover;
 `;
 
 export const IntroduceDescWrapper = styled.div`
@@ -63,6 +62,10 @@ export const FadeInCommentList = styled.ul`
 export const FadeInCommentItem = styled.li`
 	display: flex;
 	align-items: center;
+
+	&:nth-of-type(even) {
+		align-self: flex-end;
+	}
 `;
 
 export const FadeInCommentItemImg = styled.img`
@@ -79,8 +82,7 @@ export const FadeInCommentItemText = styled.p`
 	line-height: 1.15vw;
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
-
-	transform: translate3d(-30px, 0, 0);
+	transform: translate3d(-2.2vw, 0, 0);
 	z-index: -1;
 `;
 
@@ -175,7 +177,7 @@ export const AppStartButton = styled(Link)`
 export const InstagramLinkButtonWrapper = styled.a`
 	position: fixed;
 	bottom: 80px;
-	right: 7vw;
+	right: 80px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
