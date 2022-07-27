@@ -19,14 +19,11 @@ export const getNotices = async () => {
 	const {
 		noticeTree: { index },
 	} = API_URL;
-	try {
-		const { payload } = await requester<GetNoticesType>({
-			method: GET,
-			url: index,
-		});
 
-		return payload;
-	} catch (e) {
-		console.log(e);
-	}
+	const { payload } = await requester<GetNoticesType>({
+		method: GET,
+		url: index,
+	});
+
+	return payload;
 };
