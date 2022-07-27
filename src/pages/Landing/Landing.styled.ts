@@ -5,13 +5,21 @@ export const Container = styled.div`
 	position: fixed;
 	inset: 0;
 	background: linear-gradient(180deg, #c3eaff 0%, #ffffff 100%);
+
+	@media only screen and (max-width: 1023px) {
+		background: ${({ theme }) => theme.colors.bt_white};
+	}
 `;
 
 export const AppDescContainer = styled.div`
 	position: fixed;
 	inset: 0;
-	left: calc(50vw - 40vw);
-	max-width: 40vw;
+	left: calc(50vw - 512px);
+	max-width: 512px;
+
+	@media only screen and (max-width: 1023px) {
+		display: none;
+	}
 `;
 
 export const LogoWrapper = styled.div`
@@ -103,8 +111,12 @@ export const AppStartContainer = styled.div`
 	position: relative;
 	max-width: 475px;
 	height: 100vh;
-	margin-left: calc(55vw);
+	margin-left: calc(55vw - 1px);
 	background-color: ${({ theme }) => theme.colors.bt_white};
+
+	@media only screen and (max-width: 1023px) {
+		margin: 0 auto;
+	}
 `;
 
 export const PrimaryLogoWrapper = styled.div`
@@ -185,6 +197,10 @@ export const InstagramLinkButtonWrapper = styled.a`
 
 	&:hover {
 		opacity: 0.8;
+	}
+
+	@media only screen and (max-width: 1500px) {
+		display: none;
 	}
 `;
 
