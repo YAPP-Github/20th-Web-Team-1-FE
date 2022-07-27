@@ -7,6 +7,7 @@ import { myInfoState } from '@/stores/user';
 import { useMutation } from 'react-query';
 import { AlertModal } from '@/components/shared';
 import LogoutModalImg from '@/assets/images/mypage/logout_bee_img@2x.png';
+import Toast from '@/components/shared/Toast';
 
 const MyContents = () => {
 	const [myInfo, setMyInfo] = useRecoilState(myInfoState);
@@ -27,9 +28,11 @@ const MyContents = () => {
 
 	const handleCopyUrlToClipBoard = async () => {
 		await navigator.clipboard.writeText(`${DOMAIN_URL}/forest/${myInfo?.id}`);
+		setIsToastVisible(true);
 	};
 
-	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
+	const [isToastVisible, setIsToastVisible] = useState(false);
 
 	return (
 		<>
@@ -38,20 +41,21 @@ const MyContents = () => {
 				<S.MyMenuButton type="button" color="primary" onClick={handleCopyUrlToClipBoard}>
 					Url 주소 복사하기
 				</S.MyMenuButton>
-				<S.MyMenuButton type="button" color="grey" onClick={() => setIsModalVisible(true)}>
+				<S.MyMenuButton type="button" color="grey" onClick={() => setIsLogoutModalVisible(true)}>
 					로그아웃하기
 				</S.MyMenuButton>
 			</S.MyContentsContainer>
-			{isModalVisible && (
+			{isLogoutModalVisible && (
 				<AlertModal
-					isOpen={isModalVisible}
+					isOpen={isLogoutModalVisible}
 					modalMainImage={LogoutModalImg}
 					buttonTitle="로그아웃하기"
 					modalDescMessages={['로그아웃하시겠습니까?', '곧 다시 만나요...!']}
-					handleCloseBtnClick={() => setIsModalVisible(false)}
+					handleCloseBtnClick={() => setIsLogoutModalVisible(false)}
 					handleMainBtnClick={handleClickLogoutButton}
 				/>
 			)}
+			<Toast show={isToastVisible} message="복사되었습니다!" onClose={() => setIsToastVisible(false)} />
 		</>
 	);
 };
