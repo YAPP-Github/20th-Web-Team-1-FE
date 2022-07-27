@@ -19,8 +19,6 @@ type Props = {
 };
 
 const MessageDetailHeader = ({ profileImg, treeId, senderName, isLike, messageId, onToggleLike }: Props) => {
-	const { state } = useLocation();
-
 	const setErrorToastText = useSetRecoilState(errorToastState);
 
 	const { mutate: updateFavoriteMutate } = useMutation(() => updateFavoriteMessage(messageId), {
@@ -49,7 +47,7 @@ const MessageDetailHeader = ({ profileImg, treeId, senderName, isLike, messageId
 						<img src={StarIcon} alt="" style={{ width: '15px', height: '15px' }} />
 					</S.LikeButton>
 				)}
-				<Link to={state ? `/messages/${state}` : treeId ? `/messages/${treeId}` : '/messages'}>
+				<Link to={treeId ? `/messages/${treeId}` : '/messages'}>
 					<img src={CloseIcon} alt="닫기" />
 				</Link>
 			</S.MessageMenu>

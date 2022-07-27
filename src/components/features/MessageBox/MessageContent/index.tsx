@@ -41,7 +41,7 @@ const MessageContent = ({
 			return;
 		}
 
-		navigate(`/message/${treeId}/${messageId}`);
+		navigate(treeId ? `/message/${treeId}/${messageId}` : `/message/${messageId}`);
 	};
 
 	const onClickFavoriteButtonHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
