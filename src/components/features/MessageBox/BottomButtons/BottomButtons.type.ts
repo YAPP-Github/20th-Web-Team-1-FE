@@ -4,4 +4,5 @@ export interface BottomButtonsProps {
 	checkMessages: number[];
 	setShowCheckedMessages: React.Dispatch<React.SetStateAction<boolean>>;
 	editMakingToggleHandler: (path: string) => void;
+	setIsMakingFruit: React.Dispatch<React.SetStateAction<boolean>>;
 }

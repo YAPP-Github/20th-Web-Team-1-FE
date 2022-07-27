@@ -7,7 +7,7 @@ import {
 	MessageContent,
 	MessageMenu,
 } from '@/components/features/MessageBox';
-import { DeleteAlertModal, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
+import { DeleteAlertModal, ErrorToast, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
 import { Message } from '@/types/message';
@@ -15,14 +15,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { smallModalState } from '@/stores/modal';
+import { smallModalState, errorToastState } from '@/stores/modal';
 import * as S from './MessageBox.styled';
 import withAuth from '@/utils/HOC/withAuth';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
 	const [smallModal, setSmallModal] = useRecoilState(smallModalState);
-
+	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
 	const myInfo = useRecoilValue(myInfoState);
 
 	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
@@ -40,46 +40,56 @@ const MessageBox = () => {
 	const [currentPage, setCurrantPage] = useState(0);
 	const [messageList, setMessageList] = useState<Message[] | null>(null);
 	const [hasNext, setHasNext] = useState(false);
-
 	const [currentTree, setCurrentTree] = useState<string | undefined>(undefined);
 
 	const lastItemRef = useRef<HTMLDivElement>(null);
+
 	const getMessageList = useCallback(async () => {
-		const data = await getMessages({ treeId, currentPage: 0 });
+		try {
+			const data = await getMessages({ treeId, currentPage: 0 });
 
-		if (data) {
-			setMessageList(data.responseDto);
+			if (data) {
+				setMessageList(data.responseDto);
 
-			if (data.hasNext) {
-				setHasNext(data.hasNext);
-				setCurrantPage(currentPage + 1);
+				if (data.hasNext) {
+					setHasNext(data.hasNext);
+					setCurrantPage(currentPage + 1);
+				}
 			}
-		} else {
-			setSmallModal('네트워크에러');
+		} catch {
+			setErrorToastText('네트워크에러');
 		}
 	}, [currentPage, treeId]);
 
 	const getMoreMessageList = async () => {
-		const data = await getMessages({ treeId, currentPage });
-		if (data) {
-			if (messageList) {
-				setMessageList([...messageList, ...data.responseDto]);
-			}
-			if (data.hasNext) {
-				setHasNext(data.hasNext);
-				setCurrantPage(currentPage + 1);
-				return;
+		try {
+			const data = await getMessages({ treeId, currentPage });
+
+			if (data) {
+				if (messageList) {
+					setMessageList([...messageList, ...data.responseDto]);
+				}
+				if (data.hasNext) {
+					setHasNext(data.hasNext);
+					setCurrantPage(currentPage + 1);
+					return;
+				} else {
+					setHasNext(false);
+				}
 			} else {
 				setHasNext(false);
 			}
-		} else {
-			setHasNext(false);
+		} catch {
+			setErrorToastText('네트워크에러');
 		}
 	};
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage(checkMessages), {
 		onSuccess: () => {
 			getMessageList();
+		},
+		onError: () => {
+			setErrorToastText('네트워크에러');
 		},
 	});
 
@@ -138,6 +148,18 @@ const MessageBox = () => {
 			? messageList.filter((message) => checkMessages.includes(message.id))
 			: messageList;
 
+	const onIntersect: IntersectionObserverCallback = ([entry]) => {
+		entry.isIntersecting && hasNext && getMoreMessageList();
+	};
+
+	const onToggleLike = (idx: number) => {
+		if (filteredList) {
+			const newMessageList = [...filteredList];
+			newMessageList[idx].favorite = !newMessageList[idx].favorite;
+			setMessageList(newMessageList);
+		}
+	};
+
 	useEffect(() => {
 		setCheckMessages([]);
 	}, [checkMode]);
@@ -148,11 +170,8 @@ const MessageBox = () => {
 
 	useEffect(() => {
 		getMessageList();
+		setIsEdit(false);
 	}, [treeId]);
-
-	const onIntersect: IntersectionObserverCallback = ([entry]) => {
-		entry.isIntersecting && hasNext && getMoreMessageList();
-	};
 
 	useEffect(() => {
 		let observer: IntersectionObserver;
@@ -176,6 +195,8 @@ const MessageBox = () => {
 			setCurrentTree(folders[idx].name);
 		}
 	}, [folders, treeId]);
+
+	console.log(messageList);
 
 	return (
 		<S.Wrapper>
@@ -208,6 +229,7 @@ const MessageBox = () => {
 								checkMode={checkMode}
 								onToggleCheckMessage={onToggleCheckMessage}
 								checkMessages={checkMessages}
+								onToggleLike={onToggleLike}
 							/>
 						</div>
 					))}
@@ -219,6 +241,7 @@ const MessageBox = () => {
 						isMakingFruit={isMakingFruit}
 						editMakingToggleHandler={editMakingToggleHandler}
 						checkMessages={checkMessages}
+						setIsMakingFruit={setIsMakingFruit}
 						setShowCheckedMessages={setShowCheckedMessages}
 					/>
 				)}
@@ -246,6 +269,7 @@ const MessageBox = () => {
 
 			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
 			{smallModal && <SmallAlertModal />}
+			{errorToastText && <ErrorToast />}
 		</S.Wrapper>
 	);
 };

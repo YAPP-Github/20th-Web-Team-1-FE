@@ -1,7 +1,9 @@
-import React from 'react';
-import * as S from './BottomButtons.styled';
-import { useMutation, useQueryClient } from 'react-query';
 import { updateOpenMessages } from '@/apis/messages';
+import { errorToastState } from '@/stores/modal';
+import React from 'react';
+import { useMutation } from 'react-query';
+import { useSetRecoilState } from 'recoil';
+import * as S from './BottomButtons.styled';
 import { BottomButtonsProps } from './BottomButtons.type';
 
 const BottomButtons = ({
@@ -10,19 +12,20 @@ const BottomButtons = ({
 	editMakingToggleHandler,
 	checkMessages,
 	setShowCheckedMessages,
+	setIsMakingFruit,
 }: BottomButtonsProps) => {
-	const queryClient = useQueryClient();
+	const setErrorToastText = useSetRecoilState(errorToastState);
 	const { mutate: updateOpenMessagesMutate } = useMutation(() => updateOpenMessages(checkMessages), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('getMessages');
+			() => setIsMakingFruit(false);
+			setShowCheckedMessages(false);
+			editMakingToggleHandler('back');
+			setErrorToastText('열매 맺기에 성공했습니다! ');
+		},
+		onError: () => {
+			setErrorToastText('네트워크 에러! 열매 맺기에 실패했습니다. ');
 		},
 	});
-
-	const onClickMakeFruitButton = () => {
-		updateOpenMessagesMutate();
-		setShowCheckedMessages(false);
-		editMakingToggleHandler('back');
-	};
 
 	const onClickBackButton = () => {
 		editMakingToggleHandler('back');
@@ -35,7 +38,7 @@ const BottomButtons = ({
 			{isMakingFruit && (
 				<>
 					<S.ShortButton onClick={onClickBackButton}>뒤로가기</S.ShortButton>
-					<S.ShortGreenButton onClick={onClickMakeFruitButton}>저장하기</S.ShortGreenButton>
+					<S.ShortGreenButton onClick={() => updateOpenMessagesMutate()}>저장하기</S.ShortGreenButton>
 				</>
 			)}
 		</S.BackButtonContainer>

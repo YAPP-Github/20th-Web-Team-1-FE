@@ -3,13 +3,15 @@ import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import { MessageMenu } from '@/components/features/MessageBox';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
-import { AlertModal, MovingFolderModal, SideDrawer } from '@/components/shared';
+import { AlertModal, ErrorToast, MovingFolderModal, SideDrawer } from '@/components/shared';
 import { MessageDetailData } from '@/types/message';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './MessageDetail.styled';
 import withAuth from '@/utils/HOC/withAuth';
+import { useRecoilState } from 'recoil';
+import { errorToastState } from '@/stores/modal';
 
 const MessageDetail = () => {
 	const navigate = useNavigate();
@@ -22,10 +24,17 @@ const MessageDetail = () => {
 	const [isMoving, setIsMoving] = useState(false);
 	const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 	const [messageDetail, setMessageDetail] = useState<MessageDetailData | undefined>(undefined);
+	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
 
 	useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
 		onSuccess: (data) => {
+			if (data?.responseDto.alreadyRead === false) {
+				updateReadMessageMutate();
+			}
 			setMessageDetail(data);
+		},
+		onError: () => {
+			setErrorToastText('네트워크 에러!');
 		},
 		enabled: !!messageId,
 	});
@@ -34,7 +43,20 @@ const MessageDetail = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries('getMessages');
 		},
+		onError: () => {
+			setErrorToastText('메세지 삭제에 실패했습니다. 잠시후 다시 시도해주세요! ');
+		},
 	});
+
+	const { mutate: updateReadMessageMutate } = useMutation(
+		['updateReadMessage', messageId],
+		() => updateReadMessage(messageId),
+		{
+			onError: () => {
+				setErrorToastText('네트워크 에러!');
+			},
+		},
+	);
 
 	const onToggleOpenDrawer = () => {
 		setOpenedDrawer(() => !openedDrawer);
@@ -80,12 +102,6 @@ const MessageDetail = () => {
 		deleteMutate();
 		onMoveToNextMessage();
 	};
-
-	useEffect(() => {
-		if (messageDetail?.responseDto.alreadyRead === false) {
-			updateReadMessage(messageId);
-		}
-	}, [messageId, messageDetail]);
 
 	return (
 		<S.Wrapper>
@@ -152,6 +168,7 @@ const MessageDetail = () => {
 					handleAfterAction={onMoveToNextMessage}
 				/>
 			)}
+			{errorToastText && <ErrorToast />}
 		</S.Wrapper>
 	);
 };

@@ -52,8 +52,9 @@ export const MessageText = styled.div`
 	font-weight: ${({ theme }) => theme.fontWeight.light};
 	font-size: ${({ theme }) => theme.fontSize.f13};
 	line-height: ${({ theme }) => theme.lineHeight.lh13};
-
+	word-break: break-all;
 	white-space: normal;
+
 	display: -webkit-box;
 	-webkit-line-clamp: 2; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
 	-webkit-box-orient: vertical;
@@ -71,7 +72,7 @@ export const InnerBox = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-	width: calc(100% - ${PROFILE_IMAGE_SIZE}px);
+	flex-grow: 1;
 `;
 
 export const FavoriteContainer = styled.div`

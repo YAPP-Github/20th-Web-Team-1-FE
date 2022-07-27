@@ -5,5 +5,6 @@ export interface MessageContentProps {
 	checkMode: boolean;
 	idx: number;
 	onToggleCheckMessage: (id: number) => void;
+	onToggleLike: (idx: number) => void;
 	checkMessages: number[];
 }
