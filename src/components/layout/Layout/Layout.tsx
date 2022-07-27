@@ -15,7 +15,7 @@ const Layout = ({ children }: Props) => {
 			<BackgroundArea />
 			<S.AppContainer>
 				{pathname === '/login' || pathname === '/not-found' || pathname === '/' ? (
-					<>{children}</>
+					<S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>
 				) : (
 					<>
 						<Header />

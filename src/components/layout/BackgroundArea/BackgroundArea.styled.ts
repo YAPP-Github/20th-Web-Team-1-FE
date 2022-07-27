@@ -5,7 +5,7 @@ export const Container = styled.div`
 	inset: 0;
 	background: linear-gradient(180deg, #c3eaff 0%, #ffffff 100%);
 
-	@media only screen and (max-width: 1023px) {
+	@media only screen and (max-width: 1200px) {
 		background: ${({ theme }) => theme.colors.bt_white};
 	}
 `;
@@ -13,10 +13,10 @@ export const Container = styled.div`
 export const AppDescContainer = styled.div`
 	position: fixed;
 	inset: 0;
-	left: calc(50vw - 512px);
-	max-width: 512px;
+	left: calc(55vw - 60vh);
+	max-width: 60vh;
 
-	@media only screen and (max-width: 1023px) {
+	@media only screen and (max-width: 1200px) {
 		display: none;
 	}
 `;
@@ -27,7 +27,7 @@ export const LogoWrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-	width: 15.5vw;
+	width: 27vh;
 	object-fit: cover;
 `;
 
@@ -38,17 +38,17 @@ export const IntroduceDescWrapper = styled.div`
 
 export const IntroduceDescMainText = styled.h2`
 	margin-bottom: 28px;
-	font-size: 2.1vw;
+	font-size: 3.7vh;
 	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-	line-height: 2.1vw;
+	line-height: 3.7vh;
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
 `;
 
 export const IntroduceDescSubText = styled.p`
-	font-size: 1.7vw;
+	font-size: 3vh;
 	font-weight: ${({ theme }) => theme.fontWeight.normal};
-	line-height: 1.7vw;
+	line-height: 3vh;
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[100]};
 `;
@@ -84,22 +84,22 @@ export const FadeInCommentItemText = styled.p`
 	border-radius: 35.5px;
 	background-color: ${({ theme }) => theme.colors.bt_white};
 	box-shadow: 0px 0px 15.1515px rgba(79, 181, 255, 0.12);
-	font-size: 1.15vw;
+	font-size: 1.7vh;
 	font-weight: ${({ theme }) => theme.fontWeight.light};
-	line-height: 1.15vw;
+	line-height: 1.7vh;
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
-	transform: translate3d(-2.2vw, 0, 0);
+	transform: translate3d(-4vh, 0, 0);
 	z-index: -1;
 `;
 
 export const CopyrightWrapper = styled.div`
 	position: absolute;
-	bottom: 80px;
+	bottom: 7vh;
 `;
 
 export const Copyright = styled.p`
-	font-size: 0.85vw;
+	font-size: 1.5vh;
 	font-weight: ${({ theme }) => theme.fontWeight.normal};
 	line-height: ${({ theme }) => theme.lineHeight.lh16};
 	letter-spacing: -0.02em;
@@ -108,7 +108,7 @@ export const Copyright = styled.p`
 
 export const InstagramLinkButtonWrapper = styled.a`
 	position: fixed;
-	bottom: 80px;
+	bottom: 7vh;
 	right: 80px;
 	display: flex;
 	align-items: center;

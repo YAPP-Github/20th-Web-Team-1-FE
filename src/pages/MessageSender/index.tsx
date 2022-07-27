@@ -8,7 +8,7 @@ import { useQuery, useMutation } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
 import { getForest } from '@/apis/forest';
-import { DEFAULT_FOLDER_NAME } from '@/constants/messageSender';
+import { DEFAULT_FOLDER_NAME } from '@/constants/message-Sender';
 import { Folder } from '@/types/forest';
 import { postMessages } from '@/apis/messages';
 

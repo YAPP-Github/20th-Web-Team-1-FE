@@ -3,23 +3,7 @@ import * as S from './BackgroundArea.styled';
 import LogoIcon from '@/assets/images/landing/landing_logo.svg';
 import BeeIcon from '@/assets/images/shared/bee.svg';
 import InstagramIcon from '@/assets/images/landing/instagram.png';
-
-const comments = [
-	{
-		id: 0,
-		text: '내일 면접! 난 열심히 준비했으니 잘할 수 있어. 난 날 믿어!',
-	},
-	{
-		id: 1,
-		text: '이번 달 목표, 매일 일기 쓰기! 내가 해냄!!!',
-	},
-	{
-		id: 2,
-		text: '내 매력은 비행기야. 타고남!!! ㅎㅎ',
-	},
-];
-
-const INSTAGRAM_URL = 'https://instagram.com/betree_official?igshid=YmMyMTA2M2Y=';
+import { COMMENTS, INSTAGRAM_URL } from '@/constants/app-background';
 
 const BackgroundArea = () => {
 	return (
@@ -37,7 +21,7 @@ const BackgroundArea = () => {
 				</S.IntroduceDescWrapper>
 
 				<S.FadeInCommentList>
-					{comments.map((comment) => {
+					{COMMENTS.map((comment) => {
 						return (
 							<S.FadeInCommentItem key={comment?.id}>
 								<S.FadeInCommentItemImg src={BeeIcon} alt="" />
