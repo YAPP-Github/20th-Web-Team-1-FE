@@ -200,8 +200,6 @@ const MessageBox = () => {
 		}
 	}, [folders, treeId]);
 
-	console.log(messageList);
-
 	return (
 		<S.Wrapper>
 			{isMakingFruit ? (
