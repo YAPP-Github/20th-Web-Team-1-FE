@@ -94,6 +94,10 @@ const MessageBox = () => {
 	});
 
 	const onToggleCheckMessage = (id: number) => {
+		if (checkMessages.length === 8) {
+			setSmallModal('8개 이상 열매를 맺을 수 없습니다!');
+			return;
+		}
 		checkMessages.includes(id)
 			? setCheckMessages(checkMessages.filter((message) => message !== id))
 			: setCheckMessages([...checkMessages, id]);
@@ -204,7 +208,6 @@ const MessageBox = () => {
 				<MakingFruitMenu
 					showCheckedMessages={showCheckedMessages}
 					setShowCheckedMessages={setShowCheckedMessages}
-					numberOfMessages={messageList ? messageList.length : 0}
 					numberOfCheckedMessages={checkMessages.length}
 				/>
 			) : (

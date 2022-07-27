@@ -6,7 +6,6 @@ import { MessageCheckBox, MakingFruitPopup } from '@/components/features/Message
 const MakingFruitMenu = ({
 	showCheckedMessages,
 	setShowCheckedMessages,
-	numberOfMessages,
 	numberOfCheckedMessages,
 }: MakingFruitMenuProps) => {
 	const handleToggleChecked = () => {
@@ -22,7 +21,7 @@ const MakingFruitMenu = ({
 					<S.CheckText>선택한 메시지 모아보기</S.CheckText>
 				</S.FlexBox>
 				<S.CheckText>
-					<S.StrongText>{numberOfCheckedMessages} </S.StrongText> / {numberOfMessages}
+					<S.StrongText>{numberOfCheckedMessages} </S.StrongText> / 8
 				</S.CheckText>
 			</S.InfoContainer>
 		</S.MenuContainer>
