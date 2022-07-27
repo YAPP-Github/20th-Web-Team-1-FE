@@ -82,14 +82,10 @@ export const getTreeDetail = async ({ treeId, userId }: TreeDetailParam) => {
 		forest: { index },
 	} = API_URL;
 
-	try {
-		const response = await requester<TreeDetail | undefined>({
-			method: GET,
-			url: `${index}/${treeId}?userId=${userId}`,
-		});
+	const response = await requester<TreeDetail | undefined>({
+		method: GET,
+		url: `${index}/${treeId}?userId=${userId}`,
+	});
 
-		return response.payload;
-	} catch (error) {
-		// 에러 핸들링
-	}
+	return response.payload;
 };

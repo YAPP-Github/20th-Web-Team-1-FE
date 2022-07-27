@@ -1,10 +1,11 @@
 import { getForest } from '@/apis/forest';
 import { updateMovingMessages } from '@/apis/messages';
+import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
 import { Folder } from '@/types/forest';
 import React, { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useRecoilValue } from 'recoil';
+import { useMutation, useQuery } from 'react-query';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Button from '../../Button';
 import ModalFrame from '../ModalFrame';
 import * as S from './MovingFolderModal.styled';
@@ -18,9 +19,8 @@ const MovingFolderModal = ({
 	getMessageList,
 	handleAfterAction,
 }: MovingFolderModalProps) => {
-	const queryClient = useQueryClient();
-
 	const myInfo = useRecoilValue(myInfoState);
+	const setErrorToastText = useSetRecoilState(errorToastState);
 
 	const userId = myInfo?.id;
 
@@ -34,18 +34,17 @@ const MovingFolderModal = ({
 		() => updateMovingMessages({ messageIds: checkMessages, treeId: selectFolder }),
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries('getMessages');
+				getMessageList && getMessageList();
+				onToggleMovingFolderModal();
+				setIsEdit && setIsEdit(false);
+				handleAfterAction && handleAfterAction();
+				setErrorToastText('폴더 이동에 성공했습니다! ');
+			},
+			onError: () => {
+				setErrorToastText('네트워크 에러! 폴더 이동에 실패했습니다.');
 			},
 		},
 	);
-
-	const onClickMovingFolderButton = () => {
-		updateMovingMessagesMutate();
-		onToggleMovingFolderModal();
-		setIsEdit && setIsEdit(false);
-		getMessageList && getMessageList();
-		handleAfterAction && handleAfterAction();
-	};
 
 	return (
 		<ModalFrame onModal={isMoving} setOnModal={onToggleMovingFolderModal}>
@@ -73,7 +72,14 @@ const MovingFolderModal = ({
 								</Button>
 							</S.ModalButton>
 							<S.MoveButton>
-								<Button type="button" bgColor="primary" fontWeight="bold" onClick={onClickMovingFolderButton}>
+								<Button
+									type="button"
+									bgColor="primary"
+									fontWeight="bold"
+									onClick={() => {
+										updateMovingMessagesMutate();
+									}}
+								>
 									이동하기
 								</Button>
 							</S.MoveButton>

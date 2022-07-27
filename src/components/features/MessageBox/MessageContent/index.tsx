@@ -3,23 +3,36 @@ import LikeIcon from '@/assets/images/messages/like_star.svg';
 import BeeIcon from '@/assets/images/messages/message_bee.svg';
 import StarIcon from '@/assets/images/messages/star.svg';
 import { MessageCheckBox } from '@/components/features/MessageBox';
+import { errorToastState } from '@/stores/modal';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import * as S from './MessageContent.styled';
 import { MessageContentProps } from './MessageContent.type';
 
-const MessageContent = ({ message, checkMode, checkMessages, onToggleCheckMessage, idx }: MessageContentProps) => {
+const MessageContent = ({
+	message,
+	checkMode,
+	checkMessages,
+	onToggleCheckMessage,
+	idx,
+	onToggleLike,
+}: MessageContentProps) => {
 	dayjs.locale('ko');
 	const navigate = useNavigate();
 	const { treeId } = useParams();
-	const queryClient = useQueryClient();
+
+	const setErrorToastText = useSetRecoilState(errorToastState);
 
 	const { mutate: updateFavoriteMutate } = useMutation(() => updateFavoriteMessage(message.id), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('getMessages');
+			onToggleLike(idx);
+		},
+		onError: () => {
+			setErrorToastText('네트워크 에러! 즐겨찾기에 실패했습니다. ');
 		},
 	});
 

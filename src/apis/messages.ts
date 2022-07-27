@@ -7,19 +7,15 @@ export const deleteMessage = async (messageIds: MessageIdType[]) => {
 		messages: { index },
 	} = API_URL;
 
-	try {
-		const data = messageIds;
+	const data = messageIds;
 
-		const { status } = await requester({
-			method: DELETE,
-			url: index,
-			data,
-		});
+	const { status } = await requester({
+		method: DELETE,
+		url: index,
+		data,
+	});
 
-		return status;
-	} catch (error) {
-		throw new Error('Failed to delete message!');
-	}
+	return status;
 };
 
 export const updateReadMessage = async (messageId: MessageIdType) => {
@@ -27,29 +23,21 @@ export const updateReadMessage = async (messageId: MessageIdType) => {
 		messages: { read },
 	} = API_URL;
 
-	try {
-		const response = await requester<boolean>({
-			method: PUT,
-			url: `${read}?messageId=${messageId}`,
-		});
+	const response = await requester<boolean>({
+		method: PUT,
+		url: `${read}?messageId=${messageId}`,
+	});
 
-		return response.payload;
-	} catch (error) {
-		throw new Error('Failed to update read message!');
-	}
+	return response.payload;
 };
 
 export const getMessageDetail = async (messageId: MessageIdType) => {
-	try {
-		const response = await requester<MessageDetailData>({
-			method: GET,
-			url: `/messages/${messageId}`,
-		});
+	const response = await requester<MessageDetailData>({
+		method: GET,
+		url: `/messages/${messageId}`,
+	});
 
-		return response.payload;
-	} catch (error) {
-		throw new Error('Failed to get message of detail');
-	}
+	return response.payload;
 };
 
 export const getMessages = async ({ treeId, currentPage }: MessageParams) => {
@@ -60,16 +48,12 @@ export const getMessages = async ({ treeId, currentPage }: MessageParams) => {
 			? `/messages?page=${currentPage}&size=10&treeId=${treeId}`
 			: `/messages?page=${currentPage}&size=10`;
 
-	try {
-		const response = await requester<MessagesType>({
-			method: GET,
-			url: path,
-		});
+	const response = await requester<MessagesType>({
+		method: GET,
+		url: path,
+	});
 
-		return response.payload;
-	} catch (error) {
-		throw new Error(`Failed to get messages of ${treeId ? treeId : 'myMessageFolder'}`);
-	}
+	return response.payload;
 };
 
 export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
@@ -77,23 +61,15 @@ export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
 		messages: { opening },
 	} = API_URL;
 
-	try {
-		const data = messageIds;
+	const data = messageIds;
 
-		const { status } = await requester({
-			method: PUT,
-			url: opening,
-			data,
-		});
+	const { status } = await requester({
+		method: PUT,
+		url: opening,
+		data,
+	});
 
-		if (status === 204) {
-			window.alert('열매맺기에 성공했습니다.');
-		}
-
-		return status;
-	} catch (error) {
-		throw new Error('Failed to open messages');
-	}
+	return status;
 };
 
 export const updateMovingMessages = async ({ messageIds, treeId }: { messageIds: number[]; treeId: number }) => {
@@ -101,23 +77,15 @@ export const updateMovingMessages = async ({ messageIds, treeId }: { messageIds:
 		messages: { folder },
 	} = API_URL;
 
-	try {
-		const data = messageIds;
+	const data = messageIds;
 
-		const { status } = await requester({
-			method: PUT,
-			url: `${folder}?treeId=${treeId}`,
-			data,
-		});
+	const { status } = await requester({
+		method: PUT,
+		url: `${folder}?treeId=${treeId}`,
+		data,
+	});
 
-		if (status === 204) {
-			window.alert('이동에 성공했습니다.');
-		}
-
-		return status;
-	} catch (error) {
-		throw new Error('Failed to move messages to another folder');
-	}
+	return status;
 };
 
 export const postMessages = async (postMessageData: PostMessageData) => {
@@ -125,20 +93,15 @@ export const postMessages = async (postMessageData: PostMessageData) => {
 		messages: { index },
 	} = API_URL;
 
-	try {
-		const data = postMessageData;
+	const data = postMessageData;
 
-		const { status } = await requester({
-			method: POST,
-			url: index,
-			data,
-		});
+	const { status } = await requester({
+		method: POST,
+		url: index,
+		data,
+	});
 
-		return status;
-	} catch (error) {
-		// 에러 핸들링
-		throw new Error('Failed to send message');
-	}
+	return status;
 };
 
 export const updateFavoriteMessage = async (messageId: MessageIdType) => {
@@ -146,14 +109,10 @@ export const updateFavoriteMessage = async (messageId: MessageIdType) => {
 		messages: { favorite },
 	} = API_URL;
 
-	try {
-		const { status } = await requester({
-			method: PUT,
-			url: `${favorite}?messageId=${messageId}`,
-		});
+	const { status } = await requester({
+		method: PUT,
+		url: `${favorite}?messageId=${messageId}`,
+	});
 
-		return status;
-	} catch (error) {
-		throw new Error('Failed to update read message!');
-	}
+	return status;
 };

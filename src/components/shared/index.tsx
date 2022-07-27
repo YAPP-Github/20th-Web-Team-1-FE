@@ -12,3 +12,4 @@ export { default as SideDrawer } from './Modal/SideDrawer';
 export { default as SuccessModal } from './Modal/SuccessModal';
 export { default as SmallAlertModal } from './Modal/SmallAlertModal';
 export { default as MediumAlertModal } from './Modal/MediumAlertModal';
+export { default as ErrorToast } from './Modal/ErrorToast';

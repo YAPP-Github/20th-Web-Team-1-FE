@@ -27,6 +27,8 @@ export const MessageContentContainer = styled.div`
 `;
 
 export const MessageContent = styled.div`
+	width: 100%;
+
 	display: flex;
 	flex-direction: column;
 
@@ -36,6 +38,7 @@ export const MessageContent = styled.div`
 	font-weight: ${({ theme }) => theme.fontWeight.light};
 	font-size: ${({ theme }) => theme.fontSize.f14};
 	line-height: 24px;
+	word-break: break-all;
 
 	background: ${({ theme }) => theme.colors.bt_primary[20]};
 
