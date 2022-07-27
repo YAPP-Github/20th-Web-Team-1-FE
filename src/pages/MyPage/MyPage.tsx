@@ -16,4 +16,4 @@ const MyPage = () => {
 	);
 };
 
-export default withAuth(MyPage);
+export default MyPage;
