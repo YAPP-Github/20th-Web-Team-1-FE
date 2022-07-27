@@ -8,44 +8,44 @@ export const Container = styled.div`
 	padding: 10vh 0 7vh 0;
 `;
 
-export const PrimaryLogoWrapper = styled.div`
+export const LandingLogoWrapper = styled.div`
 	margin-bottom: 4.2vh;
 	text-align: center;
 `;
 
-export const PrimaryLogo = styled.img``;
+export const LandingLogo = styled.img``;
 
-export const AppStartTitleWrapper = styled.div`
+export const LandingTitleWrapper = styled.div`
 	margin-bottom: 4.2vh;
 	text-align: center;
 `;
 
-export const AppStartTitle = styled.p`
+export const LandingTitle = styled.p`
 	font-size: ${({ theme }) => theme.fontSize.f28};
 	font-weight: ${({ theme }) => theme.fontWeight.thin};
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
 `;
 
-export const AppStartImojTigle = styled(AppStartTitle)`
+export const LandingImojiTitle = styled(LandingTitle)`
 	margin-bottom: 1vh;
 	font-size: ${({ theme }) => theme.fontSize.f32};
 `;
 
-export const AppStartTreeImgWrapper = styled.div`
+export const LandingImgWrapper = styled.div`
 	text-align: center;
 	margin-bottom: 3.4vh;
 `;
 
-export const AppStartTreeImg = styled.img`
+export const LandingImg = styled.img`
 	width: 90%;
 `;
 
-export const AppStartDescWrapper = styled.div`
+export const LandingDescWrapper = styled.div`
 	text-align: center;
 `;
 
-export const AppStartDesc = styled.p`
+export const LandingDesc = styled.p`
 	font-size: ${({ theme }) => theme.fontSize.f14};
 	font-weight: ${({ theme }) => theme.fontWeight.light};
 	line-height: ${({ theme }) => theme.lineHeight.lh24};

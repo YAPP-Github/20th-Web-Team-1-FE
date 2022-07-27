@@ -18,23 +18,23 @@ const Landing = () => {
 
 	return (
 		<S.Container>
-			<S.PrimaryLogoWrapper>
-				<S.PrimaryLogo src={PrimaryLogoIcon} alt="" />
-			</S.PrimaryLogoWrapper>
+			<S.LandingLogoWrapper>
+				<S.LandingLogo src={PrimaryLogoIcon} alt="" />
+			</S.LandingLogoWrapper>
 
-			<S.AppStartTitleWrapper>
-				<S.AppStartImojTigle>잘한다👏 자란다🌳</S.AppStartImojTigle>
-				<S.AppStartTitle>자존감이 자라는 곳</S.AppStartTitle>
-			</S.AppStartTitleWrapper>
+			<S.LandingTitleWrapper>
+				<S.LandingImojiTitle>잘한다👏 자란다🌳</S.LandingImojiTitle>
+				<S.LandingTitle>자존감이 자라는 곳</S.LandingTitle>
+			</S.LandingTitleWrapper>
 
-			<S.AppStartTreeImgWrapper>
-				<S.AppStartTreeImg src={LandingTreeImg} alt="" />
-			</S.AppStartTreeImgWrapper>
+			<S.LandingImgWrapper>
+				<S.LandingImg src={LandingTreeImg} alt="" />
+			</S.LandingImgWrapper>
 
-			<S.AppStartDescWrapper>
-				<S.AppStartDesc>칭찬의 장벽을 낮추고, 자존감을 높이는 Betree입니다.</S.AppStartDesc>
-				<S.AppStartDesc>칭찬하고 칭찬 받으며 나만의 따뜻한 나무숲을 가꾸세요!</S.AppStartDesc>
-			</S.AppStartDescWrapper>
+			<S.LandingDescWrapper>
+				<S.LandingDesc>칭찬의 장벽을 낮추고, 자존감을 높이는 Betree입니다.</S.LandingDesc>
+				<S.LandingDesc>칭찬하고 칭찬 받으며 나만의 따뜻한 나무숲을 가꾸세요!</S.LandingDesc>
+			</S.LandingDescWrapper>
 
 			<S.AppStartButtonWrapper>
 				<S.AppStartButton to="/main-tree">Betree 시작하기</S.AppStartButton>
