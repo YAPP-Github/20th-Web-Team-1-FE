@@ -31,9 +31,9 @@ const BackgroundArea = () => {
 							</S.FadeInCommentItem>
 						);
 					})}
-					<S.FadeInCommentSkipWarpper>
+					<S.FadeInCommentItem>
 						<img src={SkipIcon} alt="" />
-					</S.FadeInCommentSkipWarpper>
+					</S.FadeInCommentItem>
 				</S.FadeInCommentList>
 				<S.CopyrightWrapper>
 					<S.Copyright>Copyright &copy; Betree All rights reserved</S.Copyright>

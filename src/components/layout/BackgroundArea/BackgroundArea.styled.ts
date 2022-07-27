@@ -1,4 +1,41 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+
+const slideInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(-100px, 0 ,0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0 ,0);
+  }
+`;
+
+const slideInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(100px, 0 ,0);
+  }
+
+  to {
+    opacity: 1;
+		transform: translate3d(4vh, 0, 0);
+  }
+`;
+
+const slideInBottom = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100px ,0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0 ,0);
+  }
+`;
 
 export const Container = styled.div`
 	position: fixed;
@@ -71,9 +108,25 @@ export const FadeInCommentItem = styled.li`
 	align-items: center;
 	justify-content: center;
 
-	&:nth-of-type(even) {
+	opacity: 0;
+	&:not(:last-child):nth-of-type(even) {
 		align-self: flex-end;
-		transform: translate3d(4vh, 0, 0);
+	}
+
+	&:nth-of-type(1) {
+		animation: ${slideInLeft} 1s ease forwards;
+	}
+
+	&:nth-of-type(2) {
+		animation: ${slideInRight} 1s 0.3s ease forwards;
+	}
+
+	&:nth-of-type(3) {
+		animation: ${slideInLeft} 1s 0.6s ease forwards;
+	}
+
+	&:nth-of-type(4) {
+		animation: ${slideInBottom} 1s 0.9s ease forwards;
 	}
 `;
 
