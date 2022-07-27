@@ -10,7 +10,7 @@ import { COMMENTS, INSTAGRAM_URL } from '@/constants/app-background';
 const BackgroundArea = () => {
 	return (
 		<S.Container>
-			<S.AppDescContainer>
+			<S.InnerContainer>
 				<S.LogoWrapper>
 					<S.Logo src={LogoIcon} alt="Betree Logo" />
 				</S.LogoWrapper>
@@ -22,19 +22,20 @@ const BackgroundArea = () => {
 					</S.IntroduceDescSubText>
 				</S.IntroduceDescWrapper>
 
-				<S.FadeInCommentList>
+				<S.SlideFadeInCommentList>
 					{COMMENTS.map((comment) => {
 						return (
-							<S.FadeInCommentItem key={comment?.id}>
-								<S.FadeInCommentItemImg src={comment?.id % 2 === 0 ? BeeIcon : BeeOrangeIcon} alt="" />
-								<S.FadeInCommentItemText>{comment?.text}</S.FadeInCommentItemText>
-							</S.FadeInCommentItem>
+							<S.SlideFadeInCommentItem key={comment?.id}>
+								<S.SlideFadeInCommentItemImg src={comment?.id % 2 === 0 ? BeeIcon : BeeOrangeIcon} alt="" />
+								<S.SlideFadeInCommentItemText>{comment?.text}</S.SlideFadeInCommentItemText>
+							</S.SlideFadeInCommentItem>
 						);
 					})}
-					<S.FadeInCommentItem>
+					<S.SlideFadeInCommentItem>
 						<img src={SkipIcon} alt="" />
-					</S.FadeInCommentItem>
-				</S.FadeInCommentList>
+					</S.SlideFadeInCommentItem>
+				</S.SlideFadeInCommentList>
+
 				<S.CopyrightWrapper>
 					<S.Copyright>Copyright &copy; Betree All rights reserved</S.Copyright>
 				</S.CopyrightWrapper>
@@ -42,7 +43,7 @@ const BackgroundArea = () => {
 				<S.InstagramLinkButtonWrapper href={INSTAGRAM_URL} target="_blank">
 					<S.InstagramLinkButtonImg src={InstagramIcon} alt="Instagram" />
 				</S.InstagramLinkButtonWrapper>
-			</S.AppDescContainer>
+			</S.InnerContainer>
 		</S.Container>
 	);
 };

@@ -1,7 +1,7 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const slideInLeft = keyframes`
+const slideFadeInLeft = keyframes`
   from {
     opacity: 0;
     transform: translate3d(-100px, 0 ,0);
@@ -13,7 +13,7 @@ const slideInLeft = keyframes`
   }
 `;
 
-const slideInRight = keyframes`
+const slideFadeInRight = keyframes`
   from {
     opacity: 0;
     transform: translate3d(100px, 0 ,0);
@@ -25,7 +25,7 @@ const slideInRight = keyframes`
   }
 `;
 
-const slideInBottom = keyframes`
+const slideFadeInBottom = keyframes`
   from {
     opacity: 0;
     transform: translate3d(0, 100px ,0);
@@ -47,7 +47,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const AppDescContainer = styled.div`
+export const InnerContainer = styled.div`
 	position: fixed;
 	inset: 0;
 	left: calc(55vw - 60vh);
@@ -82,7 +82,7 @@ export const IntroduceDescMainText = styled.h2`
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
 `;
 
-export const IntroduceDescSubText = styled.p`
+export const IntroduceDescSubText = styled.h2`
 	font-size: 3vh;
 	font-weight: ${({ theme }) => theme.fontWeight.normal};
 	line-height: 3vh;
@@ -95,7 +95,7 @@ export const IntroduceDescEmphasizedText = styled.strong`
 	color: ${({ theme }) => theme.colors.bt_primary[200]};
 `;
 
-export const FadeInCommentList = styled.ul`
+export const SlideFadeInCommentList = styled.ul`
 	position: absolute;
 	top: 42vh;
 	display: flex;
@@ -103,7 +103,7 @@ export const FadeInCommentList = styled.ul`
 	gap: 3.1vh;
 `;
 
-export const FadeInCommentItem = styled.li`
+export const SlideFadeInCommentItem = styled.li`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -114,27 +114,27 @@ export const FadeInCommentItem = styled.li`
 	}
 
 	&:nth-of-type(1) {
-		animation: ${slideInLeft} 1s ease forwards;
+		animation: ${slideFadeInLeft} 1s ease forwards;
 	}
 
 	&:nth-of-type(2) {
-		animation: ${slideInRight} 1s 0.3s ease forwards;
+		animation: ${slideFadeInRight} 1s 0.3s ease forwards;
 	}
 
 	&:nth-of-type(3) {
-		animation: ${slideInLeft} 1s 0.6s ease forwards;
+		animation: ${slideFadeInLeft} 1s 0.6s ease forwards;
 	}
 
 	&:nth-of-type(4) {
-		animation: ${slideInBottom} 1s 0.9s ease forwards;
+		animation: ${slideFadeInBottom} 1s 0.9s ease forwards;
 	}
 `;
 
-export const FadeInCommentItemImg = styled.img`
+export const SlideFadeInCommentItemImg = styled.img`
 	width: 7.2vh;
 `;
 
-export const FadeInCommentItemText = styled.p`
+export const SlideFadeInCommentItemText = styled.p`
 	padding: 2.3vh 4.6vh;
 	border-radius: 35.5px;
 	background-color: ${({ theme }) => theme.colors.bt_white};
@@ -148,7 +148,7 @@ export const FadeInCommentItemText = styled.p`
 	z-index: -1;
 `;
 
-export const FadeInCommentSkipWarpper = styled.div`
+export const SlideFadeInCommentSkipWarpper = styled.div`
 	text-align: center;
 `;
 
