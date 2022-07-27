@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './Landing.styled';
 import LogoIcon from '@/assets/images/landing/landing_logo.svg';
 import PrimaryLogoIcon from '@/assets/images/layout/betree_logo.svg';
 import BeeIcon from '@/assets/images/shared/bee.svg';
 import LandingTreeImg from '@/assets/images/landing/landing_tree.png';
 import InstagramIcon from '@/assets/images/landing/instagram.png';
+import { useRecoilValue } from 'recoil';
+import { myInfoState } from '@/stores/user';
+import { useNavigate } from 'react-router-dom';
 
 const comments = [
 	{
@@ -24,6 +27,15 @@ const comments = [
 const INSTAGRAM_URL = 'https://instagram.com/betree_official?igshid=YmMyMTA2M2Y=';
 
 const Landing = () => {
+	const userInfo = useRecoilValue(myInfoState);
+	const navigator = useNavigate();
+
+	useEffect(() => {
+		if (userInfo) {
+			navigator('/main-tree');
+		}
+	}, [userInfo, navigator]);
+
 	return (
 		<S.Container>
 			<S.AppDescContainer>

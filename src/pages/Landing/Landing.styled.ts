@@ -99,8 +99,6 @@ export const Copyright = styled.p`
 	color: ${({ theme }) => theme.colors.bt_grey[40]};
 `;
 
-// ==== App
-
 export const AppStartContainer = styled.div`
 	position: relative;
 	max-width: 475px;
@@ -171,8 +169,6 @@ export const AppStartButton = styled(Link)`
 	letter-spacing: -0.02em;
 	color: ${({ theme }) => theme.colors.bt_white};
 `;
-
-// ==== instagram
 
 export const InstagramLinkButtonWrapper = styled.a`
 	position: fixed;
