@@ -33,7 +33,7 @@ export const Logo = styled.img`
 
 export const IntroduceDescWrapper = styled.div`
 	position: absolute;
-	top: 30vh;
+	top: 25vh;
 `;
 
 export const IntroduceDescMainText = styled.h2`
@@ -60,18 +60,20 @@ export const IntroduceDescEmphasizedText = styled.strong`
 
 export const FadeInCommentList = styled.ul`
 	position: absolute;
-	top: 50vh;
+	top: 42vh;
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 3.1vh;
 `;
 
 export const FadeInCommentItem = styled.li`
 	display: flex;
 	align-items: center;
+	justify-content: center;
 
 	&:nth-of-type(even) {
 		align-self: flex-end;
+		transform: translate3d(4vh, 0, 0);
 	}
 `;
 
@@ -91,6 +93,10 @@ export const FadeInCommentItemText = styled.p`
 	color: ${({ theme }) => theme.colors.bt_grey[120]};
 	transform: translate3d(-4vh, 0, 0);
 	z-index: -1;
+`;
+
+export const FadeInCommentSkipWarpper = styled.div`
+	text-align: center;
 `;
 
 export const CopyrightWrapper = styled.div`

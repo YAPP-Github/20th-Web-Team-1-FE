@@ -1,8 +1,10 @@
 import React from 'react';
 import * as S from './BackgroundArea.styled';
-import LogoIcon from '@/assets/images/landing/landing_logo.svg';
+import LogoIcon from '@/assets/images/appBackground/landing_logo.svg';
 import BeeIcon from '@/assets/images/shared/bee.svg';
-import InstagramIcon from '@/assets/images/landing/instagram.png';
+import BeeOrangeIcon from '@/assets/images/appBackground/orange_bee.svg';
+import SkipIcon from '@/assets/images/appBackground/skip.svg';
+import InstagramIcon from '@/assets/images/appBackground/instagram.png';
 import { COMMENTS, INSTAGRAM_URL } from '@/constants/app-background';
 
 const BackgroundArea = () => {
@@ -24,11 +26,14 @@ const BackgroundArea = () => {
 					{COMMENTS.map((comment) => {
 						return (
 							<S.FadeInCommentItem key={comment?.id}>
-								<S.FadeInCommentItemImg src={BeeIcon} alt="" />
+								<S.FadeInCommentItemImg src={comment?.id % 2 === 0 ? BeeIcon : BeeOrangeIcon} alt="" />
 								<S.FadeInCommentItemText>{comment?.text}</S.FadeInCommentItemText>
 							</S.FadeInCommentItem>
 						);
 					})}
+					<S.FadeInCommentSkipWarpper>
+						<img src={SkipIcon} alt="" />
+					</S.FadeInCommentSkipWarpper>
 				</S.FadeInCommentList>
 				<S.CopyrightWrapper>
 					<S.Copyright>Copyright &copy; Betree All rights reserved</S.Copyright>
