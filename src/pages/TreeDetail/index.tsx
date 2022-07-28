@@ -35,7 +35,7 @@ const TreeDetail = () => {
 
 	const moveTree = (nextTree: number | undefined) => {
 		setShowMessage(false);
-		navigate(`/forest/${nextTree}`);
+		navigate(`/forest/tree/${nextTree}`);
 	};
 
 	return (
