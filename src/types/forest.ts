@@ -1,7 +1,7 @@
 export type Folder = {
 	id: number;
 	name: string;
-	fruit: string;
+	fruit: React.SetStateAction<string | undefined>;
 };
 
 export type Param = string | undefined;
