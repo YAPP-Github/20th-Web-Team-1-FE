@@ -1,17 +1,16 @@
 import styled from '@emotion/styled';
 import { FruitProps } from './Tree.type';
 
-const TREE_CIRCLE_SIZE = '261px';
-
 export const TreeWrapper = styled.div`
 	width: 100%;
 	height: 100%;
+	max-width: 475px;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
 	box-sizing: border-box;
 
-	padding: 30vh 16.5vw 0px 16.5vw;
+	padding-top: 30vh;
 `;
 
 export const TreeContainer = styled.div`
