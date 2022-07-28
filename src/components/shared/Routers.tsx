@@ -22,7 +22,8 @@ const Routers = () => {
 			<Route path="/main-tree" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/forest" element={<Forest />} />
-			<Route path="/forest/:treeId" element={<TreeDetail />} />
+			<Route path="/forest/:userId" element={<Forest />} />
+			<Route path="/forest/tree/:treeId" element={<TreeDetail />} />
 			<Route path="/forest/edit" element={<TreeAddForm />} />
 			<Route path="/forest/edit/:treeId" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />

@@ -20,7 +20,7 @@ const TreeItem = ({ tree }: Props) => {
 
 	return (
 		<S.ItemWrapper>
-			<Link to={`/forest/${id}`}>
+			<Link to={`/forest/tree/${id}`}>
 				<TreeShapeContainer>
 					<TreeCircle size="small">
 						{FRUIT_RENDER_POSITION.map((info) => {
