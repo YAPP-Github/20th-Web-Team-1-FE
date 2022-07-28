@@ -18,6 +18,7 @@ const theme: Theme = {
 		},
 		bt_yellow: {
 			50: '#ffd541',
+			100: '#FFC700',
 		},
 		bt_grey: {
 			20: '#eeeeee',
@@ -44,6 +45,12 @@ const theme: Theme = {
 		f17: '17px',
 		f18: '18px',
 		f20: '20px',
+		f22: '22px',
+		f24: '24px',
+		f28: '28px',
+		f32: '32px',
+		f36: '36px',
+		f40: '40px',
 	},
 	fontWeight: {
 		thin: 200,
@@ -61,9 +68,15 @@ const theme: Theme = {
 		lh14: '14px',
 		lh15: '15px',
 		lh16: '16px',
+		lh17: '17px',
 		lh18: '18px',
 		lh20: '20px',
 		lh22: '22px',
+		lh24: '24px',
+		lh28: '28px',
+		lh32: '32px',
+		lh36: '36px',
+		lh40: '40px',
 	},
 };
 

@@ -15,8 +15,8 @@ const GlobalStyle = () => {
 
 				body {
 					position: relative;
-					max-width: 475px;
-					margin: 0 auto;
+					/* max-width: 475px; */
+					/* margin: 0 auto; */
 					font-family: 'Pretendard';
 				}
 

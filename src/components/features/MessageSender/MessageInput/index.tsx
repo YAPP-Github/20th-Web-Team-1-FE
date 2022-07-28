@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './MessageInput.styled';
-import { MIN_LENGTH, PLACE_HOLDER } from '@/constants/messageSender';
+import { MIN_LENGTH, PLACE_HOLDER } from '@/constants/message-Sender';
 import { Props } from './MessageInput.type';
 
 const MessageInput = ({ messageInputRef }: Props) => {

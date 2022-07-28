@@ -1,11 +1,35 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { StyledProps } from './SideDrawer.type';
 
+const slideIn = keyframes`
+	0% {
+		opacity: 0;
+		transform: translate3d(-100%, 0 ,0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0 ,0);
+	}
+`;
+
+const slideOut = keyframes`
+	0% {
+		opacity: 0;
+		transform: translate3d(0, 0 ,0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translate3d(-100%, 0 ,0);
+	}
+`;
+
 export const SideDrawerContainer = styled.div<StyledProps>`
 	position: fixed;
 	top: 0;
-	left: auto;
 	display: flex;
 	flex-direction: column;
 	flex: 1 0 auto;
@@ -14,10 +38,13 @@ export const SideDrawerContainer = styled.div<StyledProps>`
 	height: 100vh;
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.bt_white};
-	transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms, opacity 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-	transform: ${({ show }) => (show ? 'translateX(0px)' : 'translateX(-100%)')};
-	opacity: ${({ show }) => (show ? 1 : 0)};
+	animation: ${({ show }) => (show ? slideIn : slideOut)} 225ms cubic-bezier(0, 0, 0.2, 1) forwards;
 	z-index: 10;
+
+	@media only screen and (min-width: 1200px) {
+		inset: 0;
+		margin-left: 55vw;
+	}
 `;
 
 export const CloseBtnWrapper = styled.div`

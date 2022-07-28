@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './FolderSelect.styled';
 import { Props } from './FolderSelect.type';
-import { DEFAULT_FOLDER_NAME } from '@/constants/messageSender';
+import { DEFAULT_FOLDER_NAME } from '@/constants/message-Sender';
 
 const FolderSelect = ({
 	folders,

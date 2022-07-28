@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Header, BottomNav } from '@/components/layout';
+import { Header, BottomNav, BackgroundArea } from '@/components/layout';
 import * as S from './Layout.styled';
 import { useLocation } from 'react-router-dom';
 
@@ -12,15 +12,18 @@ const Layout = ({ children }: Props) => {
 
 	return (
 		<>
-			{pathname === '/login' || pathname === '/not-found' ? (
-				<>{children}</>
-			) : (
-				<>
-					<Header />
+			<BackgroundArea />
+			<S.AppContainer>
+				{pathname === '/login' || pathname === '/not-found' || pathname === '/' ? (
 					<S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>
-					<BottomNav />
-				</>
-			)}
+				) : (
+					<>
+						<Header />
+						<S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>
+						<BottomNav />
+					</>
+				)}
+			</S.AppContainer>
 		</>
 	);
 };

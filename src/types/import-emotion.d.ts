@@ -29,7 +29,10 @@ declare module '@emotion/react' {
 				20: string;
 				200: string;
 			};
-			bt_yellow: { 50: string };
+			bt_yellow: {
+				50: string;
+				100: string;
+			};
 			bt_white: string;
 		};
 		fontSize: {
@@ -43,6 +46,12 @@ declare module '@emotion/react' {
 			f17: string;
 			f18: string;
 			f20: string;
+			f22: string;
+			f24: string;
+			f28: string;
+			f32: string;
+			f36: string;
+			f40: string;
 		};
 		fontWeight: {
 			thin: number;
@@ -60,9 +69,15 @@ declare module '@emotion/react' {
 			lh14: string;
 			lh15: string;
 			lh16: string;
+			lh17: string;
 			lh18: string;
 			lh20: string;
 			lh22: string;
+			lh24: string;
+			lh28: string;
+			lh32: string;
+			lh36: string;
+			lh40: string;
 		};
 	}
 }
