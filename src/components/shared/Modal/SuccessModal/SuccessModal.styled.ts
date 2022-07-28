@@ -11,10 +11,11 @@ export const WateringImgWrapper = styled.div`
 
 export const WateringImg = styled.img`
 	width: 120px;
-	height: auto;
+	height: 120px;
 	margin: 72px 0 31px 0;
 	border-radius: 50%;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	object-fit: contain;
 `;
 
 export const MessageTitle = styled.h3`

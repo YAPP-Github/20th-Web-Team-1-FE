@@ -1,29 +1,29 @@
 import React from 'react';
 import AlertModalFrame from '../AlertModalFrame';
 import * as S from './SuccessModal.styled';
-import WateringIcon from '@/assets/images/noticeTree/watering_icon.svg';
 import Button from '../../Button';
 import { Props } from './SuccessModal.type';
 
-const SuccessModal = ({ isSucceedSendMessage, handleCloseBtnClick }: Props) => {
+const SuccessModal = ({ image, title, messages, buttonText, isSucceedSendMessage, handleCloseBtnClick }: Props) => {
 	return (
 		<AlertModalFrame onAlertModal={isSucceedSendMessage}>
 			<S.SuccessModalContainer>
 				<S.SuccessModalWrapper>
 					<S.WateringImgWrapper>
-						<S.WateringImg src={WateringIcon} alt="" />
+						<S.WateringImg src={image} alt="" />
 					</S.WateringImgWrapper>
 
-					<S.MessageTitle>물 주기 완료!</S.MessageTitle>
+					<S.MessageTitle>{title}</S.MessageTitle>
 
 					<S.MessageDescWrapper>
-						<p>따듯한 메시지를 무사히 전달했어요.</p>
-						<p>덕분에 나무가 한 뼘 자라날 수 있게 되었어요!</p>
+						{messages.map((message, idx) => (
+							<p key={`${message}-${idx}`}>{message}</p>
+						))}
 					</S.MessageDescWrapper>
 
 					<S.ConfirmBtnWrapper>
 						<Button type="button" bgColor="primary" fontWeight="bold" onClick={handleCloseBtnClick}>
-							닫기
+							{buttonText}
 						</Button>
 					</S.ConfirmBtnWrapper>
 				</S.SuccessModalWrapper>
