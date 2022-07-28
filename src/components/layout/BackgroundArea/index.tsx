@@ -5,7 +5,7 @@ import BeeIcon from '@/assets/images/shared/bee.svg';
 import BeeOrangeIcon from '@/assets/images/appBackground/orange_bee.svg';
 import SkipIcon from '@/assets/images/appBackground/skip.svg';
 import InstagramIcon from '@/assets/images/appBackground/instagram.png';
-import { COMMENTS, INSTAGRAM_URL } from '@/constants/app-background';
+import { COMMENTS, INSTAGRAM_URL } from '@/constants/appBackground';
 
 const BackgroundArea = () => {
 	return (
