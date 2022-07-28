@@ -11,10 +11,6 @@ export const ModalBackDrop = styled.div<StyledProps>`
 	background-color: rgba(0, 0, 0, 0.66);
 	inset: 0px;
 	z-index: 10;
-
-	@media only screen and (min-width: 1200px) {
-		margin-left: 55vw;
-	}
 `;
 
 export const ModalContainer = styled.div`

@@ -22,9 +22,12 @@ const GlobalStyle = () => {
 
 				#modal-root {
 					position: relative;
-					width: 475px;
+
 					margin: 0 auto;
 					overflow: hidden;
+					@media only screen and (max-width: 1200px) {
+						width: 475px;
+					}
 				}
 
 				li {
