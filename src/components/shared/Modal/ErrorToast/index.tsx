@@ -13,6 +13,7 @@ const ErrorToast = () => {
 
 		return () => {
 			clearTimeout(toastTimer);
+			setErrorToastText(undefined);
 		};
 	}, []);
 
