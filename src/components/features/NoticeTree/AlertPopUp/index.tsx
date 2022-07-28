@@ -11,6 +11,9 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage, activeHomeAlert 
 	const showAlertHandler = () => {
 		if (!showAlert && !openedAlertButton) {
 			setShowAlert(true);
+			setTimeout(() => {
+				setOpenedAlertButton(true);
+			}, 500);
 			return;
 		}
 
