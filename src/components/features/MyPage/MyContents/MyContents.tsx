@@ -24,7 +24,7 @@ const MyContents = () => {
 		logoutMutation();
 	};
 
-	const DOMAIN_URL = import.meta.env.DEV ? 'http://localhost:3000' : 'https://www.betree.shop';
+	const DOMAIN_URL = import.meta.env.DEV ? 'http://localhost:3000' : 'https://www.betree.site';
 
 	const handleCopyUrlToClipBoard = async () => {
 		await navigator.clipboard.writeText(`${DOMAIN_URL}/forest/${myInfo?.id}`);
