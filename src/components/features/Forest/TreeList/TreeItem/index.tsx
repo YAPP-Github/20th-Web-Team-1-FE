@@ -13,7 +13,7 @@ import { Props } from './TreeItem.type';
 const TreeItem = ({ tree }: Props) => {
 	const { id, fruit, name } = tree;
 
-	const getSelectedFruitImage = (fruitValue: string) => {
+	const getSelectedFruitImage = (fruitValue: React.SetStateAction<string | undefined>) => {
 		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === fruitValue)[0];
 		return selectedFruitObj?.imgSrc;
 	};

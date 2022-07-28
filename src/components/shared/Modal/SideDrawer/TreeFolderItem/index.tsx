@@ -12,7 +12,7 @@ const TreeFolderItem = ({
 }: Props) => {
 	const navigator = useNavigate();
 
-	const getSelectedFruitImage = (fruitValue: string) => {
+	const getSelectedFruitImage = (fruitValue: React.SetStateAction<string | undefined>) => {
 		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === fruitValue)[0];
 		return selectedFruitObj?.imgSrc;
 	};
