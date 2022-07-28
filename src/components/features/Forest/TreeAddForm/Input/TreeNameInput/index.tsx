@@ -18,7 +18,6 @@ const TreeNameInput = ({ treeName, placeholder, autoFocus, onChangeTreeName }: P
 			onChange={onChange}
 			minLength={TREE_NAME_LENGTH_MIN}
 			maxLength={TREE_NAME_LENGTH_MAX}
-			required
 		/>
 	);
 };

@@ -11,6 +11,7 @@ import { Folder } from '@/types/forest';
 import { postTree, getForest, updateTree } from '@/apis/forest';
 import { useRecoilValue } from 'recoil';
 import { myInfoState } from '@/stores/user';
+import Toast from '@/components/shared/Toast';
 
 const TreeAddForm = () => {
 	const navigate = useNavigate();
@@ -36,6 +37,8 @@ const TreeAddForm = () => {
 
 	const [treeName, setTreeName] = useState<string>('');
 	const [selectedFruit, setSelectedFruit] = useState<string | undefined>('');
+	const [isToastVisible, setIsToastVisible] = useState(false);
+	const [formAlertMessage, setFormAlertMessage] = useState('');
 
 	const handleChangeTreeName = (treeName: string) => {
 		setTreeName(treeName);
@@ -52,6 +55,24 @@ const TreeAddForm = () => {
 
 	const handleSubmitEditedTreeInfo = (event: React.FormEvent) => {
 		event.preventDefault();
+
+		if (!treeName && !selectedFruit) {
+			setFormAlertMessage('나무 이름과 나무 열매를 입력해주세요.');
+			setIsToastVisible(true);
+			return;
+		}
+
+		if (!treeName) {
+			setFormAlertMessage('나무 이름을 입력해주세요.');
+			setIsToastVisible(true);
+			return;
+		}
+
+		if (!selectedFruit) {
+			setFormAlertMessage('나무 열매를 입력해주세요.');
+			setIsToastVisible(true);
+			return;
+		}
 
 		if (treeId) {
 			treeUpdateMutation.mutate({ treeId: Number(treeId), name: treeName, fruitType: selectedFruit }); //
@@ -132,6 +153,8 @@ const TreeAddForm = () => {
 					저장하기
 				</Button>
 			</S.ButtonBox>
+
+			<Toast show={isToastVisible} message={formAlertMessage} onClose={() => setIsToastVisible(false)} />
 		</S.TreeAddForm>
 	);
 };
