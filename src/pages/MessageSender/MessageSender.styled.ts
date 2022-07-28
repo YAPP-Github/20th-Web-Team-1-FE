@@ -1,17 +1,33 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+	margin: 0 32px;
+`;
+
+export const Background = styled.div`
+	width: 100%;
+	height: 70.5px;
+	background-color: ${({ theme }) => theme.colors.bt_white};
+`;
+
 export const MessageSenderContainer = styled.form`
-	padding: 96px 0 30px 0;
+	position: relative;
+	height: calc(100vh - 155.5px);
+	padding-bottom: 30px;
+	overflow: scroll;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
 `;
 
 export const TopWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
-	margin: 0 32px 0 32px;
 `;
 
 export const MessageInputWrapper = styled.div`
-	margin: 46px 32px 0 32px;
+	margin-top: 46px;
 `;
 
 export const AnonymousCheckBoxWrapper = styled.div`
@@ -21,5 +37,5 @@ export const AnonymousCheckBoxWrapper = styled.div`
 export const ButtonWrapper = styled.div`
 	display: flex;
 	gap: 14px;
-	margin: 36px 32px 0 32px;
+	margin-top: 36px;
 `;

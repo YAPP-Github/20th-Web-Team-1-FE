@@ -4,16 +4,7 @@ import { MIN_LENGTH, PLACE_HOLDER } from '@/constants/messageSender';
 import { Props } from './MessageInput.type';
 
 const MessageInput = ({ messageInputRef }: Props) => {
-	return (
-		<S.MessageInput
-			ref={messageInputRef}
-			name="message"
-			minLength={MIN_LENGTH}
-			placeholder={PLACE_HOLDER}
-			autoFocus
-			required
-		/>
-	);
+	return <S.MessageInput ref={messageInputRef} name="message" />;
 };
 
 export default MessageInput;

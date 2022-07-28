@@ -23,9 +23,7 @@ const Forest = () => {
 		<S.TreesContainer>
 			<MessageChip message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
 
-			<S.TreeListBox>
-				<TreeList trees={folders} />
-			</S.TreeListBox>
+			<S.TreeListBox>{folders && <TreeList trees={folders} />}</S.TreeListBox>
 
 			<S.ButtonBox>
 				<Button type="button" bgColor="primary" onClick={() => navigate('/message/edit')}>
