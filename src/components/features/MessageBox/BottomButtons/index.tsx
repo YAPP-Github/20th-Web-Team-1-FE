@@ -10,6 +10,7 @@ const BottomButtons = ({
 	isEdit,
 	isMakingFruit,
 	editMakingToggleHandler,
+	getMessageList,
 	checkMessages,
 	setShowCheckedMessages,
 	setIsMakingFruit,
@@ -20,6 +21,7 @@ const BottomButtons = ({
 			() => setIsMakingFruit(false);
 			setShowCheckedMessages(false);
 			editMakingToggleHandler('back');
+			getMessageList();
 			setErrorToastText('열매 맺기에 성공했습니다! ');
 		},
 		onError: () => {
