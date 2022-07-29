@@ -24,7 +24,7 @@ const TreeDetail = () => {
 	const [showMessage, setShowMessage] = useState(false);
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [treeMessages, setTreeMessages] = useState<MessageWithLocationType[] | null>(null);
-	console.log(treeMessages);
+
 	const userId = myInfo?.id;
 
 	const { data: treeDetailInfo } = useQuery(
