@@ -80,8 +80,8 @@ export const Button = styled(DefaultButton)<{ disabled: boolean }>`
 `;
 
 export const ArrowIcon = styled.img`
-	margin-right: 8px;
+	margin-left: 8px;
 `;
 export const ArrowDownIcon = styled.img`
-	margin-left: 8px;
+	margin-right: 8px;
 `;
