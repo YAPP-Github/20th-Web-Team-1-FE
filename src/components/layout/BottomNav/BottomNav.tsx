@@ -8,7 +8,7 @@ const BottomNav = () => {
 
 	const { pathname } = useLocation();
 
-	const isLinkSelected = (to: string) => to === pathname;
+	const isLinkSelected = (to: string) => pathname.includes(to);
 
 	const decideLinkColor = (to: string) =>
 		isLinkSelected(to) ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20];
@@ -17,11 +17,11 @@ const BottomNav = () => {
 		<S.BottomNavWrapper>
 			<S.BottomNavLinkList>
 				<li>
-					<S.BottomNavLink to="/" selected={isLinkSelected('/')}>
+					<S.BottomNavLink to="/main-tree" selected={isLinkSelected('/main-tree')}>
 						<svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
 								d="M7.5 18C8.53125 18 9.375 17.1692 9.375 16.1538H5.625C5.625 17.1692 6.45937 18 7.5 18ZM13.125 12.4615V7.84615C13.125 5.01231 11.5875 2.64 8.90625 2.01231V1.38462C8.90625 0.618462 8.27812 0 7.5 0C6.72187 0 6.09375 0.618462 6.09375 1.38462V2.01231C3.40312 2.64 1.875 5.00308 1.875 7.84615V12.4615L0 14.3077V15.2308H15V14.3077L13.125 12.4615Z"
-								fill={decideLinkColor('/')}
+								fill={decideLinkColor('/main-tree')}
 							/>
 						</svg>
 

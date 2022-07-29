@@ -14,7 +14,7 @@ export const Background = styled.div`
 export const TreeAddForm = styled.form`
 	position: relative;
 	height: calc(100vh - 155.5px);
-	padding-bottom: 30px;
+	padding: 16px 0 30px 0;
 	overflow: scroll;
 
 	::-webkit-scrollbar {
@@ -45,14 +45,12 @@ export const HelperBeeMessage = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	gap: 7px;
-	width: 100%;
-	height: 66px;
 	border-radius: 20px 20px 20px 0px;
 	background: ${({ theme }) => theme.colors.bt_primary[25]};
 	box-shadow: 0px 0px 5px rgba(0, 196, 184, 0.1);
-	padding: 15px 20px;
+	padding: 17px 33px 14px 21px;
 	margin-left: 14px;
 
 	& > p:nth-of-type(1) {
