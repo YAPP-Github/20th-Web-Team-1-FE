@@ -10,7 +10,7 @@ const BottomNav = () => {
 
 	console.log(pathname);
 
-	const isLinkSelected = (to: string) => to === pathname;
+	const isLinkSelected = (to: string) => pathname.includes(to);
 
 	const decideLinkColor = (to: string) =>
 		isLinkSelected(to) ? theme.colors.bt_primary[200] : theme.colors.bt_grey[20];
