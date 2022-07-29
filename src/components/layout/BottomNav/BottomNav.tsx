@@ -8,8 +8,6 @@ const BottomNav = () => {
 
 	const { pathname } = useLocation();
 
-	console.log(pathname);
-
 	const isLinkSelected = (to: string) => pathname.includes(to);
 
 	const decideLinkColor = (to: string) =>
