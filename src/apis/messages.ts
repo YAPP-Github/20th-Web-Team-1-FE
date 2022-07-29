@@ -56,12 +56,17 @@ export const getMessages = async ({ treeId, currentPage }: MessageParams) => {
 	return response.payload;
 };
 
-export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
+interface updateMessagesParamType {
+	messageIds: number[];
+	treeId: string | number | undefined;
+}
+
+export const updateOpenMessages = async ({ messageIds, treeId }: updateMessagesParamType) => {
 	const {
 		messages: { opening },
 	} = API_URL;
 
-	const data = messageIds;
+	const data = { messageIds, treeId };
 
 	const { status } = await requester({
 		method: PUT,
@@ -72,7 +77,7 @@ export const updateOpenMessages = async (messageIds: MessageIdType[]) => {
 	return status;
 };
 
-export const updateMovingMessages = async ({ messageIds, treeId }: { messageIds: number[]; treeId: number }) => {
+export const updateMovingMessages = async ({ messageIds, treeId }: updateMessagesParamType) => {
 	const {
 		messages: { folder },
 	} = API_URL;
