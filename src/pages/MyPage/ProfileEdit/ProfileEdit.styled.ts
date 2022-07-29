@@ -21,6 +21,14 @@ export const ProfileEditWrapper = styled.div`
 		margin-bottom: 101px;
 	}
 
+	& > img {
+		width: 120px;
+		height: 120px;
+		background: ${({ theme }) => theme.colors.bt_white};
+		box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+		border-radius: 60px;
+	}
+
 	& > input {
 		width: 150px;
 		padding: 8px 0;
@@ -29,7 +37,7 @@ export const ProfileEditWrapper = styled.div`
 		border-bottom: 2px solid ${({ theme }) => theme.colors.bt_primary[200]};
 		font-weight: ${({ theme }) => theme.fontWeight.medium};
 		font-size: 20px;
-		margin-top: 10px;
+		margin-top: 18px;
 	}
 `;
 
