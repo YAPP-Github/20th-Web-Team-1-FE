@@ -52,6 +52,8 @@ export const InnerCircle = styled.div`
 `;
 
 export const Fruit = styled.img<FruitProps>`
+	width: 33px;
+	height: 33px;
 	position: absolute;
 	left: ${({ innerWidth }) => innerWidth};
 	top: ${({ innerHeight }) => innerHeight};

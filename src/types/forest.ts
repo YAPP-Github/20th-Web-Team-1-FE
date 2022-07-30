@@ -22,6 +22,7 @@ export interface TreeDetailMessage {
 export interface TreeDetail {
 	id: number;
 	level: number;
+	fruitType: string;
 	messages: TreeDetailMessage[];
 	name: string;
 	nextId: number;

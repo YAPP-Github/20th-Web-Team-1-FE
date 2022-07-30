@@ -3,6 +3,7 @@ import { MessageWithLocationType } from '@/pages/NoticeTree/NoticeTree.type';
 export interface TreeProps {
 	updateReadMessageHandler: (messageId: number, selectedIdx: number) => void;
 	messages: MessageWithLocationType[] | null;
+	fruitType?: string;
 }
 
 export interface FruitProps {

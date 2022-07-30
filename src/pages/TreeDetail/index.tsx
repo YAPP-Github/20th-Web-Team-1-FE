@@ -6,7 +6,7 @@ import { Clouds, MessageBox, Tree, WateringButton } from '@/components/features/
 import { ErrorToast } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -31,14 +31,6 @@ const TreeDetail = () => {
 		['readTreeDetail', { treeId: treeId, userId: userId }],
 		() => getTreeDetail({ treeId: treeId, userId: String(userId) }),
 		{
-			onSuccess: () => {
-				const newMessages = treeDetailInfo?.messages.map((message) => ({
-					...message,
-					width: Math.floor(Math.random() * 100),
-					height: Math.floor(Math.random() * 100),
-				}));
-				newMessages && setTreeMessages(newMessages);
-			},
 			onError: () => {
 				setErrorToastText('네트워크 오류. 나무 정보를 가져올 수 없습니다.');
 			},
@@ -64,6 +56,17 @@ const TreeDetail = () => {
 		navigate(`/forest/tree/${nextTree}`);
 	};
 
+	useEffect(() => {
+		if (treeDetailInfo) {
+			const newMessages = treeDetailInfo.messages.map((message) => ({
+				...message,
+				width: Math.floor(Math.random() * 100),
+				height: Math.floor(Math.random() * 100),
+			}));
+			newMessages && setTreeMessages(newMessages);
+		}
+	}, [treeDetailInfo]);
+
 	return (
 		<>
 			<S.TemporaryWrapper>
@@ -76,7 +79,11 @@ const TreeDetail = () => {
 					<span>맺혀 있는 열매 : {treeMessages?.length}개</span>
 				</S.TreeDetailTextWrapper>
 
-				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={treeMessages} />
+				<Tree
+					fruitType={treeDetailInfo?.fruitType}
+					updateReadMessageHandler={updateReadMessageHandler}
+					messages={treeMessages}
+				/>
 
 				{showMessage && (
 					<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />
