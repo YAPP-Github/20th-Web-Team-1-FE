@@ -18,4 +18,4 @@ const Clouds = () => {
 	);
 };
 
-export default Clouds;
+export default React.memo(Clouds);
