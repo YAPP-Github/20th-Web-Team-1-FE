@@ -12,7 +12,10 @@ export const Wrapper = styled.main`
 
 export const MessageDetailContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - 233px);
+	height: calc(100vh - 250px);
+
+	display: flex;
+	flex-direction: column;
 
 	padding: 0px 32px;
 	overflow: auto;
@@ -24,6 +27,7 @@ export const MessageContentContainer = styled.div`
 	flex-grow: 1;
 
 	padding-bottom: 46px;
+	overflow: auto;
 `;
 
 export const MessageContent = styled.div`
@@ -31,6 +35,7 @@ export const MessageContent = styled.div`
 
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 
 	padding: 30px;
 	overflow: auto;
@@ -46,8 +51,8 @@ export const MessageContent = styled.div`
 	border-radius: 20px;
 `;
 
-export const MessageNavButtonWrapper = styled.div`
-	height: 82px;
+export const MessageNavButtonContainer = styled.div`
+	min-height: 50px;
 
 	position: relative;
 
