@@ -6,7 +6,7 @@ export const MyInfoContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	padding: 154px 0px 69px 0px;
+	padding: 32% 0px 15% 0px;
 
 	& > img {
 		width: 117px;
@@ -27,5 +27,9 @@ export const MyInfoContainer = styled.div`
 			font-size: 16px;
 			font-weight: ${({ theme }) => theme.fontWeight.light};
 		}
+	}
+
+	@media screen and (max-width: 475px) {
+		padding: 25% 0px 10% 0px;
 	}
 `;
