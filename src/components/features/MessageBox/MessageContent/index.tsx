@@ -65,7 +65,7 @@ const MessageContent = ({
 					/>
 				)}
 				<S.ProfileImage>
-					<img src={BeeIcon} alt="profileImage" />
+					<img src={`${import.meta.env.VITE_API_BASE_URL}/${message.senderProfileImage}`} alt="profileImage" />
 				</S.ProfileImage>
 				<S.ContentContainer>
 					<S.InnerBox>
