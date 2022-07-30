@@ -165,10 +165,6 @@ const MessageBox = () => {
 	};
 
 	useEffect(() => {
-		setCheckMessages([]);
-	}, [checkMode]);
-
-	useEffect(() => {
 		setCheckMode(isEdit || isMakingFruit);
 	}, [isEdit, isMakingFruit, setCheckMode]);
 
@@ -199,6 +195,18 @@ const MessageBox = () => {
 			setCurrentTree(folders[idx].name);
 		}
 	}, [folders, treeId]);
+
+	useEffect(() => {
+		if (!checkMode) {
+			setCheckMessages([]);
+		}
+	}, [checkMode]);
+
+	useEffect(() => {
+		if (filteredList && isMakingFruit) {
+			setCheckMessages(filteredList.filter((message) => message.opening === true).map((message) => message.id));
+		}
+	}, [isMakingFruit]);
 
 	return (
 		<S.Wrapper>
@@ -242,6 +250,7 @@ const MessageBox = () => {
 						isMakingFruit={isMakingFruit}
 						editMakingToggleHandler={editMakingToggleHandler}
 						checkMessages={checkMessages}
+						getMessageList={getMessageList}
 						setIsMakingFruit={setIsMakingFruit}
 						setShowCheckedMessages={setShowCheckedMessages}
 					/>

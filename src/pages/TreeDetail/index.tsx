@@ -1,25 +1,50 @@
+import { getTreeDetail } from '@/apis/forest';
 import { updateReadMessage } from '@/apis/messages';
 import LeftButton from '@/assets/images/trees/tree_left_button.svg';
 import RightButton from '@/assets/images/trees/tree_right_button.svg';
 import { Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
 import { ErrorToast } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
+import { myInfoState } from '@/stores/user';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { MessageWithLocationType } from '../NoticeTree/NoticeTree.type';
 import * as S from './TreeDetail.styled';
-import useTreeDetail from './useTreeDetail';
 
 const TreeDetail = () => {
-	const { treeId, treeMessages, treeDetailInfo } = useTreeDetail();
-
-	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
+	const { treeId } = useParams();
 
 	const navigate = useNavigate();
 
+	const myInfo = useRecoilValue(myInfoState);
+	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
+
 	const [showMessage, setShowMessage] = useState(false);
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
+	const [treeMessages, setTreeMessages] = useState<MessageWithLocationType[] | null>(null);
+
+	const userId = myInfo?.id;
+
+	const { data: treeDetailInfo } = useQuery(
+		['readTreeDetail', { treeId: treeId, userId: userId }],
+		() => getTreeDetail({ treeId: treeId, userId: String(userId) }),
+		{
+			onSuccess: () => {
+				const newMessages = treeDetailInfo?.messages.map((message) => ({
+					...message,
+					width: Math.floor(Math.random() * 100),
+					height: Math.floor(Math.random() * 100),
+				}));
+				newMessages && setTreeMessages(newMessages);
+			},
+			onError: () => {
+				setErrorToastText('네트워크 오류. 나무 정보를 가져올 수 없습니다.');
+			},
+			enabled: !!treeId,
+		},
+	);
 
 	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
 		try {
@@ -35,6 +60,7 @@ const TreeDetail = () => {
 
 	const moveTree = (nextTree: number | undefined) => {
 		setShowMessage(false);
+		setTreeMessages(null);
 		navigate(`/forest/tree/${nextTree}`);
 	};
 
@@ -47,10 +73,10 @@ const TreeDetail = () => {
 					<S.TreeDetailMainText>
 						{treeDetailInfo?.name === 'DEFAULT' ? '기본폴더' : treeDetailInfo?.name}
 					</S.TreeDetailMainText>
-					<span>맺혀 있는 열매 : {treeDetailInfo?.messages.length}개</span>
+					<span>맺혀 있는 열매 : {treeMessages?.length}개</span>
 				</S.TreeDetailTextWrapper>
 
-				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={treeMessages ? treeMessages : null} />
+				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={treeMessages} />
 
 				{showMessage && (
 					<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />

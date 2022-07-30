@@ -37,7 +37,9 @@ const MessageMenu = ({
 				{!isEdit && editMakingToggleHandler && (
 					<>
 						<S.MenuButton onClick={() => editMakingToggleHandler('edit')}>편집하기</S.MenuButton>
-						{treeId && <S.MenuButton onClick={() => editMakingToggleHandler('making')}>열매맺기</S.MenuButton>}
+						{treeId && treeId !== 'favorite' && (
+							<S.MenuButton onClick={() => editMakingToggleHandler('making')}>열매맺기</S.MenuButton>
+						)}
 					</>
 				)}
 			</S.InnerWrapper>

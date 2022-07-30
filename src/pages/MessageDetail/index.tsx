@@ -130,13 +130,13 @@ const MessageDetail = () => {
 					</S.MessageContentContainer>
 					<S.MessageNavButtonWrapper>
 						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
-							<S.ArrowIcon src={ArrowUpIcon} alt="" />
+							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
 							이전 메시지
 						</S.Button>
 
 						<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
 							다음 메시지
-							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
+							<S.ArrowIcon src={ArrowUpIcon} alt="" />
 						</S.Button>
 					</S.MessageNavButtonWrapper>
 				</S.MessageDetailContainer>

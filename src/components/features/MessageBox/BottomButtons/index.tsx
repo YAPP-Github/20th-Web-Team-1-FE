@@ -2,6 +2,7 @@ import { updateOpenMessages } from '@/apis/messages';
 import { errorToastState } from '@/stores/modal';
 import React from 'react';
 import { useMutation } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './BottomButtons.styled';
 import { BottomButtonsProps } from './BottomButtons.type';
@@ -10,22 +11,28 @@ const BottomButtons = ({
 	isEdit,
 	isMakingFruit,
 	editMakingToggleHandler,
+	getMessageList,
 	checkMessages,
 	setShowCheckedMessages,
 	setIsMakingFruit,
 }: BottomButtonsProps) => {
+	const { treeId } = useParams();
 	const setErrorToastText = useSetRecoilState(errorToastState);
-	const { mutate: updateOpenMessagesMutate } = useMutation(() => updateOpenMessages(checkMessages), {
-		onSuccess: () => {
-			() => setIsMakingFruit(false);
-			setShowCheckedMessages(false);
-			editMakingToggleHandler('back');
-			setErrorToastText('열매 맺기에 성공했습니다! ');
+	const { mutate: updateOpenMessagesMutate } = useMutation(
+		() => updateOpenMessages({ messageIds: checkMessages, treeId: treeId }),
+		{
+			onSuccess: () => {
+				() => setIsMakingFruit(false);
+				setShowCheckedMessages(false);
+				editMakingToggleHandler('back');
+				getMessageList();
+				setErrorToastText('열매 맺기에 성공했습니다! ');
+			},
+			onError: () => {
+				setErrorToastText('네트워크 에러! 열매 맺기에 실패했습니다. ');
+			},
 		},
-		onError: () => {
-			setErrorToastText('네트워크 에러! 열매 맺기에 실패했습니다. ');
-		},
-	});
+	);
 
 	const onClickBackButton = () => {
 		editMakingToggleHandler('back');

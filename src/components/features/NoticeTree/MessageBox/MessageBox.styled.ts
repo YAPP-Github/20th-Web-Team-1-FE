@@ -2,12 +2,14 @@ import styled from '@emotion/styled';
 import { DefaultButton } from '@/components/shared/DefaultButton/DefaultButton.styled';
 
 export const MessageBoxWrapper = styled.div`
-	position: absolute;
-	bottom: 45px;
 	width: 100%;
 	min-height: 173px;
 	max-height: 350px;
+
+	position: absolute;
+	bottom: 45px;
 	z-index: 1;
+
 	display: flex;
 	justify-content: center;
 
@@ -16,17 +18,22 @@ export const MessageBoxWrapper = styled.div`
 
 export const MessageBoxInner = styled.div`
 	width: 100%;
-	height: 100%;
 	min-height: 173px;
-	padding: 24px 27px;
-	background: ${({ theme }) => theme.colors.bt_white};
-	box-sizing: border-box;
-	border-radius: 20px;
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+	max-height: 350px;
+
 	position: relative;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	padding: 24px 27px;
+
+	background: ${({ theme }) => theme.colors.bt_white};
+
+	box-sizing: border-box;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+	border-radius: 20px;
 `;
 
 export const CancelButton = styled(DefaultButton)`
@@ -46,6 +53,7 @@ export const MessageTitle = styled.span`
 	line-height: ${({ theme }) => theme.lineHeight.lh18};
 	color: ${({ theme }) => theme.colors.bt_grey[55]};
 	letter-spacing: -0.02em;
+
 	margin-bottom: 9px;
 `;
 
@@ -57,9 +65,6 @@ export const MessageText = styled.p`
 	color: ${({ theme }) => theme.colors.bt_grey[40]};
 	overflow-y: auto;
 	overflow-x: hidden;
-	/* ::-webkit-scrollbar {
-		display: none;
-	} */
 `;
 
 export const MessageWriter = styled.p`
