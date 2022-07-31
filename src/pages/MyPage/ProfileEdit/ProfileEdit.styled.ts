@@ -2,11 +2,15 @@ import styled from '@emotion/styled';
 export const ProfileEditForm = styled.form`
 	width: 100%;
 	min-height: calc(100vh - 85px);
-	padding: 154px 32px 30px 32px;
+	padding: 32% 32px 30px 32px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+
+	@media screen and (max-width: 475px) {
+		padding: 25% 32px 30px 32px;
+	}
 `;
 
 export const ProfileEditWrapper = styled.div`
@@ -18,7 +22,11 @@ export const ProfileEditWrapper = styled.div`
 	& > label {
 		font-size: 20px;
 		font-weight: ${({ theme }) => theme.fontWeight.medium};
-		margin-bottom: 101px;
+		margin-bottom: 45%;
+
+		@media screen and (max-width: 475px) {
+			margin-bottom: 40%;
+		}
 	}
 
 	& > img {
