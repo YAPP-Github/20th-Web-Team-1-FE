@@ -14,4 +14,7 @@ export default defineConfig({
 		tsconfigPaths(),
 		vitePluginFaviconsInject('./src/assets/images/shared/favicon.png'),
 	],
+	build: {
+		manifest: true,
+	},
 });
