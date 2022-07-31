@@ -99,9 +99,7 @@ const TreeAddForm = () => {
 			<S.TreeAddForm onSubmit={handleSubmitEditedTreeInfo}>
 				<S.HelperMessageContainer>
 					<S.HelperBeeContainer>
-						<object type="image/svg+xml" data={BeeIcon}>
-							<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
-						</object>
+						<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
 					</S.HelperBeeContainer>
 					<S.HelperBeeMessage>
 						<p>열매 나무를 편집하시나요?</p>

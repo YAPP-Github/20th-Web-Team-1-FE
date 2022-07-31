@@ -131,6 +131,9 @@ export const TreePole = styled.div<{ size?: 'small' | 'medium' }>`
 `;
 
 export const Fruit = styled.img<StyledProps>`
+	width: 16px;
+	height: 16px;
+
 	position: absolute;
 	top: ${({ position }) => position.top + '%'};
 	left: ${({ position }) => position.left + '%'};
