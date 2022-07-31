@@ -51,6 +51,7 @@
 		"ts-node": "^10.7.0",
 		"typescript": "^4.6.4",
 		"vite": "^2.9.8",
+		"vite-plugin-favicons-inject": "^2.1.0",
 		"vite-tsconfig-paths": "^3.4.1"
 	},
 	"packageManager": "yarn@3.2.1"

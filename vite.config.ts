@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
 
 export default defineConfig({
 	plugins: [
@@ -11,5 +12,6 @@ export default defineConfig({
 			},
 		}),
 		tsconfigPaths(),
+		vitePluginFaviconsInject('./src/assets/images/shared/favicon.png'),
 	],
 });
