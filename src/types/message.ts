@@ -42,3 +42,13 @@ export interface MessageParams {
 	treeId: MessageIdType;
 	currentPage: number;
 }
+
+export interface messageDetailParamType {
+	messageId: MessageIdType;
+	treeId: string | undefined;
+}
+
+export interface updateMessagesParamType {
+	messageIds: number[];
+	treeId: string | number | undefined;
+}

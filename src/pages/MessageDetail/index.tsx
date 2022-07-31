@@ -26,18 +26,22 @@ const MessageDetail = () => {
 	const [messageDetail, setMessageDetail] = useState<MessageDetailData | undefined>(undefined);
 	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
 
-	useQuery<MessageDetailData>(['getMessageDetail', messageId], () => getMessageDetail(messageId), {
-		onSuccess: (data) => {
-			if (data?.responseDto.alreadyRead === false) {
-				updateReadMessageMutate();
-			}
-			setMessageDetail(data);
+	useQuery<MessageDetailData>(
+		['getMessageDetail', { messageId, treeId }],
+		() => getMessageDetail({ messageId, treeId }),
+		{
+			onSuccess: (data) => {
+				if (data?.responseDto.alreadyRead === false) {
+					updateReadMessageMutate();
+				}
+				setMessageDetail(data);
+			},
+			onError: () => {
+				setErrorToastText('네트워크 에러!');
+			},
+			enabled: !!messageId,
 		},
-		onError: () => {
-			setErrorToastText('네트워크 에러!');
-		},
-		enabled: !!messageId,
-	});
+	);
 
 	const { mutate: deleteMutate } = useMutation(() => deleteMessage([messageId]), {
 		onSuccess: () => {
@@ -128,7 +132,7 @@ const MessageDetail = () => {
 
 						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
 					</S.MessageContentContainer>
-					<S.MessageNavButtonWrapper>
+					<S.MessageNavButtonContainer>
 						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
 							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
 							이전 메시지
@@ -138,7 +142,7 @@ const MessageDetail = () => {
 							다음 메시지
 							<S.ArrowIcon src={ArrowUpIcon} alt="" />
 						</S.Button>
-					</S.MessageNavButtonWrapper>
+					</S.MessageNavButtonContainer>
 				</S.MessageDetailContainer>
 			)}
 			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
