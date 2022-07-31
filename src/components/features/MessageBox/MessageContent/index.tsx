@@ -1,6 +1,5 @@
 import { updateFavoriteMessage } from '@/apis/messages';
 import LikeIcon from '@/assets/images/messages/like_star.svg';
-import BeeIcon from '@/assets/images/messages/message_bee.svg';
 import StarIcon from '@/assets/images/messages/star.svg';
 import { MessageCheckBox } from '@/components/features/MessageBox';
 import { errorToastState } from '@/stores/modal';

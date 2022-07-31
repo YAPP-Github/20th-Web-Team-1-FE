@@ -38,7 +38,11 @@ export const HelperBeeContainer = styled.div`
 	height: 66px;
 	padding: 7px 8px 8px 7px;
 	border-radius: 20px;
-	box-shadow: 0px 0px 5px rgba(0, 196, 184, 0.1); ;
+	box-shadow: 0px 0px 5px rgba(0, 196, 184, 0.1);
+	img {
+		width: 51px;
+		height: 51px;
+	}
 `;
 
 export const HelperBeeMessage = styled.div`

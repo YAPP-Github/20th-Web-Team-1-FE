@@ -3,7 +3,7 @@ import ModalFrame from '../ModalFrame';
 import * as S from './AlertModal.styled';
 import Button from '../../Button';
 import { AlertModalProps } from './AlertModal.type';
-import DeleteIcon from '@/assets/images/messages/delete_icon.svg';
+import DeleteIcon from '@/assets/images/messages/delete_icon.png';
 
 const AlertModal = ({
 	isOpen,

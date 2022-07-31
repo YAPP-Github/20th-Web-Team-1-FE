@@ -25,6 +25,11 @@ export const IconBox = styled.div<OpenAlertProps>`
 	box-shadow: 0px 0px 10px rgba(79, 181, 255, 0.12);
 	transition: all 0.3s;
 `;
+
+export const AlertIcon = styled.img`
+	width: 51px;
+	height: 51px;
+`;
 export const ForestWrapper = styled.div`
 	display: flex;
 	flex-direction: column;

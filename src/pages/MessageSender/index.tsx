@@ -12,7 +12,7 @@ import { DEFAULT_FOLDER_NAME } from '@/constants/messageSender';
 import { Folder } from '@/types/forest';
 import { postMessages } from '@/apis/messages';
 import PencilImg from '@/assets/images/shared/pencil.png';
-import WaterImg from '@/assets/images/noticeTree/watering_icon.svg';
+import WaterImg from '@/assets/images/noticeTree/watering_icon.png';
 import SadBeeImg from '@/assets/images/mypage/logout_bee_img@2x.png';
 
 const MessageSender = () => {
@@ -146,6 +146,8 @@ const MessageSender = () => {
 				{isMessageTextSizeAlertVisible && (
 					<MediumAlertModal
 						image={PencilImg}
+						width={200}
+						height={200}
 						contents={['10자 이상, 1000자 이하로', '메시지를 작성해야 해요!']}
 						buttonText={'닫기'}
 						modalHandler={() => setIsMessageTextSizeAlertVisible(false)}

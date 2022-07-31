@@ -4,7 +4,6 @@ import * as S from './SideDrawer.styled';
 import ModalFrame from '../ModalFrame';
 import TreeFolderItem from './TreeFolderItem';
 import EditFolderMoreModal from './EditFolderMoreModal';
-import Default_Profile_Img from '@/assets/images/noticeTree/alert_bee.svg';
 import { Props } from './SideDrawer.type';
 import { TREE_SIZE_MAX } from '@/constants/forest';
 import { DeleteAlertModal } from '@/components/shared';

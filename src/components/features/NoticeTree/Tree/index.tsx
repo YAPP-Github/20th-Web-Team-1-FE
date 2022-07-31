@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import * as S from './Tree.styled';
-import APPLE from '@/assets/images/trees/apple.svg';
-import BLUEBERRY from '@/assets/images/trees/blueberry.svg';
-import GRAPE from '@/assets/images/trees/grape.svg';
-import LEMON from '@/assets/images/trees/lemon.svg';
-import ORANGE from '@/assets/images/trees/orange.svg';
-import STRAWBERRY from '@/assets/images/trees/strawberry.svg';
+import APPLE from '@/assets/images/trees/apple.png';
+import BLUEBERRY from '@/assets/images/trees/blueberry.png';
+import GRAPE from '@/assets/images/trees/grape.png';
+import LEMON from '@/assets/images/trees/lemon.png';
+import ORANGE from '@/assets/images/trees/orange.png';
+import STRAWBERRY from '@/assets/images/trees/strawberry.png';
 
 import { TreeProps } from './Tree.type';
 import TreeImage from '@/assets/images/shared/tree.svg';

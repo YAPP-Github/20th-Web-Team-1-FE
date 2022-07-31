@@ -131,7 +131,8 @@ export const SlideFadeInCommentItem = styled.li`
 `;
 
 export const SlideFadeInCommentItemImg = styled.img`
-	width: 7.2vh;
+	width: 77px;
+	height: 77px;
 `;
 
 export const SlideFadeInCommentItemText = styled.p`

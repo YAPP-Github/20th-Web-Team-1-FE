@@ -4,7 +4,7 @@ import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import Button from '@/components/shared/Button';
-import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
+import BeeIcon from '@/assets/images/noticeTree/alert_bee.png';
 import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
 import { useQuery, useMutation } from 'react-query';
 import { Folder } from '@/types/forest';

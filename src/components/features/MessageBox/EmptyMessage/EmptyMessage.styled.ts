@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-	padding: 43px 44px;
+	padding: 5vh 44px;
 
 	display: flex;
 	flex-direction: column;
@@ -19,10 +19,15 @@ export const Wrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-	width: 302px;
-	height: 302px;
+	width: 80vw;
+	max-width: 302px;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
 `;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './AlertPopUp.styled';
 import { Link } from 'react-router-dom';
-import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
+import AlertBee from '@/assets/images/noticeTree/alert_bee.png';
 import Forest from '@/assets/images/noticeTree/forest_btn.svg';
 import { AlertPopUpProps } from './AlertPopUp.type';
 
@@ -63,7 +63,7 @@ const AlertPopUp = ({ username, messageCount, showAlertMessage, activeHomeAlert 
 	return (
 		<S.PopUpWrapper showAlert={showAlert}>
 			<S.IconBox openedAlertButton={openedAlertButton}>
-				<img src={AlertBee} alt="alertBee" onClick={showAlertHandler} />
+				<S.AlertIcon src={AlertBee} alt="alertBee" onClick={showAlertHandler} />
 				{openedAlertButton && (
 					<Link to="/forest">
 						<S.ForestWrapper>
