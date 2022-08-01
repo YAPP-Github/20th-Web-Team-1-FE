@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './EmptyMessage.styled';
-import EmptyMessageIcon from '@/assets/images/messages/empty_box_bee.svg';
-import EmptyFolderIcon from '@/assets/images/messages/empty_folder_bee.svg';
+import EmptyMessageIcon from '@/assets/images/messages/empty_box_bee.png';
+import EmptyFolderIcon from '@/assets/images/messages/empty_folder_bee.png';
 
 const EmptyMessage = ({ treeId }: { treeId: string | undefined }) => {
 	return (

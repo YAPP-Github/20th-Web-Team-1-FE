@@ -4,7 +4,7 @@ import * as S from './TreeAddForm.styled';
 import TreeNameInput from './Input/TreeNameInput';
 import TreeFruitInput from './Input/TreeFruitInput';
 import Button from '@/components/shared/Button';
-import BeeIcon from '@/assets/images/noticeTree/alert_bee.svg';
+import BeeIcon from '@/assets/images/noticeTree/alert_bee.png';
 import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
 import { useQuery, useMutation } from 'react-query';
 import { Folder } from '@/types/forest';
@@ -99,9 +99,7 @@ const TreeAddForm = () => {
 			<S.TreeAddForm onSubmit={handleSubmitEditedTreeInfo}>
 				<S.HelperMessageContainer>
 					<S.HelperBeeContainer>
-						<object type="image/svg+xml" data={BeeIcon}>
-							<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
-						</object>
+						<img src={BeeIcon} alt="가이드 메시지 꿀벌" />
 					</S.HelperBeeContainer>
 					<S.HelperBeeMessage>
 						<p>열매 나무를 편집하시나요?</p>

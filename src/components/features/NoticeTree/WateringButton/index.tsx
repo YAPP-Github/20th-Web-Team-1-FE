@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './WateringButton.styled';
-import WateringIcon from '@/assets/images/noticeTree/watering_icon.svg';
+import WateringIcon from '@/assets/images/noticeTree/watering_icon.png';
 
 const WateringButton = ({ treeId }: { treeId?: string | undefined }) => {
 	return (

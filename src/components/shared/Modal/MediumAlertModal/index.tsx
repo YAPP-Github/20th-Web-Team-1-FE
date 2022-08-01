@@ -5,17 +5,19 @@ import * as S from './MediumAlertModal.styled';
 
 interface MediumAlertModalProps {
 	image: string;
+	width: number;
+	height: number;
 	contents: string[];
 	buttonText: string;
 	modalHandler: () => void;
 }
 
-const MediumAlertModal = ({ image, contents, buttonText, modalHandler }: MediumAlertModalProps) => {
+const MediumAlertModal = ({ image, contents, buttonText, modalHandler, width, height }: MediumAlertModalProps) => {
 	return (
 		<AlertModalFrame onAlertModal={true}>
 			<S.MediumModalContainer>
 				<S.Content>
-					<img src={image} alt="" />
+					<S.Image src={image} alt="" width={width} height={height} />
 					{contents?.map((content, idx) => (
 						<p key={`${content}-${idx}`}>{content}</p>
 					))}

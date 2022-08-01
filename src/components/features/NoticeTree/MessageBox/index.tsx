@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './MessageBox.styled';
 import { MessageBoxProps } from './MessageBox.type';
-import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
+import AlertBee from '@/assets/images/noticeTree/alert_bee.png';
 import CancelIcon from '@/assets/images/noticeTree/cancel_icon.svg';
 const MessageBox = ({ selectedMessage, showMessageHandler }: MessageBoxProps) => {
 	return (

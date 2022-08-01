@@ -1,9 +1,9 @@
-import AppleIcon from '@/assets/images/trees/apple.svg';
-import StrawberryIcon from '@/assets/images/trees/strawberry.svg';
-import OrangeIcon from '@/assets/images/trees/orange.svg';
-import LemonIcon from '@/assets/images/trees/lemon.svg';
-import BlueberryIcon from '@/assets/images/trees/blueberry.svg';
-import GrapeIcon from '@/assets/images/trees/grape.svg';
+import AppleIcon from '@/assets/images/trees/apple.png';
+import StrawberryIcon from '@/assets/images/trees/strawberry.png';
+import OrangeIcon from '@/assets/images/trees/orange.png';
+import LemonIcon from '@/assets/images/trees/lemon.png';
+import BlueberryIcon from '@/assets/images/trees/blueberry.png';
+import GrapeIcon from '@/assets/images/trees/grape.png';
 
 export const FRUITS = [
 	{

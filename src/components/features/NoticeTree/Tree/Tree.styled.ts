@@ -52,10 +52,15 @@ export const InnerCircle = styled.div`
 `;
 
 export const Fruit = styled.img<FruitProps>`
-	width: 33px;
-	height: 33px;
+	width: 8.5vw;
+	height: 8.5vw;
+	max-width: 33px;
+	max-height: 33px;
+
 	position: absolute;
 	left: ${({ innerWidth }) => innerWidth};
 	top: ${({ innerHeight }) => innerHeight};
 	z-index: 1;
+
+	cursor: pointer;
 `;

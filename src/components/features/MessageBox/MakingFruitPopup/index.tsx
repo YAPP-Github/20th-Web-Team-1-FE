@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './MakingFruitPopup.styled';
-import AlertBee from '@/assets/images/noticeTree/alert_bee.svg';
+import AlertBee from '@/assets/images/noticeTree/alert_bee.png';
 
 const MakingFruitPopup = () => {
 	return (

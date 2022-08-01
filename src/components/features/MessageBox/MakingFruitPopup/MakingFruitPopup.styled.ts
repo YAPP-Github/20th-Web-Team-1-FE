@@ -25,6 +25,10 @@ export const IconBox = styled.div`
 
 	border-radius: 20px;
 	box-shadow: 0px 0px 10px ${BOX_SHADOW_COLOR};
+	img {
+		width: 51px;
+		height: 51px;
+	}
 `;
 
 export const MessageBox = styled.div`

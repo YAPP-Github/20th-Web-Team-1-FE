@@ -31,6 +31,10 @@ export const TreeFolderItemThumbnailWrapper = styled.div`
 		margin-right: 7px;
 		border-radius: 50%;
 	}
+	img {
+		width: 18px;
+		height: 18px;
+	}
 `;
 
 export const TreeFolderItemMoreMenuWrapper = styled.div`

@@ -35,4 +35,9 @@ export const FruitInputLabel = styled.label<StyledProps>`
 		font-family: 'Pretendard', 'noto sans';
 		letter-spacing: -0.02em;
 	}
+
+	img {
+		width: 14px;
+		height: 16px;
+	}
 `;

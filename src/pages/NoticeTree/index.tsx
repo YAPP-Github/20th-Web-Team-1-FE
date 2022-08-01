@@ -1,6 +1,6 @@
 import { updateReadMessage } from '@/apis/messages';
 import { getNotices } from '@/apis/noticeTree';
-import NoMessageIcon from '@/assets/images/noticeTree/no_message.svg';
+import NoMessageIcon from '@/assets/images/noticeTree/no_message.png';
 import { AlertPopUp, Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
 import { ErrorToast, MediumAlertModal } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
@@ -22,9 +22,9 @@ const NoticeTree = () => {
 	const [showAlertMessage, setShowAlertMessage] = useState(true);
 	const [activeHomeAlert, setActiveHomeAlert] = useState(false);
 	const [noticeMessages, setNoticeMessages] = useState<MessageWithLocationType[] | null>(null);
-	const [totalUnreadMessageCount, setTotalUnreadMessageCount] = useState<number>(0);
+
 	const [onAlertModal, setOnAlertModal] = useState(false);
-	const [unreadCount, setUnreadCount] = useState(totalUnreadMessageCount);
+	const [unreadCount, setUnreadCount] = useState<number | null>(null);
 
 	const modalHandler = () => {
 		setOnAlertModal(!onAlertModal);
@@ -33,6 +33,7 @@ const NoticeTree = () => {
 	const getNoticeMessages = useCallback(async () => {
 		try {
 			const defaultNotices = await getNotices();
+			setUnreadCount(defaultNotices.totalUnreadMessageCount);
 			if (defaultNotices.messages.length > 0) {
 				const newNoticeMessages = defaultNotices.messages.map((message, idx) => ({
 					...message,
@@ -41,7 +42,6 @@ const NoticeTree = () => {
 					messageIndex: idx + 1,
 				}));
 				setNoticeMessages(newNoticeMessages);
-				setTotalUnreadMessageCount(defaultNotices.totalUnreadMessageCount);
 			} else {
 				if (!sessionStorage.getItem('noticeTree-read')) {
 					modalHandler();
@@ -59,7 +59,7 @@ const NoticeTree = () => {
 				if (messageId > 0) {
 					const isRead = await updateReadMessage(messageId);
 
-					!isRead && setUnreadCount((prev) => prev - 1);
+					!isRead && setUnreadCount((prev) => prev && prev - 1);
 				}
 
 				showMessageHandler(true);
@@ -123,6 +123,8 @@ const NoticeTree = () => {
 			{onAlertModal && (
 				<MediumAlertModal
 					image={NoMessageIcon}
+					width={268}
+					height={268}
 					contents={['새롭게 도착한 메시지가 없습니다.']}
 					modalHandler={modalHandler}
 					buttonText="닫기"

@@ -10,7 +10,7 @@ export interface OpenAlertProps {
 
 export interface AlertPopUpProps {
 	username: string;
-	messageCount: number;
+	messageCount: number | null;
 	showAlertMessage: boolean;
 	activeHomeAlert: boolean;
 }

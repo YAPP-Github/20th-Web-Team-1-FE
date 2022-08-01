@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './BackgroundArea.styled';
 import LogoIcon from '@/assets/images/appBackground/landing_logo.svg';
-import BeeIcon from '@/assets/images/shared/bee.svg';
-import BeeOrangeIcon from '@/assets/images/appBackground/orange_bee.svg';
+import BeeIcon from '@/assets/images/shared/main_bee.png';
+import BeeOrangeIcon from '@/assets/images/appBackground/orange_bee.png';
 import SkipIcon from '@/assets/images/appBackground/skip.svg';
 import InstagramIcon from '@/assets/images/appBackground/instagram.png';
 import { COMMENTS, INSTAGRAM_URL } from '@/constants/appBackground';

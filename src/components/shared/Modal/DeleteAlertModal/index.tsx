@@ -2,7 +2,7 @@ import React from 'react';
 import AlertModalFrame from '../AlertModalFrame';
 import * as S from './DeleteAlertModal.styled';
 import Button from '@/components/shared/Button';
-import TrashIcon from '@/assets/images/messages/delete_icon.svg';
+import TrashIcon from '@/assets/images/messages/delete_icon.png';
 import { Props } from './DeleteAlertModal.type';
 
 const DeleteAlertModal = ({
