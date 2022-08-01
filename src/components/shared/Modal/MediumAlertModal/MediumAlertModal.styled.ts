@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
 
+interface ImageProps {
+	width: number;
+	height: number;
+}
+
 export const MediumModalContainer = styled.div`
 	width: 100%;
 	height: 496px;
@@ -21,4 +26,9 @@ export const Content = styled.div`
 		line-height: 26px;
 		color: #4b4b4b;
 	}
+`;
+
+export const Image = styled.img<ImageProps>`
+	width: ${({ width }) => (width ? width : 0)}px;
+	height: ${({ height }) => (height ? height : 0)}px;
 `;

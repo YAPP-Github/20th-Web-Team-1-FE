@@ -17,7 +17,7 @@ const MediumAlertModal = ({ image, contents, buttonText, modalHandler, width, he
 		<AlertModalFrame onAlertModal={true}>
 			<S.MediumModalContainer>
 				<S.Content>
-					<img src={image} alt="" style={{ width: `${width}px`, height: `${height}px` }} />
+					<S.Image src={image} alt="" width={width} height={height} />
 					{contents?.map((content, idx) => (
 						<p key={`${content}-${idx}`}>{content}</p>
 					))}
