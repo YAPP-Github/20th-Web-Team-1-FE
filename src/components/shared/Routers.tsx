@@ -25,11 +25,13 @@ const Routers = () => {
 			<Route path="/forest" element={<Forest />} />
 			<Route path="/forest/:userId" element={<PublicForest />} />
 			<Route path="/forest/tree/:treeId" element={<TreeDetail />} />
+			<Route path="/forest/tree/:treeId/:treeUserId" element={<TreeDetail />} />
 			<Route path="/forest/edit" element={<TreeAddForm />} />
 			<Route path="/forest/edit/:treeId" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
 			<Route path="/mypage/edit" element={<ProfileEdit />} />
 			<Route path="/message/edit" element={<MessageSender />} />
+			<Route path="/message/edit/:treeUserId/:treeOwner" element={<MessageSender />} />
 			<Route path="/message/edit/:treeId" element={<MessageSender />} />
 			<Route path="/messages" element={<MessageBox />} />
 			<Route path="/messages/:treeId" element={<MessageBox />} />
