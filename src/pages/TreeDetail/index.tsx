@@ -3,7 +3,7 @@ import { updateReadMessage } from '@/apis/messages';
 import LeftButton from '@/assets/images/trees/tree_left_button.svg';
 import RightButton from '@/assets/images/trees/tree_right_button.svg';
 import { Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
-import { Header, Layout } from '@/components/layout';
+import { Header, Layout, PublicBottomNav } from '@/components/layout';
 import { ErrorToast } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
@@ -16,6 +16,7 @@ import * as S from './TreeDetail.styled';
 
 const TreeDetail = () => {
 	const { treeId } = useParams();
+	const { treeUserId } = useParams();
 
 	const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const TreeDetail = () => {
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [treeMessages, setTreeMessages] = useState<MessageWithLocationType[] | null>(null);
 
-	const userId = myInfo?.id;
+	const userId = myInfo ? myInfo.id : treeUserId;
 
 	const { data: treeDetailInfo } = useQuery(
 		['readTreeDetail', { treeId: treeId, userId: userId }],
@@ -42,7 +43,7 @@ const TreeDetail = () => {
 	const updateReadMessageHandler = (messageId: number, selectedIdx: number) => {
 		try {
 			if (treeMessages) {
-				updateReadMessage(messageId);
+				!treeUserId && updateReadMessage(messageId);
 				setShowMessage(true);
 				setSelectedMessage(treeMessages[selectedIdx]);
 			}
@@ -109,6 +110,7 @@ const TreeDetail = () => {
 					)}
 					{errorToastText && <ErrorToast />}
 				</S.TemporaryWrapper>
+				{!myInfo && <PublicBottomNav />}
 			</>
 		</Layout>
 	);
