@@ -1,14 +1,15 @@
+import { editProfile } from '@/apis/users';
+import { Layout } from '@/components/layout';
+import { SmallAlertModal } from '@/components/shared';
+import { RESPONSE_SUCCESS_OK } from '@/constants/api';
+import useInput from '@/hooks/useInput';
+import { smallModalState } from '@/stores/modal';
+import { myInfoState } from '@/stores/user';
+import withAuth from '@/utils/HOC/withAuth';
 import React from 'react';
-import * as S from './ProfileEdit.styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { myInfoState } from '@/stores/user';
-import useInput from '@/hooks/useInput';
-import { editProfile } from '@/apis/users';
-import { RESPONSE_SUCCESS_OK } from '@/constants/api';
-import withAuth from '@/utils/HOC/withAuth';
-import { SmallAlertModal } from '@/components/shared';
-import { smallModalState } from '@/stores/modal';
+import * as S from './ProfileEdit.styled';
 
 const ProfileEdit = () => {
 	const [myInfo, setMyInfo] = useRecoilState(myInfoState);
@@ -45,7 +46,7 @@ const ProfileEdit = () => {
 	};
 
 	return (
-		<>
+		<Layout path="private">
 			<main>
 				<S.ProfileEditForm onSubmit={handleSubmitEditProfileForm}>
 					<S.ProfileEditWrapper>
@@ -61,7 +62,7 @@ const ProfileEdit = () => {
 				</S.ProfileEditForm>
 			</main>
 			{smallModal && <SmallAlertModal />}
-		</>
+		</Layout>
 	);
 };
 

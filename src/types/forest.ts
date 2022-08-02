@@ -4,6 +4,11 @@ export type Folder = {
 	fruit: React.SetStateAction<string | undefined>;
 };
 
+export interface ForestTrees {
+	responseDtoList: Folder[];
+	nickname: string;
+}
+
 export type Param = string | undefined;
 
 export interface TreeDetailParam {

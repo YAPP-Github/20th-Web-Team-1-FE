@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
-import { Routers } from '@/components/shared';
-import { Layout } from '@/components/layout';
 import { checkMyInfo } from '@/apis/users';
-import { useSetRecoilState } from 'recoil';
+import { Routers } from '@/components/shared';
 import { myInfoState } from '@/stores/user';
+import React, { useCallback, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const App = () => {
 	const setMyInfo = useSetRecoilState(myInfoState);
@@ -18,11 +17,7 @@ const App = () => {
 		handleCheckMyInfo();
 	}, [handleCheckMyInfo]);
 
-	return (
-		<Layout>
-			<Routers />
-		</Layout>
-	);
+	return <Routers />;
 };
 
 export default App;

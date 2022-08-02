@@ -1,18 +1,19 @@
 import {
 	Forest,
+	Landing,
 	MessageBox,
 	MessageDetail,
 	MessageSender,
 	MyPage,
-	NoticeTree,
-	TreeDetail,
 	NotFound,
-	Landing,
+	NoticeTree,
+	PublicForest,
+	TreeDetail,
 } from '@/pages';
 import Login from '@/pages/Login';
 import ProfileEdit from '@/pages/MyPage/ProfileEdit';
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import TreeAddForm from '../features/Forest/TreeAddForm';
 
 const Routers = () => {
@@ -22,13 +23,15 @@ const Routers = () => {
 			<Route path="/main-tree" element={<NoticeTree />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/forest" element={<Forest />} />
-			<Route path="/forest/:userId" element={<Forest />} />
+			<Route path="/forest/:userId" element={<PublicForest />} />
 			<Route path="/forest/tree/:treeId" element={<TreeDetail />} />
+			<Route path="/forest/tree/:treeId/:treeUserId" element={<TreeDetail />} />
 			<Route path="/forest/edit" element={<TreeAddForm />} />
 			<Route path="/forest/edit/:treeId" element={<TreeAddForm />} />
 			<Route path="/mypage" element={<MyPage />} />
 			<Route path="/mypage/edit" element={<ProfileEdit />} />
 			<Route path="/message/edit" element={<MessageSender />} />
+			<Route path="/message/edit/:treeUserId/:treeOwner" element={<MessageSender />} />
 			<Route path="/message/edit/:treeId" element={<MessageSender />} />
 			<Route path="/messages" element={<MessageBox />} />
 			<Route path="/messages/:treeId" element={<MessageBox />} />

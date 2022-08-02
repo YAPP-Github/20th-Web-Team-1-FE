@@ -2,6 +2,7 @@ import { updateReadMessage } from '@/apis/messages';
 import { getNotices } from '@/apis/noticeTree';
 import NoMessageIcon from '@/assets/images/noticeTree/no_message.png';
 import { AlertPopUp, Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
+import { Layout } from '@/components/layout';
 import { ErrorToast, MediumAlertModal } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
@@ -101,36 +102,38 @@ const NoticeTree = () => {
 	}, [noticeMessages]);
 
 	return (
-		<>
-			<S.TemporaryWrapper>
-				<Clouds />
-				<S.NoticeTextWrapper>
-					<S.NoticeMainText>
-						{username}의 알림나무<span>읽지 않은 열매 {unreadCount} </span>
-					</S.NoticeMainText>
-				</S.NoticeTextWrapper>
-				<Tree updateReadMessageHandler={updateReadMessageHandler} messages={noticeMessages ? noticeMessages : null} />
-				<AlertPopUp
-					username={username}
-					messageCount={unreadCount}
-					showAlertMessage={showAlertMessage}
-					activeHomeAlert={activeHomeAlert}
-				/>
-				{showMessage && <MessageBox selectedMessage={selectedMessage} showMessageHandler={showMessageHandler} />}
-				<WateringButton />
-				{errorToastText && <ErrorToast />}
-			</S.TemporaryWrapper>
-			{onAlertModal && (
-				<MediumAlertModal
-					image={NoMessageIcon}
-					width={268}
-					height={268}
-					contents={['새롭게 도착한 메시지가 없습니다.']}
-					modalHandler={modalHandler}
-					buttonText="닫기"
-				/>
-			)}
-		</>
+		<Layout path="private">
+			<>
+				<S.TemporaryWrapper>
+					<Clouds />
+					<S.NoticeTextWrapper>
+						<S.NoticeMainText>
+							{username}의 알림나무<span>읽지 않은 열매 {unreadCount} </span>
+						</S.NoticeMainText>
+					</S.NoticeTextWrapper>
+					<Tree updateReadMessageHandler={updateReadMessageHandler} messages={noticeMessages ? noticeMessages : null} />
+					<AlertPopUp
+						username={username}
+						messageCount={unreadCount}
+						showAlertMessage={showAlertMessage}
+						activeHomeAlert={activeHomeAlert}
+					/>
+					{showMessage && <MessageBox selectedMessage={selectedMessage} showMessageHandler={showMessageHandler} />}
+					<WateringButton />
+					{errorToastText && <ErrorToast />}
+				</S.TemporaryWrapper>
+				{onAlertModal && (
+					<MediumAlertModal
+						image={NoMessageIcon}
+						width={268}
+						height={268}
+						contents={['새롭게 도착한 메시지가 없습니다.']}
+						modalHandler={modalHandler}
+						buttonText="닫기"
+					/>
+				)}
+			</>
+		</Layout>
 	);
 };
 

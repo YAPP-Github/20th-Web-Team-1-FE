@@ -7,17 +7,18 @@ import {
 	MessageContent,
 	MessageMenu,
 } from '@/components/features/MessageBox';
+import { Layout } from '@/components/layout';
 import { DeleteAlertModal, ErrorToast, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
+import { errorToastState, smallModalState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
+import { Folder, ForestTrees } from '@/types/forest';
 import { Message } from '@/types/message';
+import withAuth from '@/utils/HOC/withAuth';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { smallModalState, errorToastState } from '@/stores/modal';
 import * as S from './MessageBox.styled';
-import withAuth from '@/utils/HOC/withAuth';
 
 const MessageBox = () => {
 	const { treeId } = useParams();
@@ -25,7 +26,7 @@ const MessageBox = () => {
 	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+	const { data: treeInfo } = useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 
@@ -190,11 +191,11 @@ const MessageBox = () => {
 		if (treeId === 'favorite' || !treeId) {
 			return;
 		}
-		if (folders && treeId) {
-			const idx = folders.findIndex((folder) => folder.id === Number(treeId));
-			setCurrentTree(folders[idx].name);
+		if (treeInfo && treeId) {
+			const idx = treeInfo.responseDtoList.findIndex((folder: Folder) => folder.id === Number(treeId));
+			setCurrentTree(treeInfo.responseDtoList[idx].name);
 		}
-	}, [folders, treeId]);
+	}, [treeInfo, treeId]);
 
 	useEffect(() => {
 		if (!checkMode) {
@@ -209,78 +210,80 @@ const MessageBox = () => {
 	}, [isMakingFruit]);
 
 	return (
-		<S.Wrapper>
-			{isMakingFruit ? (
-				<MakingFruitMenu
-					showCheckedMessages={showCheckedMessages}
-					setShowCheckedMessages={setShowCheckedMessages}
-					numberOfCheckedMessages={checkMessages.length}
-				/>
-			) : (
-				<MessageMenu
-					isEdit={isEdit}
-					editMakingToggleHandler={editMakingToggleHandler}
-					onToggleOpenDrawer={onToggleOpenDrawer}
-					onToggleMovingFolderModal={onClickMovingFolderButton}
-					deleteMessages={onClickDeleteButton}
-					treeName={currentTree}
-				/>
-			)}
-
-			<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
-				{filteredList &&
-					filteredList.map((res, idx) => (
-						<div key={`message-box-message${res.id}`} ref={idx === filteredList.length - 1 ? lastItemRef : null}>
-							<MessageContent
-								key={`message-box-message${res.id}`}
-								message={res}
-								idx={idx}
-								checkMode={checkMode}
-								onToggleCheckMessage={onToggleCheckMessage}
-								checkMessages={checkMessages}
-								onToggleLike={onToggleLike}
-							/>
-						</div>
-					))}
-				{messageList?.length === 0 && <EmptyMessage treeId={treeId} />}
-
-				{checkMode && (
-					<BottomButtons
-						isEdit={isEdit}
-						isMakingFruit={isMakingFruit}
-						editMakingToggleHandler={editMakingToggleHandler}
-						checkMessages={checkMessages}
-						getMessageList={getMessageList}
-						setIsMakingFruit={setIsMakingFruit}
+		<Layout path="private">
+			<S.Wrapper>
+				{isMakingFruit ? (
+					<MakingFruitMenu
+						showCheckedMessages={showCheckedMessages}
 						setShowCheckedMessages={setShowCheckedMessages}
+						numberOfCheckedMessages={checkMessages.length}
+					/>
+				) : (
+					<MessageMenu
+						isEdit={isEdit}
+						editMakingToggleHandler={editMakingToggleHandler}
+						onToggleOpenDrawer={onToggleOpenDrawer}
+						onToggleMovingFolderModal={onClickMovingFolderButton}
+						deleteMessages={onClickDeleteButton}
+						treeName={currentTree}
 					/>
 				)}
-			</S.MessageListContainer>
 
-			{isMoving && (
-				<MovingFolderModal
-					isMoving={isMoving}
-					setIsEdit={setIsEdit}
-					onToggleMovingFolderModal={onToggleMovingFolderModal}
-					checkMessages={checkMessages}
-					getMessageList={getMessageList}
-				/>
-			)}
+				<S.MessageListContainer checkMode={checkMode} isMakingFruit={isMakingFruit}>
+					{filteredList &&
+						filteredList.map((res, idx) => (
+							<div key={`message-box-message${res.id}`} ref={idx === filteredList.length - 1 ? lastItemRef : null}>
+								<MessageContent
+									key={`message-box-message${res.id}`}
+									message={res}
+									idx={idx}
+									checkMode={checkMode}
+									onToggleCheckMessage={onToggleCheckMessage}
+									checkMessages={checkMessages}
+									onToggleLike={onToggleLike}
+								/>
+							</div>
+						))}
+					{messageList?.length === 0 && <EmptyMessage treeId={treeId} />}
 
-			{isOpenedMessageDeleteAlertModal && (
-				<DeleteAlertModal
-					deleteTargetType="message"
-					deleteTarget="메시지"
-					onAlertModal={isOpenedMessageDeleteAlertModal}
-					handleAlertModalToggle={() => setIsOpenedMessageDeleteAlertModal(false)}
-					handleTargetDelete={deleteMessageHandler}
-				/>
-			)}
+					{checkMode && (
+						<BottomButtons
+							isEdit={isEdit}
+							isMakingFruit={isMakingFruit}
+							editMakingToggleHandler={editMakingToggleHandler}
+							checkMessages={checkMessages}
+							getMessageList={getMessageList}
+							setIsMakingFruit={setIsMakingFruit}
+							setShowCheckedMessages={setShowCheckedMessages}
+						/>
+					)}
+				</S.MessageListContainer>
 
-			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
-			{smallModal && <SmallAlertModal />}
-			{errorToastText && <ErrorToast />}
-		</S.Wrapper>
+				{isMoving && (
+					<MovingFolderModal
+						isMoving={isMoving}
+						setIsEdit={setIsEdit}
+						onToggleMovingFolderModal={onToggleMovingFolderModal}
+						checkMessages={checkMessages}
+						getMessageList={getMessageList}
+					/>
+				)}
+
+				{isOpenedMessageDeleteAlertModal && (
+					<DeleteAlertModal
+						deleteTargetType="message"
+						deleteTarget="메시지"
+						onAlertModal={isOpenedMessageDeleteAlertModal}
+						handleAlertModalToggle={() => setIsOpenedMessageDeleteAlertModal(false)}
+						handleTargetDelete={deleteMessageHandler}
+					/>
+				)}
+
+				<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
+				{smallModal && <SmallAlertModal />}
+				{errorToastText && <ErrorToast />}
+			</S.Wrapper>
+		</Layout>
 	);
 };
 

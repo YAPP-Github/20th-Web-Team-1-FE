@@ -1,17 +1,19 @@
-import React from 'react';
-import * as S from './TreeItem.styled';
-import { Link } from 'react-router-dom';
 import {
-	TreeShapeContainer,
+	Fruit,
 	TreeCircle,
 	TreePole,
-	Fruit,
+	TreeShapeContainer,
 } from '@/components/features/Forest/TreeAddForm/TreeAddForm.styled';
-import { FRUIT_RENDER_POSITION, FRUITS } from '@/constants/forest';
+import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import * as S from './TreeItem.styled';
 import { Props } from './TreeItem.type';
 
 const TreeItem = ({ tree }: Props) => {
 	const { id, fruit, name } = tree;
+
+	const { userId } = useParams();
 
 	const getSelectedFruitImage = (fruitValue: React.SetStateAction<string | undefined>) => {
 		const selectedFruitObj = FRUITS.filter((fruit) => fruit.value === fruitValue)[0];
@@ -20,7 +22,7 @@ const TreeItem = ({ tree }: Props) => {
 
 	return (
 		<S.ItemWrapper>
-			<Link to={`/forest/tree/${id}`}>
+			<Link to={userId ? `/forest/tree/${id}/${userId}` : `/forest/tree/${id}`}>
 				<TreeShapeContainer>
 					<TreeCircle size="small">
 						{FRUIT_RENDER_POSITION.map((info) => {
