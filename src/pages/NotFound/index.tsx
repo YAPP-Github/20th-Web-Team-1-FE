@@ -1,4 +1,4 @@
-import NotFoundIcon from '@/assets/images/shared/not_found.svg';
+import NotFoundIcon from '@/assets/images/shared/not_found.png';
 import { Layout } from '@/components/layout';
 import Button from '@/components/shared/Button';
 import React from 'react';

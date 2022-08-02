@@ -20,4 +20,8 @@ export const Content = styled.div`
 		line-height: 26px;
 		color: #121212;
 	}
+	img {
+		width: 268px;
+		height: 268px;
+	}
 `;

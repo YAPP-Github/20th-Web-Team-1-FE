@@ -5,7 +5,7 @@ import Button from '@/components/shared/Button';
 import Toast from '@/components/shared/Toast';
 import { FRUITS, FRUIT_RENDER_POSITION } from '@/constants/forest';
 import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
+import { Folder, ForestTrees } from '@/types/forest';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ const TreeAddForm = () => {
 
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+	const { data: treeInfo } = useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 
@@ -88,7 +88,7 @@ const TreeAddForm = () => {
 
 	useEffect(() => {
 		if (treeId) {
-			const targetTree = trees?.filter((tree) => tree.id === Number(treeId))[0] as Folder;
+			const targetTree = treeInfo?.responseDtoList?.filter((tree: Folder) => tree.id === Number(treeId))[0] as Folder;
 			setTreeName(targetTree?.name);
 			setSelectedFruit(targetTree?.fruit);
 		}

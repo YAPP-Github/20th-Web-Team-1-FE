@@ -47,21 +47,23 @@ const ProfileEdit = () => {
 
 	return (
 		<Layout path="private">
-			<main>
-				<S.ProfileEditForm onSubmit={handleSubmitEditProfileForm}>
-					<S.ProfileEditWrapper>
-						<label htmlFor="edit_nickname_input">바꿀 닉네임을 입력해주세요!</label>
-						<img src={`${import.meta.env.VITE_API_BASE_URL}/${myInfo?.userImage}`} alt="" />
-						<input id="edit_nickname_input" type="text" value={newNickname} onChange={handleNewNickname} />
-					</S.ProfileEditWrapper>
+			<>
+				<main>
+					<S.ProfileEditForm onSubmit={handleSubmitEditProfileForm}>
+						<S.ProfileEditWrapper>
+							<label htmlFor="edit_nickname_input">바꿀 닉네임을 입력해주세요!</label>
+							<img src={`${import.meta.env.VITE_API_BASE_URL}/${myInfo?.userImage}`} alt="" />
+							<input id="edit_nickname_input" type="text" value={newNickname} onChange={handleNewNickname} />
+						</S.ProfileEditWrapper>
 
-					<S.Buttons>
-						<Link to="/mypage">취소하기</Link>
-						<button type="submit">완료하기</button>
-					</S.Buttons>
-				</S.ProfileEditForm>
-			</main>
-			{smallModal && <SmallAlertModal />}
+						<S.Buttons>
+							<Link to="/mypage">취소하기</Link>
+							<button type="submit">완료하기</button>
+						</S.Buttons>
+					</S.ProfileEditForm>
+				</main>
+				{smallModal && <SmallAlertModal />}
+			</>
 		</Layout>
 	);
 };

@@ -2,7 +2,7 @@ import { getForest } from '@/apis/forest';
 import { updateMovingMessages } from '@/apis/messages';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
+import { ForestTrees } from '@/types/forest';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -26,7 +26,7 @@ const MovingFolderModal = ({
 
 	const [selectFolder, setSelectFolder] = useState(0);
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', userId], () => getForest(userId), {
+	const { data: treeInfo } = useQuery<ForestTrees | undefined>(['getForest', userId], () => getForest(userId), {
 		enabled: !!myInfo,
 	});
 
@@ -55,7 +55,7 @@ const MovingFolderModal = ({
 					</S.ModalHead>
 					<S.ModalBody>
 						<S.FolderContainer>
-							{folders?.map((folder) => (
+							{treeInfo?.responseDtoList?.map((folder) => (
 								<S.Folder
 									key={folder.id}
 									onClick={() => setSelectFolder(folder.id)}
