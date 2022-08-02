@@ -1,7 +1,6 @@
 import API_URL, { DELETE, GET, POST, PUT } from '@/constants/api';
+import { Folder, TreeDetail, TreeDetailParam } from '@/types/forest';
 import { requester } from './requester';
-import { Folder } from '@/types/forest';
-import { TreeDetailParam, Param, TreeDetail } from '@/types/forest';
 
 export const postTree = async ({ name, fruitType }: { name: string; fruitType?: string }) => {
 	const {
@@ -23,7 +22,7 @@ export const postTree = async ({ name, fruitType }: { name: string; fruitType?: 
 	}
 };
 
-export const getForest = async (userId?: number) => {
+export const getForest = async (userId?: string | number | undefined) => {
 	const {
 		forest: { index },
 	} = API_URL;

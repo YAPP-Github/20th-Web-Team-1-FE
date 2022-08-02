@@ -3,15 +3,16 @@ import ArrowDownIcon from '@/assets/images/shared/arrow_down.svg';
 import ArrowUpIcon from '@/assets/images/shared/arrow_up.svg';
 import { MessageMenu } from '@/components/features/MessageBox';
 import { MessageDetailHeader } from '@/components/features/MessageDetail';
+import { Layout } from '@/components/layout';
 import { AlertModal, ErrorToast, MovingFolderModal, SideDrawer } from '@/components/shared';
+import { errorToastState } from '@/stores/modal';
 import { MessageDetailData } from '@/types/message';
-import React, { useEffect, useState } from 'react';
+import withAuth from '@/utils/HOC/withAuth';
+import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import * as S from './MessageDetail.styled';
-import withAuth from '@/utils/HOC/withAuth';
 import { useRecoilState } from 'recoil';
-import { errorToastState } from '@/stores/modal';
+import * as S from './MessageDetail.styled';
 
 const MessageDetail = () => {
 	const navigate = useNavigate();
@@ -108,72 +109,74 @@ const MessageDetail = () => {
 	};
 
 	return (
-		<S.Wrapper>
-			<MessageMenu
-				isEdit={true}
-				onToggleMovingFolderModal={onToggleMovingFolderModal}
-				onToggleOpenDrawer={onToggleOpenDrawer}
-				deleteMessages={onClickDeleteButton}
-				treeName={messageDetail?.treeResponseDto.name}
-			/>
-			{messageDetail && (
-				<S.MessageDetailContainer>
-					<S.MessageContentContainer>
-						<MessageDetailHeader
-							profileImg={messageDetail.responseDto.senderProfileImage}
-							senderName={
-								messageDetail.responseDto.anonymous === false ? messageDetail.responseDto.senderNickname : '익명'
-							}
-							isLike={messageDetail.responseDto.favorite}
-							messageId={messageDetail.responseDto.id}
-							onToggleLike={onToggleLike}
-							treeId={treeId}
-						/>
-
-						<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
-					</S.MessageContentContainer>
-					<S.MessageNavButtonContainer>
-						<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
-							<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
-							이전 메시지
-						</S.Button>
-
-						<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
-							다음 메시지
-							<S.ArrowIcon src={ArrowUpIcon} alt="" />
-						</S.Button>
-					</S.MessageNavButtonContainer>
-				</S.MessageDetailContainer>
-			)}
-			<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
-			{isOpenDeleteModal && (
-				<AlertModal
-					isOpen={isOpenDeleteModal}
-					modalTitle="메세지"
-					modalMainImage="deleteMessageModal"
-					modalDescMessages={[
-						'메시지 삭제 시',
-						'메세지함에 있던 메시지가 삭제되며',
-						'삭제 후에는 복구할 수 없어요',
-						'정말 삭제하시겠습니까?',
-					]}
-					buttonTitle="삭제하기"
-					handleCloseBtnClick={() => {
-						setIsOpenDeleteModal(false);
-					}}
-					handleMainBtnClick={deleteMessageHandler}
-				/>
-			)}
-			{messageId && isMoving && (
-				<MovingFolderModal
-					isMoving={isMoving}
+		<Layout path="private">
+			<S.Wrapper>
+				<MessageMenu
+					isEdit={true}
 					onToggleMovingFolderModal={onToggleMovingFolderModal}
-					checkMessages={[Number(messageId)]}
-					handleAfterAction={onMoveToNextMessage}
+					onToggleOpenDrawer={onToggleOpenDrawer}
+					deleteMessages={onClickDeleteButton}
+					treeName={messageDetail?.treeResponseDto.name}
 				/>
-			)}
-			{errorToastText && <ErrorToast />}
-		</S.Wrapper>
+				{messageDetail && (
+					<S.MessageDetailContainer>
+						<S.MessageContentContainer>
+							<MessageDetailHeader
+								profileImg={messageDetail.responseDto.senderProfileImage}
+								senderName={
+									messageDetail.responseDto.anonymous === false ? messageDetail.responseDto.senderNickname : '익명'
+								}
+								isLike={messageDetail.responseDto.favorite}
+								messageId={messageDetail.responseDto.id}
+								onToggleLike={onToggleLike}
+								treeId={treeId}
+							/>
+
+							<S.MessageContent>{messageDetail.responseDto.content}</S.MessageContent>
+						</S.MessageContentContainer>
+						<S.MessageNavButtonContainer>
+							<S.Button onClick={() => onClickNavButton(messageDetail.prevId)} disabled={messageDetail.prevId === 0}>
+								<S.ArrowDownIcon src={ArrowDownIcon} alt="" />
+								이전 메시지
+							</S.Button>
+
+							<S.Button onClick={() => onClickNavButton(messageDetail.nextId)} disabled={messageDetail.nextId === 0}>
+								다음 메시지
+								<S.ArrowIcon src={ArrowUpIcon} alt="" />
+							</S.Button>
+						</S.MessageNavButtonContainer>
+					</S.MessageDetailContainer>
+				)}
+				<SideDrawer onModal={openedDrawer} setOnModal={onToggleOpenDrawer} />
+				{isOpenDeleteModal && (
+					<AlertModal
+						isOpen={isOpenDeleteModal}
+						modalTitle="메세지"
+						modalMainImage="deleteMessageModal"
+						modalDescMessages={[
+							'메시지 삭제 시',
+							'메세지함에 있던 메시지가 삭제되며',
+							'삭제 후에는 복구할 수 없어요',
+							'정말 삭제하시겠습니까?',
+						]}
+						buttonTitle="삭제하기"
+						handleCloseBtnClick={() => {
+							setIsOpenDeleteModal(false);
+						}}
+						handleMainBtnClick={deleteMessageHandler}
+					/>
+				)}
+				{messageId && isMoving && (
+					<MovingFolderModal
+						isMoving={isMoving}
+						onToggleMovingFolderModal={onToggleMovingFolderModal}
+						checkMessages={[Number(messageId)]}
+						handleAfterAction={onMoveToNextMessage}
+					/>
+				)}
+				{errorToastText && <ErrorToast />}
+			</S.Wrapper>
+		</Layout>
 	);
 };
 

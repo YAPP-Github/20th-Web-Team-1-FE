@@ -1,22 +1,20 @@
-import React, { ReactNode } from 'react';
-import { Header, BottomNav, BackgroundArea } from '@/components/layout';
+import { BackgroundArea, BottomNav, Header } from '@/components/layout';
+import React from 'react';
 import * as S from './Layout.styled';
-import { useLocation } from 'react-router-dom';
 
 type Props = {
-	children: ReactNode;
+	path: string;
+	children: JSX.Element;
 };
 
-const Layout = ({ children }: Props) => {
-	const { pathname } = useLocation();
-
+const Layout = ({ children, path }: Props) => {
 	return (
 		<>
 			<BackgroundArea />
 			<S.AppContainer>
-				{pathname === '/login' || pathname === '/not-found' || pathname === '/' ? (
-					<S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>
-				) : (
+				{path === 'public' && <S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>}
+
+				{path === 'private' && (
 					<>
 						<Header />
 						<S.LayoutContentWrapper>{children}</S.LayoutContentWrapper>

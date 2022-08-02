@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getStorageItem, storageAccessKey } from '@/utils/local-storage';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const createAxiosInstance = () => {
 	const base = axios.create({
@@ -43,12 +43,18 @@ const axiosInstance = createAxiosInstance();
 export async function requester<Payload>(option: AxiosRequestConfig) {
 	const accessToken = getStorageItem(storageAccessKey);
 
-	const response: AxiosResponse<Payload> = await axiosInstance({
-		headers: {
-			Authorization: accessToken ? `Bearer ${accessToken}` : '',
-		},
-		...option,
-	});
+	const response: AxiosResponse<Payload> = await axiosInstance(
+		accessToken
+			? {
+					headers: {
+						Authorization: `Bearer ${accessToken}`,
+					},
+					...option,
+			  }
+			: {
+					...option,
+			  },
+	);
 
 	return {
 		status: response.status,

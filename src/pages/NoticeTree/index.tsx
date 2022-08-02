@@ -2,6 +2,7 @@ import { updateReadMessage } from '@/apis/messages';
 import { getNotices } from '@/apis/noticeTree';
 import NoMessageIcon from '@/assets/images/noticeTree/no_message.png';
 import { AlertPopUp, Clouds, MessageBox, Tree, WateringButton } from '@/components/features/NoticeTree';
+import { Layout } from '@/components/layout';
 import { ErrorToast, MediumAlertModal } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
@@ -101,7 +102,8 @@ const NoticeTree = () => {
 	}, [noticeMessages]);
 
 	return (
-		<>
+		<Layout path="private">
+			{' '}
 			<S.TemporaryWrapper>
 				<Clouds />
 				<S.NoticeTextWrapper>
@@ -130,7 +132,7 @@ const NoticeTree = () => {
 					buttonText="닫기"
 				/>
 			)}
-		</>
+		</Layout>
 	);
 };
 
