@@ -11,7 +11,7 @@ import { Layout } from '@/components/layout';
 import { DeleteAlertModal, ErrorToast, MovingFolderModal, SideDrawer, SmallAlertModal } from '@/components/shared';
 import { errorToastState, smallModalState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import { Folder } from '@/types/forest';
+import { Folder, ForestTrees } from '@/types/forest';
 import { Message } from '@/types/message';
 import withAuth from '@/utils/HOC/withAuth';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -26,7 +26,7 @@ const MessageBox = () => {
 	const [errorToastText, setErrorToastText] = useRecoilState(errorToastState);
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: folders } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+	const { data: treeInfo } = useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 
@@ -191,11 +191,11 @@ const MessageBox = () => {
 		if (treeId === 'favorite' || !treeId) {
 			return;
 		}
-		if (folders && treeId) {
-			const idx = folders.findIndex((folder) => folder.id === Number(treeId));
-			setCurrentTree(folders[idx].name);
+		if (treeInfo && treeId) {
+			const idx = treeInfo.responseDtoList.findIndex((folder: Folder) => folder.id === Number(treeId));
+			setCurrentTree(treeInfo.responseDtoList[idx].name);
 		}
-	}, [folders, treeId]);
+	}, [treeInfo, treeId]);
 
 	useEffect(() => {
 		if (!checkMode) {

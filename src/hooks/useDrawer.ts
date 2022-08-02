@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { myInfoState } from '@/stores/user';
 import { deleteTree, getForest } from '@/apis/forest';
-import { Folder } from '@/types/forest';
+import { myInfoState } from '@/stores/user';
+import { Folder, ForestTrees } from '@/types/forest';
+import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 interface useDrawerProps {
 	onToggleOpenDrawer: () => void;
@@ -15,11 +15,15 @@ const useDrawer = ({ onToggleOpenDrawer }: useDrawerProps) => {
 	const navigator = useNavigate();
 	const queryClient = useQueryClient();
 	const [checkedTreeId, setCheckedTreeId] = useState<number>();
+	const [trees, setTrees] = useState<Folder[] | undefined>(undefined);
 	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
 	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
 
-	const { data: trees } = useQuery<Folder[] | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+	const { data: treeInfo } = useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		onSuccess: () => {
+			setTrees(treeInfo?.responseDtoList);
+		},
 		enabled: !!myInfo,
 	});
 

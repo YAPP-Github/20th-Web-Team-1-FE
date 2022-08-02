@@ -19,10 +19,12 @@ import * as S from './MessageSender.styled';
 const MessageSender = () => {
 	const navigate = useNavigate();
 	const { treeId } = useParams();
+	const { treeUserId } = useParams();
+	const { treeOwner } = useParams();
 
 	const myInfo = useRecoilValue(myInfoState);
 
-	const { data: trees } = useQuery(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+	const { data: treeInfo } = useQuery(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
 		enabled: !!myInfo,
 	});
 
@@ -36,13 +38,15 @@ const MessageSender = () => {
 	});
 
 	const messageInputRef = useRef<HTMLTextAreaElement>(null);
-	const [recipientName, setRecipientName] = useState('나에게');
+
 	const [checkAnonymous, setCheckAnonymous] = useState(false);
 	const [selectedFolder, setSelectedFolder] = useState(DEFAULT_FOLDER_NAME);
 	const [isOpenedSelectFolderBox, setIsOpenedSelectedFolderBox] = useState(false);
 	const [isSucceedSendMessage, setIsSucceedSendMessage] = useState(false);
 	const [isFailedSendMessage, setIsFailedSendMessage] = useState(false);
 	const [isMessageTextSizeAlertVisible, setIsMessageTextSizeAlertVisible] = useState(false);
+
+	const recipientName = treeOwner ? `${treeOwner}에게` : '나에게';
 
 	const handleSelectedFolderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const selected = event.target.value;
@@ -75,8 +79,8 @@ const MessageSender = () => {
 		return {
 			anonymous: checkAnonymous,
 			content: messageInputRef.current?.value as string,
-			folderId: trees?.filter((tree) => tree.name === selectedFolder)[0]?.id ?? null,
-			receiverId: myInfo?.id as number,
+			folderId: treeInfo?.responseDtoList?.filter((tree) => tree.name === selectedFolder)[0]?.id ?? null,
+			receiverId: treeUserId ? Number(treeUserId) : (myInfo?.id as number),
 		};
 	};
 
@@ -88,8 +92,8 @@ const MessageSender = () => {
 		trees?.filter((tree) => String(tree.id) === targetTreeId)[0]?.name || DEFAULT_FOLDER_NAME;
 
 	useEffect(() => {
-		setSelectedFolder(setInitialSelectedFolder(trees, String(treeId)));
-	}, [trees, treeId]);
+		setSelectedFolder(setInitialSelectedFolder(treeInfo?.responseDtoList, String(treeId)));
+	}, [treeInfo, treeId]);
 
 	return (
 		<Layout path={myInfo ? 'private' : 'public'}>
@@ -99,7 +103,7 @@ const MessageSender = () => {
 					<S.TopWrapper>
 						<RecipientName name={recipientName} />
 						<FolderSelect
-							folders={trees}
+							folders={treeInfo?.responseDtoList}
 							isOpenedFolderBox={isOpenedSelectFolderBox}
 							onToggleSelectedFolderBox={onToggleSelectedFolderBox}
 							selectedFolder={selectedFolder}

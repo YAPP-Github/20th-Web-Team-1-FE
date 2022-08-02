@@ -1,5 +1,5 @@
 import API_URL, { DELETE, GET, POST, PUT } from '@/constants/api';
-import { Folder, TreeDetail, TreeDetailParam } from '@/types/forest';
+import { ForestTrees, TreeDetail, TreeDetailParam } from '@/types/forest';
 import { requester } from './requester';
 
 export const postTree = async ({ name, fruitType }: { name: string; fruitType?: string }) => {
@@ -28,7 +28,7 @@ export const getForest = async (userId?: string | number | undefined) => {
 	} = API_URL;
 
 	try {
-		const response = await requester<Folder[]>({
+		const response = await requester<ForestTrees>({
 			method: GET,
 			url: `${index}?userId=${userId}`,
 		});
