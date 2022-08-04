@@ -38,7 +38,7 @@ const MessageSender = () => {
 
 	const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
-	const [checkAnonymous, setCheckAnonymous] = useState(false);
+	const [checkAnonymous, setCheckAnonymous] = useState(myInfo === undefined ? true : false);
 	const [selectedFolder, setSelectedFolder] = useState(DEFAULT_FOLDER_NAME);
 	const [isOpenedSelectFolderBox, setIsOpenedSelectedFolderBox] = useState(false);
 	const [isSucceedSendMessage, setIsSucceedSendMessage] = useState(false);
@@ -58,7 +58,7 @@ const MessageSender = () => {
 	};
 
 	const onToggleCheckAnonymous = () => {
-		setCheckAnonymous(() => !checkAnonymous);
+		myInfo && setCheckAnonymous(() => !checkAnonymous);
 	};
 
 	const handleSubmitMessage = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -116,11 +116,9 @@ const MessageSender = () => {
 						<MessageInput messageInputRef={messageInputRef} />
 					</S.MessageInputWrapper>
 
-					{myInfo && (
-						<S.AnonymousCheckBoxWrapper>
-							<AnonymousCheckBox checked={checkAnonymous} handleToggleChecked={onToggleCheckAnonymous} />
-						</S.AnonymousCheckBoxWrapper>
-					)}
+					<S.AnonymousCheckBoxWrapper>
+						<AnonymousCheckBox checked={checkAnonymous} handleToggleChecked={onToggleCheckAnonymous} />
+					</S.AnonymousCheckBoxWrapper>
 
 					<S.ButtonWrapper>
 						<Button type="button" bgColor="normal" fontWeight="medium" onClick={onGoBackClick}>
