@@ -16,6 +16,9 @@ export const MessageSenderContainer = styled.form`
 	padding-bottom: 30px;
 	overflow: scroll;
 
+	display: flex;
+	flex-direction: column;
+
 	::-webkit-scrollbar {
 		display: none;
 	}
@@ -28,6 +31,7 @@ export const TopWrapper = styled.div`
 
 export const MessageInputWrapper = styled.div`
 	margin-top: 46px;
+	flex-grow: 1;
 `;
 
 export const AnonymousCheckBoxWrapper = styled.div`
