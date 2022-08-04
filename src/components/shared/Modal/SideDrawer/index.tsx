@@ -1,34 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import * as S from './SideDrawer.styled';
-import ModalFrame from '../ModalFrame';
-import TreeFolderItem from './TreeFolderItem';
-import EditFolderMoreModal from './EditFolderMoreModal';
-import { Props } from './SideDrawer.type';
-import { TREE_SIZE_MAX } from '@/constants/forest';
+import { deleteTree, getForest } from '@/apis/forest';
 import { DeleteAlertModal } from '@/components/shared';
-import useDrawer from '@/hooks/useDrawer';
+import { TREE_SIZE_MAX } from '@/constants/forest';
+import { myInfoState } from '@/stores/user';
+import { Folder, ForestTrees } from '@/types/forest';
+import { default as React, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import ModalFrame from '../ModalFrame';
+import EditFolderMoreModal from './EditFolderMoreModal';
+import * as S from './SideDrawer.styled';
+import { Props } from './SideDrawer.type';
+import TreeFolderItem from './TreeFolderItem';
 
 const SideDrawer = ({ onModal, setOnModal }: Props) => {
+	const myInfo = useRecoilValue(myInfoState);
+
+	const navigator = useNavigate();
+
+	const queryClient = useQueryClient();
+
+	const [checkedTreeId, setCheckedTreeId] = useState<number>();
+	const [trees, setTrees] = useState<Folder[] | undefined>(undefined);
+	const [onEditMoreModal, setOnEditMoreModal] = useState(false);
+	const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+	const [isOpenedFolderDeleteAlertModal, setIsOpenedFolderDeleteAlertModal] = useState(false);
+
+	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
+
+	useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		onSuccess: (data) => {
+			setTrees(data?.responseDtoList);
+		},
+		enabled: !!myInfo,
+	});
+
+	const treeDeleteMutation = useMutation(deleteTree, {
+		onSuccess: () => {
+			queryClient.invalidateQueries('getForest');
+			handleFolderDeleteAlertModalToggle('close');
+			navigator(`/messages`);
+			onToggleOpenDrawer();
+		},
+	});
+
 	const onToggleOpenDrawer = () => {
 		setOnModal(!onModal);
 	};
 
-	const {
-		myInfo,
-		trees,
-		checkedTreeId,
-		setCheckedTreeId,
-		modalPosition,
-		onEditMoreModal,
-		isOpenedFolderDeleteAlertModal,
-		handleFolderDeleteAlertModalToggle,
-		handleFolderDelete,
-		handleEditMoreModalOpen,
-		setOnEditMoreModal,
-	} = useDrawer({ onToggleOpenDrawer });
+	const handleFolderDelete = () => {
+		treeDeleteMutation.mutate(checkedTreeId);
+	};
 
-	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
+	const handleEditMoreModalOpen = (event: React.MouseEvent<HTMLElement>) => {
+		const closest = event.currentTarget.closest('li') as HTMLLIElement;
+		const rect = closest.getBoundingClientRect();
+		const newPosition = { top: rect.top, left: rect.left + rect.width };
+
+		setModalPosition(newPosition);
+		setOnEditMoreModal(true);
+	};
+
+	const handleFolderDeleteAlertModalToggle = (state: 'open' | 'close') => {
+		setIsOpenedFolderDeleteAlertModal(state === 'open');
+		setOnEditMoreModal(false);
+	};
 
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
