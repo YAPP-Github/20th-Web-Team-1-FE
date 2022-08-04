@@ -116,9 +116,11 @@ const MessageSender = () => {
 						<MessageInput messageInputRef={messageInputRef} />
 					</S.MessageInputWrapper>
 
-					<S.AnonymousCheckBoxWrapper>
-						<AnonymousCheckBox checked={checkAnonymous} handleToggleChecked={onToggleCheckAnonymous} />
-					</S.AnonymousCheckBoxWrapper>
+					{myInfo && (
+						<S.AnonymousCheckBoxWrapper>
+							<AnonymousCheckBox checked={checkAnonymous} handleToggleChecked={onToggleCheckAnonymous} />
+						</S.AnonymousCheckBoxWrapper>
+					)}
 
 					<S.ButtonWrapper>
 						<Button type="button" bgColor="normal" fontWeight="medium" onClick={onGoBackClick}>
