@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { MessageWithLocationType } from '../NoticeTree/NoticeTree.type';
 import * as S from './TreeDetail.styled';
-
+import { AxiosError } from 'axios';
 const TreeDetail = () => {
 	const { treeId } = useParams();
 	const { treeUserId } = useParams();
@@ -43,10 +43,16 @@ const TreeDetail = () => {
 					newMessages && setTreeMessages(newMessages);
 				}
 			},
-			onError: () => {
+			onError: (error) => {
+				const { response } = error as AxiosError;
+
+				if (Boolean(treeUserId) && response) {
+					(response.status === 400 || response.status === 404) && navigate('not-found');
+				}
 				setErrorToastText('네트워크 오류. 나무 정보를 가져올 수 없습니다.');
 			},
 			enabled: !!treeId,
+			retry: 1,
 		},
 	);
 
