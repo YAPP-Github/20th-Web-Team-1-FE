@@ -3,22 +3,22 @@ import { keyframes } from '@emotion/react';
 
 const toastAnimation = keyframes`
   0% {
-    bottom: 0px;
+    top: 0px;
     opacity: 0;
   }
   50% {
-    bottom: 45px;
+    top: 86px;
 	opacity: 1;
   }
   100% {
-    bottom: 0px;
+    top: 0px;
     opacity: 0;
   }
   `;
 
 export const ToastWrapper = styled.div`
 	position: absolute;
-	bottom: 0px;
+	top: 0px;
 	left: 50%;
 	transform: translate(-50%, 0%);
 	width: 83%;
