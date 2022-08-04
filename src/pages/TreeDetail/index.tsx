@@ -27,7 +27,7 @@ const TreeDetail = () => {
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [treeMessages, setTreeMessages] = useState<MessageWithLocationType[] | null>(null);
 
-	const userId = myInfo ? myInfo.id : treeUserId;
+	const userId = treeUserId ? treeUserId : myInfo?.id;
 
 	const { data: treeDetailInfo } = useQuery(
 		['readTreeDetail', { treeId: treeId, userId: userId }],
@@ -92,7 +92,7 @@ const TreeDetail = () => {
 					{showMessage && (
 						<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />
 					)}
-					{myInfo && (
+					{myInfo && treeUserId === undefined && (
 						<>
 							<WateringButton treeId={treeId} />
 
