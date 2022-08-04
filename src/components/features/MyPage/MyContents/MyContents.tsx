@@ -55,7 +55,11 @@ const MyContents = () => {
 					handleMainBtnClick={handleClickLogoutButton}
 				/>
 			)}
-			<Toast show={isToastVisible} message="복사되었습니다!" onClose={() => setIsToastVisible(false)} />
+			<Toast
+				show={isToastVisible}
+				message="복사되었습니다! 나의 나무숲을 공유하세요!"
+				onClose={() => setIsToastVisible(false)}
+			/>
 		</>
 	);
 };
