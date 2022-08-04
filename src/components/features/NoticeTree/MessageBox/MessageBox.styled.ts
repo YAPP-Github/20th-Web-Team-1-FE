@@ -57,7 +57,7 @@ export const MessageTitle = styled.span`
 	margin-bottom: 9px;
 `;
 
-export const MessageText = styled.p`
+export const MessageText = styled.div`
 	flex-grow: 1;
 	font-weight: ${({ theme }) => theme.fontWeight.normal};
 	font-size: ${({ theme }) => theme.fontSize.f14};
@@ -65,6 +65,7 @@ export const MessageText = styled.p`
 	color: ${({ theme }) => theme.colors.bt_grey[40]};
 	overflow-y: auto;
 	overflow-x: hidden;
+	white-space: pre-wrap;
 `;
 
 export const MessageWriter = styled.p`

@@ -44,6 +44,7 @@ export const MessageContent = styled.div`
 	font-size: ${({ theme }) => theme.fontSize.f14};
 	line-height: 24px;
 	word-break: break-all;
+	white-space: pre-wrap;
 
 	background: ${({ theme }) => theme.colors.bt_primary[20]};
 
