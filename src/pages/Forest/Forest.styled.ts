@@ -8,14 +8,15 @@ export const Wrapper = styled.div`
 `;
 export const TreesContainer = styled.div`
 	width: 100%;
-	height: 100%;
+	height: calc(100vh - 85px);
 
 	display: flex;
 	flex-direction: column;
 
 	overflow: auto;
 
-	margin-top: 11vh;
+	margin-top: clamp(65px, 11vh, 94px);
+
 	padding: 0px 32px 85px 32px;
 `;
 
