@@ -21,7 +21,6 @@ const MessageSender = () => {
 	const { treeId } = useParams();
 	const { treeUserId } = useParams();
 	const { treeOwner } = useParams();
-
 	const myInfo = useRecoilValue(myInfoState);
 
 	const { data: treeInfo } = useQuery(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
@@ -102,13 +101,15 @@ const MessageSender = () => {
 				<S.MessageSenderContainer onSubmit={handleSubmitMessage}>
 					<S.TopWrapper>
 						<RecipientName name={recipientName} />
-						<FolderSelect
-							folders={treeInfo?.responseDtoList}
-							isOpenedFolderBox={isOpenedSelectFolderBox}
-							onToggleSelectedFolderBox={onToggleSelectedFolderBox}
-							selectedFolder={selectedFolder}
-							handleSelectedFolderChange={handleSelectedFolderChange}
-						/>
+						{!treeOwner && (
+							<FolderSelect
+								folders={treeInfo?.responseDtoList}
+								isOpenedFolderBox={isOpenedSelectFolderBox}
+								onToggleSelectedFolderBox={onToggleSelectedFolderBox}
+								selectedFolder={selectedFolder}
+								handleSelectedFolderChange={handleSelectedFolderChange}
+							/>
+						)}
 					</S.TopWrapper>
 
 					<S.MessageInputWrapper>

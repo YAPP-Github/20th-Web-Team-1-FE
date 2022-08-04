@@ -27,16 +27,12 @@ export const getForest = async (userId?: string | number | undefined) => {
 		forest: { index },
 	} = API_URL;
 
-	try {
-		const response = await requester<ForestTrees>({
-			method: GET,
-			url: `${index}?userId=${userId}`,
-		});
+	const response = await requester<ForestTrees>({
+		method: GET,
+		url: `${index}?userId=${userId}`,
+	});
 
-		return response.payload;
-	} catch (error) {
-		// 에러 핸들링
-	}
+	return response.payload;
 };
 
 export const updateTree = async ({ treeId, name, fruitType }: { treeId: number; name: string; fruitType?: string }) => {
