@@ -7,7 +7,7 @@ import { Header, Layout, PublicBottomNav } from '@/components/layout';
 import { ErrorToast } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -33,6 +33,16 @@ const TreeDetail = () => {
 		['readTreeDetail', { treeId: treeId, userId: userId }],
 		() => getTreeDetail({ treeId: treeId, userId: String(userId) }),
 		{
+			onSuccess: (data) => {
+				if (data) {
+					const newMessages = data.messages.map((message) => ({
+						...message,
+						width: Math.floor(Math.random() * 100),
+						height: Math.floor(Math.random() * 100),
+					}));
+					newMessages && setTreeMessages(newMessages);
+				}
+			},
 			onError: () => {
 				setErrorToastText('네트워크 오류. 나무 정보를 가져올 수 없습니다.');
 			},
@@ -57,17 +67,6 @@ const TreeDetail = () => {
 		setTreeMessages(null);
 		navigate(`/forest/tree/${nextTree}`);
 	};
-
-	useEffect(() => {
-		if (treeDetailInfo) {
-			const newMessages = treeDetailInfo.messages.map((message) => ({
-				...message,
-				width: Math.floor(Math.random() * 100),
-				height: Math.floor(Math.random() * 100),
-			}));
-			newMessages && setTreeMessages(newMessages);
-		}
-	}, [treeDetailInfo]);
 
 	return (
 		<Layout path={myInfo ? 'private' : 'public'}>

@@ -5,7 +5,7 @@ import Button from '@/components/shared/Button';
 import MessageChip from '@/components/shared/Chip/MessageChip';
 import { Folder, ForestTrees } from '@/types/forest';
 import withAuth from '@/utils/HOC/withAuth';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -20,12 +20,11 @@ const Forest = () => {
 	const [treeFolders, setTreeFolders] = useState<Folder[] | undefined>(undefined);
 
 	const { data: folders } = useQuery<ForestTrees | undefined>(['getForest', myInfo?.id], () => getForest(myInfo?.id), {
+		onSuccess: (data) => {
+			data && setTreeFolders(data.responseDtoList);
+		},
 		enabled: !!myInfo,
 	});
-
-	useEffect(() => {
-		folders && setTreeFolders(folders.responseDtoList);
-	}, [folders]);
 
 	return (
 		<Layout path="private">
