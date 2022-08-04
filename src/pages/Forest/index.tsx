@@ -28,17 +28,20 @@ const Forest = () => {
 
 	return (
 		<Layout path="private">
-			<S.TreesContainer>
-				<MessageChip message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
+			<S.Wrapper>
+				<S.TreesContainer>
+					<S.MessageChipContainer>
+						<MessageChip message="오늘 하루도 고생한 우리에게 따듯한 칭찬을 남겨보세요!" />
+					</S.MessageChipContainer>
+					<S.TreeListBox>{folders && <TreeList trees={treeFolders} />}</S.TreeListBox>
 
-				<S.TreeListBox>{folders && <TreeList trees={treeFolders} />}</S.TreeListBox>
-
-				<S.ButtonBox>
-					<Button type="button" bgColor="primary" onClick={() => navigate('/message/edit')}>
-						나무에 물 주기
-					</Button>
-				</S.ButtonBox>
-			</S.TreesContainer>
+					<S.ButtonBox>
+						<Button type="button" bgColor="primary" onClick={() => navigate('/message/edit')}>
+							나무에 물 주기
+						</Button>
+					</S.ButtonBox>
+				</S.TreesContainer>
+			</S.Wrapper>
 		</Layout>
 	);
 };

@@ -5,8 +5,8 @@ export const MessageChipWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 50px;
-	margin: auto;
+	min-height: 50px;
+
 	border-radius: 20px;
 	background-color: #e8faf8;
 	box-shadow: 0px 0px 10px rgba(0, 196, 184, 0.05);
