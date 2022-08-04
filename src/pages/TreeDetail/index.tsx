@@ -91,7 +91,7 @@ const TreeDetail = () => {
 					{showMessage && (
 						<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />
 					)}
-					{myInfo && treeUserId === undefined && (
+					{myInfo && (Number(treeUserId) === myInfo?.id || treeUserId === undefined) ? (
 						<>
 							<WateringButton treeId={treeId} />
 
@@ -106,6 +106,10 @@ const TreeDetail = () => {
 								</S.NextButton>
 							)}
 						</>
+					) : (
+						<S.PrevButton onClick={() => navigate(-1)}>
+							<img src={LeftButton} alt="뒤로가기이미지" />
+						</S.PrevButton>
 					)}
 					{errorToastText && <ErrorToast />}
 				</S.TemporaryWrapper>
