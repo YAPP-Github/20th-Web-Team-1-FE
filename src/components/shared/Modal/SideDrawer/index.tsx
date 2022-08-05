@@ -66,6 +66,10 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 		setOnEditMoreModal(false);
 	};
 
+	const getDeleteTargetTreeName = () => {
+		return trees?.filter((tree) => tree.id === checkedTreeId)[0]?.name;
+	};
+
 	return (
 		<ModalFrame onModal={onModal} setOnModal={setOnModal}>
 			<S.SideDrawerContainer show={onModal}>
@@ -144,7 +148,7 @@ const SideDrawer = ({ onModal, setOnModal }: Props) => {
 						{isOpenedFolderDeleteAlertModal && (
 							<DeleteAlertModal
 								deleteTargetType="folder"
-								deleteTarget="프로젝트A"
+								deleteTarget={getDeleteTargetTreeName()}
 								onAlertModal={isOpenedFolderDeleteAlertModal}
 								handleAlertModalToggle={() => handleFolderDeleteAlertModalToggle('close')}
 								handleTargetDelete={handleFolderDelete}
