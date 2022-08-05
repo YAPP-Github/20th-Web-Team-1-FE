@@ -2,7 +2,7 @@ import { DefaultButton } from '@/components/shared/DefaultButton/DefaultButton.s
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.main`
-	height: calc(100vh - 85px);
+	height: calc(var(--vh, 1vh) * 100 - 85px);
 
 	position: relative;
 	overflow: hidden;
@@ -12,7 +12,7 @@ export const Wrapper = styled.main`
 
 export const MessageDetailContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - 250px);
+	height: calc(var(--vh, 1vh) * 100 - 250px);
 
 	display: flex;
 	flex-direction: column;

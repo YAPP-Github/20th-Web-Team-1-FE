@@ -12,7 +12,7 @@ export const Background = styled.div`
 
 export const MessageSenderContainer = styled.form`
 	position: relative;
-	height: calc(100vh - 155.5px);
+	height: calc(var(--vh, 1vh) * 100 - 155.5px);
 	padding-bottom: 30px;
 	overflow: scroll;
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as S from './Tree.styled';
 import APPLE from '@/assets/images/trees/apple.png';
 import BLUEBERRY from '@/assets/images/trees/blueberry.png';
@@ -11,11 +11,9 @@ import { TreeProps } from './Tree.type';
 import TreeImage from '@/assets/images/shared/tree.svg';
 
 const Tree = ({ updateReadMessageHandler, messages, fruitType }: TreeProps) => {
-	const [imageWidth, setImageWidth] = useState(0);
+	const imageRef = useRef<HTMLImageElement>(null);
 
-	const onLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
-		event.target instanceof HTMLImageElement && setImageWidth(event.target.clientWidth);
-	};
+	const [imageWidth, setImageWidth] = useState<number | undefined>(undefined);
 
 	const fruit =
 		fruitType === 'STRAWBERRY'
@@ -30,25 +28,40 @@ const Tree = ({ updateReadMessageHandler, messages, fruitType }: TreeProps) => {
 			? ORANGE
 			: APPLE;
 
+	const changeTreeInnerSize = () => {
+		imageRef.current && setImageWidth(imageRef.current.clientWidth);
+	};
+
+	useEffect(() => {
+		changeTreeInnerSize();
+	}, [imageRef?.current?.clientWidth]);
+
+	useEffect(() => {
+		window.addEventListener('resize', changeTreeInnerSize);
+		return () => window.removeEventListener('resize', changeTreeInnerSize);
+	}, []);
+
 	return (
 		<S.TreeWrapper>
 			<S.TreeContainer>
-				<S.TreeImage src={TreeImage} alt="" onLoad={onLoad} />
-				<S.TreeCircle imageWidth={imageWidth}>
-					<S.InnerCircle>
-						{messages?.map((message, idx) => {
-							return (
-								<S.Fruit
-									key={`noticeTree_fruit_${message.id}`}
-									src={fruit}
-									innerWidth={`${message.width}%`}
-									innerHeight={`${message.height}%`}
-									onClick={() => updateReadMessageHandler(message.id, idx)}
-								/>
-							);
-						})}
-					</S.InnerCircle>
-				</S.TreeCircle>
+				<S.TreeImage src={TreeImage} alt="" ref={imageRef} />
+				{imageWidth !== undefined && (
+					<S.TreeCircle imageWidth={imageWidth}>
+						<S.InnerCircle>
+							{messages?.map((message, idx) => {
+								return (
+									<S.Fruit
+										key={`noticeTree_fruit_${message.id}`}
+										src={fruit}
+										innerWidth={`${message.width}%`}
+										innerHeight={`${message.height}%`}
+										onClick={() => updateReadMessageHandler(message.id, idx)}
+									/>
+								);
+							})}
+						</S.InnerCircle>
+					</S.TreeCircle>
+				)}
 			</S.TreeContainer>
 		</S.TreeWrapper>
 	);

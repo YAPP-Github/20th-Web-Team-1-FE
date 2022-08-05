@@ -3,12 +3,13 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div`
 	position: relative;
 	height: calc(100vh - 85px);
+	height: calc(var(--vh, 1vh) * 100 - 85px);
 	overflow: hidden;
 `;
 
 export const TreesContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - 85px);
+	height: calc(var(--vh, 1vh) * 100 - 85px);
 	display: flex;
 	flex-direction: column;
 	overflow: auto;

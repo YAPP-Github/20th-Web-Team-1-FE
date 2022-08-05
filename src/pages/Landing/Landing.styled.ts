@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	padding: 10vh 0 7vh 0;
 `;
 
