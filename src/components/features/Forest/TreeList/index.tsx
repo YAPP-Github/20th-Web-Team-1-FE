@@ -10,17 +10,18 @@ import { myInfoState } from '@/stores/user';
 
 const TreeList = ({ trees }: Props) => {
 	const myInfo = useRecoilValue(myInfoState);
-	const { userId: currentforestUserId } = useParams();
+	const { userId: currentForestUserId } = useParams();
 
 	const checkTreeSizeMax = () => trees && trees?.length < TREE_SIZE_MAX;
-	const isVisitedMyForest = () => Number(currentforestUserId) === myInfo?.id;
 
 	return (
 		<S.TreeItemList>
 			{trees?.map((tree) => {
 				return <TreeItem key={tree.id} tree={tree} />;
 			})}
-			{!currentforestUserId ? checkTreeSizeMax() && <TreeItemAdd /> : isVisitedMyForest() && <TreeItemAdd />}
+			{myInfo &&
+				(Number(currentForestUserId) === myInfo?.id || currentForestUserId === undefined) &&
+				checkTreeSizeMax() && <TreeItemAdd />}
 		</S.TreeItemList>
 	);
 };

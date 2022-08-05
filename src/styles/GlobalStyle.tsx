@@ -18,6 +18,8 @@ const GlobalStyle = () => {
 					/* max-width: 475px; */
 					/* margin: 0 auto; */
 					font-family: 'Pretendard';
+					height: 100vh;
+					height: calc(var(--vh, 1vh) * 100);
 				}
 
 				#modal-root {

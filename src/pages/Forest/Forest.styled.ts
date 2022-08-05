@@ -1,16 +1,40 @@
 import styled from '@emotion/styled';
 
-export const TreesContainer = styled.main`
-	padding: 96px 0 30px 0;
-	margin: 0 32px;
+export const Wrapper = styled.div`
+	position: relative;
+	height: calc(100vh - 85px);
+
+	overflow: hidden;
+`;
+export const TreesContainer = styled.div`
+	width: 100%;
+	height: calc(100vh - 85px);
+
+	display: flex;
+	flex-direction: column;
+
+	overflow: auto;
+
+	margin-top: clamp(65px, 11vh, 94px);
+
+	padding: 0px 32px 85px 32px;
+`;
+
+export const MessageChipContainer = styled.div`
+	min-height: 55px;
+	max-height: 84px;
+	height: 10vh;
 `;
 
 export const TreeListBox = styled.div`
-	margin-top: 34px;
+	width: 100%;
+	flex-grow: 1;
 `;
 
 export const ButtonBox = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: 42px;
+	align-items: center;
+	max-height: 122px;
+	height: 13.27vh;
 `;

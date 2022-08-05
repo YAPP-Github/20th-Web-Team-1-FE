@@ -6,7 +6,9 @@ export const ItemWrapper = styled.li`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 221px;
+	height: 26vh;
+	max-height: 221px;
+	min-height: 170px;
 
 	& > a {
 		width: 100%;
@@ -16,14 +18,17 @@ export const ItemWrapper = styled.li`
 	}
 
 	& > a > div {
-		height: 181px;
+		max-height: 181px;
+		min-height: 140px;
+		height: 21.5vh;
 	}
 
 	& > a > span {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 40px;
+		height: 4.7vh;
+		max-height: 40px;
 		border-top: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 		font-size: ${(props) => props.theme.fontSize.f12};
 		line-height: ${(props) => props.theme.lineHeight.lh12};

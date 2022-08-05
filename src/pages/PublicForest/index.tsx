@@ -22,24 +22,19 @@ const PublicForest = () => {
 	const [treeFolders, setTreeFolders] = useState<Folder[] | undefined>(undefined);
 	const [treeOwner, setTreeOwner] = useState('');
 
-	const { data: folders } = useQuery<ForestTrees | undefined>(
-		['getForest', currentForestUserId],
-		() => getForest(currentForestUserId),
-		{
-			enabled: !!currentForestUserId,
-			retry: 0,
-			onError: () => {
-				navigate('not-found');
-			},
+	useQuery<ForestTrees | undefined>(['getForest', currentForestUserId], () => getForest(currentForestUserId), {
+		enabled: !!currentForestUserId,
+		retry: 0,
+		onSuccess: (data) => {
+			if (data) {
+				setTreeFolders(data.responseDtoList);
+				setTreeOwner(data.nickname);
+			}
 		},
-	);
-
-	useEffect(() => {
-		if (folders) {
-			setTreeFolders(folders.responseDtoList);
-			setTreeOwner(folders.nickname);
-		}
-	}, [folders]);
+		onError: () => {
+			navigate('not-found');
+		},
+	});
 
 	useEffect(() => {
 		if (!currentForestUserId) {

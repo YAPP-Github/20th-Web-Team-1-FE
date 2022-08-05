@@ -7,13 +7,13 @@ import { Header, Layout, PublicBottomNav } from '@/components/layout';
 import { ErrorToast } from '@/components/shared';
 import { errorToastState } from '@/stores/modal';
 import { myInfoState } from '@/stores/user';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { MessageWithLocationType } from '../NoticeTree/NoticeTree.type';
 import * as S from './TreeDetail.styled';
-
+import { AxiosError } from 'axios';
 const TreeDetail = () => {
 	const { treeId } = useParams();
 	const { treeUserId } = useParams();
@@ -27,16 +27,32 @@ const TreeDetail = () => {
 	const [selectedMessage, setSelectedMessage] = useState<MessageWithLocationType | null>(null);
 	const [treeMessages, setTreeMessages] = useState<MessageWithLocationType[] | null>(null);
 
-	const userId = myInfo ? myInfo.id : treeUserId;
+	const userId = treeUserId ? treeUserId : myInfo?.id;
 
 	const { data: treeDetailInfo } = useQuery(
 		['readTreeDetail', { treeId: treeId, userId: userId }],
 		() => getTreeDetail({ treeId: treeId, userId: String(userId) }),
 		{
-			onError: () => {
+			onSuccess: (data) => {
+				if (data) {
+					const newMessages = data.messages.map((message) => ({
+						...message,
+						width: Math.floor(Math.random() * 100),
+						height: Math.floor(Math.random() * 100),
+					}));
+					newMessages && setTreeMessages(newMessages);
+				}
+			},
+			onError: (error) => {
+				const { response } = error as AxiosError;
+
+				if (Boolean(treeUserId) && response) {
+					(response.status === 400 || response.status === 404) && navigate('not-found');
+				}
 				setErrorToastText('네트워크 오류. 나무 정보를 가져올 수 없습니다.');
 			},
 			enabled: !!treeId,
+			retry: 1,
 		},
 	);
 
@@ -57,17 +73,6 @@ const TreeDetail = () => {
 		setTreeMessages(null);
 		navigate(`/forest/tree/${nextTree}`);
 	};
-
-	useEffect(() => {
-		if (treeDetailInfo) {
-			const newMessages = treeDetailInfo.messages.map((message) => ({
-				...message,
-				width: Math.floor(Math.random() * 100),
-				height: Math.floor(Math.random() * 100),
-			}));
-			newMessages && setTreeMessages(newMessages);
-		}
-	}, [treeDetailInfo]);
 
 	return (
 		<Layout path={myInfo ? 'private' : 'public'}>
@@ -92,7 +97,7 @@ const TreeDetail = () => {
 					{showMessage && (
 						<MessageBox selectedMessage={selectedMessage} showMessageHandler={() => setShowMessage(false)} />
 					)}
-					{myInfo && (
+					{myInfo && (Number(treeUserId) === myInfo?.id || treeUserId === undefined) ? (
 						<>
 							<WateringButton treeId={treeId} />
 
@@ -107,6 +112,10 @@ const TreeDetail = () => {
 								</S.NextButton>
 							)}
 						</>
+					) : (
+						<S.PrevButton onClick={() => navigate(-1)}>
+							<img src={LeftButton} alt="뒤로가기이미지" />
+						</S.PrevButton>
 					)}
 					{errorToastText && <ErrorToast />}
 				</S.TemporaryWrapper>
