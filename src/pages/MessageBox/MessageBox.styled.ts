@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import { MessageListContainerProps } from './MessageBox.type';
 export const Wrapper = styled.div`
-	height: calc(100vh - 85px);
+	height: calc(var(--vh, 1vh) * 100 - 85px);
 	background: #f5fcff;
 	position: relative;
 	overflow: hidden;
 `;
 
 export const MessageListContainer = styled.div<MessageListContainerProps>`
-	height: calc(100vh - ${({ isMakingFruit }) => (isMakingFruit ? '305px' : '230px')});
+	height: calc(var(--vh, 1vh) * 100 - ${({ isMakingFruit }) => (isMakingFruit ? '305px' : '230px')});
 
 	overflow: scroll;
 	padding-bottom: ${({ checkMode }) => (checkMode ? '100px' : '0px')};

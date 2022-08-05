@@ -13,7 +13,7 @@ export const Background = styled.div`
 
 export const TreeAddForm = styled.form`
 	position: relative;
-	height: calc(100vh - 155.5px);
+	height: calc(var(--vh, 1vh) * 100 - 155.5px);
 	padding: 16px 0 30px 0;
 	overflow: scroll;
 

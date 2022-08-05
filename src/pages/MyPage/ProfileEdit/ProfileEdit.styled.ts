@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 export const ProfileEditForm = styled.form`
 	width: 100%;
-	min-height: calc(100vh - 85px);
+	min-height: calc(var(--vh, 1vh) * 100 - 85px);
 	padding: 32% 32px 30px 32px;
 	display: flex;
 	flex-direction: column;
