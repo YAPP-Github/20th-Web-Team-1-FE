@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 export const LayoutContentWrapper = styled.div`
-	min-height: calc(100vh - 85px);
+	min-height: calc(var(--vh, 1vh) * 100 - 85px);
 `;
 
 export const AppContainer = styled.div`
 	position: relative;
 	max-width: 475px;
-	height: 100vh;
+	min-height: calc(var(--vh, 1vh) * 100);
 	margin-left: calc(55vw);
 	background-color: ${({ theme }) => theme.colors.bt_white};
 

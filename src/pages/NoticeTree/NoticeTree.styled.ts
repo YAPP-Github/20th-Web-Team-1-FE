@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const TemporaryWrapper = styled.div`
 	width: 100%;
-	height: calc(100vh - 85px);
+	height: calc(var(--vh, 1vh) * 100 - 85px);
 	overflow: hidden;
 	position: relative;
 	background: linear-gradient(

@@ -35,7 +35,7 @@ export const SideDrawerContainer = styled.div<StyledProps>`
 	flex: 1 0 auto;
 	width: calc(100% - 72px);
 	max-width: 475px;
-	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.bt_white};
 	animation: ${({ show }) => (show ? slideIn : slideOut)} 225ms cubic-bezier(0, 0, 0.2, 1) forwards;

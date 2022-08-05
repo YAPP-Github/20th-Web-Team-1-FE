@@ -18,8 +18,14 @@ const GlobalStyle = () => {
 					/* max-width: 475px; */
 					/* margin: 0 auto; */
 					font-family: 'Pretendard';
-					height: 100vh;
-					height: calc(var(--vh, 1vh) * 100);
+					min-height: calc(var(--vh, 1vh) * 100);
+
+					overflow-y: hidden;
+					touch-action: none;
+
+					@supports (-webkit-touch-callout: none) {
+						min-height: -webkit-fill-available;
+					}
 				}
 
 				#modal-root {

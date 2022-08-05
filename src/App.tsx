@@ -17,11 +17,14 @@ const App = () => {
 		handleCheckMyInfo();
 	}, [handleCheckMyInfo]);
 
-	const vh = window.innerHeight * 0.01;
-	document.documentElement.style.setProperty('--vh', `${vh}px`);
-	window.addEventListener('resize', () => {
+	const setOneVh = () => {
+		const vh = window.innerHeight * 0.01;
 		document.documentElement.style.setProperty('--vh', `${vh}px`);
-	});
+	};
+	useEffect(() => {
+		setOneVh();
+		window.addEventListener('resize', setOneVh);
+	}, []);
 
 	return <Routers />;
 };
