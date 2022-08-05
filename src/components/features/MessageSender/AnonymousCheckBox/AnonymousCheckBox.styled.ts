@@ -37,4 +37,8 @@ export const CheckBoxInput = styled.div<StyledProps>`
 	border-radius: 2px;
 	background-color: ${({ checked, theme }) => (checked ? theme.colors.bt_primary[200] : 'transparent')};
 	cursor: pointer;
+
+	display: flex;
+	align-content: center;
+	justify-content: center;
 `;

@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-export const ItemAddContainer = styled.li``;
-
 export const ItemAddBtn = styled(Link)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 221px;
+	height: 26vh;
+	max-height: 221px;
+	min-height: 170px;
 	background-color: ${(props) => props.theme.colors.bt_white};
 	border: 0.5px solid ${(props) => props.theme.colors.bt_primary[200]};
 	border-radius: 20px;
